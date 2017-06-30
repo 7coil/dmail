@@ -1,0 +1,28 @@
+{
+	"api": {
+		"discord": {
+			"clientID": "330003632298917889",
+			"clientSecret": "",
+			"scope": [ "identify" ],
+			"token": ""
+		},
+		"mailgun": {
+			"apiKey": "",
+			"domain": "discordmail.com"
+		},
+		"rethinkdb": {
+			"host": "",
+			"port": 28015,
+			"db": "discordmail"
+		},
+		"auth": ""
+	},
+	"ports": {
+		"http": 8080
+	},
+	"discord": {
+		"prefix": [
+			"dmail"
+		]
+	}
+}
