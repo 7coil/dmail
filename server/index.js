@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
 						if (err2) {
 							res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
 							sendError(body.sender, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
-						} else if (result[0]) {
+						} else if (!result[0]) {
 							res.status(406).send({ error: { message: 'Invalid user - Not found in database.' } });
 							sendError(body.sender, 'The email address does not exist.');
 						} else {

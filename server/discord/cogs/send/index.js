@@ -2,7 +2,7 @@ const r = require('./../../../db');
 const config = require('config');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
 
-const regex = /(\w+@[\w.]+) *"(.*?)" *([\w\W]+)/;
+const regex = /([\w#]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
 
 module.exports.alias = [
 	'send',
