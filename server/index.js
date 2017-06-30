@@ -49,6 +49,7 @@ app.get('/', (req, res) => {
 	.post(`/api/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
 		const body = req.body;
 		const to = body.recipient.split('@').shift();
+		console.log(`Recieved mail for ${to}`);
 
 		r.table('users')
 			.filter({
@@ -63,7 +64,7 @@ app.get('/', (req, res) => {
 						if (err2) {
 							res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
 							sendError(body.sender, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
-						} else if (result.length < 1) {
+						} else if (result[0]) {
 							res.status(406).send({ error: { message: 'Invalid user - Not found in database.' } });
 							sendError(body.sender, 'The email address does not exist.');
 						} else {
