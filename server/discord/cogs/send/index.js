@@ -23,9 +23,7 @@ module.exports.command = (message) => {
 				message.channel.createMessage('An error occured while searching for registrations.');
 			} else if (!res) {
 				message.channel.createMessage('You have not registered yet. Please run `dmail register` to register an E-Mail with your account.');
-			}
-
-			if (!email) {
+			} else if (!email) {
 				message.channel.createMessage(`Invalid use of command. Expected input: \`dmail ${message.command} email@example.com "subject" content\`\nThe "quotes" around the subject are required.`);
 			} else {
 				const data = {
