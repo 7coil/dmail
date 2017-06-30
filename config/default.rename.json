@@ -18,7 +18,7 @@
 		"auth": ""
 	},
 	"ports": {
-		"http": 8080
+		"http": 6464
 	},
 	"discord": {
 		"prefix": [
