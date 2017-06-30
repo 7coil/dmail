@@ -49,7 +49,7 @@ module.exports.command = (message) => {
 				},
 				{
 					name: 'Licence',
-					value: 'This copy of [discordmail](http://discordmail.com/) is licenced under the MIT Licence. View the [GitHub repository here](https://github.com/moustacheminer/discordmail) for more information.'
+					value: 'This copy of [Discord Mail](http://discordmail.com/) is licenced under the MIT Licence. View the [GitHub repository here](https://github.com/moustacheminer/discordmail) for more information.'
 				}
 			]
 		}
