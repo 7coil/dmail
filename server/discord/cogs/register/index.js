@@ -8,7 +8,7 @@ module.exports.alias = [
 module.exports.command = (message) => {
 	const name = message.author.username
 		.replace(/ /g, '+')
-		.replace(/\W/g, '?');
+		.replace(/\W/g, '=');
 
 	r.table('users')
 		.insert({
