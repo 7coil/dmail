@@ -1,0 +1,63 @@
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+nav {
+	width: 312px;
+	height: 100%;
+	float: left;
+	background-color: #7289DA;
+	color: #FFFFFF;
+	padding: 10px;
+}
+
+nav a {
+	color: #FFFFFF;
+}
+
+nav b {
+	color: #FFCC00;
+	font-size: 13px;
+}
+
+main {
+	float: left;
+	width: 268px;
+	padding: 10px;
+}
+
+.footer {
+	text-align: center;
+}
+
+@media(max-width: 640px) {
+	nav {
+		float: none;
+		width: 100%;
+		height: auto;
+	}
+
+	main, footer {
+		float: none;
+		width: 100%;
+	}
+}
+
+/* General font considerations */
+
+h1, h2, h3, p {
+	font-family: "Arial", sans-serif;
+}
+
+h4, code {
+	font-family: "Courier", monospace;
+}
+
+p {
+	font-size: 13px;
+}
+
+.logo {
+	width: 80px;
+}
