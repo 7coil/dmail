@@ -1,6 +1,7 @@
 const r = require('./../../../db');
 const config = require('config');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
+const request = require('request');
 
 const regex = /([\w#]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
 
@@ -32,6 +33,20 @@ module.exports.command = (message) => {
 					subject: email[2],
 					text: email[3]
 				};
+
+				if (message.attachments) {
+					data.attachment = [];
+
+					message.attachments.forEach((file) => {
+						request({ url: file.url, encoding: null }, (rerr, rres, rbody) => {
+							data.attachment.push(new mailgun.Attachment({
+								data: rbody,
+								filename: file.filename,
+								knownLength: file.size
+							}));
+						});
+					});
+				}
 
 				mailgun.messages().send(data, (err2) => {
 					if (err2) {
