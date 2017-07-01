@@ -34,15 +34,10 @@ module.exports.command = (message) => {
 					text: email[3]
 				};
 
-				if (message.attachments) {
+				if (message.attachments && message.attachments[0]) {
 					console.log('Attatching stuff!');
-					data.attachment = [];
 
-					message.attachments.forEach((file) => {
-						request(file.url, (rerr, rres, rbody) => {
-							data.attachment.push(rbody);
-						});
-					});
+					data.attachment = request(message.attachments[0].url);
 				}
 
 				mailgun.messages().send(data, (err2) => {
