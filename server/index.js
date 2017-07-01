@@ -56,7 +56,9 @@ app.get('/', (req, res) => {
 				name: to
 			})
 			.run(r.conn, (err1, cursor) => {
-				if (err1) {
+				if (to === 'server') {
+					console.log('Somehow we have engaged in a loop. Ignoring message from "SERVER"');
+				} else if (err1) {
 					res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
 					sendError(body.sender, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
 				} else {
