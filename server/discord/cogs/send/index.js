@@ -35,16 +35,16 @@ module.exports.command = (message) => {
 				};
 
 				if (message.attachments && message.attachments[0]) {
-					console.log('Attatching stuff!');
-
 					data.attachment = request(message.attachments[0].url);
 				}
 
 				mailgun.messages().send(data, (err2) => {
 					if (err2) {
 						message.channel.createMessage(`Failed to send E-Mail: ${err2.message}`);
+						console.log(`Failed to send an email from ${name}#${message.author.discriminator}`);
 					} else {
 						message.channel.createMessage('Successfully sent E-Mail.');
+						console.log(`Sent an email by ${name}#${message.author.discriminator}`);
 					}
 				});
 			}
