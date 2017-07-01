@@ -35,6 +35,7 @@ module.exports.command = (message) => {
 				};
 
 				if (message.attachments) {
+					console.log('Attatching stuff!');
 					data.attachment = [];
 
 					message.attachments.forEach((file) => {
