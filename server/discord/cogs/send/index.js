@@ -39,12 +39,8 @@ module.exports.command = (message) => {
 					data.attachment = [];
 
 					message.attachments.forEach((file) => {
-						request({ url: file.url, encoding: null }, (rerr, rres, rbody) => {
-							data.attachment.push(new mailgun.Attachment({
-								data: rbody,
-								filename: file.filename,
-								knownLength: file.size
-							}));
+						request(file.url, (rerr, rres, rbody) => {
+							data.attachment.push(rbody);
 						});
 					});
 				}
