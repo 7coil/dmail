@@ -10,6 +10,7 @@ nav {
 	background-color: #7289DA;
 	color: #FFFFFF;
 	padding: 10px;
+	position: fixed;
 }
 
 nav a {
@@ -25,6 +26,7 @@ main {
 	float: left;
 	width: 268px;
 	padding: 10px;
+	margin-left: 342px;
 }
 
 .footer {
@@ -41,6 +43,8 @@ main {
 	main, footer {
 		float: none;
 		width: 100%;
+		margin-left: 0px;
+		padding: 0px;
 	}
 }
 
@@ -50,7 +54,7 @@ h1, h2, h3, p {
 	font-family: "Arial", sans-serif;
 }
 
-h4, code {
+h4, h5, h6, code {
 	font-family: "Courier", monospace;
 }
 
