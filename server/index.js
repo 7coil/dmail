@@ -31,6 +31,9 @@ const sendError = (email, message) => {
 	});
 };
 
+const choice = array =>
+	array[Math.floor(Math.random() * array.length)];
+
 // Middleware
 app.use(bodyParser.json())
 	.use(bodyParser.urlencoded({
@@ -44,7 +47,12 @@ app.set('views', path.join(__dirname, '/views'))
 
 // Routes
 app.get('/', (req, res) => {
-	res.render('index.html');
+	const homepage = [
+		'dotmail',
+		'dsuite'
+	];
+
+	res.render(`${choice(homepage)}.html`);
 })
 	.post(`/api/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
 		const body = req.body;

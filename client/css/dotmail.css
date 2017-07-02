@@ -41,7 +41,7 @@ main {
 		position: relative;
 	}
 
-	main, footer {
+	main {
 		float: none;
 		width: 100%;
 		margin: auto;
