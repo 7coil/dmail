@@ -44,8 +44,8 @@ main {
 	main, footer {
 		float: none;
 		width: 100%;
-		margin-left: 0px;
-		padding: 0px;
+		margin: auto;
+		padding: auto;
 	}
 }
 
