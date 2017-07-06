@@ -1,9 +1,13 @@
 const r = require('./../../../db');
 
-module.exports.alias = [
-	'reg',
-	'register',
-];
+module.exports.info = {
+	name: 'Register for DiscordMail',
+	category: 'mail',
+	aliases: [
+		'reg',
+		'register'
+	]
+};
 
 module.exports.command = (message) => {
 	const name = message.author.username

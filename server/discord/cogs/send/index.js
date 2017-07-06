@@ -5,10 +5,13 @@ const request = require('request');
 
 const regex = /([\w#]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
 
-module.exports.alias = [
-	'send',
-	'mail'
-];
+module.exports.info = {
+	name: 'Send an email',
+	category: 'mail',
+	aliases: [
+		'send'
+	]
+};
 
 module.exports.command = (message) => {
 	const name = message.author.username

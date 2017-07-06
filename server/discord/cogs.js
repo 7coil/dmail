@@ -7,7 +7,7 @@ fs.readdir('./server/discord/cogs/', (err, items) => {
 	items.forEach((item) => {
 		const file = item.replace(/['"]+/g, '');
 		const command = require(`./cogs/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
-		command.alias.forEach((name) => {
+		command.info.aliases.forEach((name) => {
 			if (commands[name]) throw new Error(`Alias ${name} from ${file} was already assigned to another command!`);
 			commands[name] = require(`./cogs/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
 		});
