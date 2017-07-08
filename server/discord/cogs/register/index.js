@@ -4,8 +4,8 @@ module.exports.info = {
 	name: 'Register for DiscordMail',
 	category: 'mail',
 	aliases: [
-		'reg',
-		'register'
+		'register',
+		'reg'
 	]
 };
 
@@ -18,7 +18,8 @@ module.exports.command = (message) => {
 	r.table('users')
 		.insert({
 			id: message.author.id,
-			name: `${name}#${message.author.discriminator}`
+			name: `${name}#${message.author.discriminator}`,
+			block: []
 		}, {
 			conflict: 'update'
 		})

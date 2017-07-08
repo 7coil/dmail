@@ -1,3 +1,8 @@
+require('colors');
+
+console.log('  Welcome to "Moustacheminer Server Services"!  '.inverse.bold);
+console.log('Loading modules:');
+
 const config = require('config');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -72,7 +77,9 @@ app.get('/', (req, res) => {
 						} else {
 							discord.getDMChannel(result[0].id)
 								.then((channel) => {
-									if (body['body-plain'].length > 2000) {
+									if (result.block && Array.isArray(result.block) && result.block.includes(result.block)) {
+										res.status(406).send({ success: { message: 'Sender is blocked by recipient' } });
+									} else if (body['body-plain'].length > 2000) {
 										res.status(406).send({ error: { message: 'The content was too long' } });
 										sendError(body.sender, 'The content of your E-Mail was too long to be sent to Discord.');
 									} else if (body.subject.length > 128) {
@@ -89,7 +96,13 @@ app.get('/', (req, res) => {
 												timestamp: new Date(body.timestamp * 1000),
 												author: {
 													name: body.from || 'No Author'
-												}
+												},
+												fields: [
+													{
+														name: 'Message ID (for replies)',
+														value: body['Message-Id']
+													}
+												]
 											}
 										};
 
@@ -128,5 +141,5 @@ app.get('/', (req, res) => {
 	.use(express.static(`${__dirname}/../client`))
 	.use('*', (req, res) => res.status(404).render('error.html', { user: req.user, status: 404 }));
 
-console.log('Listening on', config.get('ports').http);
-app.listen(config.get('ports').http);
+console.log('Listening on', config.get('webserver').port);
+app.listen(config.get('webserver').port);

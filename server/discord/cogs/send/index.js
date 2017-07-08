@@ -1,7 +1,7 @@
-const r = require('./../../../db');
 const config = require('config');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
 const request = require('request');
+const dmail = require('./../../utils.js').dmail;
 
 const regex = /([\w#]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
 
@@ -21,14 +21,10 @@ module.exports.command = (message) => {
 
 	const email = regex.exec(message.input);
 
-	r.table('users')
-		.get(message.author.id)
-		.run(r.conn, (err1, res) => {
-			if (err1) {
-				message.channel.createMessage('An error occured while searching for registrations.');
-			} else if (!res) {
-				message.channel.createMessage('You have not registered yet. Please run `dmail register` to register an E-Mail with your account.');
-			} else if (!email) {
+	// Check for registrations
+	dmail.check(message.author.id)
+		.then(() => {
+			if (!email) {
 				message.channel.createMessage(`Invalid use of command. Expected input: \`dmail ${message.command} email@example.com "subject" content\`\nThe "quotes" around the subject are required.`);
 			} else {
 				const data = {
@@ -52,5 +48,8 @@ module.exports.command = (message) => {
 					}
 				});
 			}
+		})
+		.catch((err) => {
+			message.channel.createMessage(err);
 		});
 };

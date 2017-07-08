@@ -2,6 +2,7 @@
 const Discord = require('eris');
 const config = require('config');
 const utils = require('./utils.js');
+require('colors');
 
 const client = new Discord.Client(config.get('api').discord.token);
 const prefixes = config.get('discord').prefix;
@@ -10,8 +11,9 @@ let prefix = null;
 // Setup commands and util objects.
 const commands = require('./cogs.js');
 
-// Just plop all valid commands in for other cogs to look at it.
-client.commands = commands;
+client.on('shardReady', (id) => {
+	console.log(`Shard ${id} is online`.green);
+});
 
 client.on('ready', () => {
 	// Set up regex for the bot.
@@ -23,7 +25,7 @@ client.on('ready', () => {
 
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
-	console.log('Connected to Discord!');
+	console.log('All shards are online'.green.bold);
 
 	// Send DBOTS info if it was provided.
 	if (config.get('api').botsdiscordpw) {
@@ -53,19 +55,22 @@ client.on('messageCreate', (message) => {
 
 	// If there's a result, do this crap.
 	if (pre) {
-		// Bake some cool extra crap into the message
-		message.prefix = pre[1];
-		message.command = pre[2];
-		message.input = pre[3] || null;
-		// message.words = pre[3].split(/\n+|\s+/g);
+		utils.ratelimit(message.author.id)
+			.then(() => {
+				// Bake some cool extra crap into the message
+				message.prefix = pre[1];
+				message.command = pre[2];
+				message.input = pre[3] || null;
+				// message.words = pre[3].split(/\n+|\s+/g);
 
-		// Run the actual command
-		commands[message.command].command(message, client);
+				// Run the actual command
+				commands[message.command].command(message, client);
+			})
+			.catch(() => {
+				message.channel.createMessage('You are being ratelimited! Please wait before sending another message');
+			});
 	}
 });
 
-// Connect to Discord
-console.log('Discord loaded');
 client.connect();
-
 module.exports = client;

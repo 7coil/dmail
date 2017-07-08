@@ -1,3 +1,4 @@
+require('colors');
 const fs = require('fs');
 
 const commands = [];
@@ -8,7 +9,7 @@ fs.readdir('./server/discord/cogs/', (err, items) => {
 		const file = item.replace(/['"]+/g, '');
 		const command = require(`./cogs/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
 		command.info.aliases.forEach((name) => {
-			if (commands[name]) throw new Error(`Alias ${name} from ${file} was already assigned to another command!`);
+			if (commands[name]) console.log(`Alias ${name} from ${file} was already assigned to another command! Overwriting...`.red);
 			commands[name] = require(`./cogs/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
 		});
 	});

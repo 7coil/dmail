@@ -7,11 +7,12 @@ const capitalise = string =>
 	string.charAt(0).toUpperCase() + string.slice(1);
 
 module.exports.info = {
-	name: 'Help about DiscordMail',
-	category: 'info',
+	name: 'Redbot Help',
+	category: 'Info',
 	aliases: [
 		'help',
-		'commands'
+		'commands',
+		'red'
 	]
 };
 
@@ -34,11 +35,11 @@ module.exports.command = (message) => {
 	});
 
 	let reply = '```\n';
-	reply += 'DiscordMail sends e-mails via MailGun to real e-mail addresses and other DiscordMail accounts.\n';
+	reply += `${config.get('name')} is a bot with many random features.\n`;
 	reply += `Available prefixes are: ${config.get('discord').prefix.join(', ')}\n`;
 
 	Object.keys(categories).forEach((key) => {
-		reply += `\n${capitalise(key)}:\n`;
+		reply += `${capitalise(key)}:\n`;
 		categories[key].forEach((command) => {
 			const spaces = column - command.command.length;
 			reply += '  ';
@@ -56,8 +57,8 @@ module.exports.command = (message) => {
 		});
 	});
 
-	reply += `\nType ${config.get('discord').prefix[0]} ${message.command} command for more info on a command.\n`;
-	reply += `You can also type ${config.get('discord').prefix[0]} ${message.command} category for more info on a category.\n`;
+	reply += `\nType ${message.prefix} ${message.command} command for no info on a command.\n`;
+	reply += `You cannot type ${message.prefix} ${message.command} category for more info on a category.\n`;
 	reply += '\n```';
 
 	// Send the REDBOT reply

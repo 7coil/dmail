@@ -1,34 +1,35 @@
 {
-	"name": "discordmail",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node server/"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/moustacheminer/discordmail.git"
-	},
-	"author": "Moustacheminer Server Services",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/moustacheminer/discordmail/issues"
-	},
-	"homepage": "https://github.com/moustacheminer/discordmail#readme",
-	"dependencies": {
-		"body-parser": "^1.17.2",
-		"config": "^1.26.1",
-		"consolidate": "^0.14.5",
-		"eris": "^0.7.0",
-		"eslint": "^4.1.1",
-		"express": "^4.15.3",
-		"mailgun-js": "^0.11.2",
-		"multer": "^1.3.0",
-		"mustache": "^2.3.0",
-		"request": "^2.81.0",
-		"rethinkdb": "^2.3.3",
-		"rethinkdb-init": "^0.2.2"
-	}
+  "name": "discordmail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moustacheminer/discordmail.git"
+  },
+  "author": "Moustacheminer Server Services",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moustacheminer/discordmail/issues"
+  },
+  "homepage": "https://github.com/moustacheminer/discordmail#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "colors": "^1.1.2",
+    "config": "^1.26.1",
+    "consolidate": "^0.14.5",
+    "eris": "^0.7.0",
+    "eslint": "^4.1.1",
+    "express": "^4.15.3",
+    "mailgun-js": "^0.11.2",
+    "multer": "^1.3.0",
+    "mustache": "^2.3.0",
+    "request": "^2.81.0",
+    "rethinkdb": "^2.3.3",
+    "rethinkdb-init": "^0.2.2"
+  }
 }
