@@ -55,7 +55,6 @@ app.get('/', (req, res) => {
 		const body = req.body;
 		const to = body.recipient.split('@').shift().toLowerCase();
 		console.log(`Recieved mail for ${to}`);
-		console.dir(body);
 
 		r.table('users')
 			.filter({
