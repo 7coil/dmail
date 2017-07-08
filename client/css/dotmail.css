@@ -24,7 +24,7 @@ nav b {
 
 main {
 	float: left;
-	width: 268px;
+	width: calc(100% - 372px);
 	padding: 10px;
 	margin-left: 342px;
 }
