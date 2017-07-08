@@ -55,10 +55,6 @@ client.on('messageCreate', (message) => {
 
 	// If there's a result, do this crap.
 	if (pre) {
-		//	utils.ratelimit(message.author.id)
-		//		.then(() => {
-
-		// Bake some cool extra crap into the message
 		message.prefix = pre[1];
 		message.command = pre[2];
 		message.input = pre[3] || null;
@@ -66,11 +62,6 @@ client.on('messageCreate', (message) => {
 
 		// Run the actual command
 		commands[message.command].command(message, client);
-
-		//		})
-		//		.catch(() => {
-		//			message.channel.createMessage('You are being ratelimited! Please wait before sending another message');
-		//		});
 	}
 });
 
