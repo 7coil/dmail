@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
 })
 	.post(`/api/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
 		const body = req.body;
-		const to = body.recipient.split('@').shift().toLowerCase();
+		const to = body.recipient.split('@').shift().toLowerCase().replace(/%23/g, '#');
 		console.log(`Recieved mail for ${to}`);
 
 		r.table('users')
