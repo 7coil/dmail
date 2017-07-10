@@ -31,14 +31,11 @@ module.exports.command = (message) => {
 				r.table('replies')
 					.get(email[1])
 					.run(r.conn, (err, res) => {
-						console.log(name);
-						console.dir(res);
-
 						if (err) {
 							message.channel.createMessage(`An error occured looking up your reply: ${err.message}`);
 						} else if (!res) {
 							message.channel.createMessage('Could not find your Reply-ID');
-						} else if (res.to !== name) {
+						} else if (res.to !== `${name}#${message.author.discriminator}`) {
 							message.channel.createMessage('You are not allowed to reply with other user\'s IDs');
 						} else {
 							const data = {
