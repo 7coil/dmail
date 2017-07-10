@@ -19,10 +19,17 @@ const upload = multer({
 
 const app = express();
 
-const sendError = (email, message) => {
+const sendError = (email, reference, message) => {
+	const name = discord.user.username
+		.replace(/ /g, '+')
+		.replace(/\W/g, '=')
+		.toLowerCase();
+
 	const data = {
-		from: 'DiscordMail Mail Server <server@discordmail.com>',
+		from: `DiscordMail Mail Server <${name}#${discord.user.discriminator}@discordmail.com>`,
 		to: email,
+		'h:In-Reply-To': reference,
+		'h:References': reference,
 		subject: 'Your message failed to send',
 		text: message
 	};
@@ -65,73 +72,86 @@ app.get('/', (req, res) => {
 					console.log('Somehow we have engaged in a loop. Ignoring message from "SERVER"');
 				} else if (err1) {
 					res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
-					sendError(body.sender, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
+					sendError(body.sender, body['Message-Id'], 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
 				} else {
 					cursor.toArray((err2, result) => {
 						if (err2) {
 							res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
-							sendError(body.sender, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
+							sendError(body.sender, body['Message-Id'], 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
 						} else if (!result[0]) {
 							res.status(406).send({ error: { message: 'Invalid user - Not found in database.' } });
-							sendError(body.sender, 'The email address does not exist.');
+							sendError(body.sender, body['Message-Id'], 'The email address does not exist.');
 						} else {
 							discord.getDMChannel(result[0].id)
 								.then((channel) => {
-									if (result.block && Array.isArray(result.block) && result.block.includes(result.block)) {
+									if (result.block && Array.isArray(result.block) && result.block.includes(body.sender)) {
 										res.status(406).send({ success: { message: 'Sender is blocked by recipient' } });
 									} else if (body['body-plain'].length > 2000) {
 										res.status(406).send({ error: { message: 'The content was too long' } });
-										sendError(body.sender, 'The content of your E-Mail was too long to be sent to Discord.');
+										sendError(body.sender, body['Message-Id'], 'The content of your E-Mail was too long to be sent to Discord.');
 									} else if (body.subject.length > 128) {
 										res.status(406).send({ error: { message: 'The subject was too long' } });
-										sendError(body.sender, 'The subject of your E-Mail was too long to be sent to Discord.');
+										sendError(body.sender, body['Message-Id'], 'The subject of your E-Mail was too long to be sent to Discord.');
 									} else if (body.from > 128) {
 										res.status(406).send({ error: { message: 'The author name was too long' } });
-										sendError(body.sender, 'Your author name was too long to be sent to Discord.');
+										sendError(body.sender, body['Message-Id'], 'Your author name was too long to be sent to Discord.');
 									} else {
-										const content = {
-											embed: {
-												title: body.subject || 'Untitled E-Mail',
-												description: body['body-plain'] || 'Empty E-Mail',
-												timestamp: new Date(body.timestamp * 1000),
-												author: {
-													name: body.from || 'No Author'
-												},
-												fields: [
-													{
-														name: 'Message ID (for replies)',
-														value: body['Message-Id']
-													}
-												]
-											}
-										};
-
-										if (req.file && req.file.buffer.length < 8000000) {
-											content.file = req.file;
-											channel.createMessage(content, {
-												file: req.file.buffer,
-												name: req.file.originalname || 'unnamed_file'
+										r.table('replies')
+											.insert({
+												to,
+												from: body.sender,
+												reference: body['Message-Id']
 											})
-												.then(() => {
-													res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
-												}).catch(() => {
-													res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-													sendError(body.sender, 'The mail server could not DM the user.');
-												});
-										} else {
-											channel.createMessage(content)
-												.then(() => {
-													res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
-												}).catch(() => {
-													res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-													sendError(body.sender, 'The mail server could not DM the user.');
-												});
-										}
+											.run(r.conn, (err, res1) => {
+												if (err) {
+													res.status(406).send({ error: { message: 'An error occured while inserting details into the RethonkDB database.' } });
+													sendError(body.sender, body['Message-Id'], 'An error occured while inserting details into the RethonkDB database. Sorry for the inconvenience.');
+												} else {
+													const content = {
+														embed: {
+															title: body.subject || 'Untitled E-Mail',
+															description: body['body-plain'] || 'Empty E-Mail',
+															timestamp: new Date(body.timestamp * 1000),
+															author: {
+																name: body.from || 'No Author'
+															},
+															fields: [
+																{
+																	name: 'Reply ID',
+																	value: res1.generated_keys[0]
+																}
+															]
+														}
+													};
+
+													if (req.file && req.file.buffer.length < 8000000) {
+														content.file = req.file;
+														channel.createMessage(content, {
+															file: req.file.buffer,
+															name: req.file.originalname || 'unnamed_file'
+														})
+															.then(() => {
+																res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
+															}).catch(() => {
+																res.status(406).send({ error: { message: 'Could not send mail to user.' } });
+																sendError(body.sender, body['Message-Id'], 'The mail server could not DM the user.');
+															});
+													} else {
+														channel.createMessage(content)
+															.then(() => {
+																res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
+															}).catch(() => {
+																res.status(406).send({ error: { message: 'Could not send mail to user.' } });
+																sendError(body.sender, body['Message-Id'], 'The mail server could not DM the user.');
+															});
+													}
+												}
+											});
 									}
 								})
 								.catch(() => {
 									res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-									sendError(body.sender, 'The mail server could not obtain a DM channel to send a DM to the user.');
+									sendError(body.sender, body['Message-Id'], 'The mail server could not obtain a DM channel to send a DM to the user.');
 								});
 						}
 					});
