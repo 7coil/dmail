@@ -89,7 +89,7 @@ app.get('/', (req, res) => {
 						} else {
 							discord.getDMChannel(result[0].id)
 								.then((channel) => {
-									if (result.block && Array.isArray(result.block) && result.block.includes(body.sender)) {
+									if (result.block && Array.isArray(result.block) && result.block.includes(body.sender.toLowerCase())) {
 										res.status(406).send({ success: { message: 'Sender is blocked by recipient' } });
 									} else if (body['body-plain'].length > 2000) {
 										res.status(406).send({ error: { message: 'The content was too long' } });

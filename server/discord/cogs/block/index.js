@@ -17,7 +17,7 @@ module.exports.command = (message) => {
 			if (!message.input) {
 				message.channel.createMessage('Please send an email to block!');
 			} else {
-				const emails = message.input.split(';');
+				const emails = message.input.toLowerCase().split(';');
 				r.table('users')
 					.get(message.author.id)
 					.update({
