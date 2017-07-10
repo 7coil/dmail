@@ -80,6 +80,7 @@ app.get('/', (req, res) => {
 					sendError(body.sender, body['Message-Id'], 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
 				} else {
 					cursor.toArray((err2, result) => {
+						console.dir(result);
 						if (err2) {
 							res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
 							sendError(body.sender, body['Message-Id'], 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
