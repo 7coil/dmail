@@ -1,68 +1,46 @@
 <html>
 	<head>
-		<link href="/css/dotmail.css" type="text/css" rel="stylesheet">
-		<title>Discord Mail</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=0.9">
+		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="/css/discordmail.css" rel="stylesheet">
+		<link href="/css/sticky.css" rel="stylesheet">
 	</head>
-	<body>
-		<nav>
-			<h1>Discord Mail</h1>
-			<p>
-				<b>New @ Discord!</b><br>
-				Your Discord account just got more powerful with Discord Mail.
-			</p>
-			<p>
-				<b>All about Discord Mail</b><br>
-				Get notified when you have new Mail or when your friends are online. Send instant messages. Type <code>dmail register</code> to activate your own Discord Mail account!
-			</p>
-			<p>
-				<b>Less important commands</b><br>
-				<code>dmail help</code><br>
-				Display the help menu for Discord Mail<br>
-				<code>dmail info</code><br>
-				Get information about the bot.
-			</p>
-			<p>
-				<b>Links</b><br>
-				<a href="/">Home</a><br>
-				<a href="terms.html">Terms of Service and Privacy Statement</a><br>
-				<a href="https://discordapp.com/oauth2/authorize?=&client_id=330003632298917889&scope=bot&permissions=0">Invite</a><br>
-				<a href="https://discordapp.com">Discord's Website</a><br>
-				<a href="https://moustacheminer.com">Moustacheminer Server Services</a><br>
-				<a href="mailto:7coil%233175@discordmail.com">Contact Us</a>
-			</p>
+	<body class="dark">
+		<nav class="nav burple">
+			<div class="nav-wrapper">
+				<img style="height: 60px" src="/img/DiscordMail.png">
+				<div class="brand-logo center"><a href="/">DiscordMail</a></div>
+			</div>
 		</nav>
 		<main>
-			<h2>Error</h2>
-			<p>You encountered an error of sorts.</p>
-			<p>You are a failure.</p>
-			<p><a href="/">Return home.</a></p>
-
-			<hr>
-
-			<div class="footer">
-				<img class="logo" src="https://discordapp.com/assets/e4923594e694a21542a489471ecffa50.svg">
-				<p>Powered by Express, Eris and Mailgun</p>
-				<p>
-					© 2015 - 2017 moustacheminer.com<br>
-					© 1995 - 2001 discordmail.com<br>
-					Moustacheminer Server Services are not associated with Discord Inc.
-				</p>
-				<p>
-					<a href="terms.html">Terms of Service</a>
-					-
-					<a href="terms.html#priv">Privacy Statement</a>
-				</p>
+			<div class="row white-text center">
+				<div class="container">
+					<div class="col s12">
+						<h2>{{ status }}</h2>
+						<p>You might need to go back.</p>
+					</div>
+				</div>
 			</div>
 		</main>
-		<script>
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-67900801-4', 'auto');
-			ga('send', 'pageview');
-		</script>
+		<footer class="page-footer dblack grey-text" style="margin: 0px;">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<p class="grey-text text-lighten-4" id="random">
+							<a href="/terms.html">Terms of Service and Privacy Statement</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright darken-6">
+				<div class="container">
+					Copyright 2015 - 2017, Moustacheminer Server Services<br>Moustacheminer Server Services are not associated with Discord Inc.
+				</div>
+			</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+		</footer>
 	</body>
 </html>

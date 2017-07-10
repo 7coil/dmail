@@ -1,0 +1,24 @@
+@font-face {
+	font-family: "Whitney";
+	src: url(/font/whitney.woff);
+}
+
+body {
+	font-family: "Whitney", "Roboto", sans-serif;
+}
+
+.burple {
+	background-color: #7289DA !important;
+}
+
+.greyple {
+	background-color: #99AAB5;
+}
+
+.dark {
+	background-color: #2C2F33;
+}
+
+.dblack {
+	background-color: #23272A;
+}

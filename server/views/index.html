@@ -1,66 +1,123 @@
 <html>
 	<head>
-		<link href="/css/dotmail.css" type="text/css" rel="stylesheet">
-		<title>Dotmail</title>
-		<meta name="author" content="Moustacheminer Server Services">
-		<meta name="description" content="Discord Mail is a bot allowing you to send and recieve E-Mails from within Discord to your Direct Messages channel.">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=0.9">
+		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="/css/discordmail.css" rel="stylesheet">
 	</head>
-	<body>
-		<nav>
-			<h1>Discord Mail</h1>
-			<p>
-				<b>New @ Discord!</b><br>
-				Your Discord account just got more powerful with Discord Mail.
-			</p>
-			<p>
-				<b>All about Discord Mail</b><br>
-				Get notified when you have new Mail or when your friends are online. Send instant messages. Type <code>dmail register</code> to activate your own Discord Mail account!
-			</p>
-			<p>
-				<b>Less important commands</b><br>
-				<code>dmail help</code><br>
-				Display the help menu for Discord Mail<br>
-				<code>dmail info</code><br>
-				Get information about the bot.
-			</p>
-			<p>
-				<b>Links</b><br>
-				<a href="/">Home</a><br>
-				<a href="terms.html">Terms of Service and Privacy Statement</a><br>
-				<a href="https://discordapp.com/oauth2/authorize?=&client_id=330003632298917889&scope=bot&permissions=0">Invite</a><br>
-				<a href="https://discordapp.com">Discord's Website</a><br>
-				<a href="https://moustacheminer.com">Moustacheminer Server Services</a><br>
-				<a href="mailto:7coil%233175@discordmail.com">Contact Us</a>
-			</p>
+	<body class="dark">
+		<nav class="nav-extended burple">
+			<div class="nav-wrapper">
+				<img style="height: 60px" src="/img/DiscordMail.png">
+				<div class="brand-logo center">DiscordMail</div>
+			</div>
+			<div class="nav-content">
+				<ul class="tabs tabs-transparent">
+					<li class="tab"><a class="active" onclick="$('.carousel').carousel('set', 0);">Welcome</a></li>
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 1);">Advantages</a></li>
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 2);">Commands</a></li>
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 3);">Try out</a></li>
+				</ul>
+			</div>
 		</nav>
 		<main>
-			<h2>New user? Sign up now!</h2>
-			<p>DiscordMail allows you to link your Discord account to the internet!</p>
-			<h3>Valid commands:</h3>
-			<h4>dmail register</h4>
-			<p>Register for DiscordMail</p>
-			<h4>dmail send email@example.com "subject" content</h4>
-			<p>Send an email to the specific email, containing the subject and content specified within the command.</p>
-			<h4>dmail reply email@example.com &lt;In-Reply-To@example.com&gt; "subject" content</h4>
-			<p>Reply to a specific email, must be what was sent before.</p>
-
-			<hr>
-
-			<div class="footer">
-				<img class="logo" src="https://discordapp.com/assets/e4923594e694a21542a489471ecffa50.svg">
-				<p>Powered by Express, Eris and Mailgun</p>
-				<p>
-					© 2015 - 2017 moustacheminer.com<br>
-					© 1995 - 2001 discordmail.com<br>
-					Moustacheminer Server Services are not associated with Discord Inc.
-				</p>
-				<p>
-					<a href="terms.html">Terms of Service</a>
-					-
-					<a href="terms.html#priv">Privacy Statement</a>
-				</p>
+			<div id="wheeloffortune" class="carousel carousel-slider center">
+				<!--
+				<div class="carousel-fixed-item center">
+					<a class="btn waves-effect white grey-text darken-text-2">button</a>
+				</div>
+				-->
+				<div class="carousel-item dark white-text">
+					<div class="row">
+						<div class="container">
+							<div class="col s12">
+								<ul id="staggered-text">
+									<li style="opacity: 0;">
+										<h1>DiscordMail</h1>
+									</li>
+									<li style="opacity: 0;">
+										<h2>The Discord to E-Mail Bot, powered by Mailgun</h2>
+									</li>
+									<li style="opacity: 0;">
+										<p>DiscordMail links your Discord account to E-Mail, opening the usability of Discord to communicate to others unprecedentedly larger than ever before.</p>
+									</li>
+									<li style="opacity: 0;">
+										<div class="col s12 offset-m3 m6">
+											<div class="card-panel greyple black-text">
+												<span>
+													<b>{{ guilds }}</b> Guilds<br>
+													<b>{{ users }}</b> Users
+												</span>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item dark white-text">
+					<div class="row">
+						<div class="container">
+							<div class="col s12">
+								<h3>Unique Advantages</h3>
+								<h4>Professional Domain</h4>
+								<p>DiscordMail can make your own Discord venture look more professional, with a specific Discord E-Mail address that's sure to impress.</p>
+								<h4>Global</h4>
+								<p>Because DiscordMail is just an ordinary mailbox, you can use your DiscordMail E-Mail address anywhere where you can enter your email. You can even verify your Discord Account with it... But we don't suggest it.</p>
+								<h4>All in one place</h4>
+								<p>DiscordMail sends your E-Mails to your DM inbox, so you can access everything all in one place.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item dark white-text">
+					<div class="row">
+						<div class="container">
+							<div class="col s12">
+								<h3>Commands</h3>
+								<h5><code>dmail register</code></h5>
+								<p>Register for a DiscordMail account.</p>
+								<h5><code>dmail send email@example.com "subject" [content]</code></h5>
+								<p>Send an email with the following subject and with the content.</p>
+								<h5><code>dmail reply email@example.com &lt;message-id@example.com&gt; "subject" [content]</code></h5>
+								<p>Reply to the email. Requires the message-id, which is found when you recieve an email in DiscordMail.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="carousel-item dark white-text">
+					<div class="row">
+						<div class="container">
+							<div class="col s12">
+								<h3>Create an account today</h3>
+								<a class="waves-effect btn-large burple">Invite Bot</a>
+								<p>By registering with DiscordMail, you accept that you have fully read the <a href="/terms.html">Terms of Service and Privacy Statement</a>, and fully agree to the terms.</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</main>
+		<footer class="page-footer dblack grey-text" style="margin: 0px;">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<p class="grey-text text-lighten-4" id="random">
+							<a href="/terms.html">Terms of Service and Privacy Statement</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="footer-copyright darken-6">
+				<div class="container">
+					Copyright 2015 - 2017, Moustacheminer Server Services<br>Moustacheminer Server Services are not associated with Discord Inc.
+				</div>
+			</div>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+			<script src="/js/init.js"></script>
+		</footer>
 	</body>
 </html>
