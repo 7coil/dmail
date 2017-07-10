@@ -17,14 +17,14 @@ const upload = multer({
 	storage: multer.memoryStorage()
 });
 
+const name = discord.user.username
+	.replace(/ /g, '+')
+	.replace(/\W/g, '=')
+	.toLowerCase();
+
 const app = express();
 
 const sendError = (email, reference, message) => {
-	const name = discord.user.username
-		.replace(/ /g, '+')
-		.replace(/\W/g, '=')
-		.toLowerCase();
-
 	const data = {
 		from: `DiscordMail Mail Server <${name}#${discord.user.discriminator}@discordmail.com>`,
 		to: email,
@@ -68,7 +68,7 @@ app.get('/', (req, res) => {
 				name: to
 			})
 			.run(r.conn, (err1, cursor) => {
-				if (to === 'server') {
+				if (to === `${name}#${discord.user.discriminator}`) {
 					console.log('Somehow we have engaged in a loop. Ignoring message from "SERVER"');
 				} else if (err1) {
 					res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
