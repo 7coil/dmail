@@ -105,11 +105,8 @@ app.get('/', (req, res) => {
 											to,
 											from: body.sender,
 											reply: body['Message-Id'],
+											reference: body.References ? `${body.References} ${body['Message-Id']}` : body.References
 										};
-
-										if (body.References) {
-											db.reference = `${body.References} ${body['Message-Id']}`;
-										}
 
 										r.table('replies')
 											.insert(db)
