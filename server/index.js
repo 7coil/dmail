@@ -107,7 +107,7 @@ app.get('/', (req, res) => {
 											from: body.sender,
 											subject: `Re: ${body.Subject}`,
 											reply: body['Message-Id'],
-											reference: body.References ? `${body.References} ${body['Message-Id']}` : body.References
+											reference: body.References ? `${body.References} ${body['Message-Id']}` : body['Message-Id']
 										};
 
 										r.table('replies')
