@@ -17,14 +17,14 @@ const upload = multer({
 	storage: multer.memoryStorage()
 });
 
-const name = discord.user.username
-	.replace(/ /g, '+')
-	.replace(/\W/g, '=')
-	.toLowerCase();
-
 const app = express();
 
 const sendError = (email, reference, message) => {
+	const name = discord.user.username
+		.replace(/ /g, '+')
+		.replace(/\W/g, '=')
+		.toLowerCase();
+
 	const data = {
 		from: `DiscordMail Mail Server <${name}#${discord.user.discriminator}@discordmail.com>`,
 		to: email,
@@ -59,6 +59,11 @@ app.get('/', (req, res) => {
 	res.status(404).render('index.html', { user: req.user, guilds: discord.guilds.size, users: discord.users.size });
 })
 	.post(`/api/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
+		const name = discord.user.username
+			.replace(/ /g, '+')
+			.replace(/\W/g, '=')
+			.toLowerCase();
+
 		const body = req.body;
 		const to = body.recipient.split('@').shift().toLowerCase().replace(/%23/g, '#');
 		console.log(`Recieved mail for ${to}`);
