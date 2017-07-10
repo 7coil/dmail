@@ -101,12 +101,18 @@ app.get('/', (req, res) => {
 										res.status(406).send({ error: { message: 'The author name was too long' } });
 										sendError(body.sender, body['Message-Id'], 'Your author name was too long to be sent to Discord.');
 									} else {
+										const db = {
+											to,
+											from: body.sender,
+											reply: body['Message-Id'],
+										};
+
+										if (body.References) {
+											db.reference = `${body.References} ${body['Message-Id']}`;
+										}
+
 										r.table('replies')
-											.insert({
-												to,
-												from: body.sender,
-												reference: body['Message-Id']
-											})
+											.insert(db)
 											.run(r.conn, (err, res1) => {
 												if (err) {
 													res.status(406).send({ error: { message: 'An error occured while inserting details into the RethonkDB database.' } });
