@@ -31,6 +31,9 @@ module.exports.command = (message) => {
 				r.table('replies')
 					.get(email[1])
 					.run(r.conn, (err, res) => {
+						console.log(name);
+						console.dir(res);
+
 						if (err) {
 							message.channel.createMessage(`An error occured looking up your reply: ${err.message}`);
 						} else if (!res) {
