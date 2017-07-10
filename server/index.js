@@ -159,7 +159,8 @@ app.get('/', (req, res) => {
 											});
 									}
 								})
-								.catch(() => {
+								.catch((err) => {
+									console.log(err.stack);
 									res.status(406).send({ error: { message: 'Could not send mail to user.' } });
 									sendError(body.sender, body['Message-Id'], 'The mail server could not obtain a DM channel to send a DM to the user.');
 								});
