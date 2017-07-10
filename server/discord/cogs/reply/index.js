@@ -40,11 +40,11 @@ module.exports.command = (message) => {
 						} else {
 							const data = {
 								from: `${message.author.username}#${message.author.discriminator} <${name}#${message.author.discriminator}@discordmail.com>`,
-								to: email[1],
-								'h:In-Reply-To': email[2],
-								'h:References': email[2],
-								subject: email[3],
-								text: email[4]
+								to: res.from,
+								'h:In-Reply-To': res.reference,
+								'h:References': res.reference,
+								subject: email[2],
+								text: email[3]
 							};
 
 							if (message.attachments && message.attachments[0]) {
