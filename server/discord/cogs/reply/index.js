@@ -41,7 +41,7 @@ module.exports.command = (message) => {
 							const data = {
 								from: `${message.author.username}#${message.author.discriminator} <${name}#${message.author.discriminator}@discordmail.com>`,
 								to: res.from,
-								'h:In-Reply-To': res.reference,
+								'h:In-Reply-To': res.reply,
 								'h:References': res.reference,
 								subject: email[2],
 								text: email[3]
