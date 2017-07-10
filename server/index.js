@@ -104,6 +104,7 @@ app.get('/', (req, res) => {
 										const db = {
 											to,
 											from: body.sender,
+											subject: `Re: ${body.Subject}`,
 											reply: body['Message-Id'],
 											reference: body.References ? `${body.References} ${body['Message-Id']}` : body.References
 										};

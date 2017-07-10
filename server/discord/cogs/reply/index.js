@@ -4,7 +4,7 @@ const request = require('request');
 const dmail = require('./../../utils.js').dmail;
 const r = require('./../../../db');
 
-const regex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}) *"(.*?)" *([\w\W]+)/;
+const regex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}) *([\w\W]+)/;
 
 module.exports.info = {
 	name: 'Reply to E-Mail',
@@ -26,7 +26,7 @@ module.exports.command = (message) => {
 	dmail.check(message.author.id)
 		.then(() => {
 			if (!email) {
-				message.channel.createMessage(`Invalid use of command. Expected input: \`dmail ${message.command} Reply-ID "subject" content\`\nThe "quotes" around the subject are required.`);
+				message.channel.createMessage(`Invalid use of command. Expected input: \`dmail ${message.command} Reply-ID content\``);
 			} else {
 				r.table('replies')
 					.get(email[1])
@@ -43,8 +43,8 @@ module.exports.command = (message) => {
 								to: res.from,
 								'h:In-Reply-To': res.reply,
 								'h:References': res.reference,
-								subject: email[2],
-								text: email[3]
+								subject: res.subject,
+								text: email[2]
 							};
 
 							if (message.attachments && message.attachments[0]) {
