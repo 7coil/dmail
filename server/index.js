@@ -55,9 +55,12 @@ app.set('views', path.join(__dirname, '/views'))
 	.set('view engine', 'html');
 
 // Routes
-app.get('/', (req, res) => {
+app.get('', (req, res) => {
 	res.status(404).render('index.html', { user: req.user, guilds: discord.guilds.size, users: discord.users.size });
 })
+	.get('/', (req, res) => {
+		res.status(404).render('index.html', { user: req.user, guilds: discord.guilds.size, users: discord.users.size });
+	})
 	.post(`/api/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
 		const name = discord.user.username
 			.replace(/ /g, '+')
