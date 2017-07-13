@@ -44,7 +44,7 @@ module.exports.command = (message) => {
 								'h:In-Reply-To': res.reply,
 								'h:References': res.reference,
 								subject: res.subject,
-								text: email[2]
+								text: email[2] + config.get('footer')
 							};
 
 							if (message.attachments && message.attachments[0]) {

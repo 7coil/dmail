@@ -31,7 +31,7 @@ module.exports.command = (message) => {
 					from: `${message.author.username}#${message.author.discriminator} <${name}#${message.author.discriminator}@discordmail.com>`,
 					to: email[1],
 					subject: email[2],
-					text: email[3]
+					text: email[3] + config.get('footer')
 				};
 
 				if (message.attachments && message.attachments[0]) {
