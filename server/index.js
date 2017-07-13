@@ -19,7 +19,7 @@ const upload = multer({
 
 const app = express();
 
-const sendError = (email, reference, message) => {
+const sendError = (email, message) => {
 	const name = discord.user.username
 		.replace(/ /g, '+')
 		.replace(/\W/g, '=')
@@ -27,10 +27,10 @@ const sendError = (email, reference, message) => {
 
 	const data = {
 		from: `DiscordMail Mail Server <${name}#${discord.user.discriminator}@discordmail.com>`,
-		to: email,
-		'h:In-Reply-To': reference,
-		'h:References': reference,
-		subject: 'Your message failed to send',
+		to: email.sender,
+		'h:In-Reply-To': email['Message-Id'],
+		'h:References': email['Message-Id'],
+		subject: `Re: ${email.Subject}`,
 		text: message
 	};
 
@@ -77,15 +77,15 @@ app.get('/', (req, res) => {
 					console.log('Somehow we have engaged in a loop. Ignoring message from "SERVER"');
 				} else if (err1) {
 					res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
-					sendError(body.sender, body['Message-Id'], 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
+					sendError(body, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
 				} else {
 					cursor.toArray((err2, result) => {
 						if (err2) {
 							res.status(500).send({ error: { message: 'Failed to search RethonkDB for registered users.' } });
-							sendError(body.sender, body['Message-Id'], 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
+							sendError(body, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
 						} else if (!result[0]) {
 							res.status(406).send({ error: { message: 'Invalid user - Not found in database.' } });
-							sendError(body.sender, body['Message-Id'], 'The email address does not exist.');
+							sendError(body, 'The email address does not exist.');
 						} else {
 							discord.getDMChannel(result[0].id)
 								.then((channel) => {
@@ -93,13 +93,13 @@ app.get('/', (req, res) => {
 										res.status(406).send({ success: { message: 'Sender is blocked by recipient' } });
 									} else if (body['body-plain'].length > 2000) {
 										res.status(406).send({ error: { message: 'The content was too long' } });
-										sendError(body.sender, body['Message-Id'], 'The content of your E-Mail was too long to be sent to Discord.');
+										sendError(body, 'The content of your E-Mail was too long to be sent to Discord.');
 									} else if (body.subject.length > 128) {
 										res.status(406).send({ error: { message: 'The subject was too long' } });
-										sendError(body.sender, body['Message-Id'], 'The subject of your E-Mail was too long to be sent to Discord.');
+										sendError(body, 'The subject of your E-Mail was too long to be sent to Discord.');
 									} else if (body.from > 128) {
 										res.status(406).send({ error: { message: 'The author name was too long' } });
-										sendError(body.sender, body['Message-Id'], 'Your author name was too long to be sent to Discord.');
+										sendError(body, 'Your author name was too long to be sent to Discord.');
 									} else {
 										const db = {
 											to,
@@ -114,7 +114,7 @@ app.get('/', (req, res) => {
 											.run(r.conn, (err, res1) => {
 												if (err) {
 													res.status(406).send({ error: { message: 'An error occured while inserting details into the RethonkDB database.' } });
-													sendError(body.sender, body['Message-Id'], 'An error occured while inserting details into the RethonkDB database. Sorry for the inconvenience.');
+													sendError(body, 'An error occured while inserting details into the RethonkDB database. Sorry for the inconvenience.');
 												} else {
 													const content = {
 														embed: {
@@ -143,7 +143,7 @@ app.get('/', (req, res) => {
 																res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
 															}).catch(() => {
 																res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-																sendError(body.sender, body['Message-Id'], 'The mail server could not DM the user.');
+																sendError(body, 'The mail server could not DM the user.');
 															});
 													} else {
 														channel.createMessage(content)
@@ -151,7 +151,7 @@ app.get('/', (req, res) => {
 																res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
 															}).catch(() => {
 																res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-																sendError(body.sender, body['Message-Id'], 'The mail server could not DM the user.');
+																sendError(body, 'The mail server could not DM the user.');
 															});
 													}
 												}
@@ -160,7 +160,7 @@ app.get('/', (req, res) => {
 								})
 								.catch(() => {
 									res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-									sendError(body.sender, body['Message-Id'], 'The mail server could not obtain a DM channel to send a DM to the user.');
+									sendError(body, 'The mail server could not obtain a DM channel to send a DM to the user.');
 								});
 						}
 					});
