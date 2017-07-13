@@ -159,6 +159,7 @@ app.get('/', (req, res) => {
 										};
 
 										if (body['body-plain'].length > 2000) {
+											sendError(body, 'The E-Mail was sent successfully, but DiscordMail recommends less than 2000 characters per message for messages to be displayed correctly within Discord.');
 											gist(body['body-plain'], (url) => {
 												dm(`[The E-Mail was too long to be displayed in Discord.](${url})`);
 											});
