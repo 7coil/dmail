@@ -16,7 +16,7 @@ module.exports = function gist(input, callback) {
 			description: 'DiscordMail',
 			public: true,
 			files: {
-				moustacheminer: {
+				discordmail: {
 					content: text,
 				}
 			}

@@ -12,6 +12,7 @@ const mailgun = require('mailgun-js')(config.get('api').mailgun);
 const discord = require('./discord/');
 const r = require('./db');
 const multer = require('multer');
+const gist = require('./discord/utils.js').gist;
 
 const upload = multer({
 	storage: multer.memoryStorage()
@@ -92,9 +93,6 @@ app.get('/', (req, res) => {
 								.then((channel) => {
 									if (result.block && Array.isArray(result.block) && result.block.includes(body.sender.toLowerCase())) {
 										res.status(406).send({ success: { message: 'Sender is blocked by recipient' } });
-									} else if (body['body-plain'].length > 2000) {
-										res.status(406).send({ error: { message: 'The content was too long' } });
-										sendError(body, 'The content of your E-Mail was too long to be sent to Discord.');
 									} else if (body.subject.length > 128) {
 										res.status(406).send({ error: { message: 'The subject was too long' } });
 										sendError(body, 'The subject of your E-Mail was too long to be sent to Discord.');
@@ -110,53 +108,63 @@ app.get('/', (req, res) => {
 											reference: body.References ? `${body.References} ${body['Message-Id']}` : body['Message-Id']
 										};
 
-										r.table('replies')
-											.insert(db)
-											.run(r.conn, (err, res1) => {
-												if (err) {
-													res.status(406).send({ error: { message: 'An error occured while inserting details into the RethonkDB database.' } });
-													sendError(body, 'An error occured while inserting details into the RethonkDB database. Sorry for the inconvenience.');
-												} else {
-													const content = {
-														embed: {
-															title: body.subject || 'Untitled E-Mail',
-															description: body['body-plain'] || 'Empty E-Mail',
-															timestamp: new Date(body.timestamp * 1000),
-															author: {
-																name: body.from || 'No Author'
-															},
-															fields: [
-																{
-																	name: 'Reply ID',
-																	value: res1.generated_keys[0]
-																}
-															]
-														}
-													};
-
-													if (req.file && req.file.buffer.length < 8000000) {
-														content.file = req.file;
-														channel.createMessage(content, {
-															file: req.file.buffer,
-															name: req.file.originalname || 'unnamed_file'
-														})
-															.then(() => {
-																res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
-															}).catch(() => {
-																res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-																sendError(body, 'The mail server could not DM the user.');
-															});
+										const dm = (plaintext) => {
+											r.table('replies')
+												.insert(db)
+												.run(r.conn, (err, res1) => {
+													if (err) {
+														res.status(406).send({ error: { message: 'An error occured while inserting details into the RethonkDB database.' } });
+														sendError(body, 'An error occured while inserting details into the RethonkDB database. Sorry for the inconvenience.');
 													} else {
-														channel.createMessage(content)
-															.then(() => {
-																res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
-															}).catch(() => {
-																res.status(406).send({ error: { message: 'Could not send mail to user.' } });
-																sendError(body, 'The mail server could not DM the user.');
-															});
+														const content = {
+															embed: {
+																title: body.subject || 'Untitled E-Mail',
+																description: plaintext || 'Empty E-Mail',
+																timestamp: new Date(body.timestamp * 1000),
+																author: {
+																	name: body.from || 'No Author'
+																},
+																fields: [
+																	{
+																		name: 'Reply ID',
+																		value: res1.generated_keys[0]
+																	}
+																]
+															}
+														};
+
+														if (req.file && req.file.buffer.length < 8000000) {
+															content.file = req.file;
+															channel.createMessage(content, {
+																file: req.file.buffer,
+																name: req.file.originalname || 'unnamed_file'
+															})
+																.then(() => {
+																	res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
+																}).catch(() => {
+																	res.status(406).send({ error: { message: 'Could not send mail to user.' } });
+																	sendError(body, 'The mail server could not DM the user.');
+																});
+														} else {
+															channel.createMessage(content)
+																.then(() => {
+																	res.status(200).send({ success: { message: 'Successfully sent message to user.' } });
+																}).catch(() => {
+																	res.status(406).send({ error: { message: 'Could not send mail to user.' } });
+																	sendError(body, 'The mail server could not DM the user.');
+																});
+														}
 													}
-												}
+												});
+										};
+
+										if (body['body-plain'].length > 2000) {
+											gist(body['body-plain'], (url) => {
+												dm(`[The E-Mail was too long to be displayed in Discord.](${url})`);
 											});
+										} else {
+											dm(body['body-plain']);
+										}
 									}
 								})
 								.catch(() => {
