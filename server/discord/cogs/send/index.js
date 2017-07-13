@@ -50,6 +50,7 @@ module.exports.command = (message) => {
 			}
 		})
 		.catch((err) => {
+			console.dir(err);
 			message.channel.createMessage(err);
 		});
 };
