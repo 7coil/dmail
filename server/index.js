@@ -103,7 +103,7 @@ app.get('/', (req, res) => {
 									} else {
 										const db = {
 											to,
-											from: body.sender,
+											from: body['Reply-To'] || body.sender,
 											subject: `Re: ${body.Subject}`,
 											reply: body['Message-Id'],
 											reference: body.References ? `${body.References} ${body['Message-Id']}` : body['Message-Id']
