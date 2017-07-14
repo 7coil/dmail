@@ -8,7 +8,7 @@ const check = id =>
 				if (err1) {
 					reject('Could not search RethonkDB');
 				} else if (!res) {
-					reject('You are not registered! Use `dmail register` after referring to the Terms of Service on discordmail.com');
+					reject('You or the guild are not registered! Use `dmail register` after referring to the Terms of Service on discordmail.com');
 				} else {
 					resolve(res);
 				}
