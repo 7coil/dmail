@@ -1,7 +1,7 @@
 const config = require('config');
 const cogs = require('./../../cogs.js');
 
-const column = 14;
+const column = 10;
 
 const capitalise = string =>
 	string.charAt(0).toUpperCase() + string.slice(1);
@@ -36,7 +36,8 @@ module.exports.command = (message) => {
 
 	let reply = '```\n';
 	reply += `${config.get('name')} is a bot with many random features.\n`;
-	reply += `Available prefixes are: ${config.get('discord').prefix.join(', ')}\n`;
+	reply += `User prefixes: ${config.get('discord').prefix.user.join(', ')}\n`;
+	reply += `Guild prefixes: ${config.get('discord').prefix.guild.join(', ')}\n`;
 
 	Object.keys(categories).forEach((key) => {
 		reply += `${capitalise(key)}:\n`;
@@ -57,8 +58,6 @@ module.exports.command = (message) => {
 		});
 	});
 
-	reply += `\nType ${message.prefix} ${message.command} command for no info on a command.\n`;
-	reply += `You cannot type ${message.prefix} ${message.command} category for more info on a category.\n`;
 	reply += '\n```';
 
 	// Send the REDBOT reply

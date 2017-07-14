@@ -12,20 +12,20 @@ module.exports.info = {
 
 module.exports.command = (message) => {
 	// Check for registrations
-	dmail.check(message.author.id)
+	dmail.check(message.inbox)
 		.then(() => {
 			if (!message.input) {
 				message.channel.createMessage('Please send an email to block!');
 			} else {
 				const emails = message.input.toLowerCase().split(';');
-				r.table('users')
+				r.table('registrations')
 					.get(message.author.id)
 					.update({
 						block: r.row('block').union(emails)
 					})
 					.run(r.conn, (err) => {
 						if (err) {
-							throw new Error('fuck!');
+							message.channel.createMessage(`A fatal error occured: ${err.message}`);
 						} else {
 							message.channel.createMessage(`Blocked ${emails.length} email${emails.length > 1 ? 's' : ''}.`);
 						}

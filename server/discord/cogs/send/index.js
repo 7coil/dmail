@@ -14,21 +14,16 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	const name = message.author.username
-		.replace(/ /g, '+')
-		.replace(/\W/g, '=')
-		.toLowerCase();
-
 	const email = regex.exec(message.input);
 
 	// Check for registrations
-	dmail.check(message.author.id)
-		.then(() => {
+	dmail.check(message.inbox)
+		.then((details) => {
 			if (!email) {
-				message.channel.createMessage(`Invalid use of command. Expected input: \`dmail ${message.command} email@example.com "subject" content\`\nThe "quotes" around the subject are required.`);
+				message.channel.createMessage(`Invalid use of command.\nExpected input: \`dmail ${message.command} email@example.com "subject" content\`\nThe "quotes" around the subject are required.`);
 			} else {
 				const data = {
-					from: `${message.author.username}#${message.author.discriminator} <${name}#${message.author.discriminator}@discordmail.com>`,
+					from: `${details.display} <${details.email}@discordmail.com>`,
 					to: email[1],
 					subject: email[2],
 					text: email[3] + config.get('footer')
@@ -41,16 +36,15 @@ module.exports.command = (message) => {
 				mailgun.messages().send(data, (err2) => {
 					if (err2) {
 						message.channel.createMessage(`Failed to send E-Mail: ${err2.message}`);
-						console.log(`Failed to send an email from ${name}#${message.author.discriminator}`);
+						console.log(`Failed to send an email from ${details.email}`);
 					} else {
 						message.channel.createMessage('Successfully sent E-Mail.');
-						console.log(`Sent an email by ${name}#${message.author.discriminator}`);
+						console.log(`Sent an email by ${details.email}`);
 					}
 				});
 			}
 		})
 		.catch((err) => {
-			console.dir(err);
 			message.channel.createMessage(err);
 		});
 };

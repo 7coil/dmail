@@ -15,16 +15,11 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	const name = message.author.username
-		.replace(/ /g, '+')
-		.replace(/\W/g, '=')
-		.toLowerCase();
-
 	const email = regex.exec(message.input);
 
 	// Check for registrations
-	dmail.check(message.author.id)
-		.then(() => {
+	dmail.check(message.inbox)
+		.then((details) => {
 			if (!email) {
 				message.channel.createMessage(`Invalid use of command. Expected input: \`dmail ${message.command} Reply-ID content\``);
 			} else {
@@ -35,11 +30,11 @@ module.exports.command = (message) => {
 							message.channel.createMessage(`An error occured looking up your reply: ${err.message}`);
 						} else if (!res) {
 							message.channel.createMessage('Could not find your Reply-ID');
-						} else if (res.to !== `${name}#${message.author.discriminator}`) {
+						} else if (res.to !== `${details.email}`) {
 							message.channel.createMessage('You are not allowed to reply with other user\'s IDs');
 						} else {
 							const data = {
-								from: `${message.author.username}#${message.author.discriminator} <${name}#${message.author.discriminator}@discordmail.com>`,
+								from: `${details.display} <${details.email}@discordmail.com>`,
 								to: res.from,
 								'h:In-Reply-To': res.reply,
 								'h:References': res.reference,
@@ -54,10 +49,10 @@ module.exports.command = (message) => {
 							mailgun.messages().send(data, (err2) => {
 								if (err2) {
 									message.channel.createMessage(`Failed to send E-Mail: ${err2.message}`);
-									console.log(`Failed to send an email from ${name}#${message.author.discriminator}`);
+									console.log(`Failed to send an email from ${details.email}`);
 								} else {
 									message.channel.createMessage('Successfully sent E-Mail.');
-									console.log(`Sent an email by ${name}#${message.author.discriminator}`);
+									console.log(`Sent an email by ${details.email}`);
 								}
 							});
 						}
