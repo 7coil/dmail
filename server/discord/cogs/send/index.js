@@ -4,7 +4,7 @@ const request = require('request');
 const dmail = require('./../../utils.js').dmail;
 const isadmin = require('./../../utils.js').isadmin;
 
-const regex = /([\w#]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
+const regex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
 
 module.exports.info = {
 	name: 'Send an email',
