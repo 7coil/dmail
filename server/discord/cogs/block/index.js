@@ -1,5 +1,6 @@
 const r = require('./../../../db');
 const dmail = require('./../../utils.js').dmail;
+const isadmin = require('./../../utils.js').isadmin;
 
 module.exports.info = {
 	name: 'Block email. Send emails separated by ;',
@@ -11,28 +12,34 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	// Check for registrations
-	dmail.check(message.inbox)
-		.then(() => {
-			if (!message.input) {
-				message.channel.createMessage('Please send an email to block!');
-			} else {
-				const emails = message.input.toLowerCase().split(';');
-				r.table('registrations')
-					.get(message.author.id)
-					.update({
-						block: r.row('block').union(emails)
-					})
-					.run(r.conn, (err) => {
-						if (err) {
-							message.channel.createMessage(`A fatal error occured: ${err.message}`);
-						} else {
-							message.channel.createMessage(`Blocked ${emails.length} email${emails.length > 1 ? 's' : ''}.`);
-						}
-					});
-			}
-		})
-		.catch((err) => {
-			message.channel.createMessage(err);
-		});
+	if (message.context === 'guild' && !message.channel.guild) {
+		message.channel.createMessage('You can only use this context within a guild!');
+	} else if (message.context === 'guild' && !isadmin(message.member)) {
+		message.channel.createMessage('Only administrators can control the guild\'s dmail!');
+	} else {
+		// Check for registrations
+		dmail.check(message.inbox)
+			.then(() => {
+				if (!message.input) {
+					message.channel.createMessage('Please send an email to block!');
+				} else {
+					const emails = message.input.toLowerCase().split(';');
+					r.table('registrations')
+						.get(message.author.id)
+						.update({
+							block: r.row('block').union(emails)
+						})
+						.run(r.conn, (err) => {
+							if (err) {
+								message.channel.createMessage(`A fatal error occured: ${err.message}`);
+							} else {
+								message.channel.createMessage(`Blocked ${emails.length} email${emails.length > 1 ? 's' : ''}.`);
+							}
+						});
+				}
+			})
+			.catch((err) => {
+				message.channel.createMessage(err);
+			});
+	}
 };
