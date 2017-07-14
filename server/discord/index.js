@@ -73,13 +73,6 @@ client.on('messageCreate', (message) => {
 
 		// Run the actual command
 		commands[message.command].command(message, client);
-
-		message.channel.createMessage(`Testing Info:
-\`\`\`
-name:    ${message.name}
-context: ${message.context}
-inbox:   ${message.inbox}
-\`\`\``);
 	}
 });
 
