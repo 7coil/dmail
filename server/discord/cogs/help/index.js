@@ -7,12 +7,11 @@ const capitalise = string =>
 	string.charAt(0).toUpperCase() + string.slice(1);
 
 module.exports.info = {
-	name: 'Redbot Help',
-	category: 'Info',
+	name: 'Help on DiscordMail',
+	category: 'info',
 	aliases: [
 		'help',
-		'commands',
-		'red'
+		'commands'
 	]
 };
 
