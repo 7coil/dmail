@@ -34,7 +34,7 @@ module.exports.command = (message) => {
 	});
 
 	let reply = '```\n';
-	reply += `${config.get('name')} is a bot with many random features.\n`;
+	reply += `${config.get('name')} allows you to send and recieve emails from within Discord.\n`;
 	reply += `User prefixes: ${config.get('discord').prefix.user.join(', ')}\n`;
 	reply += `Guild prefixes: ${config.get('discord').prefix.guild.join(', ')}\n`;
 
@@ -57,7 +57,8 @@ module.exports.command = (message) => {
 		});
 	});
 
-	reply += '\n```';
+	reply += '\n```\n';
+	reply += config.get('url').github;
 
 	// Send the REDBOT reply
 	message.channel.createMessage(reply);

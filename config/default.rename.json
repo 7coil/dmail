@@ -27,5 +27,8 @@
 	},
 	"name": "DiscordMail",
 	"useragent": "DiscordMail/1.4 Like ParkerBot/4.0 (noud.js; Linux x86_64)",
-	"footer": "<hr><p><i>This message was sent via DiscordMail, the Discord to E-Mail mail service.<br>Content is not controlled by DiscordMail, Discord Inc. or Moustacheminer Server Services.<br>Please forward this email to <a href='mailto:admin@moustacheminer.com'>admin@moustacheminer.com</a> with a message if any messages infringe your rights, or if the email contains any content such as offensive messages, intent of self harm, or distributes illegal materials, which will be dealt with appropriately.</i></p>"
+	"footer": "<hr><p><i>This message was sent via DiscordMail, the Discord to E-Mail mail service.<br>Content is not controlled by DiscordMail, Discord Inc. or Moustacheminer Server Services.<br>Please forward this email to <a href='mailto:admin@moustacheminer.com'>admin@moustacheminer.com</a> with a message if any messages infringe your rights, or if the email contains any content such as offensive messages, intent of self harm, or distributes illegal materials, which will be dealt with appropriately.</i></p>",
+	"url": {
+		"github": "https://github.com/moustacheminer/discordmail"
+	}
 }
