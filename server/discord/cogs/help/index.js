@@ -33,11 +33,10 @@ module.exports.command = (message) => {
 		}
 	});
 
-	let reply = '```\n';
-	reply += `${config.get('name')} allows you to send and recieve emails from within Discord.\n`;
+	let reply = `${config.get('name')} allows you to send and recieve emails from within Discord.\n`;
 	reply += `User prefixes: ${config.get('discord').prefix.user.join(', ')}\n`;
 	reply += `Guild prefixes: ${config.get('discord').prefix.guild.join(', ')}\n`;
-
+	reply += '```\n';
 	Object.keys(categories).forEach((key) => {
 		reply += `${capitalise(key)}:\n`;
 		categories[key].forEach((command) => {
