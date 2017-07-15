@@ -27,6 +27,13 @@ client.on('ready', () => {
 	prefixes.push(`<@${client.user.id}>`);
 	console.log('All shards are online'.green.bold);
 
+	// Set up currently playing game
+	client.editStatus('online', {
+		name: 'dmail help',
+		type: 0,
+		url: 'https://discordmail.com/'
+	});
+
 	// Send DBOTS info if it was provided.
 	if (config.get('api').botsdiscordpw) {
 		utils.botsdiscordpw(client);
