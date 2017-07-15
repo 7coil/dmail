@@ -34,8 +34,8 @@ module.exports.command = (message) => {
 	});
 
 	let reply = `${config.get('name')} allows you to send and recieve emails from within Discord.\n`;
-	reply += `Prefix for users: \`${config.get('discord').prefix.user.join(', ')}\`\n`;
-	reply += `Prefix for guilds: \`${config.get('discord').prefix.guild.join(', ')}\`\n`;
+	reply += `Prefixes for users: \`${config.get('discord').prefix.user.join(', ')}\`\n`;
+	reply += `Prefixes for guilds: \`${config.get('discord').prefix.guild.join(', ')}\`\n`;
 	reply += '```\n';
 	Object.keys(categories).forEach((key) => {
 		reply += `${capitalise(key)}:\n`;
