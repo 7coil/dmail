@@ -25,9 +25,9 @@ module.exports.command = (message) => {
 				} else {
 					const emails = message.input.toLowerCase().split(';');
 					r.table('registrations')
-						.get(message.author.id)
+						.get(message.inbox)
 						.update({
-							block: r.row('block').union(emails)
+							block: r.row('block').union(emails).default([emails])
 						})
 						.run(r.conn, (err) => {
 							if (err) {
