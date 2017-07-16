@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
 				} else {
 					cursor.toArray((err2, result) => {
 						const cont = (channel) => {
-							if (result.block && Array.isArray(result.block) && result.block.includes(body.sender.toLowerCase())) {
+							if (result.block && Array.isArray(result.block) && result.block.some(email => body.sender.toLowerCase().includes(email))) {
 								res.status(406).send({ success: { message: 'Sender is blocked by recipient' } });
 								console.log('The E-Mail was blocked by the recipient.');
 							} else if (body.subject.length > 128) {
