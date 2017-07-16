@@ -171,7 +171,6 @@ app.get('/', (req, res) => {
 						} else if (banne.some(word => body['body-plain'].toLowerCase().includes(word))) {
 							console.log('The email was detected as spam.');
 							res.status(406).send({ error: { message: 'The email was detected as spam.' } });
-							sendError(body, 'Your email was marked as spam. If you think this was a mistake, or have any other questions, send them to admin@moustacheminer.com');
 						} else if (result[0].type === 'user') {
 							discord.getDMChannel(result[0].id)
 								.then((channel) => {
