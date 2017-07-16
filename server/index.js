@@ -94,7 +94,7 @@ app.get('/', (req, res) => {
 								console.log('The author name was too long');
 								res.status(406).send({ error: { message: 'The author name was too long' } });
 								sendError(body, 'Your author name was too long to be sent to Discord.');
-							} else if (banne.some(word => body['body-plain'].toLowerCase.includes(word))) {
+							} else if (banne.some(word => body['body-plain'].toLowerCase().includes(word))) {
 								console.log('The email was detected as spam.');
 								res.status(406).send({ error: { message: 'The email was detected as spam.' } });
 								sendError(body, 'Your email was marked as spam. If you think this was a mistake, or have any other questions, send them to admin@moustacheminer.com');
