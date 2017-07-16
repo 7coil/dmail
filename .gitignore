@@ -6,3 +6,4 @@
 /config/default.json
 npm-debug.log
 /example.json
+/package-lock.json
