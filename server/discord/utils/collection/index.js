@@ -8,7 +8,7 @@ function guildStats(guild) {
 	const users = guild.memberCount - bots;
 	const percentage = Math.floor((bots / guild.memberCount) * 100);
 	const timestamp = Date.now();
-	const collection = percentage > config.get('collection').percentage && guild.memberCount > config.get('collection').users;
+	const collection = percentage > config.get('discord').collection.percentage && guild.memberCount > config.get('discord').collection.users;
 
 	// Owner!
 	const owner = client.users.get(guild.ownerID);
@@ -56,8 +56,8 @@ function banGuild(id, reason) {
 function checkGuilds(bot) {
 	bot.guilds.filter(guild => guildStats(guild).guild.collection).forEach(guild => banGuild(guild.id, {
 		message: 'Bot collection guild',
-		maxUsers: config.get('collection').users,
-		maxPercentage: config.get('collection').percentage
+		maxUsers: config.get('discord').collection.users,
+		maxPercentage: config.get('discord').collection.percentage
 	}));
 }
 
@@ -67,7 +67,11 @@ client.on('guildCreate', (guild) => {
 
 	if (report.guild.collection) {
 		console.log(`${guild.name} failed the authentication test`);
-		banGuild(guild.id);
+		banGuild(guild.id, {
+			message: 'Bot collection guild',
+			maxUsers: config.get('discord').collection.users,
+			maxPercentage: config.get('discord').collection.percentage
+		});
 	} else {
 		r.table('collection')
 			.filter(
