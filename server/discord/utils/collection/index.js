@@ -45,7 +45,7 @@ function banGuild(id, reason) {
 
 	stats.reason = reason;
 	r.table('collection')
-		.insert(guildStats(guild))
+		.insert(stats)
 		.run(r.conn, (err) => {
 			if (err) throw new Error('Couldn\'t save banned guild.');
 			console.log(`Banned ${client.guilds.get(id).name}`);
