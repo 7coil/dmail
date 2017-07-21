@@ -35,6 +35,6 @@ module.exports.command = (message) => {
 				}
 			});
 	} else {
-		message.channel.createMessage('To register the guild, please contact 7coil#3175@discordmail.com for allocating an email.');
+		message.channel.createMessage('To register the guild, please fill this form in. https://docs.google.com/forms/d/e/1FAIpQLScv7zgws6RoCIlRMZwNt-IEt3h-z9i4TrXKAflFInAxDvLZRQ/viewform?usp=sf_link');
 	}
 };
