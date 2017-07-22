@@ -187,6 +187,9 @@ app.get('/', (req, res) => {
 				}
 			});
 	})
+	.use('/invite', (req, res) => {
+		res.redirect(`https://discordapp.com/oauth2/authorize?=&client_id=${discord.user.id}&scope=bot&permissions=0`);
+	})
 	.use(express.static(`${__dirname}/../client`))
 	.use('*', (req, res) => res.status(404).render('error.html', { user: req.user, status: 404 }));
 
