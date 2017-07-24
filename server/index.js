@@ -49,17 +49,13 @@ const sendError = (email, message) => {
 app.use(bodyParser.json())
 	.use(bodyParser.urlencoded({
 		extended: true
-	}));
-
-// Views
-app.set('views', path.join(__dirname, '/views'))
+	}))
+	.set('views', path.join(__dirname, '/views'))
 	.engine('html', engines.mustache)
-	.set('view engine', 'html');
-
-// Routes
-app.get('/', (req, res) => {
-	res.status(200).render('index.html', { user: req.user, guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo });
-})
+	.set('view engine', 'html')
+	.get('/', (req, res) => {
+		res.status(200).render('index.html', { user: req.user, guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo });
+	})
 	.post(`/api/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
 		const name = discord.user.username
 			.replace(/ /g, '+')
@@ -190,7 +186,10 @@ app.get('/', (req, res) => {
 	.use('/invite', (req, res) => {
 		res.redirect(`https://discordapp.com/oauth2/authorize?=&client_id=${discord.user.id}&scope=bot&permissions=0`);
 	})
-	.use(express.static(`${__dirname}/../client`))
+	.use((req, res, next) => {
+		res.header('Access-Control-Allow-Origin', '*');
+		next();
+	}, express.static(`${__dirname}/../client`))
 	.use('*', (req, res) => res.status(404).render('error.html', { user: req.user, status: 404 }));
 
 console.log('Listening on', config.get('webserver').port);
