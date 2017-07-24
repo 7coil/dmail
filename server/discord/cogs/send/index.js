@@ -27,6 +27,8 @@ module.exports.command = (message) => {
 			.then((details) => {
 				if (!email) {
 					message.channel.createMessage(`Invalid use of command.\nExpected input: \`dmail ${message.command} email@example.com "subject" content\`\nThe "quotes" around the subject are required.`);
+				} else if (config.get('ban').email.some(mail => email[2].toLowerCase().includes(mail))) {
+					message.channel.createMessage('You are not allowed to send to this email.');
 				} else {
 					const data = {
 						from: `${details.display} <${details.email}@discordmail.com>`,

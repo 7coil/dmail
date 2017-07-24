@@ -13,7 +13,6 @@ const discord = require('./discord/');
 const r = require('./db');
 const multer = require('multer');
 const gist = require('./discord/utils.js').gist;
-const banne = require('./banne.json').banned;
 
 const upload = multer({
 	storage: multer.memoryStorage()
@@ -164,7 +163,7 @@ app.use(bodyParser.json())
 							console.log('The author name was too long');
 							res.status(406).send({ error: { message: 'The author name was too long' } });
 							sendError(body, 'Your author name was too long to be sent to Discord.');
-						} else if (banne.some(word => body['body-plain'].toLowerCase().includes(word))) {
+						} else if (config.get('ban').word.some(word => body['body-plain'].toLowerCase().includes(word))) {
 							console.log('The email was detected as spam.');
 							res.status(406).send({ error: { message: 'The email was detected as spam.' } });
 						} else if (result[0].type === 'user') {
@@ -186,10 +185,7 @@ app.use(bodyParser.json())
 	.use('/invite', (req, res) => {
 		res.redirect(`https://discordapp.com/oauth2/authorize?=&client_id=${discord.user.id}&scope=bot&permissions=0`);
 	})
-	.use((req, res, next) => {
-		res.header('Access-Control-Allow-Origin', '*');
-		next();
-	}, express.static(`${__dirname}/../client`))
+	.use(express.static(`${__dirname}/../client`))
 	.use('*', (req, res) => res.status(404).render('error.html', { user: req.user, status: 404 }));
 
 console.log('Listening on', config.get('webserver').port);
