@@ -58,7 +58,7 @@ app.set('views', path.join(__dirname, '/views'))
 
 // Routes
 app.get('/', (req, res) => {
-	res.status(200).render('index.html', { user: req.user, guilds: discord.guilds.size, users: discord.users.size });
+	res.status(200).render('index.html', { user: req.user, guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo });
 })
 	.post(`/api/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
 		const name = discord.user.username

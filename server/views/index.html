@@ -16,20 +16,28 @@
 			</div>
 			<div class="nav-content">
 				<ul class="tabs tabs-transparent">
-					<li class="tab"><a class="active" onclick="$('.carousel').carousel('set', 0);">Welcome</a></li>
+					{{ #promo }}
+					<li class="tab"><a class="active" onclick="$('.carousel').carousel('set', 0);">{{ promo }}</a></li>
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 1);">Welcome</a></li>
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 2);">Advantages</a></li>
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 3);">Commands</a></li>
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 4);">Try out</a></li>
+					{{ /promo }}
+					{{ ^promo }}
+					<li class="tab"><a onclick="$('.carousel').carousel('set', 0);">Welcome</a></li>
 					<li class="tab"><a onclick="$('.carousel').carousel('set', 1);">Advantages</a></li>
 					<li class="tab"><a onclick="$('.carousel').carousel('set', 2);">Commands</a></li>
 					<li class="tab"><a onclick="$('.carousel').carousel('set', 3);">Try out</a></li>
+					{{ /promo }}
 				</ul>
 			</div>
 		</nav>
 		<main>
 			<div id="wheeloffortune" class="carousel carousel-slider center">
-				<!--
-				<div class="carousel-fixed-item center">
-					<a class="btn waves-effect white grey-text darken-text-2">button</a>
+				{{ #promo }}
+				<div class="carousel-item dark white-text">
 				</div>
-				-->
+				{{ /promo }}
 				<div class="carousel-item dark white-text">
 					<div class="row">
 						<div class="container">
