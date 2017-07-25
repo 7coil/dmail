@@ -7,15 +7,15 @@
 			"token": ""
 		},
 		"mailgun": {
-			"apiKey": "",
+			"apiKey": "key-",
 			"domain": "discordmail.com"
 		},
 		"rethinkdb": {
 			"host": "",
-			"port": 25565,
+			"port": 28015,
 			"db": "discordmail"
 		},
-		"auth": ""
+		"auth": "This is the URL which mailgun needs to reply to. If you put 'aaa', forward mailgun to /api/aaa"
 	},
 	"webserver": {
 		"port": 8080
@@ -23,20 +23,32 @@
 	"discord": {
 		"prefix": {
 			"user": [
-				"dmail"
+				"dmailtest"
 			],
 			"guild": [
-				"dsuite"
+				"dsuitetest"
 			]
 		},
 		"admins": [
-			"1337"
-		]
+			"190519304972664832"
+		],
+		"collection": {
+			"users": 20,
+			"percentage": 50
+		}
 	},
 	"name": "DiscordMail",
-	"useragent": "DiscordMail/1.3 Like ParkerBot/4.0 (noud.js; Linux x86_64)",
+	"useragent": "DiscordMail/1.3 Like Parkerbot/4.0 (noud.js; Linux x86_64)",
 	"footer": "\n---\nThis message was sent via DiscordMail. Content is not controlled by DiscordMail, Discord Inc. or Moustacheminer Server Services.\nContact admin@moustacheminer.com for any issues.",
 	"url": {
 		"github": "https://github.com/moustacheminer/discordmail"
+	},
+	"ban": {
+		"word": [
+			"mailing list"
+		],
+		"email": [
+			"discordapp.com"
+		]
 	}
 }
