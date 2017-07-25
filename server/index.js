@@ -27,7 +27,7 @@ app.use(bodyParser.json({
 	.set('view engine', 'html')
 	.use(cors())
 	.get('/', (req, res) => {
-		res.status(200).render('index.html', { guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo, domain: config.get('api').mailgun.domain, discordbotsorg: req.query.promo === 'discordbotsorg' });
+		res.status(200).render('index.html', { guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo, domain: config.get('api').mailgun.domain, discordbotsorg: req.query.promo === 'discord bot list' });
 	})
 	.use('/github', (req, res) => {
 		res.redirect(config.get('url').github);
