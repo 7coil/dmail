@@ -22,6 +22,7 @@
     "colors": "^1.1.2",
     "config": "^1.26.1",
     "consolidate": "^0.14.5",
+    "cors": "^2.8.4",
     "eris": "^0.7.0",
     "eslint": "^4.1.1",
     "eslint-config-airbnb-base": "^11.2.0",

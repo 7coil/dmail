@@ -8,6 +8,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const engines = require('consolidate');
 const path = require('path');
+const cors = require('cors');
 const discord = require('./discord/');
 const apiRouter = require('./api');
 
@@ -21,6 +22,7 @@ app.use(bodyParser.json())
 	.set('views', path.join(__dirname, '/views'))
 	.engine('html', engines.mustache)
 	.set('view engine', 'html')
+	.use(cors())
 	.get('/', (req, res) => {
 		res.status(200).render('index.html', { guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo });
 	})
