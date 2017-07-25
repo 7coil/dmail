@@ -31,7 +31,7 @@ module.exports.command = (message) => {
 					message.channel.createMessage('You are not allowed to send to this email.');
 				} else {
 					const data = {
-						from: `${details.display} <${details.email}@d${config.get('api').mailgun.domain}>`,
+						from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
 						to: email[1],
 						subject: email[2],
 						text: email[3] + config.get('footer')
