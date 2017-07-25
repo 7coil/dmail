@@ -1,18 +1,18 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=0.9">
-		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link rel="shortcut icon" href="https://{{ domain }}/images/favicon.ico">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link href="/css/discordmail.css" rel="stylesheet">
-		<link rel="icon" type="image/png" href="/img/favicon.png">
-		<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
+		<link rel="icon" type="image/png" href="https://{{ domain }}/img/favicon.png">
+		<link rel="shortcut icon" type="image/png" href="https://{{ domain }}/img/favicon.png">
 	</head>
 	<body {{ ^promo }}class="dark"{{ /promo }}>
 		<nav class="nav-extended burple">
 			<div class="nav-wrapper">
-				<img style="height: 60px" src="/img/DiscordMail.png">
-				<div class="brand-logo center">DiscordMail</div>
+				<img style="height: 60px" src="https://{{ domain }}/img/DiscordMail.png">
+				<div class="brand-logo center"><a href="/">DiscordMail</a></div>
 			</div>
 			<div class="nav-content">
 				<ul class="tabs tabs-transparent">
@@ -102,8 +102,8 @@
 						<div class="container">
 							<div class="col s12">
 								<h3>Create an account today</h3>
-								<a class="waves-effect btn-large burple" href="https://discordapp.com/oauth2/authorize?=&client_id=330003632298917889&scope=bot&permissions=0">Invite Bot</a>
-								<p>By registering with DiscordMail, you accept that you have fully read the <a href="/terms.html">Terms of Service and Privacy Statement</a>, and fully agree to the terms.</p>
+								<a class="waves-effect btn-large burple" href="https://{{ domain }}/invite">Invite Bot</a>
+								<p>By registering with DiscordMail, you accept that you have fully read the <a href="https://{{ domain }}/terms.html">Terms of Service and Privacy Statement</a>, and fully agree to the terms.</p>
 							</div>
 						</div>
 					</div>
@@ -115,7 +115,7 @@
 				<div class="row">
 					<div class="col s12">
 						<p class="grey-text text-lighten-4" id="random">
-							<a href="/terms.html">Terms of Service and Privacy Statement</a>
+							<a href="https://{{ domain }}/terms.html">Terms of Service and Privacy Statement</a>
 						</p>
 					</div>
 				</div>
@@ -127,7 +127,7 @@
 			</div>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-			<script src="/js/init.js"></script>
+			<script src="https://{{ domain }}/js/init.js"></script>
 		</footer>
 	</body>
 </html>

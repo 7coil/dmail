@@ -27,7 +27,7 @@ app.use(bodyParser.json({
 	.set('view engine', 'html')
 	.use(cors())
 	.get('/', (req, res) => {
-		res.status(200).render('index.html', { guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo });
+		res.status(200).render('index.html', { guilds: discord.guilds.size, users: discord.users.size, promo: req.query.promo, domain: config.get('api').mailgun.domain });
 	})
 	.use('/github', (req, res) => {
 		res.redirect(config.get('url').github);
@@ -43,7 +43,7 @@ app.use(bodyParser.json({
 	})
 	.use('/api', apiRouter)
 	.use(express.static(`${__dirname}/../client`))
-	.use('*', (req, res) => res.status(404).render('error.html', { status: 404 }));
+	.use('*', (req, res) => res.status(404).render('error.html', { status: 404, domain: config.get('api').mailgun.domain }));
 
 console.log('Listening on', config.get('webserver').port);
 app.listen(config.get('webserver').port);
