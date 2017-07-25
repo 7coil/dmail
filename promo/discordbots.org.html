@@ -1,19 +1,9 @@
-<link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
-
-<style>
-	body {
-		overflow: hidden;
-	}
-
-	#iframe {
-		position: absolute;
-		top: 58px;
-		left: 0px;
-		width: 100vw;
-		height: calc(100vh - 58px);
-		border: none;
-		overflow: hidden;
-	}
-</style>
-
-<iframe src="https://discordmail.com" id="iframe" scrolling="no"></iframe>
+<script>
+	const profile =
+	$.get("https://discordmail.com/?promo=discordbotsorg", function (data) {
+		document.open();
+		document.write(data);
+		document.close();
+		$.cache = {};
+	}, "text");
+</script>

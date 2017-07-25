@@ -128,6 +128,16 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 			<script src="https://{{ domain }}/js/init.js"></script>
+			{{ #discordbotsorg }}
+			<script>
+				const upvote = () => {
+					$.post('https://discordbots.org/api/vote', { bot: '330003632298917889', type: 'upvote' }, (data, status, xhr) => {
+						console.log(data);
+						console.log(xhr.status);
+					}, 'json');
+				}
+			</script>
+			{{ /discordbotsorg }}
 		</footer>
 	</body>
 </html>
