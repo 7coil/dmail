@@ -1,15 +1,11 @@
 <script>
-	const params = new URLSearchParams(window.location.search);
 	document.getElementById('longdesc').remove();
- 	const doc = `<iframe src="data:text/html,${encodeURI(document.documentElement.outerHTML)}"></iframe>`;
+ 	const doc = `<iframe style="height: 100%; width: 100%;" src="data:text/html,${encodeURI(document.documentElement.outerHTML)}"></iframe>`;
 
-	if (!params.has('iframe')) {
-		$.get("https://discordmail.com/?promo=discord+bot+list", function (data) {
-			document.open();
-			document.write(data);
-			document.close();
-			$.cache = {};
-		}, "text");
-	}
-
+	$.get("https://discordmail.com/?promo=discord+bot+list", function (data) {
+		document.open();
+		document.write(data);
+		document.close();
+		$.cache = {};
+	}, "text");
 </script>
