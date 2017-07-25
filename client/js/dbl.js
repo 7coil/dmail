@@ -6,4 +6,4 @@ const dblupvote = (positive) => {
 	}, 'json');
 };
 
-document.getElementById('promo').innerHTML = doc;
+document.getElementById('promo').innerHTML = '<iframe src="https://discordbots.org/bot/330003632298917889?iframe"></iframe>';
