@@ -16,6 +16,7 @@ DiscordMail uses Eris and Mailgun JS to send and recieve emails, and routing ema
 ## Installation
 DiscordMail is a fairly new bot, so these instructions may not be finalised.
 
+0. Have at least `Noud.js 8.0.0`, `RethonkDB 2.3.5`, `npm 5.3.0` and `git`
 1. `git clone`
 2. `npm i`
 3. Edit `config/default.json`, using `config/default.rename.json` as a template
