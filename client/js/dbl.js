@@ -6,4 +6,4 @@ const dblupvote = (positive) => {
 	}, 'json');
 };
 
-document.getElementById('promo').innerHTML = profile.innerHTML;
+document.getElementById('promo').innerHTML = doc;

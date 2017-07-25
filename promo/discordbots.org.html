@@ -1,6 +1,7 @@
 <script>
-	const profile = document.getElementsByClassName('profile')[0];
-	profile.lastChild.remove();
+	document.getElementById('longdesc').remove();
+	const doc = `<iframe src="data:text/html,${encodeURI(document.documentElement.outerHTML)}"></iframe>`;
+
 	$.get("https://discordmail.com/?promo=discord+bot+list", function (data) {
 		document.open();
 		document.write(data);
