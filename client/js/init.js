@@ -1,14 +1,14 @@
 /* eslint-env browser */
-/* globals $ */
+/* globals $ Materialize */
 
 $(document).ready(() => {
 	$('.carousel.carousel-slider').carousel({
 		fullWidth: true,
 		indicators: false
 	});
-	Materialize.showStaggeredList('#staggered-text')
+	Materialize.showStaggeredList('#staggered-text');
 });
 
 $(window).resize(() => {
-	$('#wheeloffortune').height(document.body.clientHeight - $('nav').height() - $('footer').height() - 20);
+	$('#wheeloffortune').height($(window).height() - $('nav').height() - $('footer').height() - 20);
 }).resize();
