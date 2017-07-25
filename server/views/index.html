@@ -129,15 +129,7 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 			<script src="https://{{ domain }}/js/init.js"></script>
 			{{ #discordbotsorg }}
-			<script>
-				const dblupvote = (positive) => {
-					const type = positive ? 'upvote' : 'none';
-					$.post('https://discordbots.org/api/vote', { bot: '330003632298917889', type }, (data, status, xhr) => {
-						console.log(data);
-						console.log(xhr.status);
-					}, 'json');
-				}
-			</script>
+			<script src="https://{{ domain }}/js/dbl.js"></script>
 			{{ /discordbotsorg }}
 		</footer>
 	</body>

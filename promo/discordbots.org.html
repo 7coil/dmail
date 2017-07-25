@@ -1,5 +1,6 @@
 <script>
-	const profile =
+	const profile = document.getElementsByClassName('profile')[0];
+	profile.lastChild.remove();
 	$.get("https://discordmail.com/?promo=discord+bot+list", function (data) {
 		document.open();
 		document.write(data);
