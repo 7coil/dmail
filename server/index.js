@@ -15,9 +15,12 @@ const apiRouter = require('./api');
 const app = express();
 
 // Middleware
-app.use(bodyParser.json())
+app.use(bodyParser.json({
+	limit: '20mb'
+}))
 	.use(bodyParser.urlencoded({
-		extended: true
+		extended: true,
+		limit: '20mb'
 	}))
 	.set('views', path.join(__dirname, '/views'))
 	.engine('html', engines.mustache)
