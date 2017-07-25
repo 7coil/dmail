@@ -40,7 +40,7 @@ module.exports.command = (message) => {
 								message.channel.createMessage('You are not allowed to reply with other user\'s IDs');
 							} else {
 								const data = {
-									from: `${details.display} <${details.email}@discordmail.com>`,
+									from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
 									to: res.from,
 									'h:In-Reply-To': res.reply,
 									'h:References': res.reference,

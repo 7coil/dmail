@@ -57,7 +57,11 @@ module.exports.command = (message) => {
 	});
 
 	reply += '\n```\n';
-	reply += config.get('url').github;
+
+	reply += `GitHub: https://${config.get('api').mailgun.domain}/github\n`;
+	reply += `DiscordMail Guild: https://${config.get('api').mailgun.domain}/help\n`;
+	reply += `DiscordMail Invite: https://${config.get('api').mailgun.domain}/invite\n`;
+	reply += `Guild Applications: https://${config.get('api').mailgun.domain}/guild\n`;
 
 	// Send the REDBOT reply
 	message.channel.createMessage(reply);

@@ -1,4 +1,5 @@
 const dmail = require('./../../utils.js').dmail;
+const config = require('config');
 
 module.exports.info = {
 	name: 'Check DMail',
@@ -17,9 +18,9 @@ module.exports.command = (message) => {
 		dmail.check(message.inbox)
 			.then((details) => {
 				if (message.context === 'guild') {
-					message.channel.createMessage(`The Guild's email is \`${details.email}@discordmail.com\``);
+					message.channel.createMessage(`The Guild's email is \`${details.email}@${config.get('api').mailgun.domain}\``);
 				} else if (message.context === 'user') {
-					message.channel.createMessage(`Your email is \`${details.email}@discordmail.com\``);
+					message.channel.createMessage(`Your email is \`${details.email}@${config.get('api').mailgun.domain}\``);
 				} else {
 					message.channel.createMessage('Invalid context!');
 				}

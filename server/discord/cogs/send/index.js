@@ -26,12 +26,12 @@ module.exports.command = (message) => {
 		dmail.check(message.inbox)
 			.then((details) => {
 				if (!email) {
-					message.channel.createMessage(`Invalid use of command.\nExpected input: \`dmail ${message.command} email@example.com "subject" content\`\nThe "quotes" around the subject are required.`);
+					message.channel.createMessage(`Message not sent.\nExpected input: \`dmail ${message.command} email@example.com "subject" content\`\nThe "quotes" around the subject are required.`);
 				} else if (config.get('ban').email.some(mail => email[1].toLowerCase().includes(mail))) {
 					message.channel.createMessage('You are not allowed to send to this email.');
 				} else {
 					const data = {
-						from: `${details.display} <${details.email}@discordmail.com>`,
+						from: `${details.display} <${details.email}@d${config.get('api').mailgun.domain}>`,
 						to: email[1],
 						subject: email[2],
 						text: email[3] + config.get('footer')

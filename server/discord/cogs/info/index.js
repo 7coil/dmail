@@ -1,6 +1,7 @@
 const os = require('os');
 const utils = require('./../../utils.js');
 const client = require('./../../');
+const config = require('config');
 
 // Non-changing statistics
 // (x64) AMD Athlon (x3) Something @ 3ghz (clocked at ????MHz)
@@ -50,7 +51,7 @@ module.exports.command = (message) => {
 				},
 				{
 					name: 'Licence',
-					value: 'This copy of [Discord Mail](http://discordmail.com/) is licenced under the MIT Licence. View the [GitHub repository here](https://github.com/moustacheminer/discordmail) for more information.'
+					value: `This copy of [Discord Mail](https://discordmail.com/) is licenced under the MIT Licence. View the [GitHub repository here](https://${config.get('api').mailgun.domain}/github) or [our guild](https://${config.get('api').mailgun.domain}/help) for more information.`
 				}
 			]
 		}

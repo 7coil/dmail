@@ -1,4 +1,5 @@
 const r = require('./../../../db');
+const config = require('config');
 
 module.exports.info = {
 	name: 'Register for DiscordMail',
@@ -29,12 +30,12 @@ module.exports.command = (message) => {
 				if (err) {
 					message.channel.createMessage('An error occured writing your registration to the database.');
 				} else if (res.replaced) {
-					message.channel.createMessage(`Overwrote \`${message.name}#${message.author.discriminator}@discordmail.com\` to your account.`);
+					message.channel.createMessage(`Overwrote \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.`);
 				} else {
-					message.channel.createMessage(`Assigned \`${message.name}#${message.author.discriminator}@discordmail.com\` to your account.`);
+					message.channel.createMessage(`Assigned \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.`);
 				}
 			});
 	} else {
-		message.channel.createMessage('To register the guild, please fill this form in. https://docs.google.com/forms/d/e/1FAIpQLScv7zgws6RoCIlRMZwNt-IEt3h-z9i4TrXKAflFInAxDvLZRQ/viewform?usp=sf_link');
+		message.channel.createMessage(`To register the guild, please fill this form in. https://${config.get('api').mailgun.domain}/guild`);
 	}
 };
