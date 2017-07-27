@@ -30,10 +30,7 @@ app.use(bodyParser.json({
 		res.status(200).render('index.html', {
 			guilds: discord.guilds.size,
 			users: discord.users.size,
-			promo: req.query.promo,
-			domain: config.get('api').mailgun.domain,
-			discordbotsorg: req.query.promo === 'discord bot list',
-			botsdiscordpw: req.query.promo === 'discord bots'
+			domain: config.get('api').mailgun.domain
 		});
 	})
 	.use('/github', (req, res) => {

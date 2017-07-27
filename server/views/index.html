@@ -16,28 +16,15 @@
 			</div>
 			<div class="nav-content">
 				<ul class="tabs tabs-transparent">
-					{{ #promo }}
-					<li class="tab"><a class="active" onclick="$('.carousel').carousel('set', 0);">{{ promo }}</a></li>
-					<li class="tab"><a onclick="$('.carousel').carousel('set', 1);">Welcome</a></li>
-					<li class="tab"><a onclick="$('.carousel').carousel('set', 2);">Advantages</a></li>
-					<li class="tab"><a onclick="$('.carousel').carousel('set', 3);">Commands</a></li>
-					<li class="tab"><a onclick="$('.carousel').carousel('set', 4);">Try out</a></li>
-					{{ /promo }}
-					{{ ^promo }}
 					<li class="tab"><a onclick="$('.carousel').carousel('set', 0);">Welcome</a></li>
 					<li class="tab"><a onclick="$('.carousel').carousel('set', 1);">Advantages</a></li>
 					<li class="tab"><a onclick="$('.carousel').carousel('set', 2);">Commands</a></li>
 					<li class="tab"><a onclick="$('.carousel').carousel('set', 3);">Try out</a></li>
-					{{ /promo }}
 				</ul>
 			</div>
 		</nav>
 		<main>
 			<div id="wheeloffortune" class="carousel carousel-slider center">
-				{{ #promo }}
-				<div class="carousel-item dark" id="promo">
-				</div>
-				{{ /promo }}
 				<div class="carousel-item dark white-text">
 					<div class="row">
 						<div class="container">
@@ -128,12 +115,6 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
 			<script src="https://{{ domain }}/js/init.js"></script>
-			{{ #discordbotsorg }}
-			<script src="https://{{ domain }}/js/dbl.js"></script>
-			{{ /discordbotsorg }}
-			{{ #botsdiscordpw }}
-			<script src="https://{{ domain }}/js/db.js"></script>
-			{{ /botsdiscordpw }}
 		</footer>
 	</body>
 </html>
