@@ -1,11 +1,14 @@
-<script>
-	document.getElementById('longdesc').remove();
- 	const doc = `<iframe style="height: 100%; width: 100%;" src="data:text/html,${encodeURI(document.documentElement.outerHTML)}"></iframe>`;
+<style>
+	#iframe {
+		z-index: 100;
+		position: fixed;
+		top: 58px;
+		left: 0;
+		width: 100vw;
+		height: calc(100vh - 58px);
+		border: none;
+		overflow: hidden;
+	}
+</style>
 
-	$.get("https://discordmail.com/?promo=discord+bot+list", function (data) {
-		document.open();
-		document.write(data);
-		document.close();
-		$.cache = {};
-	}, "text");
-</script>
+<iframe src="https://discordmail.com/" id="iframe" scrolling="no"></iframe>
