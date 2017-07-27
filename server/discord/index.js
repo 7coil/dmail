@@ -79,7 +79,7 @@ client.on('messageCreate', (message) => {
 		// message.words = pre[3].split(/\n+|\s+/g);
 
 		// Run the actual command
-		commands[message.command].command(message, client);
+		commands[message.command.toLowerCase()].command(message, client);
 	}
 });
 
