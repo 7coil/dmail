@@ -28,6 +28,6 @@ module.exports = function gist(input, callback) {
 			throw new Error('Error in posting GitHub Gist');
 		}
 
-		callback(body.files.moustacheminer.raw_url);
+		callback(body.files.discordmail.raw_url);
 	});
 };
