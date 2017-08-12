@@ -6,9 +6,10 @@ const bodyParser = require('body-parser');
 const engines = require('consolidate');
 const path = require('path');
 const cors = require('cors');
-// const discord = require('./discord');
-// const apiRouter = require('./api');
+const discord = require('./discord');
+const apiRouter = require('./api');
 const docsRouter = require('./docs');
+const urlRouter = require('./url');
 
 const app = express();
 
@@ -28,11 +29,13 @@ app.use(bodyParser.json({
 	.use(cors())
 	.get('/', (req, res) => {
 		res.status(200).render('index.html', {
-			domain: config.get('api').mailgun.domain
+			guilds: discord.guilds.size,
+			users: discord.users.size
 		});
 	})
-	// .use('/api', apiRouter)
+	.use('/api', apiRouter)
 	.use('/docs', docsRouter)
+	.use('/url', urlRouter)
 	.use(express.static(path.join(__dirname, '/static')))
 	.use('*', (req, res) => res.status(404).render('error.html', { status: 404, domain: config.get('api').mailgun.domain }));
 

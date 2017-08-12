@@ -29,13 +29,16 @@ module.exports.command = (message) => {
 			.run(r.conn, (err, res) => {
 				if (err) {
 					message.channel.createMessage('An error occured writing your registration to the database.');
-				} else if (res.replaced) {
-					message.channel.createMessage(`Overwrote \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.`);
 				} else {
-					message.channel.createMessage(`Assigned \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.`);
+					message.channel.createMessage({
+						embed: {
+							title: `Welcome to ${config.get('name')}!`,
+							description: `${res.replaced ? 'Reassigned' : 'Assigned'} \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.\nPlease consult the [DiscordMail Terms of Service](https://${config.get('api').mailgun.domain}/docs/terms) and [Privacy Agreement](https://${config.get('api').mailgun.domain}/docs/privacy) before continuting.`
+						}
+					});
 				}
 			});
 	} else {
-		message.channel.createMessage(`To register the guild, please fill this form in. https://${config.get('api').mailgun.domain}/guild`);
+		message.channel.createMessage(`To register the guild, please fill this form in. https://${config.get('api').mailgun.domain}/url/guild`);
 	}
 };
