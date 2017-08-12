@@ -21,7 +21,7 @@ module.exports.command = (message) => {
 		dmail.check(message.inbox)
 			.then(() => {
 				if (!message.input) {
-					message.channel.createMessage('Please send an email to block!');
+					message.channel.createMessage('Please submit emails to be blocked. Separate emails with semicolons if required.');
 				} else {
 					const emails = message.input.toLowerCase().split(';');
 					r.table('registrations')
