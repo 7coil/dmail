@@ -55,32 +55,32 @@ client.on('ready', () => {
 	setInterval(() => {
 		utils.collection.check(client);
 	}, 1800000);
-});
 
-client.on('messageCreate', (message) => {
-	// It crashed on this before. No explaination.
-	if (!message.author) return;
-	// Disallow if the author is a bot
-	if (message.author.bot) return;
+	client.on('messageCreate', (message) => {
+		// It crashed on this before. No explaination.
+		if (!message.author) return;
+		// Disallow if the author is a bot
+		if (message.author.bot) return;
 
-	// Test the message content on the regular expression for prefixed commands.
-	const pre = prefix.exec(message.content);
+		// Test the message content on the regular expression for prefixed commands.
+		const pre = prefix.exec(message.content);
 
-	// If there's a result, do this crap.
-	if (pre) {
-		message.prefix = pre[1];
-		message.command = pre[2];
-		message.input = pre[3] || null;
-		message.name = message.author.username.replace(/ /g, '+')
-			.replace(/\W/g, '=')
-			.toLowerCase();
-		message.context = config.get('discord').prefix.user.includes(message.prefix.toLowerCase()) ? 'user' : 'guild';
-		message.inbox = message.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || 'Not inside a guild';
-		// message.words = pre[3].split(/\n+|\s+/g);
+		// If there's a result, do this crap.
+		if (pre) {
+			message.prefix = pre[1];
+			message.command = pre[2];
+			message.input = pre[3] || null;
+			message.name = message.author.username.replace(/ /g, '+')
+				.replace(/\W/g, '=')
+				.toLowerCase();
+			message.context = config.get('discord').prefix.user.includes(message.prefix.toLowerCase()) ? 'user' : 'guild';
+			message.inbox = message.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || 'Not inside a guild';
+			// message.words = pre[3].split(/\n+|\s+/g);
 
-		// Run the actual command
-		commands[message.command.toLowerCase()].command(message, client);
-	}
+			// Run the actual command
+			commands[message.command.toLowerCase()].command(message, client);
+		}
+	});
 });
 
 client.connect();

@@ -3,7 +3,7 @@ const client = require('./../../');
 module.exports.info = {
 	name: 'Ping',
 	description: 'Get the latency for each shard from the server to Discord.',
-	category: 'Info',
+	category: 'info',
 	aliases: [
 		'ping',
 		'pong'
