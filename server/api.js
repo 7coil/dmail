@@ -1,10 +1,10 @@
 const express = require('express');
 const config = require('config');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
-const r = require('./../db');
+const r = require('./db.js');
 const multer = require('multer');
-const gist = require('./../discord/utils.js').gist;
-const discord = require('./../discord/');
+const gist = require('./discord/utils.js').gist;
+const discord = require('./discord/');
 
 const upload = multer({
 	storage: multer.memoryStorage()

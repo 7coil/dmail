@@ -1,18 +1,18 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=0.9">
-		<link rel="shortcut icon" href="https://{{ domain }}/images/favicon.ico">
+		<link rel="shortcut icon" href="/images/favicon.ico">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link href="https://{{ domain }}/css/discordmail.css" rel="stylesheet">
-		<link rel="icon" type="image/png" href="https://{{ domain }}/img/favicon.png">
-		<link rel="shortcut icon" type="image/png" href="https://{{ domain }}/img/favicon.png">
+		<link href="/css/discordmail.css" rel="stylesheet">
+		<link rel="icon" type="image/png" href="/img/favicon.png">
+		<link rel="shortcut icon" type="image/png" href="/img/favicon.png">
 	</head>
 	<body class="dark">
 		<nav class="nav-extended burple">
 			<div class="nav-wrapper">
-				<img style="height: 60px" src="https://{{ domain }}/img/DiscordMail.png">
-				<div class="brand-logo center"><a href="/">DiscordMail</a></div>
+				<img style="height: 60px" src="/img/DiscordMail.png">
+				<div class="brand-logo center"><a href="/">{{ name }}</a></div>
 			</div>
 			<div class="nav-content">
 				<ul class="tabs tabs-transparent">
@@ -31,7 +31,7 @@
 							<div class="col s12">
 								<ul id="staggered-text">
 									<li style="opacity: 0;">
-										<h1>DiscordMail</h1>
+										<h1>{{ name }}</h1>
 									</li>
 									<li style="opacity: 0;">
 										<h2>The Discord to E-Mail Bot, powered by Mailgun</h2>
@@ -60,11 +60,11 @@
 							<div class="col s12">
 								<h3>Unique Advantages</h3>
 								<h4>Professional Domain</h4>
-								<p>DiscordMail can make your own Discord venture look more professional, with a specific Discord E-Mail address that's sure to impress.</p>
+								<p>{{ name }} can make your own Discord venture look more professional, with a specific Discord E-Mail address that's sure to impress.</p>
 								<h4>Global</h4>
-								<p>Because DiscordMail is just an ordinary mailbox, you can use your DiscordMail E-Mail address anywhere where you can enter your email. You can even verify your Discord Account with it... But we don't suggest it.</p>
+								<p>Because {{ name }} is just an ordinary mailbox, you can use your {{ name }} E-Mail address anywhere where you can enter your email. You can even verify your Discord Account with it... But we don't suggest it.</p>
 								<h4>All in one place</h4>
-								<p>DiscordMail sends your E-Mails to your DM inbox, so you can access everything all in one place.</p>
+								<p>{{ name }} sends your E-Mails to your DM inbox, so you can access everything all in one place.</p>
 							</div>
 						</div>
 					</div>
@@ -75,11 +75,11 @@
 							<div class="col s12">
 								<h3>Commands</h3>
 								<h5><code>dmail register</code></h5>
-								<p>Register for a DiscordMail account.</p>
+								<p>Register for a {{ name }} account.</p>
 								<h5><code>dmail send email@example.com "subject" [content]</code></h5>
 								<p>Send an email with the following subject and with the content.</p>
 								<h5><code>dmail reply Reply-ID [content]</code></h5>
-								<p>Reply to the email. Requires the message-id, which is found when you recieve an email in DiscordMail.</p>
+								<p>Reply to the email. Requires the message-id, which is found when you recieve an email in {{ name }}.</p>
 							</div>
 						</div>
 					</div>
@@ -89,8 +89,8 @@
 						<div class="container">
 							<div class="col s12">
 								<h3>Create an account today</h3>
-								<a class="waves-effect btn-large burple" href="https://{{ domain }}/invite">Invite Bot</a>
-								<p>By registering with DiscordMail, you accept that you have fully read the <a href="https://{{ domain }}/terms.html">Terms of Service and Privacy Statement</a>, and fully agree to the terms.</p>
+								<a class="waves-effect btn-large burple" href="/invite">Invite Bot</a>
+								<p>By registering with DiscordMail, you accept that you have fully read the <a href="/docs/terms">Terms of Service</a> and <a href="/docs/privacy">Privacy Agreement</a>, and fully agree to the terms.</p>
 							</div>
 						</div>
 					</div>
@@ -101,8 +101,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col s12">
-						<p class="grey-text text-lighten-4" id="random">
-							<a href="https://{{ domain }}/terms.html">Terms of Service and Privacy Statement</a>
+						<p class="grey-text text-lighten-4">
+							<a href="/docs/terms">Terms of Service</a> - <a href="/docs/privacy">Privacy Agreement</a>
 						</p>
 					</div>
 				</div>
@@ -114,7 +114,7 @@
 			</div>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
-			<script src="https://{{ domain }}/js/init.js"></script>
+			<script src="/js/init.js"></script>
 		</footer>
 	</body>
 </html>

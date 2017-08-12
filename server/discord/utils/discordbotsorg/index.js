@@ -15,7 +15,5 @@ module.exports = function dbotsupdate(client) {
 		}
 	};
 
-	request.post(data, (err, res) => {
-		if (err || res.status !== 200) console.log(err);
-	});
+	request.post(data);
 };

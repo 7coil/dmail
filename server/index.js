@@ -1,7 +1,4 @@
-require('colors');
-
-console.log('  Welcome to "Moustacheminer Server Services"!  '.inverse.bold);
-console.log('Loading modules:');
+console.log('Welcome to Moustacheminer Server Services');
 
 const config = require('config');
 const express = require('express');
@@ -9,10 +6,13 @@ const bodyParser = require('body-parser');
 const engines = require('consolidate');
 const path = require('path');
 const cors = require('cors');
-const discord = require('./discord/');
-const apiRouter = require('./api');
+// const discord = require('./discord');
+// const apiRouter = require('./api');
+const docsRouter = require('./docs');
 
 const app = express();
+
+app.locals.name = config.get('name');
 
 // Middleware
 app.use(bodyParser.json({
@@ -22,31 +22,18 @@ app.use(bodyParser.json({
 		extended: true,
 		limit: '20mb'
 	}))
-	.set('views', path.join(__dirname, '/views'))
+	.set('views', path.join(__dirname, '/dynamic'))
 	.engine('html', engines.mustache)
 	.set('view engine', 'html')
 	.use(cors())
 	.get('/', (req, res) => {
 		res.status(200).render('index.html', {
-			guilds: discord.guilds.size,
-			users: discord.users.size,
 			domain: config.get('api').mailgun.domain
 		});
 	})
-	.use('/github', (req, res) => {
-		res.redirect(config.get('url').github);
-	})
-	.use('/invite', (req, res) => {
-		res.redirect(`https://discordapp.com/oauth2/authorize?=&client_id=${discord.user.id}&scope=bot&permissions=0`);
-	})
-	.use('/guild', (req, res) => {
-		res.redirect(config.get('url').guild);
-	})
-	.use('/help', (req, res) => {
-		res.redirect(config.get('url').help);
-	})
-	.use('/api', apiRouter)
-	.use(express.static(`${__dirname}/../client`))
+	// .use('/api', apiRouter)
+	.use('/docs', docsRouter)
+	.use(express.static(path.join(__dirname, '/static')))
 	.use('*', (req, res) => res.status(404).render('error.html', { status: 404, domain: config.get('api').mailgun.domain }));
 
 console.log('Listening on', config.get('webserver').port);
