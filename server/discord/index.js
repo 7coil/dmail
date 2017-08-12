@@ -75,7 +75,6 @@ client.on('ready', () => {
 				.toLowerCase();
 			message.context = config.get('discord').prefix.user.includes(message.prefix.toLowerCase()) ? 'user' : 'guild';
 			message.inbox = message.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || 'Not inside a guild';
-			// message.words = pre[3].split(/\n+|\s+/g);
 
 			// Run the actual command
 			commands[message.command.toLowerCase()].command(message, client);
