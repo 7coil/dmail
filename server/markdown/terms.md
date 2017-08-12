@@ -1,6 +1,7 @@
 ## Dmail Terms of Service
 
-Last updated: 12th August 2017
+Last updated: 12th August 2017  
+Effective Date: 20th August 2017
 
 Thanks for choosing Dmail!
 
