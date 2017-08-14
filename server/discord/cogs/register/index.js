@@ -33,7 +33,7 @@ module.exports.command = (message) => {
 					message.channel.createMessage({
 						embed: {
 							title: `Welcome to ${config.get('name')}!`,
-							description: `${res.replaced ? 'Reassigned' : 'Assigned'} \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.\nPlease consult the [DiscordMail Terms of Service](https://${config.get('api').mailgun.domain}/docs/terms) and [Privacy Agreement](https://${config.get('api').mailgun.domain}/docs/privacy) before continuting.`
+							description: `${res.replaced ? 'Reassigned' : 'Assigned'} \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.\nPlease consult the [DiscordMail Terms of Service](https://${config.get('api').mailgun.domain}/docs/terms) and [Privacy Agreement](https://${config.get('api').mailgun.domain}/docs/privacy) before continuing.`
 						}
 					});
 				}
