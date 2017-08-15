@@ -167,7 +167,7 @@ router.post(`/${config.get('api').auth}`, upload.single('attachment-1'), (req, r
 		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size });
 	})
 	.get('/collection', (req, res) => {
-		r.table('registrations')
+		r.table('collection')
 			.run(r.conn, (err1, cursor) => {
 				if (err1) {
 					res.status(500).json(err1);
