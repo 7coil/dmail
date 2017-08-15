@@ -1,7 +1,7 @@
 # DiscordMail
 The Discord to Email client, connecting the past to the future.
 
-![Discord Mail](client/img/favicon.png)
+![Discord Mail](server/static/img/favicon.png)
 
 - Invite: https://discordapp.com/oauth2/authorize?=&client_id=330003632298917889&scope=bot&permissions=0
 - Guild: https://discord.gg/wHgdmf4
