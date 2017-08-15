@@ -29,9 +29,9 @@ client.on('ready', () => {
 
 	// Set up currently playing game
 	client.editStatus('online', {
-		name: 'dmail help',
+		name: `${prefixes[0]} help`,
 		type: 0,
-		url: 'https://discordmail.com/'
+		url: config.get('api').mailgun.domain
 	});
 
 	// Send DBOTS info if it was provided.
