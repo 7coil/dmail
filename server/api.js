@@ -165,6 +165,22 @@ router.post(`/${config.get('api').auth}`, upload.single('attachment-1'), (req, r
 })
 	.get('/stats', (req, res) => {
 		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size });
+	})
+	.get('/collection', (req, res) => {
+		r.table('registrations')
+			.run(r.conn, (err1, cursor) => {
+				if (err1) {
+					res.status(500).json(err1);
+				} else {
+					cursor.toArray((err2, result) => {
+						if (err2) {
+							res.status(500).json(err2);
+						} else {
+							res.status(200).json(result);
+						}
+					});
+				}
+			});
 	});
 
 module.exports = router;
