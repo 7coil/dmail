@@ -53,7 +53,8 @@ module.exports.command = (message) => {
 				}
 			})
 			.catch((err) => {
-				message.channel.createMessage(err.message || 'An error occured.');
+				console.dir(err);
+				message.channel.createMessage('An error occured.');
 			});
 	}
 };
