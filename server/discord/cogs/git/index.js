@@ -4,7 +4,7 @@ const config = require('config');
 module.exports.info = {
 	name: 'Git Execution',
 	description: 'Execute git commands.',
-	category: 'Owner',
+	category: 'owner',
 	aliases: [
 		'git'
 	],
