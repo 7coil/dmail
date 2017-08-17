@@ -30,8 +30,7 @@ client.once('ready', () => {
 	// Set up currently playing game
 	client.editStatus('online', {
 		name: `${prefixes[0]} help`,
-		type: 0,
-		url: config.get('api').mailgun.domain
+		type: 0
 	});
 
 	// Send DBOTS info if it was provided.
