@@ -15,7 +15,7 @@ client.on('shardReady', (id) => {
 	console.log(`Shard ${id} is online`.green);
 });
 
-client.on('ready', () => {
+client.once('ready', () => {
 	// Set up regex for the bot.
 	// It's "man's essential illness"
 	// Use this regex for testing in regexr.com
