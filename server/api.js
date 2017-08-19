@@ -148,10 +148,9 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 					res.status(200).json({ success: { message: 'Successfully sent message to user or guild.' } });
 				};
 
-				const failure = (error) => {
+				const failure = () => {
 					res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
 					sendError(body, 'The mail server could not DM the user or guild.');
-					console.dir(error);
 				};
 
 				if (req.file && req.file.buffer.length < 8000000) {
