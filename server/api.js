@@ -131,7 +131,7 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 						title: body.subject || 'Untitled E-Mail',
 						description: body['body-plain'].length > 2000 ? 'Too long to display' : body['body-plain'] || 'Empty E-Mail',
 						timestamp: new Date(body.timestamp * 1000),
-						url: `${config.get('webserver').url}/mail/${res1.generated_keys[0]}`,
+						url: `${config.get('webserver').domain}/mail/${res1.generated_keys[0]}`,
 						author: {
 							name: body.from || 'No Author'
 						},
