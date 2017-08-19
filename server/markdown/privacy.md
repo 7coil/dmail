@@ -29,7 +29,7 @@ All details about E-Mails are recorded as recieved from Mailgun for use in the D
 
 Moustacheminer Server Services have registered with the Information Commissioner's Office as a data controller, as a UK based controller storing personal information.
 
-Moustacheminer Server Services Registration Number: TODO
+DPA ICO Registration Number: TODO
 
 #### Subject Access Request
 
