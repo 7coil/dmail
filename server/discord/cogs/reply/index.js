@@ -36,16 +36,16 @@ module.exports.command = (message) => {
 								message.channel.createMessage(`An error occured looking up your reply: ${err.message}`);
 							} else if (!res) {
 								message.channel.createMessage('Could not find your Reply-ID');
-							} else if (res.to !== `${details.email}`) {
-								message.channel.createMessage('You are not allowed to reply with other user\'s IDs');
+							} else if (res.dmail !== message.inbox) {
+								message.channel.createMessage('You are not allowed to reply because the ID is for another inbox.');
 							} else {
 								const data = {
 									from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
-									to: res.from,
-									'h:In-Reply-To': res.reply,
-									'h:References': res.reference,
-									subject: res.subject,
-									text: email[2] + config.get('footer')
+									to: res.sender,
+									'h:In-Reply-To': res['Message-Id'],
+									'h:References': res.References ? `${res.References} ${res['Message-Id']}` : res['Message-Id'],
+									subject: `Re: ${res.Subject}`,
+									text: email[2]
 								};
 
 								if (message.attachments && message.attachments[0]) {

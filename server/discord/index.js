@@ -74,7 +74,8 @@ client.once('ready', () => {
 			message.inbox = message.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || 'Not inside a guild';
 
 			// Run the actual command
-			commands[message.command.toLowerCase()].command(message, client);
+			commands[message.command.toLowerCase()].command(message);
+			console.log(message.context);
 		}
 	});
 });

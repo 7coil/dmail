@@ -34,7 +34,7 @@ module.exports.command = (message) => {
 						from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
 						to: email[1],
 						subject: email[2],
-						text: email[3] + config.get('footer')
+						text: email[3]
 					};
 
 					if (message.attachments && message.attachments[0]) {
