@@ -3,7 +3,7 @@ const dmail = require('./../../utils.js').dmail;
 const isadmin = require('./../../utils.js').isadmin;
 
 module.exports.info = {
-	name: 'Block email. Send emails separated by ;',
+	name: 'Block E-Mail. Send E-Mails separated by ;',
 	category: 'mail',
 	aliases: [
 		'block',

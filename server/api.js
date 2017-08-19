@@ -36,7 +36,7 @@ const sendError = (email, message) => {
 
 const router = express.Router();
 
-router.post(`/${config.get('api').auth}`, upload.single('attachment-1'), (req, res) => {
+router.post('/mail', upload.single('attachment-1'), (req, res) => {
 	const name = discord.user.username
 		.replace(/ /g, '+')
 		.replace(/\W/g, '=')

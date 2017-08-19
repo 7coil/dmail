@@ -9,7 +9,6 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	fs.readFile(path.join(__dirname, '/markdown/index.md'), 'utf8', (err, data) => {
 		res.render('markdown.html', {
-			domain: config.get('api').mailgun.domain,
 			markdown: marked(data)
 		});
 	});
@@ -18,7 +17,6 @@ router.get('/', (req, res) => {
 		if (fs.existsSync(path.join(__dirname, '/markdown/', `${req.params.page}.md`))) {
 			fs.readFile(path.join(__dirname, '/markdown/', `${req.params.page}.md`), 'utf8', (err, data) => {
 				res.render('markdown.html', {
-					domain: config.get('api').mailgun.domain,
 					markdown: marked(data)
 				});
 			});

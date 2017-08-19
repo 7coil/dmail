@@ -92,7 +92,7 @@ module.exports.command = (message) => {
 				},
 				{
 					name: 'Licence',
-					value: `This copy of [Discord Mail](https://discordmail.com/) is licenced under the MIT Licence. View the [GitHub repository here](https://${config.get('api').mailgun.domain}/url/github) or [our guild](https://${config.get('api').mailgun.domain}/url/help) for more information.`
+					value: `This copy of [Discord Mail](https://discordmail.com/) is licenced under the MIT Licence. View the [GitHub repository here](${config.get('webserver').domain}/url/github) or [our guild](${config.get('webserver').domain}/url/help) for more information.`
 				}
 			]
 		}

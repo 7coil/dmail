@@ -7,7 +7,7 @@ const isadmin = require('./../../utils.js').isadmin;
 const regex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
 
 module.exports.info = {
-	name: 'Send an email',
+	name: 'Send an E-Mail',
 	category: 'mail',
 	aliases: [
 		'send'

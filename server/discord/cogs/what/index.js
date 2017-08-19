@@ -2,7 +2,7 @@ const dmail = require('./../../utils.js').dmail;
 const config = require('config');
 
 module.exports.info = {
-	name: 'Check DMail',
+	name: 'Check E-Mail address',
 	category: 'mail',
 	aliases: [
 		'what',

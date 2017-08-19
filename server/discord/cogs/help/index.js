@@ -56,7 +56,7 @@ module.exports.command = (message) => {
 		});
 	});
 
-	reply += `\n\`\`\`\n[GitHub](https://${config.get('api').mailgun.domain}/url/github) - [Moustacheminer Server Services Guild](https://${config.get('api').mailgun.domain}/url/help) - [Guild Applications](https://${config.get('api').mailgun.domain}/url/guild)`;
+	reply += `\n\`\`\`\n[GitHub](${config.get('webserver').domain}/url/github) - [Moustacheminer Server Services Guild](${config.get('webserver').domain}/url/help) - [Guild Applications](${config.get('webserver').domain}/url/guild)`;
 
 	const embed = {
 		embed: {

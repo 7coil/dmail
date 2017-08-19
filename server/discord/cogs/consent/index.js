@@ -34,12 +34,12 @@ module.exports.command = (message) => {
 					message.channel.createMessage({
 						embed: {
 							title: `Welcome to ${config.get('name')}!`,
-							description: `${res.replaced ? 'Reassigned' : 'Assigned'} \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.\nPlease consult the [DiscordMail Terms of Service](https://${config.get('api').mailgun.domain}/docs/terms) and [Privacy Agreement](https://${config.get('api').mailgun.domain}/docs/privacy) before continuing.`
+							description: `${res.replaced ? 'Reassigned' : 'Assigned'} \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.\nPlease consult the [DiscordMail Terms of Service](${config.get('webserver').domain}/docs/terms) and [Privacy Agreement](${config.get('webserver').domain}/docs/privacy) before continuing.`
 						}
 					});
 				}
 			});
 	} else {
-		message.channel.createMessage(`To register the guild, please fill this form in. https://${config.get('api').mailgun.domain}/url/guild`);
+		message.channel.createMessage(`To register the guild, please fill this form in. ${config.get('webserver').domain}/url/guild`);
 	}
 };

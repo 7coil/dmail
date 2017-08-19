@@ -9,7 +9,7 @@ const check = id =>
 				if (err1) {
 					reject('Could not search RethonkDB');
 				} else if (!res) {
-					reject(`You or the guild are not registered! Use \`dmail register\` after referring to the Terms of Service on ${config.get('api').mailgun.domain}`);
+					reject(`You or the guild are not registered! Please register for ${config.get('name')} using the \`register\` command`);
 				} else {
 					resolve(res);
 				}

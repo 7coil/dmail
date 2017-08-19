@@ -57,7 +57,7 @@ app.use(bodyParser.json({
 	.use('/docs', docsRouter)
 	.use('/url', urlRouter)
 	.use(express.static(path.join(__dirname, '/static')))
-	.use('*', (req, res) => res.status(404).render('error.html', { status: 404, domain: config.get('api').mailgun.domain }));
+	.use('*', (req, res) => res.status(404).render('error.html', { status: 404 }));
 
 console.log('Listening on', config.get('webserver').port);
 app.listen(config.get('webserver').port);
