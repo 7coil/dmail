@@ -119,7 +119,7 @@ const check = (req, res, next) => {
 router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) => {
 	const body = req.body;
 	body.dmail = res.locals.inbox;
-	r.table('replies')
+	r.table('emails')
 		.insert(req.body)
 		.run(r.conn, (err, res1) => {
 			if (err) {

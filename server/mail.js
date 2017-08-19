@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 	res.redirect('/');
 })
 	.get('/:id', (req, res) => {
-		r.table('replies')
+		r.table('emails')
 			.get(req.params.id)
 			.run(r.conn, (err, result) => {
 				if (err) {

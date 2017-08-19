@@ -29,7 +29,7 @@ module.exports.command = (message) => {
 				if (!email) {
 					message.channel.createMessage(`Invalid use of command. Expected input: \`dmail ${message.command} Reply-ID content\``);
 				} else {
-					r.table('replies')
+					r.table('emails')
 						.get(email[1])
 						.run(r.conn, (err, res) => {
 							if (err) {
