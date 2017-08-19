@@ -65,22 +65,22 @@ module.exports.command = (message) => {
 				{
 					name: 'Node.js',
 					value: process.version,
-					embed: true
+					inline: true
 				},
 				{
 					name: 'Uptime',
 					value: timestamp(process.uptime()),
-					embed: true
+					inline: true
 				},
 				{
 					name: 'Guilds',
 					value: client.guilds.size,
-					embed: true
+					inline: true
 				},
 				{
 					name: 'PID',
 					value: process.pid,
-					embed: true
+					inline: true
 				},
 				{
 					name: 'Hardware',
