@@ -18,7 +18,8 @@
 		"auth": "This is the URL which mailgun needs to reply to. If you put 'aaa', forward mailgun to /api/aaa"
 	},
 	"webserver": {
-		"port": 8080
+		"port": 8080,
+		"domain": "https://discordmail.com"
 	},
 	"discord": {
 		"prefix": {
