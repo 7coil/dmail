@@ -35,7 +35,7 @@ module.exports.command = (message) => {
 							if (err) {
 								message.channel.createMessage(`An error occured looking up your reply: ${err.message}`);
 							} else if (!res) {
-								message.channel.createMessage('Could not find your Reply-ID');
+								message.channel.createMessage('Could not find your E-Mail ID');
 							} else if (res.dmail !== message.inbox) {
 								message.channel.createMessage('You are not allowed to reply because the ID is for another inbox.');
 							} else {

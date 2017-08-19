@@ -127,6 +127,7 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 				sendError(body, 'An error occured while inserting details into the RethonkDB database. Sorry for the inconvenience.');
 			} else {
 				const content = {
+					content: res1.generated_keys[0],
 					embed: {
 						title: body.subject || 'Untitled E-Mail',
 						description: body['body-plain'].length > 2000 ? 'Too long to display' : body['body-plain'] || 'Empty E-Mail',
@@ -137,7 +138,7 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 						},
 						fields: [
 							{
-								name: 'ID',
+								name: 'E-Mail ID',
 								value: res1.generated_keys[0]
 							}
 						]
