@@ -29,6 +29,8 @@ All details about E-Mails are recorded as recieved from Mailgun for use in the D
 
 Moustacheminer Server Services have registered with the Information Commissioner's Office as a data controller, as a UK based controller storing personal information.
 
+Moustacheminer Server Services Registration Number: TODO
+
 #### Subject Access Request
 
 You have the right to obtain a copy of information held about you. In order to do so, you will need to undergo a Subject Access Request.P lease send a Discord Direct Message to `7coil#3175` requesting a SAR of your information.
