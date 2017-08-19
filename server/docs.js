@@ -2,7 +2,6 @@ const express = require('express');
 const marked = require('marked');
 const fs = require('fs');
 const path = require('path');
-const config = require('config');
 
 const router = express.Router();
 

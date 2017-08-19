@@ -11,15 +11,17 @@ const discord = require('./discord');
 const apiRouter = require('./api');
 const docsRouter = require('./docs');
 const urlRouter = require('./url');
+const mailRouter = require('./mail');
 
 const app = express();
 
 app.locals.name = config.get('name');
 
 // Middleware
-app.use(bodyParser.json({
-	limit: '20mb'
-}))
+app.enable('trust proxy')
+	.use(bodyParser.json({
+		limit: '20mb'
+	}))
 	.use(bodyParser.urlencoded({
 		extended: true,
 		limit: '20mb'
@@ -56,6 +58,7 @@ app.use(bodyParser.json({
 	.use('/api', apiRouter)
 	.use('/docs', docsRouter)
 	.use('/url', urlRouter)
+	.use('/mail', mailRouter)
 	.use(express.static(path.join(__dirname, '/static')))
 	.use('*', (req, res) => res.status(404).render('error.html', { status: 404 }));
 

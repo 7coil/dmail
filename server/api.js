@@ -51,7 +51,7 @@ const validate = (req, res, next) => {
 const check = (req, res, next) => {
 	const body = req.body;
 	const to = body.recipient.split('@').shift().toLowerCase().replace(/%23/g, '#');
-	console.log(`Recieved mail for ${to}`);
+	console.log((new Date()).toUTCString(), `Recieved mail for ${to}`);
 
 	r.table('registrations')
 		.filter({
@@ -129,7 +129,7 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 				const content = {
 					embed: {
 						title: body.subject || 'Untitled E-Mail',
-						description: body['body-plain'] || 'Empty E-Mail',
+						description: body['body-plain'].length > 2000 ? 'Too long to display' : body['body-plain'] || 'Empty E-Mail',
 						timestamp: new Date(body.timestamp * 1000),
 						author: {
 							name: body.from || 'No Author'
@@ -147,9 +147,10 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 					res.status(200).json({ success: { message: 'Successfully sent message to user or guild.' } });
 				};
 
-				const failure = () => {
+				const failure = (error) => {
 					res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
 					sendError(body, 'The mail server could not DM the user or guild.');
+					console.dir(error);
 				};
 
 				if (req.file && req.file.buffer.length < 8000000) {

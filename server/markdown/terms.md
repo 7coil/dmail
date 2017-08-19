@@ -1,26 +1,20 @@
-## Dmail Terms of Service
+## DiscordMail Terms of Service
 
-Last updated: 12th August 2017  
-Effective Date: 20th August 2017
+Last updated: 19th August 2017  
+Effective Date: 21st August 2017
 
-Thanks for choosing Dmail!
+Thanks for choosing DiscordMail!
 
 The following Terms of Service ('TOS') is a legal agreement between Moustacheminer Server Services ('MSS' or 'we') and you ('you').
 
-By using the Dmail application ('Dmail') via the DiscordMail bot application found on https://discordapp.com/ ('Discord'), you agree to be bound by the following TOS set by this document, to the extent applicable in your country, without any rights, express or implied, except for those outlined within the TOS and PA.
+By using the DiscordMail application ('DiscordMail', 'the Service') via the DiscordMail bot application found on https://discordapp.com/ ('Discord'), you agree to be bound by the following TOS set by this document, to the extent applicable in your country, without any rights, express or implied, except for those outlined within the TOS and PA.
 
 ### Discord
 
-Dmail uses Discord to interface with you. As an end user, Discord requires you to have accepted the Discord Terms of Service, which also includes the Discord Privacy Policy.
+DiscordMail uses Discord to interface with you. As an end user, Discord requires you to have accepted the Discord Terms of Service, which also includes the Discord Privacy Policy.
 
 - https://discordapp.com/terms
 - https://discordapp.com/privacy
-
-Under the new Discord Developer Terms of Service, DiscordMail has been renamed to Dmail to remove references to the Discord trademark.
-
-- https://discordapp.com/developers/docs/legal
-
-No end user data from Discord is stored by MSS
 
 ### Licence
 
@@ -48,16 +42,16 @@ SOFTWARE.
 
 ### Children
 
-MSS provides servers and services for users over 13 years of age. If you believe your child is using the Dmail MSS Server Services, please contact admin@moustacheminer.com
+MSS provides servers and services for users over 13 years of age. If you believe your child is using the DiscordMail service, please contact admin@moustacheminer.com
 
 ### Content
 
-All content submitted by you, including but not limited to text, images, graphics, logos, photographs, audio, video, data and information retains the sole property of you, and any content is your responsibility. MSS is not responsible for any content submitted by our users.
+All content submitted by you, including but not limited to text, images, graphics, logos, photographs, audio, video, data and information retains the sole property of you, and any content is your responsibility. You accept that MSS is not responsible for any content submitted by our users, and any damages or losses caused by the use of your or other user content shared via DiscordMail.
 
-You may use the service to send emails to any other email. You agree that your use of Dmail does not include sending unsolicited emails. If you believe unsolicited emails originated from _discordmail.com_, please contact Discord at abuse@discordapp.com
+You may use the service to send emails to any other email. You agree that your use of DiscordMail does not include sending unsolicited emails. If you believe unsolicited emails originated from _discordmail.com_, please contact Discord at abuse@discordapp.com
 
 ### Termination
 
-You may terminate your Dmail account at any time and for any reason, by sending a Discord Direct Message to 7coil#3175 or sending an email to admin@moustacheminer.com from your Dmail account requesting termination.
+You may terminate your DiscordMail account at any time and for any reason, by sending a Discord Direct Message to 7coil#3175 or sending an email to admin@moustacheminer.com from your DiscordMail account requesting termination.
 
-MSS may also termiate your account or access to all or portions of MSS services for any time and for any reason, or in the event of violation of the Dmail TOS, at any time or with or without any reason. You may lose access to your content as a result, MSS advises you to back up important emails using a secondary system as a result.
+MSS may also termiate your account or access to all or portions of MSS services for any time and for any reason, or in the event of violation of the DiscordMail TOS, at any time or with or without any reason. You may lose access to your content as a result, MSS advises you to back up important emails using a secondary system as a result.

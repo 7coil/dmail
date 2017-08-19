@@ -58,7 +58,7 @@ module.exports.command = (message) => {
 										console.log(`Failed to send an email from ${details.email}`);
 									} else {
 										message.channel.createMessage('Successfully sent E-Mail.');
-										console.log(`Sent an email by ${details.email}`);
+										console.log((new Date()).toUTCString(), `Sent reply by ${details.email}`);
 									}
 								});
 							}
