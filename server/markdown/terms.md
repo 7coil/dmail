@@ -1,7 +1,7 @@
 ## DiscordMail Terms of Service
 
 Last updated: 19th August 2017  
-Effective Date: 21st August 2017
+Effective Date: 20-21st August 2017
 
 Thanks for choosing DiscordMail!
 
