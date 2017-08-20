@@ -28,7 +28,12 @@
 						</p>
 					</div>
 					<div class="row">
+						{{ #body-html }}
 						{{{ body-html }}}
+						{{ /body-html }}
+						{{ ^body-html }}
+						{{{ stripped-html }}}
+						{{ /body-html }}
 					</div>
 				</div>
 			</div>
