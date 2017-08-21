@@ -1,7 +1,7 @@
 ## DiscordMail Privacy Agreement
 
-Last updated: 19th August 2017  
-Effective Date: 20-21st August 2017
+Last updated: 21st August 2017  
+Effective Date: 21st August 2017
 
 Thanks for choosing DiscordMail!
 
@@ -17,9 +17,7 @@ By registering with DiscordMail, you give permission for the following Discord "
 - Your Discriminator
 - Your Username
 
-This is in accordance with the Discord Developer Terms of Service
-
-- https://discordapp.com/developers/docs/legal
+This is in accordance with the Discord Developer Terms of Service.
 
 ### Incoming Emails
 
@@ -29,11 +27,12 @@ All details about E-Mails are recorded as recieved from Mailgun for use in the D
 
 Moustacheminer Server Services have registered with the Information Commissioner's Office as a data controller, as a UK based controller storing personal information.
 
-DPA ICO Registration Number: TODO
+Registration reference: ZA273490
 
 #### Subject Access Request
 
-You have the right to obtain a copy of information held about you. In order to do so, you will need to undergo a Subject Access Request.P lease send a Discord Direct Message to `7coil#3175` requesting a SAR of your information.
+You have the right to obtain a copy of information held about you. In order to do so, you will need to undergo a Subject Access Request.
+Please send a Discord Direct Message to `7coil#3175` requesting a SAR of your information, or to the address listed on the ICO website.
 
 ##### If you wish to obtain a paper copy, please include:
 
@@ -56,4 +55,8 @@ You may also include specifics for specific information held about you. A respon
 
 For more information about a Subject Access Request, please view the ICO website.
 
-https://ico.org.uk/for-the-public/personal-information/
+### Links
+
+- [Certificate of Registration](/certificate.pdf)
+- [Information about a Subject Access Request (external site)](https://ico.org.uk/for-the-public/personal-information/)
+- [Discord Developer Terms of Service](https://discordapp.com/developers/docs/legal)
