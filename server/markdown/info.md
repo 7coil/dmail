@@ -20,5 +20,5 @@ DiscordMail is a fairly new bot, so these instructions may not be finalised.
 1. `git clone`
 2. `npm i`
 3. Edit `config/default.json`, using `config/default.rename.json` as a template
-4. Create a database in Rethonk with tables: `collection`, `registrations` and `emails`
+4. Create a database in Rethonk with tables: `registrations` and `emails`
 5. `npm start`
