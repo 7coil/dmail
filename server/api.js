@@ -33,7 +33,7 @@ const sendError = (email, message) => {
 			if (err) {
 				console.log('Failed to send error message. Giving up.');
 			} else {
-				console.log('Sent error message to person.');
+				console.log(message, 'Sent error message to person.');
 			}
 		});
 	}

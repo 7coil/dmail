@@ -1,5 +1,6 @@
 const r = require('./../../../db');
 const config = require('config');
+const mailgun = require('mailgun-js')(config.get('api').mailgun);
 
 module.exports.info = {
 	name: 'Agree to Terms and Conditions',
@@ -27,14 +28,24 @@ module.exports.command = (message) => {
 			}, {
 				conflict: 'update'
 			})
-			.run(r.conn, (err, res) => {
+			.run(r.conn, (err) => {
 				if (err) {
 					message.channel.createMessage('An error occured writing your registration to the database.');
 				} else {
-					message.channel.createMessage({
-						embed: {
-							title: `Welcome to ${config.get('name')}!`,
-							description: `${res.replaced ? 'Reassigned' : 'Assigned'} \`${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}\` to your account.`
+					const data = {
+						from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
+						to: `${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`,
+						subject: `Welcome to ${config.get('name')}!`,
+						html: config.get('welcome')
+					};
+
+					mailgun.messages().send(data, (err2) => {
+						if (err2) {
+							message.channel.createMessage(`Failed to send E-Mail: ${err2.message}`);
+							console.log(`Failed to send an introductory email to ${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`);
+						} else {
+							message.channel.createMessage('Welcome! You should be receiving an E-Mail to your DMs. If you do not recieve one, make sure you have allowed DMs to your account.');
+							console.log((new Date()).toUTCString(), `Sent introductory email to ${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`);
 						}
 					});
 				}

@@ -1,6 +1,7 @@
 const r = require('./../../../db');
 const config = require('config');
 const name = require('./../../utils').dmail.name;
+const mailgun = require('mailgun-js')(config.get('api').mailgun);
 
 module.exports.info = {
 	name: 'Register a Guild',
@@ -32,7 +33,22 @@ module.exports.command = (message) => {
 					if (err) {
 						message.channel.createMessage('An error occured writing the registration to the database.');
 					} else {
-						message.channel.createMessage('Successfully added guild to DiscordMail.');
+						const data = {
+							from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
+							to: `${name(message.input)}@${config.get('api').mailgun.domain}`,
+							subject: `Welcome to ${config.get('name')}!`,
+							html: config.get('welcome')
+						};
+
+						mailgun.messages().send(data, (err2) => {
+							if (err2) {
+								message.channel.createMessage(`Failed to send E-Mail: ${err2.message}`);
+								console.log(`Failed to send an introductory email to ${name(message.input)}@${config.get('api').mailgun.domain}`);
+							} else {
+								message.channel.createMessage('Successfully added guild to DiscordMail.');
+								console.log((new Date()).toUTCString(), `Sent introductory email to ${name(message.input)}@${config.get('api').mailgun.domain}`);
+							}
+						});
 					}
 				});
 		}
