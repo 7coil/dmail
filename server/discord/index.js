@@ -69,7 +69,6 @@ client.once('ready', () => {
 
 			// Run the actual command
 			commands[message.command.toLowerCase()].command(message);
-			console.log(message.context);
 		}
 	});
 });
