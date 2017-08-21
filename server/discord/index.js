@@ -49,12 +49,6 @@ client.once('ready', () => {
 		}, 1800000);
 	}
 
-	// Check for bot collection servers
-	utils.collection.check(client);
-	setInterval(() => {
-		utils.collection.check(client);
-	}, 1800000);
-
 	client.on('messageCreate', (message) => {
 		// It crashed on this before. No explaination.
 		if (!message.author) return;
