@@ -130,7 +130,7 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 					content: res1.generated_keys[0],
 					embed: {
 						title: body.subject || 'Untitled E-Mail',
-						description: body['body-plain'].length > 2000 ? 'Too long to display' : body['body-plain'] || 'Empty E-Mail',
+						description: body['body-plain'].length > 2000 ? `Too long to display. View full E-Mail at ${config.get('webserver').domain}/mail/${res1.generated_keys[0]}` : body['body-plain'] || 'Empty E-Mail',
 						timestamp: new Date(body.timestamp * 1000),
 						url: `${config.get('webserver').domain}/mail/${res1.generated_keys[0]}`,
 						author: {
