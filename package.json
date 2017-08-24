@@ -23,7 +23,7 @@
     "config": "^1.26.1",
     "consolidate": "^0.14.5",
     "cors": "^2.8.4",
-    "eris": "^0.7.0",
+    "eris": "^0.7.1",
     "eslint": "^4.1.1",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.7.0",

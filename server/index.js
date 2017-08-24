@@ -5,7 +5,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const engines = require('consolidate');
 const path = require('path');
-const cors = require('cors');
 const request = require('request');
 const discord = require('./discord');
 const apiRouter = require('./api');
@@ -29,7 +28,6 @@ app.enable('trust proxy')
 	.set('views', path.join(__dirname, '/dynamic'))
 	.engine('html', engines.mustache)
 	.set('view engine', 'html')
-	.use(cors())
 	.get('/', (req, res) => {
 		request({
 			method: 'GET',
