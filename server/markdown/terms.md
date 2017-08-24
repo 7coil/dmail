@@ -1,7 +1,7 @@
 ## DiscordMail Terms of Service
 
-Last updated: 21st August 2017  
-Effective Date: 21st August 2017
+Last updated: 25th August 2017  
+Effective Date: 31st August 2017
 
 Thanks for choosing DiscordMail!
 
@@ -50,8 +50,12 @@ All content submitted by you, including but not limited to text, images, graphic
 
 You may use the service to send emails to any other email. You agree that your use of DiscordMail does not include sending unsolicited emails. If you believe unsolicited emails originated from _discordmail.com_, please contact Discord at abuse@discordapp.com
 
+### Use
+
+Your use of DiscordMail shall not be automated via any means, via the Discord API (commonly referred to as 'Selfbots'), macro software, etc for any portion of the product and service, except for the API services exposed at the https://discordmail.com/api/ URL.
+
 ### Termination
 
-You may terminate your DiscordMail account at any time and for any reason, by sending a Discord Direct Message to 7coil#3175 or sending an email to admin@moustacheminer.com from your DiscordMail account requesting termination.
+You may terminate your DiscordMail account at any time and for any reason, by sending a Discord Direct Message to 7coil#3175 or sending an email to admin@moustacheminer.com from your DiscordMail account requesting termination. On termination of your Discord account, your DiscordMail account will also be terminated in accordance to the Discord API TOS and the DPA.
 
 MSS may also termiate your account or access to all or portions of MSS services for any time and for any reason, or in the event of violation of the DiscordMail TOS, at any time or with or without any reason. You may lose access to your content as a result, MSS advises you to back up important emails using a secondary system as a result.
