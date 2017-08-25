@@ -16,7 +16,6 @@ DiscordMail uses Discord to interface with you. As an end user, Discord requires
 - https://discordapp.com/terms
 - https://discordapp.com/privacy
 
-
 ### Children
 
 MSS provides servers and services for users over 13 years of age.
