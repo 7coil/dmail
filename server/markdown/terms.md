@@ -16,6 +16,14 @@ DiscordMail uses Discord to interface with you. As an end user, Discord requires
 - https://discordapp.com/terms
 - https://discordapp.com/privacy
 
+
+### Children
+
+MSS provides servers and services for users over 13 years of age.
+By registering with the DiscordMail service, you agree that you are over 13 years of age and have read the TOS and PA.
+If you are between 13 and the age of majority in your current jurisdiction, you also agree that your legal parent/guardian has also reas the TOS and PA.
+If you believe your child under the age of 13 is using the DiscordMail service, please contact admin@moustacheminer.com
+
 ### Licence
 
 MIT License
@@ -39,10 +47,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
-### Children
-
-MSS provides servers and services for users over 13 years of age. If you believe your child is using the DiscordMail service, please contact admin@moustacheminer.com
 
 ### Content
 
