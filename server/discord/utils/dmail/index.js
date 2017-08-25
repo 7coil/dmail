@@ -16,7 +16,7 @@ const check = id =>
 			});
 	});
 
-const name = string => string.replace(/ /g, '+').replace(/\W/g, '=').toLowerCase();
+const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 
 module.exports.check = check;
 module.exports.name = name;
