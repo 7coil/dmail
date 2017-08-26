@@ -41,7 +41,7 @@ module.exports.command = (message) => {
 							} else {
 								const data = {
 									from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
-									to: res.sender,
+									to: res.from || res.sender,
 									'h:In-Reply-To': res['Message-Id'],
 									'h:References': res.References ? `${res.References} ${res['Message-Id']}` : res['Message-Id'],
 									subject: `Re: ${res.Subject}`,
