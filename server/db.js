@@ -1,9 +1,9 @@
 const r = require('rethinkdb');
 const config = require('config');
 
-r.connect(config.get('rethinkdb')).then((conn) => {
+r.connect(config.get('api').rethinkdb).then((conn) => {
 	r.conn = conn;
-	r.conn.use(config.get('rethinkdb').db);
+	r.conn.use(config.get('api').rethinkdb.db);
 });
 
 module.exports = r;
