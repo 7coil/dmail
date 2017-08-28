@@ -26,8 +26,10 @@ const sendError = (email, message) => {
 		text: message
 	};
 
-	if ((email.from || email.sender.toLowerCase()) === `${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}`.toLowerCase()) {
+	if (email.from.toLowerCase() === `${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}`.toLowerCase()) {
 		console.log('Detected server is sending error message to itself. Giving up.');
+	} else if (email.recipient.toLowerCase() === `${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}`.toLowerCase()) {
+		console.log('Detected recipient is also mail server. Giving up');
 	} else {
 		mailgun.messages().send(data, (err) => {
 			if (err) {
