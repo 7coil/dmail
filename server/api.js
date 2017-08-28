@@ -26,7 +26,7 @@ const sendError = (email, message) => {
 		text: message
 	};
 
-	if (email.sender.toLowerCase() === `${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}`.toLowerCase()) {
+	if ((email.from || email.sender.toLowerCase()) === `${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}`.toLowerCase()) {
 		console.log('Detected server is sending error message to itself. Giving up.');
 	} else {
 		mailgun.messages().send(data, (err) => {
