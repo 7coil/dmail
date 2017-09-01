@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 				} else if (!result) {
 					res.status(404).render('error.html', { status: 404 });
 				} else {
-					const date = new Date(result.timestamp);
+					const date = new Date(result.timestamp * 1000);
 					res.render('mail.html', { email: result, datestamp: date.toUTCString() });
 				}
 			});
