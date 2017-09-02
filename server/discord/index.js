@@ -33,7 +33,7 @@ client.once('ready', () => {
 		type: 0
 	});
 
-	// Send DBOTS info if it was provided.
+	// Send bots.discord.pw info if it was provided.
 	if (config.get('api').botsdiscordpw) {
 		utils.botsdiscordpw(client);
 		setInterval(() => {
@@ -41,11 +41,19 @@ client.once('ready', () => {
 		}, 1800000);
 	}
 
-	// Send FAKEDBOTS info if it was provided.
+	// Send discordbots.org info if it was provided.
 	if (config.get('api').discordbotsorg) {
 		utils.discordbotsorg(client);
 		setInterval(() => {
 			utils.discordbotsorg(client);
+		}, 1800000);
+	}
+
+	// Send ls.terminal.ink info if it was provided.
+	if (config.get('api').lsterminalink) {
+		utils.discordbotsorg(client);
+		setInterval(() => {
+			utils.lsterminalink(client);
 		}, 1800000);
 	}
 
