@@ -1,0 +1,16 @@
+extends template.pug
+
+block main
+	.container
+		.col-s12
+			ul
+				li From: #{email.from}
+				li Date: #{datestamp}
+				li Subject: #{email.subject}
+				li To: #{email.To}
+		hr
+		.col-s12
+			if email.body-html
+				.col-s12!= email["body-html"]
+			else
+				.col-s12!= email["stripped-html"]

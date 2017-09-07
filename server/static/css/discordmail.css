@@ -1,6 +1,6 @@
 @font-face {
 	font-family: "Whitney";
-	src: url(https://discordmail.com/font/whitney.woff);
+	src: url(/font/whitney.woff);
 }
 
 body {
@@ -12,13 +12,27 @@ body {
 }
 
 .greyple {
-	background-color: #99AAB5;
+	background-color: #99AAB5 !important;
+}
+
+.dgrey {
+	background-color: #36393E !important;
 }
 
 .dark {
-	background-color: #2C2F33;
+	background-color: #2C2F33 !important;
 }
 
 .dblack {
-	background-color: #23272A;
+	background-color: #23272A !important;
+}
+
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
 }

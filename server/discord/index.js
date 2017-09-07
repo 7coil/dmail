@@ -49,14 +49,6 @@ client.once('ready', () => {
 		}, 1800000);
 	}
 
-	// Send ls.terminal.ink info if it was provided.
-	if (config.get('api').lsterminalink) {
-		utils.discordbotsorg(client);
-		setInterval(() => {
-			utils.lsterminalink(client);
-		}, 1800000);
-	}
-
 	client.on('messageCreate', (message) => {
 		// It crashed on this before. No explaination.
 		if (!message.author) return;

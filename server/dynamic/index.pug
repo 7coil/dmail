@@ -1,0 +1,72 @@
+extends template.pug
+
+block head
+	link(rel="stylesheet" href="/css/embed.css")
+
+block main
+	.container
+		.row.center
+			ul#staggered-text
+				li(style="opacity: 0;"): h1 #{__('name')}
+				li(style="opacity: 0;"): h2 The Discord to E-Mail Bot, powered by Mailgun
+				li(style="opacity: 0;"): p #{__('name')} links your Discord account to E-Mail, opening the usability of Discord to communicate to others unprecedentedly larger than ever before.
+				li(style="opacity: 0;")
+					.col.s12.offset-m3.m6
+						.card-panel.greyple.black-text
+							span
+								| #{discord.guilds.size} Guilds
+								br
+								| #{discord.users.size} Users
+								br
+								| #{outgoing} sent and #{incoming} incoming emails to date
+		.row.center
+			h3 Create an account today!
+			h4 Invite the bot and type
+				code dmail register
+			a.waves-effect.btn-large.burple(href="/url/invite" target="_blank") Invite Bot
+			p By registering with #{__('name')}, you agree with the contents of the
+				a(href="/docs/tos") Terms of Service
+				| and
+				a(href="/docs/privacy") Privacy Agreement
+				| , and fully agree to those terms.
+		.row
+			.embed-wrapper
+				.embed-color-pill
+				.embed.embed-rich
+					.embed-content
+						.embed-content-inner
+							.embed-author
+								a.embed-author-name(href='https://discordmail.com/mail/711f6811-7464-4ba1-b50d-2cd736a22d8f', target='_blank', rel='noreferrer') DiscordMail Mail Server &lt;noreply@discordmail.com&gt;
+							div
+								a.embed-title(href='https://discordmail.com/mail/711f6811-7464-4ba1-b50d-2cd736a22d8f', target='_blank', rel='noreferrer')
+									| Welcome to DiscordMail!
+							.embed-description.markup
+								| Thanks for registering with DiscordMail!
+								br
+								| By viewing this E-Mail you will have succeeded in Step 1 of the DiscordMail tutorial.
+								br
+								br
+								| Step 2: Try sending an E-Mail to a friend of yours.
+								br
+								code dmail send yourfriend@example.com 'Hello!' I sent an E-Mail from Discord, isn't that cool?
+								br
+								|Tip! You can attach a single file while sending the message to send the attachment in Discord!
+								br
+								br
+								| Step 3: Explore!
+								br
+								| Because DiscordMail is just a normal E-Mail client, you can use your DiscordMail account anywhere where you can insert an E-Mail. If E-Mails don't come out right in Discord, you can click the embed URL to open the original HTML version. Try it out on this E-Mail!
+								br
+								br
+								| This is a one-time E-Mail sent on registration for DiscordMail. If you are unaware of this E-Mail, please disregard it.
+								br
+								| Copyright 2015 - 2017, Moustacheminer Server Services
+								br
+								| Moustacheminer Server Services are not associated with Discord Inc.
+							.embed-fields
+								.embed-field
+									.embed-field-name
+										| E-Mail ID
+									.embed-field-value.markup
+										| 711f6811-7464-4ba1-b50d-2cd736a22d8f
+					span.embed-footer Tue Aug 22nd, 2017 at 12:28 AM

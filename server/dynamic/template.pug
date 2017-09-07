@@ -1,0 +1,38 @@
+doctype html
+
+html
+	head
+		block title
+			title #{title ? `${title} -` : ''} #{__('name')}
+		block head
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css")
+		link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+		link(rel="stylesheet" href="/css/discordmail.css")
+		link(rel="icon" type="image/png" href="/img/favicon.png")
+		link(rel="shortcut icon" type="image/png" href="/img/favicon.png")
+	body.dgrey
+		nav.burple.icon
+			.nav-wrapper
+				.brand-logo.center
+					a(href="/") #{__('name')}
+		main.white-text
+			block main
+		footer.page-footer.dark.grey-text
+			.container
+				.row
+					.col.s12
+						p.grey-text.text-lighten-4
+							ul
+								li: a(href="/docs/terms") Terms of Service
+								li: a(href="/docs/privacy") Privacy Agreement
+								li: a(href="https://moustacheminer.com/") moustacheminer.com
+			.footer-copyright.dblack
+				.container
+					ul
+						li Copyright 2015 - 2017, Moustacheminer Server Services
+						li Moustacheminer Server Services are not associated with Discord Inc.
+		block scripts
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js")
+		script(src="/js/init.js")
