@@ -4,10 +4,10 @@ block main
 	.container
 		.col-s12
 			ul
-				li From: #{email.from}
-				li Date: #{datestamp}
-				li Subject: #{email.subject}
-				li To: #{email.To}
+				li #{__('mail_from', { from: email.from})}
+				li #{__('mail_date', { date: datestamp})}
+				li #{__('mail_subject', { subject: email.subject})}
+				li #{__('mail_to', { to: email.To})}
 		hr
 		.col-s12
 			if email.body-html

@@ -8,27 +8,23 @@ block main
 		.row.center
 			ul#staggered-text
 				li(style="opacity: 0;"): h1 #{__('name')}
-				li(style="opacity: 0;"): h2 The Discord to E-Mail Bot, powered by Mailgun
-				li(style="opacity: 0;"): p #{__('name')} links your Discord account to E-Mail, opening the usability of Discord to communicate to others unprecedentedly larger than ever before.
+				li(style="opacity: 0;"): h2 #{__('main_subtitle')}
+				li(style="opacity: 0;"): p #{__('main_description', { name: __('name') })}
 				li(style="opacity: 0;")
 					.col.s12.offset-m3.m6
 						.card-panel.greyple.black-text
 							span
-								| #{discord.guilds.size} Guilds
+								| #{__('main_guilds', { count: discord.guilds.size })}
 								br
-								| #{discord.users.size} Users
+								| #{__('main_users', { count: discord.users.size })}
 								br
-								| #{outgoing} sent and #{incoming} incoming emails to date
+								| #{__('main_emails', { outgoing, incoming })}
 		.row.center
-			h3 Create an account today!
-			h4 Invite the bot and type
-				code dmail register
-			a.waves-effect.btn-large.burple(href="/url/invite" target="_blank") Invite Bot
-			p By registering with #{__('name')}, you agree with the contents of the
-				a(href="/docs/tos") Terms of Service
-				| and
-				a(href="/docs/privacy") Privacy Agreement
-				| , and fully agree to those terms.
+			h3 #{__('main_calltoaction')}
+			h4 #{__('main_invitemethod')}
+			a.waves-effect.btn-large.burple(href="/url/invite" target="_blank") #{__('main_invitebutton')}
+			p #{__('main_disclaimer', { name: __('name') })}
+			a(href="/docs") #{__('documentation')}
 		.row
 			.embed-wrapper
 				.embed-color-pill
@@ -69,4 +65,4 @@ block main
 										| E-Mail ID
 									.embed-field-value.markup
 										| 711f6811-7464-4ba1-b50d-2cd736a22d8f
-					span.embed-footer Tue Aug 22nd, 2017 at 12:28 AM
+					span.embed-footer Thu Jan 1st, 1970 at 12:00 AM

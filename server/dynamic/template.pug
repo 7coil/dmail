@@ -24,15 +24,15 @@ html
 					.col.s12
 						p.grey-text.text-lighten-4
 							ul
-								li: a(href="/docs/terms") Terms of Service
-								li: a(href="/docs/privacy") Privacy Agreement
-								li: a(href="https://moustacheminer.com/") moustacheminer.com
-								li: a(href="/lang") Languages / Internationalization
+								li: a(href="/docs/terms") #{__('footer_tos')}
+								li: a(href="/docs/privacy") #{__('footer_pa')}
+								li: a(href="https://moustacheminer.com/") #{__('footer_mss')}
+								li: a(href="/lang") #{__('footer_lang')}
 			.footer-copyright.dblack
 				.container
 					ul
-						li Copyright 2015 - 2017, Moustacheminer Server Services
-						li Moustacheminer Server Services are not associated with Discord Inc.
+						li #{__('footer_copyright')}
+						li #{__('footer_disclaimer')}
 		block scripts
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js")

@@ -1,3 +1,24 @@
 {
-	"name": "DiscordMail"
+	"name": "DiscordMail",
+	"main_subtitle": "The Discord to E-Mail Bot, powered by Mailgun",
+	"main_description": "{{ name }} links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.",
+	"main_guilds": "{{ count }} Guilds",
+	"main_users": "{{ count }} Users",
+	"main_emails": "{{ outgoing }} sent and {{ incoming }} incoming emails to date",
+	"main_calltoaction": "Create an account today!",
+	"main_invitemethod": "Invite the bot and type 'dmail register'",
+	"main_invitebutton": "invite bot",
+	"main_disclaimer": "By registering with {{ name }}, you fully agree to the contents of the Terms of Service and Privacy Agreement, found in the documentation.",
+	"documentation": "Documentation",
+	"error_suggest": "You may want to go back to the previous page.",
+	"footer_copyright": "Copyright 2015 - 2017, Moustacheminer Server Services",
+	"footer_disclaimer": "MSS are not associated with Discord Inc.",
+	"footer_tos": "Terms of Service",
+	"footer_pa": "Privacy Agreement",
+	"footer_mss": "Moustacheminer Server Services",
+	"footer_lang": "Languages / Internationalization",
+	"mail_from": "From: {{ from }",
+	"mail_date": "Date: {{ date }}",
+	"mail_subject": "Subject: {{ subject }}",
+	"mail_to": "To: {{ to }}"
 }

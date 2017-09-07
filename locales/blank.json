@@ -1,3 +1,24 @@
 {
-	"name": "name"
+	"name": "name",
+	"main_subtitle": "main_subtitle",
+	"main_description": "main_description",
+	"main_guilds": "main_guilds",
+	"main_users": "main_users",
+	"main_emails": "main_emails",
+	"main_calltoaction": "main_calltoaction",
+	"main_invitemethod": "main_invitemethod",
+	"main_invitebutton": "main_invitebutton",
+	"main_disclaimer": "main_disclaimer",
+	"documentation": "documentation",
+	"error_suggest": "error_suggest",
+	"footer_copyright": "footer_copyright",
+	"footer_disclaimer": "footer_disclaimer",
+	"footer_tos": "footer_tos",
+	"footer_pa": "footer_pa",
+	"footer_mss": "footer_mss",
+	"footer_lang": "footer_lang",
+	"mail_from": "mail_from",
+	"mail_date": "mail_date",
+	"mail_subject": "mail_subject",
+	"mail_to": "mail_to"
 }
