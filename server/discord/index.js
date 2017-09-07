@@ -59,7 +59,9 @@ client.once('ready', () => {
 		const pre = prefix.exec(message.content);
 
 		// If there's a result, do this crap.
-		if (pre) {
+		if (config.get('discord').disable) {
+			message.channel.createMessage('DiscordMail has ran out of it\'s monthly Mailgun quota. For help, please go to the DiscordMail guild at https://discordmail.com/url/help');
+		} else if (pre) {
 			message.prefix = pre[1];
 			message.command = pre[2];
 			message.input = pre[3] || null;
