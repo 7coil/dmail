@@ -20,5 +20,6 @@
 	"mail_from": "From: {{ from }",
 	"mail_date": "Date: {{ date }}",
 	"mail_subject": "Subject: {{ subject }}",
-	"mail_to": "To: {{ to }}"
+	"mail_to": "To: {{ to }}",
+	"github": "GitHub"
 }

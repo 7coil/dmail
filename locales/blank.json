@@ -20,5 +20,6 @@
 	"mail_from": "mail_from",
 	"mail_date": "mail_date",
 	"mail_subject": "mail_subject",
-	"mail_to": "mail_to"
+	"mail_to": "mail_to",
+	"github": "GitHub"
 }

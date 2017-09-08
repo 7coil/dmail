@@ -20,5 +20,6 @@
 	"mail_from": "{{ from }} alaah",
 	"mail_date": "fa la ehak Calasta: {{ date }}",
 	"mail_subject": "Ajd a {{ subject }} kaka nababa",
-	"mail_to": "{{ to }} ajax apala"
+	"mail_to": "{{ to }} ajax apala",
+	"github": "PornHub"
 }

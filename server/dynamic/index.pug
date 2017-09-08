@@ -24,7 +24,8 @@ block main
 			h4 #{__('main_invitemethod')}
 			a.waves-effect.btn-large.burple(href="/url/invite" target="_blank") #{__('main_invitebutton')}
 			p #{__('main_disclaimer', { name: __('name') })}
-			a(href="/docs") #{__('documentation')}
+			p: a(href="/docs") #{__('documentation')}
+			p: a(href="/url/github") #{__('github')}
 		.row
 			.embed-wrapper
 				.embed-color-pill
