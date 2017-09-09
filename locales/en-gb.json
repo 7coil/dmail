@@ -17,7 +17,7 @@
 	"footer_pa": "Privacy Agreement",
 	"footer_mss": "Moustacheminer Server Services",
 	"footer_lang": "Languages / Internationalization",
-	"mail_from": "From: {{ from }",
+	"mail_from": "From: {{ from }}",
 	"mail_date": "Date: {{ date }}",
 	"mail_subject": "Subject: {{ subject }}",
 	"mail_to": "To: {{ to }}",
