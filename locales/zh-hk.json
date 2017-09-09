@@ -2,7 +2,7 @@
 	"footer_tos": "條款",
 	"footer_pa": "私隱權",
 	"footer_lang": "Languages / 顯示語言",
-	"mail_from": "寄件者: {{ from }",
+	"mail_from": "寄件者: {{ from }}",
 	"mail_date": "日期: {{ date }}",
 	"mail_subject": "主旨: {{ subject }}",
 	"mail_to": "收件者: {{ to }}",
