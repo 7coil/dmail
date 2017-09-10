@@ -22,6 +22,7 @@ const sendError = (email, message) => {
 		to: email.From,
 		'h:In-Reply-To': email['Message-Id'],
 		'h:References': email['Message-Id'],
+		'h:X-Failed-Recipients': email.recipient,
 		subject: `Re: ${email.Subject}`,
 		text: message
 	};
