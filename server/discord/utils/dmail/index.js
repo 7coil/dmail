@@ -8,7 +8,9 @@ const check = message =>
 				if (err1) {
 					reject(message.__('err_generic'));
 				} else if (!res) {
-					reject(message.__('what_user_noreg', { prefix: message.prefix }));
+					reject(message.__('what_user_noreg', {
+						prefix: message.prefix
+					}));
 				} else {
 					resolve(res);
 				}

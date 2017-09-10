@@ -2,7 +2,7 @@ const r = require('../../../db.js');
 const i18n = require('i18n');
 
 module.exports.info = {
-	name: 'Locale',
+	name: 'View and set locales',
 	category: 'Config',
 	aliases: [
 		'locale',
