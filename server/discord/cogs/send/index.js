@@ -16,7 +16,7 @@ module.exports.info = {
 module.exports.command = (message) => {
 	const email = regex.exec(message.input);
 	// Check for registrations
-	dmail.check(message.inbox)
+	dmail.check(message)
 		.then((details) => {
 			if (!email) {
 				message.channel.createMessage(message.__('send_incorrect', { prefix: message.prefix, command: message.command }));

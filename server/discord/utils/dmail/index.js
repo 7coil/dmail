@@ -1,15 +1,14 @@
 const r = require('./../../../db');
-const config = require('config');
 
-const check = id =>
+const check = message =>
 	new Promise((resolve, reject) => {
 		r.table('registrations')
-			.get(id)
+			.get(message.inbox)
 			.run(r.conn, (err1, res) => {
 				if (err1) {
-					reject('Could not search RethonkDB');
+					reject(message.__('err_generic'));
 				} else if (!res) {
-					reject(`You or the guild are not registered! Please register for ${config.get('name')} using the \`register\` command`);
+					reject(message.__('what_user_noreg', { prefix: message.prefix }));
 				} else {
 					resolve(res);
 				}

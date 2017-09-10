@@ -12,7 +12,7 @@ module.exports.info = {
 
 module.exports.command = (message) => {
 	// Check for registrations
-	dmail.check(message.inbox)
+	dmail.check(message)
 		.then(() => {
 			if (!message.input) {
 				message.channel.createMessage(message.__('block_delimit'));
