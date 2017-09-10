@@ -1,7 +1,7 @@
 ## DiscordMail Terms of Service
 
-Last updated: 25th August 2017  
-Effective Date: 31st August 2017
+Last updated: 10th September 2017  
+Effective Date: 31st September 2017
 
 Thanks for choosing DiscordMail!
 
@@ -56,6 +56,8 @@ You may use the service to send emails to any other email. You agree that your u
 ### Use
 
 Your use of DiscordMail shall not be automated via any means, via the Discord API (commonly referred to as 'Selfbots'), macro software, etc for any portion of the product and service, except for the API services exposed at the https://discordmail.com/api/ URL.
+
+Furthermore, DiscordMail operates under a Fair Use Policy. To protect the service from being overloaded, and to free up our allocated E-Mail allowance, you may be temporarily blocked for periods of time if we determine you are abusing the service.
 
 ### Termination
 
