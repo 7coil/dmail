@@ -59,18 +59,18 @@ client.once('ready', () => {
 		const pre = prefix.exec(message.content);
 
 		// If there's a result, do this crap.
-		if (pre && config.get('discord').disable) {
-			message.channel.createMessage('DiscordMail has ran out of it\'s monthly Mailgun quota. For help, please go to the DiscordMail guild at https://discordmail.com/url/help');
-		} else if (pre) {
-			message.prefix = pre[1];
-			message.command = pre[2];
-			message.input = pre[3] || null;
-			message.name = utils.dmail.name(message.author.username);
-			message.context = config.get('discord').prefix.user.includes(message.prefix.toLowerCase()) ? 'user' : 'guild';
-			message.inbox = message.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || 'Not inside a guild';
-
-			// Run the actual command
-			commands[message.command.toLowerCase()].command(message);
+		if (pre) {
+			utils.init(message, pre, () => {
+				if (message.context === 'guild' && !message.channel.guild) {
+					message.channel.createMessage(message.__('err_guild'));
+				} else if (message.context === 'guild' && !utils.isadmin(message.member)) {
+					message.channel.createMessage(message.__('err_admin'));
+				} else if (config.get('discord').disable) {
+					message.channel.createMessage(message.__('err_quota'));
+				} else {
+					commands[message.command.toLowerCase()].command(message);
+				}
+			});
 		}
 	});
 });

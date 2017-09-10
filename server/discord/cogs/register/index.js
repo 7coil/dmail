@@ -12,8 +12,14 @@ module.exports.info = {
 module.exports.command = (message) => {
 	message.channel.createMessage({
 		embed: {
-			title: `Welcome to ${config.get('name')}!`,
-			description: `Your account has not been created yet. Please read the [${config.get('name')} Terms of Service](${config.get('webserver').domain}/docs/terms) and [Privacy Agreement](${config.get('webserver').domain}/docs/privacy) before continuing. If you agree, please run the \`dmail agree\` command to complete your registration`
+			title: message.__('consent_subject', { name: message.__('name') }),
+			description: message.__('consent_needed', { prefix: message.prefix }),
+			fields: [
+				{
+					name: message.__('documentation'),
+					value: `[${message.__('tos')}](${config.get('webserver').domain}/docs/terms) - [${message.__('pa')}](${config.get('webserver').domain}/docs/privacy)`
+				}
+			]
 		}
 	});
 };

@@ -31,22 +31,22 @@ module.exports.command = (message) => {
 				})
 				.run(r.conn, (err) => {
 					if (err) {
-						message.channel.createMessage('An error occured writing the registration to the database.');
+						message.channel.createMessage(message.__('err_generic'));
 					} else {
 						const data = {
 							from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
-							to: `${name(message.input)}@${config.get('api').mailgun.domain}`,
-							subject: `Welcome to ${config.get('name')}!`,
+							to: `${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`,
+							subject: message.__('consent_subject', { name: message.__('name') }),
 							html: config.get('welcome')
 						};
 
 						mailgun.messages().send(data, (err2) => {
 							if (err2) {
-								message.channel.createMessage(`Failed to send E-Mail: ${err2.message}`);
-								console.log(`Failed to send an introductory email to ${name(message.input)}@${config.get('api').mailgun.domain}`);
+								message.channel.createMessage(message.__('err_generic'));
+								console.log(`Failed to send an introductory email to ${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`);
 							} else {
-								message.channel.createMessage('Successfully added guild to DiscordMail.');
-								console.log((new Date()).toUTCString(), `Sent introductory email to ${name(message.input)}@${config.get('api').mailgun.domain}`);
+								message.channel.createMessage(message.__('consent_message'));
+								console.log((new Date()).toUTCString(), `Sent introductory email to ${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`);
 							}
 						});
 					}

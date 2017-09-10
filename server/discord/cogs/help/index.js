@@ -33,9 +33,9 @@ module.exports.command = (message) => {
 		}
 	});
 
-	let reply = `${config.get('name')} allows you to send and recieve emails from within Discord.\n`;
-	reply += `Prefixes for users: \`${config.get('discord').prefix.user.join('; ')}\`\n`;
-	reply += `Prefixes for guilds: \`${config.get('discord').prefix.guild.join('; ')}\`\n`;
+	let reply = `${message.__('help_intro', { name: message.__('name') })}\n`;
+	reply += `${message.__('help_prefixuser', { prefixes: `${config.get('discord').prefix.user.join('; ')}` })}\n`;
+	reply += `${message.__('help_prefixguild', { prefixes: `${config.get('discord').prefix.guild.join('; ')}` })}\n`;
 	reply += '```\n';
 	Object.keys(categories).forEach((key) => {
 		reply += `${capitalise(key)}:\n`;
@@ -56,7 +56,7 @@ module.exports.command = (message) => {
 		});
 	});
 
-	reply += `\n\`\`\`\n[GitHub](${config.get('webserver').domain}/url/github) - [Invite](${config.get('webserver').domain}/url/invite) - [Guild](${config.get('webserver').domain}/url/help) - [Guild Applications](${config.get('webserver').domain}/url/guild)`;
+	reply += `\n\`\`\`\n[${message.__('github')}](${config.get('webserver').domain}/url/github) - [${message.__('invite')}](${config.get('webserver').domain}/url/invite) - [${message.__('guild')}](${config.get('webserver').domain}/url/help) - [${message.__('guildapp')}](${config.get('webserver').domain}/url/guild)`;
 
 	const embed = {
 		embed: {

@@ -171,22 +171,6 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 })
 	.get('/stats', (req, res) => {
 		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size });
-	})
-	.get('/collection', (req, res) => {
-		r.table('collection')
-			.run(r.conn, (err1, cursor) => {
-				if (err1) {
-					res.status(500).json(err1);
-				} else {
-					cursor.toArray((err2, result) => {
-						if (err2) {
-							res.status(500).json(err2);
-						} else {
-							res.status(200).json(result);
-						}
-					});
-				}
-			});
 	});
 
 module.exports = router;

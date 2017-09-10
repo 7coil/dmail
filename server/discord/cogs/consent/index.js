@@ -30,27 +30,27 @@ module.exports.command = (message) => {
 			})
 			.run(r.conn, (err) => {
 				if (err) {
-					message.channel.createMessage('An error occured writing your registration to the database.');
+					message.channel.createMessage(message.__('err_generic'));
 				} else {
 					const data = {
 						from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
 						to: `${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`,
-						subject: `Welcome to ${config.get('name')}!`,
+						subject: message.__('consent_subject', { name: message.__('name') }),
 						html: config.get('welcome')
 					};
 
 					mailgun.messages().send(data, (err2) => {
 						if (err2) {
-							message.channel.createMessage(`Failed to send E-Mail: ${err2.message}`);
+							message.channel.createMessage(message.__('err_generic'));
 							console.log(`Failed to send an introductory email to ${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`);
 						} else {
-							message.channel.createMessage('Welcome! You should be receiving an E-Mail to your DMs. If you do not recieve one, make sure you have allowed DMs to your account.');
+							message.channel.createMessage(message.__('consent_message'));
 							console.log((new Date()).toUTCString(), `Sent introductory email to ${message.name}#${message.author.discriminator}@${config.get('api').mailgun.domain}`);
 						}
 					});
 				}
 			});
 	} else {
-		message.channel.createMessage(`To register the guild, please fill this form in. ${config.get('webserver').domain}/url/guild`);
+		message.channel.createMessage(message.__('consent_guild', { url: `${config.get('webserver').domain}/url/guild` }));
 	}
 };

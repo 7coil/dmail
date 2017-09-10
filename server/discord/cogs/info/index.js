@@ -1,54 +1,10 @@
 const os = require('os');
 const client = require('./../../');
-const config = require('config');
 
 // Non-changing statistics
 // (x64) AMD Athlon (x3) Something @ 3ghz (clocked at ????MHz)
-const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} clocked at ${os.cpus()[0].speed} MHz`;
+const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} @ ${os.cpus()[0].speed} MHz`;
 const softwareinfo = `[${os.type()}] ${os.release()}`;
-
-const timestamp = (input) => {
-	let d = 0;
-	let h = 0;
-	let m = 0;
-	let s = 0;
-
-	m = Math.floor(input / 60);
-	s = Math.floor(input % 60);
-
-	h = Math.floor(m / 60);
-	m %= 60;
-
-	d = Math.floor(h / 24);
-	h %= 24;
-
-	let message = '';
-	if (d === 1) {
-		message += `${d} day `;
-	} else if (d > 1) {
-		message += `${d} days `;
-	}
-
-	if (h === 1) {
-		message += `${h} hour `;
-	} else if (h > 1) {
-		message += `${h} hours `;
-	}
-
-	if (m === 1) {
-		message += `${m} minute `;
-	} else if (m > 1) {
-		message += `${m} minutes `;
-	}
-
-	if (s === 1) {
-		message += `${s} second `;
-	} else if (s > 1) {
-		message += `${s} seconds `;
-	}
-
-	return message || 'Literally no time whatsoever';
-};
 
 module.exports.info = {
 	name: 'Info about DiscordMail',
@@ -63,36 +19,31 @@ module.exports.command = (message) => {
 		embed: {
 			fields: [
 				{
-					name: 'Node.js',
+					name: message.__('info_nodejs'),
 					value: process.version,
 					inline: true
 				},
 				{
-					name: 'Uptime',
-					value: timestamp(process.uptime()),
-					inline: true
-				},
-				{
-					name: 'Guilds',
+					name: message.__('info_guilds'),
 					value: client.guilds.size,
 					inline: true
 				},
 				{
-					name: 'PID',
+					name: message.__('info_pid'),
 					value: process.pid,
 					inline: true
 				},
 				{
-					name: 'Hardware',
+					name: message.__('info_hard'),
 					value: hardwareinfo
 				},
 				{
-					name: 'Software',
+					name: message.__('info_soft'),
 					value: softwareinfo
 				},
 				{
-					name: 'Licence',
-					value: `This copy of [Discord Mail](https://discordmail.com/) is licenced under the MIT Licence. View the [GitHub repository here](${config.get('webserver').domain}/url/github) or [our guild](${config.get('webserver').domain}/url/help) for more information.`
+					name: message.__('info_licence'),
+					value: message.__('info_licencedesc', { name: message.__('name') })
 				}
 			]
 		}
