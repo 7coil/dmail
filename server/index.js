@@ -30,8 +30,6 @@ i18n.configure({
 	updateFiles: false
 });
 
-app.locals.name = config.get('name');
-
 // Middleware
 app.enable('trust proxy')
 	.use(bodyParser.json({
