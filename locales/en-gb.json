@@ -4,7 +4,7 @@
 	"main_description": "{{{ name }}} links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.",
 	"main_guilds": "{{{ count }}} Guilds",
 	"main_users": "{{{ count }}} Users",
-	"main_emails": "{{{ outgoing }} sent and {{ incoming }}} incoming emails to date",
+	"main_emails": "{{{ outgoing }}} sent and {{{ incoming }}} incoming emails to date",
 	"main_calltoaction": "Create an account today!",
 	"main_invitemethod": "Invite the bot and type 'dmail register'",
 	"main_invitebutton": "invite bot",
