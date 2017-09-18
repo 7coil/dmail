@@ -31,6 +31,7 @@ module.exports.command = (message) => {
 						} else {
 							r.table('emails')
 								.get(email[1])
+								.delete()
 								.run(r.conn, (err2) => {
 									if (err2) {
 										message.channel.createMessage(message.__('error_generic'));
