@@ -46,11 +46,11 @@
 	"info_soft": "Software",
 	"info_licence": "Licence",
 	"info_licencedesc": "{{{ name }}}, an instance of [DiscordMail](https://discordmail.com) is licenced under the MIT Licence.",
-	"reply_incorrect": "Expected input: `{{{ prefix }} {{ command }}} Reply-ID Content`",
+	"reply_incorrect": "Expected input: `{{{ prefix }}} {{{ command }}} Reply-ID Content`",
 	"reply_noexist": "Could not find your E-Mail ID",
 	"reply_conflict": "You cannot reply with another user's ID",
 	"reply_sent": "Successfully replied to E-Mail.",
-	"send_incorrect": "Expected input: `{{{ prefix }} {{ command }}} Address \"Subject\" Content`",
+	"send_incorrect": "Expected input: `{{{ prefix }}} {{{ command }}} Address \"Subject\" Content`",
 	"send_blocked": "This email address has been blocked by the owner of this bot.",
 	"send_sent": "Successfully sent E-Mail.",
 	"what_guild_noexist": "This guild has not registered for DiscordMail. Please register by filling in this form: {{{ url }}}",
@@ -60,5 +60,8 @@
 	"what_user_noreg": "You have not registered! Please register by running the `{{{ prefix }}} register` command",
 	"what_self_exist": "Your E-Mail is `{{{ email }}}`",
 	"locale_incorrect": "Valid locales: {{{ locales }}}",
-	"locale_set": "Set locale to {{{ locale }}}"
+	"locale_set": "Set locale to {{{ locale }}}",
+	"delete_incorrect": "Expected input: `{{{ prefix }}} {{{ command }}} Reply-ID`",
+	"delete_conflict": "You cannot delete with another user's ID",
+	"delete_deleted": "Successfully deleted E-Mail"
 }

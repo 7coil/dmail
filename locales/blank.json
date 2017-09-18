@@ -60,5 +60,8 @@
 	"what_user_noreg": "what_user_noreg",
 	"what_self_exist": "what_self_exist",
 	"locale_incorrect": "locale_incorrect",
-	"locale_set": "locale_set"
+	"locale_set": "locale_set",
+	"delete_incorrect": "delete_incorrect",
+	"delete_conflict": "delete_conflict",
+	"delete_deleted": "delete_deleted"
 }
