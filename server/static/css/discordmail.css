@@ -27,6 +27,13 @@ body {
 	background-color: #23272A !important;
 }
 
+#iframe {
+	border-width: 0px;
+	border-style: none;
+	background-color: #FFFFFF;
+	width: 100%;
+}
+
 body {
 	display: flex;
 	min-height: 100vh;

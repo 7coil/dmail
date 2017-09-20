@@ -10,7 +10,7 @@ block main
 				li #{__('mail_to', { to: email.To })}
 		hr
 		.col-s12
-			if email.body-html
-				.col-s12!= email["body-html"]
-			else
-				.col-s12!= email["stripped-html"]
+			iframe#iframe(sandbox="allow-same-origin" onload="iframeLoaded()" src=`view/${email.id}`)
+
+block scripts
+	script(src="/js/mail.js")
