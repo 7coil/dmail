@@ -3,6 +3,11 @@ const mailgun = require('mailgun-js')(config.get('api').mailgun);
 const request = require('request');
 const dmail = require('./../../utils.js').dmail;
 const r = require('./../../../db');
+const marked = require('marked');
+
+marked.setOptions({
+	sanitize: true
+});
 
 const regex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}|) *([\w\W]+)/;
 
@@ -15,7 +20,7 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	const email = regex.exec(message.input);
+	const email = regex.exec(message.clean.input);
 	// Check for registrations
 	dmail.check(message)
 		.then((details) => {
@@ -33,7 +38,8 @@ module.exports.command = (message) => {
 						'h:In-Reply-To': res['Message-Id'],
 						'h:References': res.References ? `${res.References} ${res['Message-Id']}` : res['Message-Id'],
 						subject: `Re: ${res.Subject}`,
-						text: email[2]
+						text: email[2],
+						html: marked(email[2])
 					};
 
 					if (message.attachments && message.attachments[0]) {

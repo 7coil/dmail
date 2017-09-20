@@ -60,7 +60,9 @@ client.once('ready', () => {
 
 		// If there's a result, do this crap.
 		if (pre) {
-			utils.init(message, pre, () => {
+			// Redo the message content but parsed.
+			const clean = prefix.exec(message.cleanContent);
+			utils.init(message, pre, clean, () => {
 				if (message.context === 'guild' && !message.channel.guild) {
 					message.channel.createMessage(message.__('err_guild'));
 				} else if (message.context === 'guild' && !utils.isadmin(message.member)) {

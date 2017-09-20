@@ -2,6 +2,11 @@ const config = require('config');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
 const request = require('request');
 const dmail = require('./../../utils.js').dmail;
+const marked = require('marked');
+
+marked.setOptions({
+	sanitize: true
+});
 
 const regex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
 
@@ -14,7 +19,7 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	const email = regex.exec(message.input);
+	const email = regex.exec(message.clean.input);
 	// Check for registrations
 	dmail.check(message)
 		.then((details) => {
@@ -27,6 +32,7 @@ module.exports.command = (message) => {
 					from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
 					to: email[1],
 					subject: email[2],
+					html: marked(email[3]),
 					text: email[3]
 				};
 

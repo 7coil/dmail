@@ -3,7 +3,7 @@ const utils = require('../../utils.js');
 const config = require('config');
 const r = require('../../../db.js');
 
-const init = (message, pre, next) => {
+const init = (message, pre, clean, next) => {
 	i18n.init(message);
 	message.prefix = pre[1];
 	message.command = pre[2];
@@ -12,6 +12,12 @@ const init = (message, pre, next) => {
 	message.name = utils.dmail.name(message.author.username);
 	message.context = config.get('discord').prefix.user.includes(message.prefix.toLowerCase()) ? 'user' : 'guild';
 	message.inbox = message.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || 'Not inside a guild';
+	message.clean = {
+		prefix: clean[1],
+		command: clean[2],
+		input: clean[3],
+		words: (pre[3] || '').split(' ')
+	};
 	r.table('i18n')
 		.get(message.inbox)
 		.run(r.conn, (err, res) => {
