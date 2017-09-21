@@ -1,18 +1,9 @@
 const config = require('config');
 
 module.exports.info = {
-	name: 'Restart',
-	description: 'Restart the bot, and all of it\'s shards.',
-	category: 'owner',
 	aliases: [
 		'restart',
 		'reboot'
-	],
-	use: [
-		{
-			name: '',
-			value: 'Restart the bot'
-		}
 	]
 };
 

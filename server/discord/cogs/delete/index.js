@@ -4,12 +4,11 @@ const r = require('./../../../db');
 const regex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})/;
 
 module.exports.info = {
-	name: 'Delete E-Mail from Server',
-	category: 'mail',
 	aliases: [
 		'del',
 		'rm',
-
+		'delete',
+		'remove'
 	]
 };
 

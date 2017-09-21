@@ -2,17 +2,8 @@ const execFile = require('child_process').execFile;
 const config = require('config');
 
 module.exports.info = {
-	name: 'Git Execution',
-	description: 'Execute git commands.',
-	category: 'owner',
 	aliases: [
 		'git'
-	],
-	use: [
-		{
-			name: '<command>',
-			value: 'Execute the git command.'
-		}
 	]
 };
 

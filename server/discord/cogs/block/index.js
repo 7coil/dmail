@@ -2,8 +2,6 @@ const r = require('./../../../db');
 const dmail = require('./../../utils.js').dmail;
 
 module.exports.info = {
-	name: 'Block E-Mail. Send E-Mails separated by ;',
-	category: 'mail',
 	aliases: [
 		'block',
 		'blk'

@@ -7,8 +7,6 @@ const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} @ ${os.cpus()[0].spee
 const softwareinfo = `[${os.type()}] ${os.release()}`;
 
 module.exports.info = {
-	name: 'Info about DiscordMail',
-	category: 'info',
 	aliases: [
 		'info'
 	]

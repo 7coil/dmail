@@ -12,8 +12,6 @@ marked.setOptions({
 const regex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}|) *([\w\W]+)/;
 
 module.exports.info = {
-	name: 'Reply to E-Mail',
-	category: 'mail',
 	aliases: [
 		'reply'
 	]

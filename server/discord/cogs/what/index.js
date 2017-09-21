@@ -4,8 +4,6 @@ const r = require('./../../../db.js');
 const regex = /(\d+)/;
 
 module.exports.info = {
-	name: 'Check E-Mail address',
-	category: 'mail',
 	aliases: [
 		'what',
 		'check',

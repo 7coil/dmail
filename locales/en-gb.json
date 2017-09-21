@@ -35,6 +35,7 @@
 	"help_intro": "{{{ name }}} allows you to send and recieve emails from within Discord.",
 	"help_prefixuser": "Prefixes for users: {{{ prefixes }}}",
 	"help_prefixguild": "Prefixes for guilds: {{{ prefixes }}}",
+	"help_noexist": "The help file for this language was not found",
 	"invite": "Invite",
 	"guild": "Guild",
 	"guildapp": "Guild Application Forms",

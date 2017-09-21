@@ -4,8 +4,6 @@ const name = require('./../../utils').dmail.name;
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
 
 module.exports.info = {
-	name: 'Register a Guild',
-	category: 'owner',
 	aliases: [
 		'guild'
 	]

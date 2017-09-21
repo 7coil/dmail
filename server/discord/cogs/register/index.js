@@ -1,8 +1,6 @@
 const config = require('config');
 
 module.exports.info = {
-	name: 'Register for DiscordMail',
-	category: 'mail',
 	aliases: [
 		'register',
 		'reg'

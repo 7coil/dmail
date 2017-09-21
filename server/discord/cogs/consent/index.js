@@ -3,8 +3,6 @@ const config = require('config');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
 
 module.exports.info = {
-	name: 'Agree to Terms and Conditions',
-	category: 'mail',
 	aliases: [
 		'agree',
 		'consent',
