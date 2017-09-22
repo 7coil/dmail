@@ -64,5 +64,11 @@
 	"locale_set": "Set locale to {{{ locale }}}",
 	"delete_incorrect": "Expected input: `{{{ prefix }}} {{{ command }}} Reply-ID`",
 	"delete_conflict": "You cannot delete with another user's ID",
-	"delete_deleted": "Successfully deleted E-Mail"
+	"delete_deleted": "Successfully deleted E-Mail",
+	"lang_cookies": "Cookies",
+	"lang_cookie_desc": "By selecting a language, you agree for discordmail.com to store cookies on your computer.",
+	"lang_cookie_link": "Information about Cookies (external site)",
+	"lang_improve": "You can help improve internationalisation by helping to localise DiscordMail.",
+	"lang_en_gb": "English (United Kingdom)",
+	"lang_blank": "DiscordMail Development Language"
 }

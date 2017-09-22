@@ -3,15 +3,13 @@ extends template.pug
 block main
 	.container
 		.col-s12
-			h4 🍪 Cookies
-			p By selecting a language, you agree for discordmail.com to store cookies on your computer.
-			p: a(href="https://ico.org.uk/for-the-public/online/cookies/") Information about Cookies (external site)
+			h4 🍪 #{__('lang_cookies')}
+			p #{__('lang_cookie_desc')}
+			p: a(href="https://ico.org.uk/for-the-public/online/cookies/") #{__('lang_cookie_link')}
 		.col-s12
-			p You can help improve internationalisation by helping to localise DiscordMail.
+			p #{__('lang_improve')}
 			p: a(href="https://github.com/moustacheminer/discordmail/tree/master/locales") #{__('github')}
 		.col-s12
 			ul
-				li: a(href="/lang/en-gb") English (United Kingdom)
-				li: a(href="/lang/blank") DiscordMail Development
-				li: a(href="/lang/bullshit") Random Bullshit / Hdkaja oajwka laa
-				li: a(href="/lang/fire") Oh my God, I'm on fire!
+				li: a(href="/lang/en-gb") #{__('lang_en_gb')}
+				li: a(href="/lang/blank") #{__('lang_blank')}

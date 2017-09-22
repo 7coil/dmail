@@ -64,5 +64,11 @@
 	"locale_set": "locale_set",
 	"delete_incorrect": "delete_incorrect",
 	"delete_conflict": "delete_conflict",
-	"delete_deleted": "delete_deleted"
+	"delete_deleted": "delete_deleted",
+	"lang_cookies": "lang_cookies",
+	"lang_cookie_desc": "lang_cookie_desc",
+	"lang_cookie_link": "lang_cookie_link",
+	"lang_improve": "lang_improve",
+	"lang_en_gb": "lang_en_gb",
+	"lang_blank": "lang_blank"
 }
