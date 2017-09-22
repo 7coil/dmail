@@ -16,7 +16,7 @@
 	"tos": "Terms of Service",
 	"pa": "Privacy Agreement",
 	"mss": "Moustacheminer Server Services",
-	"footer_lang": "Languages / Internationalisation",
+	"footer_lang": "Languages / internationalization",
 	"mail_from": "From: {{{ from }}}",
 	"mail_date": "Date: {{{ date }}}",
 	"mail_subject": "Subject: {{{ subject }}}",
@@ -68,7 +68,7 @@
 	"lang_cookies": "Cookies",
 	"lang_cookie_desc": "By selecting a language, you agree for discordmail.com to store cookies on your computer.",
 	"lang_cookie_link": "Information about Cookies (external site)",
-	"lang_improve": "You can help improve internationalisation by helping to localise DiscordMail.",
+	"lang_improve": "You can help improve internationalization by helping to localise DiscordMail.",
 	"lang_en_gb": "English (United Kingdom)",
 	"lang_en_us": "English (United States)",
 	"lang_blank": "DiscordMail Development Language"
