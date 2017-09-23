@@ -30,7 +30,7 @@ module.exports.command = (message) => {
 					from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
 					to: email[1],
 					subject: email[2],
-					html: marked(email[3]),
+					html: marked(email[3].replace(/\n(?=.)/g, '  \n')),
 					text: email[3]
 				};
 

@@ -36,8 +36,8 @@ module.exports.command = (message) => {
 						'h:In-Reply-To': res['Message-Id'],
 						'h:References': res.References ? `${res.References} ${res['Message-Id']}` : res['Message-Id'],
 						subject: `Re: ${res.Subject}`,
-						text: email[2],
-						html: marked(email[2])
+						html: marked(email[3].replace(/\n(?=.)/g, '  \n')),
+						text: email[2]
 					};
 
 					if (message.attachments && message.attachments[0]) {
