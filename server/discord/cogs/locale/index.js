@@ -4,12 +4,15 @@ const i18n = require('i18n');
 module.exports.info = {
 	aliases: [
 		'locale',
-		'lang'
+		'lang',
+		'i18n'
+		'langue',
+		'langage'
 	]
 };
 
 module.exports.command = (message) => {
-	if (message.input) {
+	if (message.input && Object.keys(i18n.getCatalog()).includes(message.input)) {
 		r.table('i18n')
 			.insert({
 				id: message.inbox,
