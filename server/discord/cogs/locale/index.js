@@ -5,7 +5,7 @@ module.exports.info = {
 	aliases: [
 		'locale',
 		'lang',
-		'i18n'
+		'i18n',
 		'langue',
 		'langage'
 	]
