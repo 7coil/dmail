@@ -13,7 +13,7 @@ register
  ┗━ Register for DiscordMail
 reply
  ┣━ Reply to a specific E-Mail
- ┃  ┗━ [Email-ID] Content
+ ┃  ┗━ [Email-ID] [Content]
  ┗━ Reply to the last E-Mail recieved
     ┗━ [Content]
 send
