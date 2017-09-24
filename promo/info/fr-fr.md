@@ -36,6 +36,7 @@ ping
 locale
  ┗━ Change la langue
     ┣━ en-gb
+	┣━ en-us
     ┣━ fr-fr
 	┗━ blank
 ```

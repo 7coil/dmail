@@ -1,6 +1,6 @@
 {
 	"name": "DiscordMail",
-  "main_subtitle": "Le bot pour s'échanger des e-mails, par Mailgun",
+	"main_subtitle": "Le bot pour s'échanger des e-mails, par Mailgun",
 	"main_description": "{{{ name }}} lie votre compte à une adresse e-mail unique, ouvrant les possibilités de Discord à être capable de communiquer avec un plus grand nombre de personnes.",
 	"main_guilds": "{{{ count }}} Serveurs",
 	"main_users": "{{{ count }}} Utilisateurs",
@@ -70,7 +70,7 @@
 	"lang_cookie_link": "Informations à propos de Cookies (site externe)",
 	"lang_improve": "Vous pouvez nous aider à nous internationaliser en traduisant DiscordMail.",
 	"lang_en_gb": "Anglais (Royaume-Uni)",
-  "lang_en_us": "Anglais (États-Unis d'Amérique)",
-  "lang_fr_fr": "Français (France)",
+	"lang_en_us": "Anglais (États-Unis d'Amérique)",
+	"lang_fr_fr": "Français (France)",
 	"lang_blank": "Langage de développement de DiscordMail"
 }
