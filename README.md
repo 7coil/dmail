@@ -22,3 +22,24 @@ DiscordMail is a fairly new bot, so these instructions may not be finalised.
 3. Edit `config/default.json`, using `config/default.rename.json` as a template
 4. Create a database in Rethonk with tables: `registrations`, `emails` and `i18n`
 5. `npm start`
+
+## Translations
+
+Thinking of translating DiscordMail?
+
+Language         | Code   | Progress  | Translator(s)
+---------------- | ------ | --------- | --------------------------
+English (GB)     | en-gb  | Main      | @lepon01 (7coil#3175)
+English (USA)    | en-us  | Done      | @lepon01 (7coil#3175)
+French (France)  | fr-fr  | Done      | @iDroid27210 (iDroid#4441)
+German (Germany) | de     | Announced | TimNook#0323
+English (Pirate) | pirate | Announced |
+
+Translations required:
+
+Description  | Location
+------------ | ----------------------
+General Text | `locales/{code}.json`
+Help Menu    | `promo/info/{code}.md`
+
+Feel free to add your name inside the help menu, and ask for extra translated aliases for commands to better suit the language's audience.
