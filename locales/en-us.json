@@ -72,5 +72,7 @@
 	"lang_en_gb": "English (United Kingdom)",
 	"lang_en_us": "English (United States)",
 	"lang_fr_fr": "French (France)",
+	"lang_de": "German",
+	"lang_pirate": "Pirate",
 	"lang_blank": "DiscordMail Development Language"
 }
