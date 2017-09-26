@@ -62,13 +62,13 @@ const check = (req, res, next) => {
 		})
 		.run(r.conn, (err1, cursor) => {
 			if (err1) {
-				res.status(500).json({ error: { message: 'Failed to search RethonkDB for registered users.' } });
-				sendError(body, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
+				res.status(500).json({ error: { message: 'Failed to search RethinkDB for registered users.' } });
+				sendError(body, 'The mail server failed to fetch registered users from the RethinkDB database. Sorry for the inconvenience.');
 			} else {
 				cursor.toArray((err2, result) => {
 					if (err2) {
-						res.status(500).json({ error: { message: 'Failed to search RethonkDB for registered users.' } });
-						sendError(body, 'The mail server failed to fetch registered users from the RethonkDB database. Sorry for the inconvenience.');
+						res.status(500).json({ error: { message: 'Failed to search RethinkDB for registered users.' } });
+						sendError(body, 'The mail server failed to fetch registered users from the RethinkDB database. Sorry for the inconvenience.');
 					} else if (!result[0]) {
 						res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
 						sendError(body, 'The email address does not exist.');
@@ -126,8 +126,8 @@ router.post('/mail', upload.single('attachment-1'), validate, check, (req, res) 
 		.insert(req.body)
 		.run(r.conn, (err, res1) => {
 			if (err) {
-				res.status(406).json({ error: { message: 'An error occured while inserting details into the RethonkDB database.' } });
-				sendError(body, 'An error occured while inserting details into the RethonkDB database. Sorry for the inconvenience.');
+				res.status(406).json({ error: { message: 'An error occured while inserting details into the RethinkDB database.' } });
+				sendError(body, 'An error occured while inserting details into the RethinkDB database. Sorry for the inconvenience.');
 			} else {
 				const content = {
 					content: res1.generated_keys[0],
