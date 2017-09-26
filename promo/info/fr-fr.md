@@ -22,7 +22,7 @@ what
  ┣━ Obtient l'adresse e-mail du sujet
  ┗━ Obtient l'adresse e-mail d'un utilisateur ou d'un serveur
     ┣━ [@mention]
-	┗━ [Guild or User ID]
+    ┗━ [Guild or User ID]
 
 === Info ===
 help
@@ -36,7 +36,7 @@ ping
 locale
  ┗━ Change la langue
     ┣━ en-gb
-	┣━ en-us
+    ┣━ en-us
     ┣━ fr-fr
-	┗━ blank
+    ┗━ blank
 ```
