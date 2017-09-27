@@ -6,12 +6,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	if (req.user && req.user.dmail) {
 		r.table('emails')
-			.orderBy({
-				index: r.desc('timestamp')
-			})
 			.filter({
 				dmail: req.user.id
 			})
+			.orderBy(r.desc('timestamp'))
 			.run(r.conn, (err1, cursor) => {
 				if (err1) {
 					res.status(500).render('error.pug', { status: 500 });
