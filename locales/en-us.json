@@ -74,5 +74,8 @@
 	"lang_fr_fr": "French (France)",
 	"lang_de": "German",
 	"lang_pirate": "Pirate",
-	"lang_blank": "DiscordMail Development Language"
+	"lang_blank": "DiscordMail Development Language",
+	"nav_emails": "E-Mails",
+	"nav_login": "Log in",
+	"nav_logout": "Log out"
 }
