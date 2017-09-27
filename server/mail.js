@@ -9,6 +9,9 @@ router.get('/', (req, res) => {
 			.filter({
 				dmail: req.user.id
 			})
+			.orderBy({
+				index: r.desc('timestamp')
+			})
 			.run(r.conn, (err1, cursor) => {
 				if (err1) {
 					res.status(500).render('error.pug', { status: 500 });
