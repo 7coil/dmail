@@ -3,4 +3,5 @@
 
 $(document).ready(() => {
 	Materialize.showStaggeredList('#staggered-text');
+	$('.button-collapse').sideNav();
 });

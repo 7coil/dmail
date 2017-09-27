@@ -16,7 +16,9 @@ html
 			.nav-wrapper
 				.brand-logo.center
 					a(href="/") #{__('name')}
-		main.white-text
+				a.button-collapse(href="#" data-activates="slide-out")
+					i.material-icons menu
+		main
 			block main
 		footer.page-footer.dark.grey-text
 			.container
@@ -34,6 +36,16 @@ html
 					ul
 						li #{__('footer_copyright')}
 						li #{__('footer_disclaimer')}
+		ul.side-nav#slide-out
+			if user
+				li: a(href="#") #{user.username}##{user.discriminator}
+				if user.dmail
+					li: a(href="mailto:" + encodeURIComponent(`${user.dmail.email}@${domain}`)) #{user.dmail.email}@#{domain}
+					li: a(href="/mail") #{__('nav_emails')}
+				li: a(href="/auth/logout") #{__('nav_logout')}
+			else
+				li: a(href="/auth") #{__('nav_login')}
+			li: a(href="/docs/terms") #{__('tos')}
 		block scripts
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js")

@@ -34,6 +34,10 @@ body {
 	width: 100%;
 }
 
+a.button-collapse {
+	display: block !important;
+}
+
 body {
 	display: flex;
 	min-height: 100vh;

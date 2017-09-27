@@ -1,6 +1,6 @@
 ## DiscordMail Terms of Service
 
-Last updated: 10th September 2017  
+Last updated: 27th September 2017  
 Effective Date: 31st September 2017
 
 Thanks for choosing DiscordMail!
@@ -61,6 +61,6 @@ Furthermore, DiscordMail operates under a Fair Use Policy. To protect the servic
 
 ### Termination
 
-You may terminate your DiscordMail account at any time and for any reason, by sending a Discord Direct Message to 7coil#3175 or sending an email to admin@moustacheminer.com from your DiscordMail account requesting termination. On termination of your Discord account, your DiscordMail account will also be terminated in accordance to the Discord API TOS and the DPA.
+You may terminate your DiscordMail account at any time and for any reason, by sending a Discord Direct Message to 7coil#3175, sending an email to admin@moustacheminer.com from your DiscordMail account requesting termination, or visiting https://discordmail.com/mail/terminate after logging in online. On termination of your Discord account, your DiscordMail account will also be terminated in accordance to the Discord API TOS and the DPA.
 
 MSS may also termiate your account or access to all or portions of MSS services for any time and for any reason, or in the event of violation of the DiscordMail TOS, at any time or with or without any reason. You may lose access to your content as a result, MSS advises you to back up important emails using a secondary system as a result.

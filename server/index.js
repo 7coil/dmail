@@ -15,6 +15,9 @@ const docs = require('./docs');
 const url = require('./url');
 const mail = require('./mail');
 const lang = require('./lang');
+const auth = require('./auth');
+const r = require('./db');
+const authentication = require('./auth/auth');
 const session = require('express-session');
 
 const app = express();
@@ -51,6 +54,26 @@ app.enable('trust proxy')
 	.engine('html', engines.pug)
 	.set('view engine', 'html')
 	.use(cors())
+	.use(authentication.initialize())
+	.use(authentication.session())
+	.use((req, res, next) => {
+		res.locals.domain = config.get('api').mailgun.domain;
+		if (req.user) {
+			r.table('registrations')
+				.get(req.user.id)
+				.run(r.conn, (err, result) => {
+					if (err) {
+						res.status(500).render('error.pug', { status: 500 });
+					} else {
+						req.user.dmail = result;
+						res.locals.user = req.user;
+					}
+					next();
+				});
+		} else {
+			next();
+		}
+	})
 	.get('/', (req, res) => {
 		request({
 			method: 'GET',
@@ -80,6 +103,7 @@ app.enable('trust proxy')
 	.use('/url', url)
 	.use('/mail', mail)
 	.use('/lang', lang)
+	.use('/auth', auth)
 	.use(express.static(path.join(__dirname, '/static')))
 	.use('*', (req, res) => res.status(404).render('error.pug', { status: 404 }));
 

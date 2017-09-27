@@ -1,0 +1,10 @@
+extends template.pug
+
+block main
+	.container
+		div.collection
+			each email in emails
+				a.collection-item(href=`/mail/${email.id}`)
+					h5 #{email.Subject}
+					p #{email.from}
+					p #{email.datestamp}

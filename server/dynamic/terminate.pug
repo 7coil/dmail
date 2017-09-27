@@ -1,0 +1,13 @@
+extends template.pug
+
+block main
+	.container.white-text
+		.col-s12
+			h4 Account Termination
+			p By deleting your account, all personal information stored about you, will be deleted from our servers. This includes:
+			ul
+				li Recieved E-Mails
+				li Your registration details
+				li Your choice of language
+			form(method="POST")
+				button.btn.waves-effect.waves-light.red(type="submit") Terminate
