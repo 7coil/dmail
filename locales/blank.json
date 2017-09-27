@@ -77,5 +77,11 @@
 	"lang_blank": "lang_blank",
 	"nav_emails": "nav_emails",
 	"nav_login": "nav_login",
-	"nav_logout": "nav_logout"
+	"nav_logout": "nav_logout",
+	"terminate_title": "terminate_title",
+	"terminate_description": "terminate_description",
+	"terminate_emails": "terminate_emails",
+	"terminate_details": "terminate_details",
+	"terminate_language": "terminate_language",
+	"terminate_submit": "terminate_submit"
 }
