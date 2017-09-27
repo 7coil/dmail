@@ -78,10 +78,10 @@
 	"nav_emails": "nav_emails",
 	"nav_login": "S'identifier",
 	"nav_logout": "Se déconnecter",
-	"terminate_title": "terminate_title",
-	"terminate_description": "terminate_description",
-	"terminate_emails": "terminate_emails",
-	"terminate_details": "terminate_details",
-	"terminate_language": "terminate_language",
-	"terminate_submit": "terminate_submit"
+	"terminate_title": "Supprimer votre compte",
+	"terminate_description": "En supprimant votre compte , toutes vos données personnelles seront supprimées de nos serveurs. Cela inclut:",
+	"terminate_emails": "Les mails que vous avez reçus",
+	"terminate_details": "Vos informations d'enregistrement ",
+	"terminate_language": "Votre choix de langue",
+	"terminate_submit": "Supprimer"
 }
