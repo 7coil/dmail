@@ -4,7 +4,11 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	if (req.user && req.user.dmail) {
+	if (!req.user) {
+		res.redirect('/auth');
+	} else if (!req.user.dmail) {
+		res.status(401).render('error.pug', { status: 401 });
+	} else {
 		r.table('emails')
 			.filter({
 				dmail: req.user.id
@@ -28,19 +32,23 @@ router.get('/', (req, res) => {
 					});
 				}
 			});
-	} else {
-		res.status(400).render('error.pug', { status: 400 });
 	}
 })
 	.get('/terminate', (req, res) => {
-		if (req.user && req.user.dmail) {
-			res.render('terminate.pug');
+		if (!req.user) {
+			res.redirect('/auth');
+		} else if (!req.user.dmail) {
+			res.status(401).render('error.pug', { status: 401 });
 		} else {
-			res.status(400).render('error.pug', { status: 400 });
+			res.render('terminate.pug');
 		}
 	})
 	.post('/terminate', (req, res) => {
-		if (req.user && req.user.dmail) {
+		if (!req.user) {
+			res.redirect('/auth');
+		} else if (!req.user.dmail) {
+			res.status(401).render('error.pug', { status: 401 });
+		} else {
 			r.table('registrations')
 				.get(req.user.id)
 				.delete()
@@ -56,8 +64,6 @@ router.get('/', (req, res) => {
 				.delete()
 				.run(r.conn);
 			res.redirect('/');
-		} else {
-			res.status(400).render('error.pug', { status: 400 });
 		}
 	})
 	.get('/:id', (req, res) => {
