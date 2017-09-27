@@ -6,11 +6,11 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	if (req.user && req.user.dmail) {
 		r.table('emails')
-			.filter({
-				dmail: req.user.id
-			})
 			.orderBy({
 				index: r.desc('timestamp')
+			})
+			.filter({
+				dmail: req.user.id
 			})
 			.run(r.conn, (err1, cursor) => {
 				if (err1) {
