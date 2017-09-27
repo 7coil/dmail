@@ -3,68 +3,60 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+const registered = (req, res, next) => {
 	if (!req.user) {
 		res.redirect('/auth');
 	} else if (!req.user.dmail) {
 		res.status(401).render('error.pug', { status: 401 });
 	} else {
+		next();
+	}
+};
+
+router.get('/', registered, (req, res) => {
+	r.table('emails')
+		.filter({
+			dmail: req.user.id
+		})
+		.orderBy(r.desc('timestamp'))
+		.run(r.conn, (err1, cursor) => {
+			if (err1) {
+				res.status(500).render('error.pug', { status: 500 });
+			} else {
+				cursor.toArray((err2, result) => {
+					if (err2) {
+						res.status(500).render('error.pug', { status: 500 });
+					} else {
+						res.render('client.pug', {
+							emails: result.map((email) => {
+								email.datestamp = new Date(email.timestamp * 1000).toUTCString();
+								return email;
+							})
+						});
+					}
+				});
+			}
+		});
+})
+	.get('/terminate', registered, (req, res) => {
+		res.render('terminate.pug');
+	})
+	.post('/terminate', registered, (req, res) => {
+		r.table('registrations')
+			.get(req.user.id)
+			.delete()
+			.run(r.conn);
 		r.table('emails')
 			.filter({
 				dmail: req.user.id
 			})
-			.orderBy(r.desc('timestamp'))
-			.run(r.conn, (err1, cursor) => {
-				if (err1) {
-					res.status(500).render('error.pug', { status: 500 });
-				} else {
-					cursor.toArray((err2, result) => {
-						if (err2) {
-							res.status(500).render('error.pug', { status: 500 });
-						} else {
-							res.render('client.pug', {
-								emails: result.map((email) => {
-									email.datestamp = new Date(email.timestamp * 1000).toUTCString();
-									return email;
-								})
-							});
-						}
-					});
-				}
-			});
-	}
-})
-	.get('/terminate', (req, res) => {
-		if (!req.user) {
-			res.redirect('/auth');
-		} else if (!req.user.dmail) {
-			res.status(401).render('error.pug', { status: 401 });
-		} else {
-			res.render('terminate.pug');
-		}
-	})
-	.post('/terminate', (req, res) => {
-		if (!req.user) {
-			res.redirect('/auth');
-		} else if (!req.user.dmail) {
-			res.status(401).render('error.pug', { status: 401 });
-		} else {
-			r.table('registrations')
-				.get(req.user.id)
-				.delete()
-				.run(r.conn);
-			r.table('emails')
-				.filter({
-					dmail: req.user.id
-				})
-				.delete()
-				.run(r.conn);
-			r.table('i18n')
-				.get(req.user.id)
-				.delete()
-				.run(r.conn);
-			res.redirect('/');
-		}
+			.delete()
+			.run(r.conn);
+		r.table('i18n')
+			.get(req.user.id)
+			.delete()
+			.run(r.conn);
+		res.redirect('/');
 	})
 	.get('/:id', (req, res) => {
 		r.table('emails')
