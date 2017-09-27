@@ -31,7 +31,7 @@ Language         | Code   | Progress  | Translator(s)
 ---------------- | ------ | --------- | --------------------------
 English (GB)     | en-gb  | Main      | @lepon01 (7coil#3175)
 English (USA)    | en-us  | Done      | @lepon01 (7coil#3175)
-French (France)  | fr-fr  | Done      | @iDroid27210 (iDroid#4441)
+French (France)  | fr-fr  | Done      | @iDroid27210 (iDroid#4441), @lepeli (Yvan#5087)
 German (Germany) | de     | Announced | TimNook#0323
 English (Pirate) | pirate | Announced |
 
