@@ -79,7 +79,7 @@
 	"nav_login": "Log in",
 	"nav_logout": "Log out",
 	"terminate_title": "Account Termination",
-	"terminate_description": "By deleting your account, all personal information stored about you, will be deleted from our servers. This includes:",
+	"terminate_description": "By deleting your account, all personal information stored about you will be deleted from our servers. This includes:",
 	"terminate_emails": "Recieved E-Mails",
 	"terminate_details": "Your registration details",
 	"terminate_language": "Your choice of language",
