@@ -4,7 +4,9 @@ const config = require('config');
 const utils = require('./utils.js');
 require('colors');
 
-const client = new Discord.Client(config.get('api').discord.token);
+const client = new Discord.Client(config.get('api').discord.token, {
+	maxShards: config.get('discord').shards
+});
 const prefixes = config.get('discord').prefix.user.concat(config.get('discord').prefix.guild);
 let prefix = null;
 
