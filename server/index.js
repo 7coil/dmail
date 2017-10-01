@@ -26,9 +26,6 @@ i18n.configure({
 	directory: path.join(__dirname, '..', 'locales'),
 	cookie: 'lang',
 	defaultLocale: 'en-gb',
-	fallbacks: {
-		'zh-hk': 'en-gb'
-	},
 	autoReload: true,
 	updateFiles: false
 });
