@@ -17,6 +17,7 @@ const init = (message, pre, clean, next) => {
 		input: clean[3],
 		words: (pre[3] || '').split(' ')
 	};
+	i18n.init(message);
 	r.table('i18n')
 		.get(message.inbox)
 		.run(r.conn, (err1, res1) => {
@@ -25,7 +26,6 @@ const init = (message, pre, clean, next) => {
 			} else if (res1 && res1.lang) {
 				message.setLocale(res1.lang);
 			}
-			i18n.init(message);
 			r.table('ratelimit')
 				.get(message.author.id)
 				.run(r.conn, (err2, res2) => {
