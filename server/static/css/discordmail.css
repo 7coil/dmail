@@ -66,5 +66,5 @@ main {
 
 .bordering {
 	height: 25px;
-	margin-bottom: -6px;
+	display: block;
 }
