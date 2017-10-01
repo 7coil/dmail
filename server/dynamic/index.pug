@@ -4,14 +4,21 @@ block head
 	link(rel="stylesheet" href="/css/embed.css")
 
 block main
-	.container.white-text
-		.row.center
-			ul#staggered-text
-				li(style="opacity: 0;"): h1 #{__('name')}
-				li(style="opacity: 0;"): h2 #{__('main_subtitle')}
-				li(style="opacity: 0;"): p #{__('main_description', { name: __('name') })}
-				li(style="opacity: 0;")
+	.portion.burple.white-text
+		.container
+			.section
+				.row.center
+					.col.s12
+						h2 #{__('main_subtitle')}
+						h5 #{__('main_description', { name: __('name') })}
+	svg.portion.bordering.greyple(viewBox="0 0 100 100" preserveAspectRatio="none")
+		polygon.burplef(points="0,0 0,100 100,0")
+	.portion.greyple
+		.container
+			.section
+				.row.center
 					.col.s12.offset-m3.m6
+						h4 Statistics
 						.card-panel.greyple.black-text
 							span
 								| #{__('main_guilds', { count: discord.guilds.size })}
@@ -19,51 +26,18 @@ block main
 								| #{__('main_users', { count: discord.users.size })}
 								br
 								| #{__('main_emails', { outgoing, incoming })}
-		.row.center
-			h3 #{__('main_calltoaction')}
-			h4 #{__('main_invitemethod')}
-			a.waves-effect.btn-large.burple(href="/url/invite" target="_blank") #{__('main_invitebutton')}
-			p #{__('main_disclaimer', { name: __('name') })}
-			p: a(href="/docs") #{__('documentation')}
-			p: a(href="/url/github") #{__('github')}
-		.row
-			.embed-wrapper
-				.embed-color-pill
-				.embed.embed-rich
-					.embed-content
-						.embed-content-inner
-							.embed-author
-								a.embed-author-name(href='https://discordmail.com/mail/711f6811-7464-4ba1-b50d-2cd736a22d8f', target='_blank', rel='noreferrer') DiscordMail Mail Server &lt;noreply@discordmail.com&gt;
-							div
-								a.embed-title(href='https://discordmail.com/mail/711f6811-7464-4ba1-b50d-2cd736a22d8f', target='_blank', rel='noreferrer')
-									| Welcome to DiscordMail!
-							.embed-description.markup
-								| Thanks for registering with DiscordMail!
-								br
-								| By viewing this E-Mail you will have succeeded in Step 1 of the DiscordMail tutorial.
-								br
-								br
-								| Step 2: Try sending an E-Mail to a friend of yours.
-								br
-								code dmail send yourfriend@example.com 'Hello!' I sent an E-Mail from Discord, isn't that cool?
-								br
-								|Tip! You can attach a single file while sending the message to send the attachment in Discord!
-								br
-								br
-								| Step 3: Explore!
-								br
-								| Because DiscordMail is just a normal E-Mail client, you can use your DiscordMail account anywhere where you can insert an E-Mail. If E-Mails don't come out right in Discord, you can click the embed URL to open the original HTML version. Try it out on this E-Mail!
-								br
-								br
-								| This is a one-time E-Mail sent on registration for DiscordMail. If you are unaware of this E-Mail, please disregard it.
-								br
-								| Copyright 2015 - 2017, Moustacheminer Server Services
-								br
-								| Moustacheminer Server Services are not associated with Discord Inc.
-							.embed-fields
-								.embed-field
-									.embed-field-name
-										| E-Mail ID
-									.embed-field-value.markup
-										| 711f6811-7464-4ba1-b50d-2cd736a22d8f
-					span.embed-footer Thu Jan 1st, 1970 at 12:00 AM
+	svg.portion.bordering.dgrey(viewBox="0 0 100 100" preserveAspectRatio="none")
+		polygon.greyplef(points="0,0 0,100 100,0")
+	.portion.dgrey.white-text
+		.container
+			.section
+				.row.center
+					.col.s12
+						h3 #{__('main_calltoaction')}
+						h4 #{__('main_invitemethod')}
+						a.waves-effect.btn-large.burple(href="/url/invite" target="_blank") #{__('main_invitebutton')}
+						p #{__('main_disclaimer', { name: __('name') })}
+						p: a(href="/docs") #{__('documentation')}
+						p: a(href="/url/github") #{__('github')}
+	svg.portion.bordering.dark(viewBox="0 0 100 100" preserveAspectRatio="none")
+		polygon.dgreyf(points="0,0 0,100 100,0")

@@ -11,12 +11,24 @@ body {
 	background-color: #7289DA !important;
 }
 
+.burplef {
+	fill: #7289DA;
+}
+
 .greyple {
 	background-color: #99AAB5 !important;
 }
 
+.greyplef {
+	fill: #99AAB5;
+}
+
 .dgrey {
 	background-color: #36393E !important;
+}
+
+.dgreyf {
+	fill: #36393E;
 }
 
 .dark {
@@ -46,4 +58,13 @@ body {
 
 main {
 	flex: 1 0 auto;
+}
+
+.portion {
+	width: 100%;
+}
+
+.bordering {
+	height: 25px;
+	margin-bottom: -6px;
 }

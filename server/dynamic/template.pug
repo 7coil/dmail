@@ -28,8 +28,8 @@ html
 							ul
 								li: a(href="/docs/terms") #{__('tos')}
 								li: a(href="/docs/privacy") #{__('pa')}
-								li: a(href="/url/github") #{__('github')}
-								li: a(href="https://moustacheminer.com/") #{__('mss')}
+								li: a(href="/url/github" target="_blank") #{__('github')}
+								li: a(href="https://moustacheminer.com/" target="_blank") #{__('mss')}
 								li: a(href="/lang") #{__('footer_lang')}
 			.footer-copyright.dblack
 				.container
@@ -44,7 +44,7 @@ html
 					li: a(href="/mail") #{__('nav_emails')}
 				li: a(href="/auth/logout") #{__('nav_logout')}
 			else
-				li: a(href="/auth") #{__('nav_login')}
+				li: a(href="/auth" target="_blank") #{__('nav_login')}
 			li: a(href="/docs/terms") #{__('tos')}
 		block scripts
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
