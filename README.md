@@ -20,7 +20,7 @@ DiscordMail is a fairly new bot, so these instructions may not be finalised.
 1. `git clone`
 2. `npm i`
 3. Edit `config/default.json`, using `config/default.rename.json` as a template
-4. Create a database in Rethink with tables: `registrations`, `emails` and `i18n`
+4. Create a database in Rethink with tables: `registrations`, `emails`, `i18n`, `users` and `ratelimit`
 5. `npm start`
 
 ## Translations
