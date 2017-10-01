@@ -13,13 +13,13 @@ block main
 						h5 #{__('main_description', { name: __('name') })}
 	svg.portion.bordering.greyple(viewBox="0 0 100 100" preserveAspectRatio="none")
 		polygon.burplef(points="0,0 0,100 100,0")
-	.portion.greyple
+	.portion.greyple.white-text
 		.container
 			.section
 				.row.center
 					.col.s12.offset-m3.m6
 						h4 Statistics
-						.card-panel.greyple.black-text
+						.card-panel.greyple
 							span
 								| #{__('main_guilds', { count: discord.guilds.size })}
 								br
