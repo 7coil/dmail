@@ -4,7 +4,8 @@ module.exports.info = {
 	aliases: [
 		'invite',
 		'links'
-	]
+	],
+	ratelimit: 1000
 };
 
 module.exports.command = (message) => {

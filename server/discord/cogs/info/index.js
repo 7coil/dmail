@@ -9,7 +9,8 @@ const softwareinfo = `[${os.type()}] ${os.release()}`;
 module.exports.info = {
 	aliases: [
 		'info'
-	]
+	],
+	ratelimit: 1000
 };
 
 module.exports.command = (message) => {

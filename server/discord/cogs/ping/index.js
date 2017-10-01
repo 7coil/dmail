@@ -4,7 +4,8 @@ module.exports.info = {
 	aliases: [
 		'ping',
 		'pong'
-	]
+	],
+	ratelimit: 1000
 };
 
 module.exports.command = (message) => {

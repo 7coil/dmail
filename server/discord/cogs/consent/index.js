@@ -7,7 +7,8 @@ module.exports.info = {
 		'agree',
 		'consent',
 		'takemyfuckinglifeaway'
-	]
+	],
+	ratelimit: 30000
 };
 
 module.exports.command = (message) => {

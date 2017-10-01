@@ -4,7 +4,6 @@ const config = require('config');
 const r = require('../../../db.js');
 
 const init = (message, pre, clean, next) => {
-	i18n.init(message);
 	message.prefix = pre[1];
 	message.command = pre[2];
 	message.input = pre[3] || null;
@@ -20,13 +19,24 @@ const init = (message, pre, clean, next) => {
 	};
 	r.table('i18n')
 		.get(message.inbox)
-		.run(r.conn, (err, res) => {
-			if (err) {
-				console.dir(err);
-			} else if (res && res.lang) {
-				message.setLocale(res.lang);
+		.run(r.conn, (err1, res1) => {
+			if (err1) {
+				console.dir(err1);
+			} else if (res1 && res1.lang) {
+				message.setLocale(res1.lang);
 			}
-			next();
+			i18n.init(message);
+			r.table('ratelimit')
+				.get(message.author.id)
+				.run(r.conn, (err2, res2) => {
+					if (err2) {
+						message.channel.createMessage(message.__('err_generic'));
+					} else if (res2 && (res2.timeout - Date.now()) > 0) {
+						message.channel.createMessage(message.__('err_ratelimit', { time: (res2.timeout - Date.now()) / 1000 }));
+					} else {
+						next();
+					}
+				});
 		});
 };
 

@@ -4,7 +4,8 @@ module.exports.info = {
 	aliases: [
 		'restart',
 		'reboot'
-	]
+	],
+	ratelimit: 0
 };
 
 module.exports.command = (message) => {

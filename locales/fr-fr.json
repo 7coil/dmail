@@ -28,6 +28,7 @@
 	"block_blocked": "E-mail(s) de {{{ emails }}} bloqué(s).",
 	"err_generic": "Une erreur est survenue lors du traitement de votre requête.",
 	"err_quota": "DiscordMail a atteint son quota mensuel du service Mailgun. Le bot a été désactivé.",
+	"err_ratelimit": "err_ratelimit",
 	"consent_subject": "Bienvenue sur {{{ name }}}!",
 	"consent_message": "Bienvenue ! Vous devriez recevoir un e-mail en DM. Si vous n'avez rien reçu, assurez-vous d'avoir activé les messages privés venant de members non-ami.",
 	"consent_guild": "Pour enregistrer le serveur, veuillez remplir ce formulaire : {{{ url }}}",

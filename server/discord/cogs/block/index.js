@@ -5,7 +5,8 @@ module.exports.info = {
 	aliases: [
 		'block',
 		'blk'
-	]
+	],
+	ratelimit: 500
 };
 
 module.exports.command = (message) => {

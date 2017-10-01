@@ -6,7 +6,8 @@ module.exports.info = {
 	aliases: [
 		'help',
 		'commands'
-	]
+	],
+	ratelimit: 1000
 };
 
 module.exports.command = (message) => {

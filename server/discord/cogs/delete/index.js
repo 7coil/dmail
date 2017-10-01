@@ -9,7 +9,8 @@ module.exports.info = {
 		'rm',
 		'delete',
 		'remove'
-	]
+	],
+	ratelimit: 500
 };
 
 module.exports.command = (message) => {

@@ -28,6 +28,7 @@
 	"block_blocked": "block_blocked",
 	"err_generic": "err_generic",
 	"err_quota": "err_quota",
+	"err_ratelimit": "err_ratelimit",
 	"consent_subject": "consent_subject",
 	"consent_message": "consent_message",
 	"consent_guild": "consent_guild",

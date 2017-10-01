@@ -6,7 +6,8 @@ const mailgun = require('mailgun-js')(config.get('api').mailgun);
 module.exports.info = {
 	aliases: [
 		'guild'
-	]
+	],
+	ratelimit: 0
 };
 
 module.exports.command = (message) => {

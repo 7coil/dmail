@@ -13,7 +13,8 @@ const regex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" 
 module.exports.info = {
 	aliases: [
 		'send'
-	]
+	],
+	ratelimit: 30000
 };
 
 module.exports.command = (message) => {

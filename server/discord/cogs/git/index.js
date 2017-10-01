@@ -4,7 +4,8 @@ const config = require('config');
 module.exports.info = {
 	aliases: [
 		'git'
-	]
+	],
+	ratelimit: 0
 };
 
 module.exports.command = (message) => {

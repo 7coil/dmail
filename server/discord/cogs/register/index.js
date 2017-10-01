@@ -4,7 +4,8 @@ module.exports.info = {
 	aliases: [
 		'register',
 		'reg'
-	]
+	],
+	ratelimit: 5000
 };
 
 module.exports.command = (message) => {

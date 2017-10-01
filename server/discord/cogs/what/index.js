@@ -8,7 +8,8 @@ module.exports.info = {
 		'what',
 		'check',
 		'email'
-	]
+	],
+	ratelimit: 1000
 };
 
 module.exports.command = (message) => {

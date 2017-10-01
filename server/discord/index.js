@@ -2,6 +2,7 @@
 const Discord = require('eris');
 const config = require('config');
 const utils = require('./utils.js');
+const r = require('../db');
 require('colors');
 
 const client = new Discord.Client(config.get('api').discord.token, {
@@ -71,8 +72,16 @@ client.once('ready', () => {
 					message.channel.createMessage(message.__('err_admin'));
 				} else if (config.get('discord').disable) {
 					message.channel.createMessage(message.__('err_quota'));
-				} else {
+				} else if (commands[message.command.toLowerCase()]) {
 					commands[message.command.toLowerCase()].command(message);
+					r.table('ratelimit')
+						.insert({
+							id: message.inbox,
+							timeout: Date.now() + commands[message.command.toLowerCase()].info.ratelimit
+						}, {
+							conflict: 'replace'
+						})
+						.run(r.conn);
 				}
 			});
 		}

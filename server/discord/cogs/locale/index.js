@@ -8,7 +8,8 @@ module.exports.info = {
 		'i18n',
 		'langue',
 		'langage'
-	]
+	],
+	ratelimit: 1000
 };
 
 module.exports.command = (message) => {
