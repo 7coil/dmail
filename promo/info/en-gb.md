@@ -17,7 +17,9 @@ reply
     ┗━ [Content]
 send
  ┗━ Create and send an E-Mail
-    ┗━ [E-Mail] "[Subject]" [Content]
+    ┣━ [E-Mail] "[Subject]" [Content]
+    ┣━ [E-Mail] [Content]
+    ┗━ [E-Mail] "Subject"
 what
  ┣━ Obtain the E-Mail address of the context
  ┗━ Obtain a user's E-Mail address
