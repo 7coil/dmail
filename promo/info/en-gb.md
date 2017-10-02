@@ -1,8 +1,7 @@
 ```
 === DiscordMail ===
 block
- ┗━ Block emails. Emails containing a subset of the
-    input will be blocked.
+ ┗━ Block emails. Emails containing a subset of the input will be blocked.
     ┗━ [E-Mail 1]; [E-Mail 2]; ...
 agree
  ┗━ Agree to Terms and Conditions and Privacy Policy

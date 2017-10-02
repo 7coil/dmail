@@ -17,7 +17,9 @@ reply
     ┗━ [Content]
 send
  ┗━ Crée et envoi un e-mail
-    ┗━ [E-Mail] "[Subject]" [Content]
+    ┣━ [E-Mail] "[Subject]" [Content]
+    ┣━ [E-Mail] [Content]
+    ┗━ [E-Mail] "Subject"
 what
  ┣━ Obtient l'adresse e-mail du sujet
  ┗━ Obtient l'adresse e-mail d'un utilisateur ou d'un serveur
