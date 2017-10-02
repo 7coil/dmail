@@ -14,7 +14,7 @@ module.exports.info = {
 	aliases: [
 		'send'
 	],
-	ratelimit: 30000
+	ratelimit: 15000
 };
 
 module.exports.command = (message) => {

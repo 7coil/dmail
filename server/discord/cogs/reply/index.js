@@ -15,7 +15,7 @@ module.exports.info = {
 	aliases: [
 		'reply'
 	],
-	ratelimit: 30000
+	ratelimit: 15000
 };
 
 module.exports.command = (message) => {
