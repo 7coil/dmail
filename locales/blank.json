@@ -29,6 +29,8 @@
 	"err_generic": "err_generic",
 	"err_quota": "err_quota",
 	"err_ratelimit": "err_ratelimit",
+	"err_dm": "err_dm",
+	"err_registered": "err_registered",
 	"consent_subject": "consent_subject",
 	"consent_message": "consent_message",
 	"consent_guild": "consent_guild",
