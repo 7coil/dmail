@@ -1,14 +1,174 @@
 <style>
-	#iframe {
+	#discordmail {
 		z-index: 100;
-		position: fixed;
-		top: 58px;
-		left: 0;
 		width: 100vw;
 		height: calc(100vh - 58px);
 		border: none;
 		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+
+	h1, h2, h3, h4, h5, h6, div, button, p {
+		font-family: "Whitney", "Roboto", sans-serif !important;
+	}
+
+	body {
+		background-color: #7289DA !important;
+	}
+
+	@font-face {
+		font-family: "Whitney";
+		src: url(https://discordmail.com/font/whitney.woff);
+	}
+
+	.profile {
+		color: #FFFFFF;
+	}
+
+	.dmh1, .dmh2, .dmh3, .dmh4, .dmh5, .dmh6 {
+		font-weight: 400;
+		line-height: 1.1;
+	}
+
+	.dmh2 {
+		font-size: 3.56rem;
+		line-height: 110%;
+		margin: 1.78rem 0 1.424rem 0;
+	}
+
+	.dmh3 {
+		font-size: 2.92rem;
+		line-height: 110%;
+		margin: 1.46rem 0 1.168rem 0;
+	}
+
+	.dmh4 {
+		font-size: 2.28rem;
+	}
+
+	.dmh5 {
+		font-size: 1.64rem;
+	}
+
+	.dmcontainer {
+		margin: 25px auto;
+		max-width: 1280px;
+		width: 90%;
+	}
+
+	@media only screen and (min-width: 993px) {
+		.dmcontainer {
+			width: 70%;
+		}
+	}
+
+	@media only screen and (min-width: 601px) {
+		.dmcontainer {
+			width: 85%;
+		}
+	}
+
+	.burple {
+		background-color: #7289DA !important;
+	}
+
+	.burplef {
+		fill: #7289DA;
+	}
+
+	.greyple {
+		background-color: #99AAB5 !important;
+	}
+
+	.greyplef {
+		fill: #99AAB5;
+	}
+
+	.dgrey {
+		background-color: #36393E !important;
+	}
+
+	.blacktext {
+		color: #000000;
+	}
+
+	.bordering {
+		height: 25px;
+		width: 100vw;
+		display: block;
+	}
+
+	.lastbox {
+		flex-grow: 1;
+	}
+
+	.dmbutton {
+		margin: 10px 0 !important;
+	}
+
+	.shortDESU {
+		display: none;
 	}
 </style>
 
-<iframe src="https://discordmail.com/" id="iframe" scrolling="no"></iframe>
+<div id="discordmail" class="burple">
+	<div class="dmcontainer">
+		<h2 class="dmh2">The Discord to E-Mail Bot, powered by Mailgun</h2>
+		<h5 class="dmh5">DiscordMail links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.</h5>
+	</div>
+	<svg class="bordering greyple" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="burplef" points="0,0 0,100 100,0"></polygon></svg>
+	<div class="greyple">
+		<div class="dmcontainer blacktext">
+			<h4 class="dmh4">Statistics</h4>
+			<p id="dmguilds">Loading Guilds</p>
+			<p id="dmusers">Loading Users</p>
+		</div>
+	</div>
+	<svg class="bordering dgrey" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="greyplef" points="0,0 0,100 100,0"></polygon></svg>
+	<div class="dgrey lastbox">
+		<div class="dmcontainer">
+			<h3 class="dmh3">Create an account today!</h3>
+			<h4 class="dmh4">Invite the bot and type 'dmail register'</h4>
+			<button onclick="window.open('https://discordapp.com/oauth2/authorize?=&amp;client_id=330003632298917889&amp;scope=bot&amp;permissions=0', '_blank')" class="ui labeled icon button dmbutton">
+				<i class="mouse pointer icon"></i>
+				Invite
+			</button>
+			<p>By registering with DiscordMail, you fully agree to the contents of the Terms of Service and Privacy Agreement, found in the documentation.</p>
+			<p><a href="https://discordmail.com/docs">Documentation</a></p>
+			<p><a href="https://discordmail.com/docs/url/github">GitHub</a></p>
+		</div>
+	</div>
+</div>
+
+<script>
+	const dmguilds = document.getElementById('dmguilds')
+	const dmusers = document.getElementById('dmusers')
+	const check = () => {
+		if (typeof request !== 'undefined') {
+			console.log('Request found');
+			stats();
+		} else {
+			console.log('Request not found');
+			setTimeout(check, 10);
+		}
+	};
+
+	const stats = () => {
+		request({
+			url: "https://discordmail.com/api/stats",
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}, (err, res) => {
+			if (err) {
+				console.log(err);
+			} else {
+				dmguilds.innerHTML = `${res.guilds} guilds`;
+				dmusers.innerHTML = `${res.users} users`;
+			}
+		});
+	}
+	check();
+</script>
