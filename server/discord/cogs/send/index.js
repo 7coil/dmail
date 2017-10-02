@@ -8,7 +8,7 @@ marked.setOptions({
 	sanitize: true
 });
 
-const regex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) *"(.*?)" *([\w\W]+)/;
+const regex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) (?:"(.*?)")? *([\w\W]+)?/;
 
 module.exports.info = {
 	aliases: [
@@ -30,9 +30,9 @@ module.exports.command = (message) => {
 				const data = {
 					from: `${details.display} <${details.email}@${config.get('api').mailgun.domain}>`,
 					to: email[1],
-					subject: email[2],
-					html: marked(email[3].replace(/\n(?=.)/g, '  \n')),
-					text: email[3]
+					subject: email[2] || 'No Subject',
+					html: marked(email[3].replace(/\n(?=.)/g, '  \n')) || '<p>This document is empty</p>',
+					text: email[3] || 'This document is empty'
 				};
 
 				if (message.attachments && message.attachments[0]) {
