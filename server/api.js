@@ -77,72 +77,66 @@ const services = (req, res, next) => {
 	}
 };
 
-const check = (req, res, next) => {
+const check = async (req, res, next) => {
 	const body = req.body;
 	const to = body.recipient.split('@').shift().toLowerCase().replace(/%23/g, '#');
 	console.log((new Date()).toUTCString(), `Recieved mail for ${to}`);
 
-	r.table('registrations')
-		.filter({
-			email: to
-		})
-		.run(r.conn, (err1, cursor) => {
-			if (err1) {
-				res.status(500).json({ error: { message: 'Failed to search RethinkDB for registered users.' } });
-				sendError(body, 'The mail server failed to fetch registered users from the RethinkDB database. Sorry for the inconvenience.');
-			} else {
-				cursor.toArray((err2, result) => {
-					if (err2) {
-						res.status(500).json({ error: { message: 'Failed to search RethinkDB for registered users.' } });
-						sendError(body, 'The mail server failed to fetch registered users from the RethinkDB database. Sorry for the inconvenience.');
-					} else if (!result[0]) {
-						res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
-						sendError(body, 'The email address does not exist.');
-					} else if (result[0].block && Array.isArray(result[0].block) && result[0].block.some(email => body.sender.toLowerCase().includes(email))) {
-						res.status(406).json({ success: { message: 'Sender is blocked by recipient' } });
-						console.log('The E-Mail was blocked by the recipient.');
-					} else if (body.subject.length > 128) {
-						console.log('The subject was too long');
-						res.status(406).json({ error: { message: 'The subject was too long' } });
-						sendError(body, 'The subject of your E-Mail was too long to be sent to Discord.');
-					} else if (body.from > 128) {
-						console.log('The author name was too long');
-						res.status(406).json({ error: { message: 'The author name was too long' } });
-						sendError(body, 'Your author name was too long to be sent to Discord.');
-					} else if (config.get('ban').word.some(word => body['body-plain'].toLowerCase().includes(word))) {
-						console.log('The email was detected as spam.');
-						res.status(406).json({ error: { message: 'The email was detected as spam.' } });
-					} else if (result[0].type === 'user') {
-						discord.getDMChannel(result[0].id)
-							.then((channel) => {
-								res.locals.inbox = result[0].id;
-								res.locals.channel = channel;
-								next();
-							})
-							.catch(() => {
-								res.status(406).json({ error: { message: 'Could not send mail to user.' } });
-								sendError(body, 'The mail server could not obtain a DM channel to send a DM to the user.');
-							});
-					} else if (result[0].type === 'guild') {
-						const guild = discord.guilds.get(result[0].id);
-						if (guild) {
-							const channel = guild.channels.get(result[0].details.channel);
-							if (channel) {
-								res.locals.inbox = result[0].id;
-								res.locals.channel = discord.guilds.get(result[0].id).channels.get(result[0].details.channel);
-								next();
-							} else {
-								res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
-								sendError(body, 'The guild\'s channel could not be found');
-							}
-						} else {
-							res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
-							sendError(body, 'The guild\'s could not be found');
-						}
-					}
-				});
+	try {
+		const cursor = await r.table('registrations')
+			.filter({
+				email: to
+			})
+			.run(r.conn);
+
+		const result = await cursor.toArray();
+		if (!result[0]) {
+			res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
+			sendError(body, 'The email address does not exist.');
+		} else if (result[0].block && Array.isArray(result[0].block) && result[0].block.some(email => body.sender.toLowerCase().includes(email))) {
+			res.status(406).json({ success: { message: 'Sender is blocked by recipient' } });
+			console.log('The E-Mail was blocked by the recipient.');
+		} else if (body.subject.length > 128) {
+			console.log('The subject was too long');
+			res.status(406).json({ error: { message: 'The subject was too long' } });
+			sendError(body, 'The subject of your E-Mail was too long to be sent to Discord.');
+		} else if (body.from > 128) {
+			console.log('The author name was too long');
+			res.status(406).json({ error: { message: 'The author name was too long' } });
+			sendError(body, 'Your author name was too long to be sent to Discord.');
+		} else if (config.get('ban').word.some(word => body['body-plain'].toLowerCase().includes(word))) {
+			console.log('The email was detected as spam.');
+			res.status(406).json({ error: { message: 'The email was detected as spam.' } });
+		} else if (result[0].type === 'user') {
+			try {
+				res.locals.channel = await discord.getDMChannel(result[0].id);
+				res.locals.inbox = result[0].id;
+				next();
+			} catch (e) {
+				console.log('Could not get DM Channel');
+				res.status(406).json({ error: { message: 'The email was detected as spam.' } });
 			}
-		});
+		} else if (result[0].type === 'guild') {
+			const guild = discord.guilds.get(result[0].id);
+			if (guild) {
+				const channel = guild.channels.get(result[0].details.channel);
+				if (channel) {
+					res.locals.channel = discord.guilds.get(result[0].id).channels.get(result[0].details.channel);
+					res.locals.inbox = result[0].id;
+					next();
+				} else {
+					res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
+					sendError(body, 'The guild\'s channel could not be found');
+				}
+			} else {
+				res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
+				sendError(body, 'The guild\'s could not be found');
+			}
+		}
+	} catch (e) {
+		console.log('Could not fetch RethinkDB');
+		res.status(500).json({ error: { message: 'Could not fetch RethinkDB' } });
+	}
 };
 
 router.post('/mail', upload.single('attachment-1'), validate, services, check, (req, res) => {
