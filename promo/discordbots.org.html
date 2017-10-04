@@ -112,7 +112,7 @@
 	}
 </style>
 
-<div id="discordmail" class="burple">
+<div id="discordmail" class="burple" onload="var e=document.createElement('script');e.src='https://discordmail.com/js/botsdiscordpw.js';document.head.appendChild(e);">
 	<div class="dmcontainer">
 		<h2 class="dmh2">The Discord to E-Mail Bot, powered by Mailgun</h2>
 		<h5 class="dmh5">DiscordMail links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.</h5>
@@ -140,35 +140,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	const dmguilds = document.getElementById('dmguilds')
-	const dmusers = document.getElementById('dmusers')
-	const check = () => {
-		if (typeof request !== 'undefined') {
-			console.log('Request found');
-			stats();
-		} else {
-			console.log('Request not found');
-			setTimeout(check, 10);
-		}
-	};
-
-	const stats = () => {
-		request({
-			url: "https://discordmail.com/api/stats",
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		}, (err, res) => {
-			if (err) {
-				console.log(err);
-			} else {
-				dmguilds.innerHTML = `${res.guilds} guilds`;
-				dmusers.innerHTML = `${res.users} users`;
-			}
-		});
-	}
-	check();
-</script>
