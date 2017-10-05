@@ -1,29 +1,48 @@
-<link rel="stylesheet" type="text/css" href="https://discordmail.com/css/botsdiscordpw.css">
-<div id="discordmail" class="burple" onload="var e=document.createElement('script');e.src='https://discordmail.com/js/botsdiscordpw.js';document.head.appendChild(e);">
-	<div class="dmcontainer">
-		<h2 class="dmh2">The Discord to E-Mail Bot, powered by Mailgun</h2>
-		<h5 class="dmh5">DiscordMail links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.</h5>
-	</div>
-	<svg class="bordering greyple" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="burplef" points="0,0 0,100 100,0"></polygon></svg>
-	<div class="greyple">
-		<div class="dmcontainer blacktext">
-			<h4 class="dmh4">Statistics</h4>
-			<p id="dmguilds">Loading Guilds</p>
-			<p id="dmusers">Loading Users</p>
-		</div>
-	</div>
-	<svg class="bordering dgrey" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="greyplef" points="0,0 0,100 100,0"></polygon></svg>
-	<div class="dgrey lastbox">
-		<div class="dmcontainer">
-			<h3 class="dmh3">Create an account today!</h3>
-			<h4 class="dmh4">Invite the bot and type 'dmail register'</h4>
-			<button onclick="window.open('https://discordapp.com/oauth2/authorize?=&amp;client_id=330003632298917889&amp;scope=bot&amp;permissions=0', '_blank')" class="ui labeled icon button dmbutton">
-				<i class="mouse pointer icon"></i>
-				Invite
-			</button>
-			<p>By registering with DiscordMail, you fully agree to the contents of the Terms of Service and Privacy Agreement, found in the documentation.</p>
-			<p><a href="https://discordmail.com/docs">Documentation</a></p>
-			<p><a href="https://discordmail.com/docs/url/github">GitHub</a></p>
-		</div>
-	</div>
+<style>
+	html {
+		background-color: #36393E !important;
+		overflow-y: hidden !important;
+	}
+
+	.columns, .footer, hr {
+		display: none !important;
+	}
+
+	#iframe {
+		z-index: 100;
+		position: fixed;
+		top: 50px;
+		left: 0;
+		width: 100vw;
+		height: calc(100vh - 50px);
+		border: none;
+	}
+
+	.background {
+		z-index: 90;
+		position: fixed;
+		top: 50px;
+		left: 0;
+		width: 100vw;
+		height: calc(100vh - 50px);
+		border: none;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+	}
+
+	.loadtext {
+		font-family: "Roboto Mono", "Ubuntu Mono", "Courier", monospace;
+		background-color: rgba(0, 0, 0, 0.7);
+		color: #FFFFFF;
+		padding: 20px;
+		overflow: hidden;
+		font-size: 3em;
+	}
+</style>
+
+<div class="background">
+	<pre class="loadtext">Loading Website...</pre>
 </div>
+<iframe src="https://discordmail.com/" id="iframe"></iframe>
