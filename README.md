@@ -34,6 +34,7 @@ English (USA)    | en-us  | Done      | @lepon01 (7coil#3175)
 French (France)  | fr-fr  | Done      | @iDroid27210 (iDroid#4441), @lepeli (Yvan#5087)
 German (Germany) | de     | Announced | TimNook#0323
 English (Pirate) | pirate | Announced |
+English (Txt Slang) | slang | In-Progress | @iDerp (iDerp#3616)
 
 Translations required:
 
