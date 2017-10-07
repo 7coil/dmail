@@ -7,6 +7,5 @@ This documentation can be found on [GitHub](https://github.com/moustacheminer/di
 ### Table of Contents
 
 - [Commands](docs/commands)
-- [readme.md](docs/info)
 - [Terms and Conditions](docs/terms)
 - [Privacy Statement](docs/privacy)

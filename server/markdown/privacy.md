@@ -1,13 +1,13 @@
 ## DiscordMail Privacy Agreement
 
-Last updated: 21st August 2017  
-Effective Date: 21st August 2017
+Last updated: 7th October 2017  
+Effective Date: 31st October 2017
 
 Thanks for choosing DiscordMail!
 
 The following Privacy Agreement ('PA') is a legal agreement between Moustacheminer Server Services ('MSS' or 'we') and you ('you').
 
-By using the DiscordMail application ('DiscordMail') via the DiscordMail bot application found on https://discordapp.com/ ('Discord'), you agree to be bound by the following PA set by this document, to the extent applicable in your country, without any rights, express or implied, except for those outlined within the TOS and PA.
+By using the DiscordMail application ('DiscordMail', 'the Service') via the DiscordMail bot application found on https://discordapp.com/ ('Discord'), or any other services provided via the DiscordMail website on https://discordmail.com/, you agree to be bound by the following PA set by this document in it's entirety, to the extent applicable in your country, without any rights, express or implied, except for those outlined within the Terms of Service and Privacy Agreement.
 
 ### Discord
 
@@ -29,31 +29,17 @@ Moustacheminer Server Services have registered with the Information Commissioner
 
 Registration reference: ZA273490
 
+### Cookies
+
+Cookies are only used within our site to store your choice of language. By selecting a language on the DiscordMail website, you agree for DiscordMail to store a cookie to allow this functionality to work.
+
 #### Subject Access Request
 
 You have the right to obtain a copy of information held about you. In order to do so, you will need to undergo a Subject Access Request.
-Please send a Discord Direct Message to `7coil#3175` requesting a SAR of your information, or to the address listed on the ICO website.
+Please send a Discord Direct Message to admin@moustacheminer.com requesting a Subject Access Request of your information, or via mail to the address listed on the ICO website.
 
-##### If you wish to obtain a paper copy, please include:
-
-- Full Name
-- Address
-- Discord Tag
-- Discord ID
-- "Please mail me a paper copy"
-
-This paper service will cost £10 (GBP).
-
-##### If you wish to obtain a digital copy, please include:
-
-- E-Mail address
-- "Please E-Mail me a copy"
-
-This digital service will cost £2 (GBP).
-
-You may also include specifics for specific information held about you. A response will be sent within 40 days, under the Data Protection Act 1998.
-
-For more information about a Subject Access Request, please view the ICO website.
+You may terminate your DiscordMail account at any time and for any reason, by visiting https://discordmail.com/mail/terminate.
+On termination of your Discord account, your DiscordMail account will also be terminated in accordance to the Discord API Terms of Service and the Data Protection Act.
 
 ### Links
 
