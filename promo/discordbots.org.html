@@ -2,14 +2,13 @@
 	#discordmail {
 		z-index: 100;
 		width: 100vw;
-		height: calc(100vh - 58px);
 		border: none;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 	}
 
-	h1, h2, h3, h4, h5, h6, div, button, p {
+	h1,h2,h3,h4,h5,h6,div,button,p {
 		font-family: "Whitney", "Roboto", sans-serif !important;
 	}
 
@@ -26,12 +25,12 @@
 		color: #FFFFFF;
 	}
 
-	.dmh1, .dmh2, .dmh3, .dmh4, .dmh5, .dmh6 {
+	.dmh1,.dmh2,.dmh3,.dmh4,.dmh5,.dmh6,#shortDESU {
 		font-weight: 400;
 		line-height: 1.1;
 	}
 
-	.dmh2 {
+	.dmh2,#shortDESU {
 		font-size: 3.56rem;
 		line-height: 110%;
 		margin: 1.78rem 0 1.424rem 0;
@@ -93,28 +92,32 @@
 		color: #000000;
 	}
 
+	.dark {
+		background-color: #2C2F33 !important;
+	}
+
+	.dblack {
+		background-color: #23272A !important;
+	}
+
 	.bordering {
 		height: 25px;
 		width: 100vw;
 		display: block;
 	}
 
-	.lastbox {
-		flex-grow: 1;
-	}
-
 	.dmbutton {
 		margin: 10px 0 !important;
 	}
 
-	.shortDESU {
-		display: none;
+	ul {
+		padding: 0px;
+		list-style-type: none;
 	}
 </style>
 
 <div id="discordmail" class="burple">
 	<div class="dmcontainer">
-		<h2 class="dmh2">The Discord to E-Mail Bot, powered by Mailgun</h2>
 		<h5 class="dmh5">DiscordMail links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.</h5>
 	</div>
 	<svg class="bordering greyple" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="burplef" points="0,0 0,100 100,0"></polygon></svg>
@@ -139,4 +142,57 @@
 			<p><a href="https://discordmail.com/docs/url/github">GitHub</a></p>
 		</div>
 	</div>
+	<div class="dark">
+		<div class="dmcontainer">
+			<ul>
+				<li><a href="https://discordmail.com/docs/terms">Terms of Service</a></li>
+				<li><a href="https://discordmail.com/docs/privacy">Privacy Agreement</a></li>
+				<li><a href="https://discordmail.com/url/github" target="_blank">GitHub</a></li>
+				<li><a href="https://moustacheminer.com/" target="_blank">Moustacheminer Server Services</a></li>
+				<li><a href="https://discordmail.com/lang">Languages / Internationalisation</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="dblack">
+		<div class="dmcontainer">
+			<p>
+				Copyright 2015 - 2018, Moustacheminer Server Services<br> Moustacheminer Server Services are not associated with Discord Inc.
+			</p>
+		</div>
+	</div>
 </div>
+
+<script>
+	const dmguilds = document.getElementById('dmguilds');
+	const dmusers = document.getElementById('dmusers');
+	const dblservers = [... document.getElementsByClassName('ui label blue')][0];
+
+	const check = () => {
+		if (typeof request !== 'undefined') {
+			console.log('Request found');
+			stats();
+		} else {
+			console.log('Request not found');
+			setTimeout(check, 10);
+		}
+	};
+
+	const stats = () => {
+		request({
+			url: "https://discordmail.com/api/stats",
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}, (err, res) => {
+			if (err) {
+				console.log(err);
+			} else {
+				dblservers.innerHTML = `${res.guilds} SERVERS`
+				dmguilds.innerHTML = `${res.guilds} guilds`;
+				dmusers.innerHTML = `${res.users} users`;
+			}
+		});
+	}
+	check();
+</script>
