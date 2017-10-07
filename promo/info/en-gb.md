@@ -24,7 +24,7 @@ what
  ┣━ Obtain the E-Mail address of the context
  ┗━ Obtain a user's E-Mail address
     ┣━ [@mention]
-	┗━ [Guild or User ID]
+    ┗━ [Guild or User ID]
 
 === Info ===
 help
