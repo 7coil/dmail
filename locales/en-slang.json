@@ -18,7 +18,7 @@
 	"mss": "Moustacheminer Server Services",
 	"footer_lang": "Lnguags / inturnationalisashun",
 	"mail_from": "Frum: {{{ from }}}",
-	"mail_date": "Daet: {{{ date }}}",
+	"mail_date": "d8: {{{ date }}}",
 	"mail_subject": "Subject: {{{ subject }}}",
 	"mail_to": "2: {{{ to }}}",
 	"github": "GitHub",

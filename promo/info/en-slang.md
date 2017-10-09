@@ -1,3 +1,4 @@
+```
 === discordmale ===
 blok
  ┗━ blok emails. Emails contaen n subset uv teh input wel b blocked.
@@ -38,3 +39,4 @@ locail
  ┣━ git an list uv locals
  ┗━ set yoru locail
 	┗━ [locale]
+```

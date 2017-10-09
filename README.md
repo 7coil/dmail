@@ -27,14 +27,14 @@ DiscordMail is a fairly new bot, so these instructions may not be finalised.
 
 Thinking of translating DiscordMail?
 
-Language         | Code   | Progress  | Translator(s)
----------------- | ------ | --------- | --------------------------
-English (GB)     | en-gb  | Main      | @lepon01 (7coil#3175)
-English (USA)    | en-us  | Done      | @lepon01 (7coil#3175)
-French (France)  | fr-fr  | Done      | @iDroid27210 (iDroid#4441), @lepeli (Yvan#5087)
-German (Germany) | de     | Announced | TimNook#0323
-English (Pirate) | pirate | Announced |
-English (Pirate) | en-slang | Awaiting Confirmation | @iDerp (iDerp#3616)
+Language         | Code     | Progress  | Translator(s)
+---------------- | -------- | --------- | --------------------------
+English (GB)     | en-gb    | Main      | @lepon01 (7coil#3175)
+English (USA)    | en-us    | Done      | @lepon01 (7coil#3175)
+English (Slang)  | en-slang | Done      | @iDerp (iDerp#3616)
+French (France)  | fr-fr    | Done      | @iDroid27210 (iDroid#4441), @lepeli (Yvan#5087)
+German (Germany) | de       | Announced | TimNook#0323
+English (Pirate) | pirate   | Announced |
 
 Translations required:
 
