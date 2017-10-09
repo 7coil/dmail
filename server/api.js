@@ -191,8 +191,9 @@ router.post('/mail', upload.single('attachment-1'), validate, services, check, (
 			}
 		});
 })
-	.get('/stats', (req, res) => {
-		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size });
+	.get('/stats', async (req, res) => {
+		const count = await r.table('registrations').count().run(r.conn);
+		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size, registered: count });
 	});
 
 module.exports = router;
