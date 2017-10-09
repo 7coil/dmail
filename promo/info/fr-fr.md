@@ -3,8 +3,6 @@
 block
  ┗━ Bloquer une ou plusieurs adresses e-mail. Les adresses contenant un sous-ensemble à celles fournies seront ignorées.
     ┗━ [E-Mail 1]; [E-Mail 2]; ...
-agree
- ┗━ Accepter les Conditions d'Utililisation et l'Accord de Confidentialité
 delete
  ┗━ Supprimer un e-mail de la base de données
     ┗━ [Email-ID]
