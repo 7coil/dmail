@@ -23,9 +23,7 @@ block main
 							span
 								| #{__('main_guilds', { count: discord.guilds.size })}
 								br
-								| #{__('main_users', { count: discord.users.size })}
-								br
-								| #{__('main_emails', { outgoing, incoming })}
+								| #{__('main_users', { count })}
 	svg.portion.bordering.dgrey(viewBox="0 0 100 100" preserveAspectRatio="none")
 		polygon.greyplef(points="0,0 0,100 100,0")
 	.portion.dgrey.white-text

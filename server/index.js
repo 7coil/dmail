@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const engines = require('consolidate');
 const path = require('path');
-const request = require('request');
 const cors = require('cors');
 const i18n = require('i18n');
 const discord = require('./discord');
@@ -71,28 +70,11 @@ app.enable('trust proxy')
 			next();
 		}
 	})
-	.get('/', (req, res) => {
-		request({
-			method: 'GET',
-			url: `https://api:${config.get('api').mailgun.apiKey}@api.mailgun.net/v3/${config.get('api').mailgun.domain}/stats/total?event=accepted&event=delivered&resolution=month`,
-			json: true
-		}, (err, response, body) => {
-			let incoming = null;
-			let outgoing = null;
-
-			if (err || response.statusCode !== 200) {
-				incoming = 'Error';
-				outgoing = 'Error';
-			} else {
-				incoming = body.stats.reduce((total, time) => total + time.accepted.incoming, 0);
-				outgoing = body.stats.reduce((total, time) => total + time.accepted.outgoing, 0);
-			}
-
-			res.status(200).render('index.pug', {
-				discord,
-				incoming,
-				outgoing
-			});
+	.get('/', async (req, res) => {
+		const count = await r.table('registrations').count().run(r.conn);
+		res.status(200).render('index.pug', {
+			discord,
+			count
 		});
 	})
 	.use('/api', api)
