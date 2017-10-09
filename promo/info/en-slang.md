@@ -3,9 +3,9 @@
 blok
  ┗━ blok emails. Emails contaen n subset uv teh input wel b blocked.
      ┗━ [e-male 1]; [e-male 2];...
- agr
+agree
  ┗━ agrea 2 turms nd conditions nd privacy policy
-delete
+deleet
  ┗━ delete e-male frum database
     ┗━ [email-id]
 registur
@@ -15,7 +15,7 @@ repli
  ┃  ┗━ [email-id] [content]
  ┗━ repli 2 teh last e-male recievid
     ┗━ [content]
-sen
+send
  ┗━ crte nd sen n e-male
     ┣━ [e-mail] "[subject]" [content]
     ┣━ [e-mail] [content]

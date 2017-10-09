@@ -5,10 +5,10 @@ const regex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12})/;
 
 module.exports.info = {
 	aliases: [
-		'del',
 		'rm',
 		'delete',
-		'remove'
+		'remove',
+		'deleet'
 	],
 	ratelimit: 500
 };

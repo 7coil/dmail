@@ -7,7 +7,8 @@ module.exports.info = {
 	aliases: [
 		'what',
 		'check',
-		'email'
+		'email',
+		'wat'
 	],
 	ratelimit: 1000
 };

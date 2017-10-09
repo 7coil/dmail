@@ -5,7 +5,8 @@ const path = require('path');
 module.exports.info = {
 	aliases: [
 		'help',
-		'commands'
+		'commands',
+		'halp'
 	],
 	ratelimit: 1000
 };

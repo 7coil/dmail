@@ -4,7 +4,9 @@ const dmail = require('./../../utils.js').dmail;
 module.exports.info = {
 	aliases: [
 		'block',
-		'blk'
+		'blk',
+		'blok',
+		'minecraft'
 	],
 	ratelimit: 500
 };

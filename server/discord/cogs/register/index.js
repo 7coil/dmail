@@ -3,7 +3,7 @@ const config = require('config');
 module.exports.info = {
 	aliases: [
 		'register',
-		'reg'
+		'registur'
 	],
 	ratelimit: 5000
 };

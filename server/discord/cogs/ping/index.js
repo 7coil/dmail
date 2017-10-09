@@ -3,7 +3,8 @@ const client = require('./../../');
 module.exports.info = {
 	aliases: [
 		'ping',
-		'pong'
+		'pong',
+		'pn'
 	],
 	ratelimit: 1000
 };
