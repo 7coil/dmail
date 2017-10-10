@@ -24,7 +24,7 @@ module.exports.command = (message) => {
 		.then((details) => {
 			if (!email) {
 				message.channel.createMessage(message.__('send_incorrect', { prefix: message.prefix, command: message.command }));
-			} else if (config.get('ban').email.some(mail => email[1].toLowerCase().includes(mail))) {
+			} else if (config.get('ban').out.some(mail => email[1].toLowerCase().includes(mail))) {
 				message.channel.createMessage(message.__('send_blocked'));
 			} else {
 				const data = {

@@ -93,6 +93,9 @@ const check = async (req, res, next) => {
 		if (!result[0]) {
 			res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
 			sendError(body, 'The email address does not exist.');
+		} else if (config.get('ban').in.some(email => body.sender.toLowerCase().includes(email))) {
+			res.status(406).json({ success: { message: 'The domain this email was sent from is not allowed to send to DiscordMail. Contact admin@moustacheminer.com for details.' } });
+			console.log('The E-Mail was blocked by the recipient.');
 		} else if (result[0].block && Array.isArray(result[0].block) && result[0].block.some(email => body.sender.toLowerCase().includes(email))) {
 			res.status(406).json({ success: { message: 'Sender is blocked by recipient' } });
 			console.log('The E-Mail was blocked by the recipient.');
@@ -106,7 +109,7 @@ const check = async (req, res, next) => {
 			sendError(body, 'Your author name was too long to be sent to Discord.');
 		} else if (config.get('ban').word.some(word => body['body-plain'].toLowerCase().includes(word))) {
 			console.log('The email was detected as spam.');
-			res.status(406).json({ error: { message: 'The email was detected as spam.' } });
+			res.status(406).json({ error: { message: 'The email was detected as spam. Contact admin@moustacheminer.com for details.' } });
 		} else if (result[0].type === 'user') {
 			try {
 				res.locals.channel = await discord.getDMChannel(result[0].id);

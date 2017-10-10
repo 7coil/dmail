@@ -48,9 +48,15 @@
 		"word": [
 			"mailing list"
 		],
-		"email": [
+		"in": [
+			"mixer.com",
+			"mdteam.ga"
+		],
+		"out": [
 			"discordapp.com",
-			"valvesoftware.com"
+			"valvesoftware.com",
+			"mdteam.ga",
+			"mixer.com"
 		]
 	}
 }
