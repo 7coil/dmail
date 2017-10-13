@@ -54,3 +54,10 @@ html
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js")
 		script(src="/js/init.js")
+		script(async src="https://www.googletagmanager.com/gtag/js?id=UA-67900801-4")
+		script
+			| window.dataLayer = window.dataLayer || [];
+			| function gtag(){dataLayer.push(arguments);}
+			| gtag('js', new Date());
+			| gtag('config', 'UA-67900801-4');
+
