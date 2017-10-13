@@ -117,7 +117,7 @@ const check = async (req, res, next) => {
 				next();
 			} catch (e) {
 				console.log('Could not get DM Channel');
-				res.status(406).json({ error: { message: 'The email was detected as spam.' } });
+				res.status(406).json({ error: { message: 'DiscordMail failed to fetch a DM channel' } });
 			}
 		} else if (result[0].type === 'guild') {
 			const guild = discord.guilds.get(result[0].id);
