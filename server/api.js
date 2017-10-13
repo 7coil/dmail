@@ -94,7 +94,7 @@ const check = async (req, res, next) => {
 			res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
 			sendError(body, 'The email address does not exist.');
 		} else if (config.get('ban').in.some(email => body.sender.toLowerCase().includes(email))) {
-			res.status(406).json({ success: { message: 'The domain this email was sent from is not allowed to send to DiscordMail. Contact admin@moustacheminer.com for details.' } });
+			res.status(406).json({ success: { message: `The domain this email was sent from is not allowed to send to DiscordMail. Visit ${config.get('webserver').domain}/docs/blocked` } });
 			console.log('The E-Mail was blocked by the recipient.');
 		} else if (result[0].block && Array.isArray(result[0].block) && result[0].block.some(email => body.sender.toLowerCase().includes(email))) {
 			res.status(406).json({ success: { message: 'Sender is blocked by recipient' } });
@@ -109,7 +109,7 @@ const check = async (req, res, next) => {
 			sendError(body, 'Your author name was too long to be sent to Discord.');
 		} else if (config.get('ban').word.some(word => body['body-plain'].toLowerCase().includes(word))) {
 			console.log('The email was detected as spam.');
-			res.status(406).json({ error: { message: 'The email was detected as spam. Contact admin@moustacheminer.com for details.' } });
+			res.status(406).json({ error: { message: `The email was detected as spam. Visit ${config.get('webserver').domain}/docs/blocked` } });
 		} else if (result[0].type === 'user') {
 			try {
 				res.locals.channel = await discord.getDMChannel(result[0].id);
@@ -197,6 +197,9 @@ router.post('/mail', upload.single('attachment-1'), validate, services, check, (
 	.get('/stats', async (req, res) => {
 		const count = await r.table('registrations').count().run(r.conn);
 		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size, registered: count });
+	})
+	.get('/', (req, res) => {
+		res.redirect('/docs/api');
 	});
 
 module.exports = router;
