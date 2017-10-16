@@ -10,7 +10,8 @@ module.exports.info = {
 		'langage',
 		'locail',
 		'internationalisation',
-		'internationalization'
+		'internationalization',
+		'lugar'
 	],
 	ratelimit: 1000
 };

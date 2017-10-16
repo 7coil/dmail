@@ -8,7 +8,8 @@ module.exports.info = {
 		'rm',
 		'delete',
 		'remove',
-		'deleet'
+		'deleet',
+		'borrar'
 	],
 	ratelimit: 500
 };

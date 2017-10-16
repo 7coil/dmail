@@ -6,7 +6,8 @@ module.exports.info = {
 		'block',
 		'blk',
 		'blok',
-		'minecraft'
+		'minecraft',
+		'bloquear'
 	],
 	ratelimit: 500
 };

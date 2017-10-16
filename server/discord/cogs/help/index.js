@@ -6,7 +6,8 @@ module.exports.info = {
 	aliases: [
 		'help',
 		'commands',
-		'halp'
+		'halp',
+		'ayuda'
 	],
 	ratelimit: 1000
 };

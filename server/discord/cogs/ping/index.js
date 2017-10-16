@@ -4,7 +4,8 @@ module.exports.info = {
 	aliases: [
 		'ping',
 		'pong',
-		'pn'
+		'pn',
+		'silbido'
 	],
 	ratelimit: 1000
 };
