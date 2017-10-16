@@ -26,7 +26,9 @@ module.exports.command = (message) => {
 					.run(r.conn, (err1, res) => {
 						if (err1) {
 							message.channel.createMessage(message.__('err_generic'));
-						} else if (res.dmail !== message.inbox) {
+						} else if (!res) {
+							message.channel.createMessage(message.__('reply_noexist'));
+						} if (res.dmail !== message.inbox) {
 							message.channel.createMessage(message.__('delete_conflict'));
 						} else {
 							r.table('emails')
