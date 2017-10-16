@@ -37,4 +37,6 @@ locail
  ┣━ git an list uv locals
  ┗━ set yoru locail
 	┗━ [locale]
+
+iDerp#3616 bruv made dis languij
 ```
