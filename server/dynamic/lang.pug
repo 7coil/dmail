@@ -11,7 +11,5 @@ block main
 			p: a(href="https://github.com/moustacheminer/discordmail/tree/master/locales") #{__('github')}
 		.col-s12
 			ul
-				li: a(href="/lang/en-gb") #{__('lang_en_gb')}
-				li: a(href="/lang/en-us") #{__('lang_en_us')}
-				li: a(href="/lang/fr-fr") #{__('lang_fr_fr')}
-				li: a(href="/lang/blank") #{__('lang_blank')}
+				for language in languages
+					li: a(href=`/lang/${language}`) #{__(`lang_${language.replace('-', '_')}`)}
