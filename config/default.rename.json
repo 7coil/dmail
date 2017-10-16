@@ -46,17 +46,17 @@
 	},
 	"ban": {
 		"word": [
-			"mailing list"
 		],
 		"in": [
-			"mixer.com",
+			"dmail.com",
 			"mdteam.ga"
 		],
 		"out": [
 			"discordapp.com",
 			"valvesoftware.com",
 			"mdteam.ga",
-			"mixer.com"
+			"dmail.com"
 		]
 	}
 }
+
