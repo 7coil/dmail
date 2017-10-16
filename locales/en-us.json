@@ -26,7 +26,7 @@
 	"err_admin": "Only administrators can use this context.",
 	"block_delimit": "Please submit email addresses, separated by semicolons `;`",
 	"block_blocked": "Blocked {{{ emails }}} email(s).",
-	"err_generic": "An error occured while processing your request.",
+	"err_generic": "An error occurred while processing your request.",
 	"err_quota": "DiscordMail has ran out of it's monthly Mailgun quota. The bot has been disabled.",
 	"err_ratelimit": "To help prevent abuse for this bot, you are being ratelimited. Please wait for {{ time }}s.",
 	"err_dm": "The bot detected that it cannot send DMs to your account. Please enable before reregistering",

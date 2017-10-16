@@ -149,8 +149,8 @@ router.post('/mail', upload.single('attachment-1'), validate, services, check, (
 		.insert(req.body)
 		.run(r.conn, (err, res1) => {
 			if (err) {
-				res.status(406).json({ error: { message: 'An error occured while inserting details into the RethinkDB database.' } });
-				sendError(body, 'An error occured while inserting details into the RethinkDB database. Sorry for the inconvenience.');
+				res.status(406).json({ error: { message: 'An error occurred while inserting details into the RethinkDB database.' } });
+				sendError(body, 'An error occurred while inserting details into the RethinkDB database. Sorry for the inconvenience.');
 			} else {
 				const content = {
 					content: res1.generated_keys[0],

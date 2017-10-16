@@ -1,7 +1,7 @@
 # The domain this email was sent from is not allowed to send to DiscordMail.
 
 Your domain has been associated with either spam, or innapropriately dealing with emails.
-This may have occured if emails are sent without a user's permission from an automated service.
+This may have occurred if emails are sent without a user's permission from an automated service.
 
 Domain    | Reason
 --------- | ----------------------------------------------------------------------
