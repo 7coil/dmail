@@ -5,7 +5,7 @@
   "main_guilds": "{{{ count }}} Gremios",
   "main_users": "{{{ count }}} Usuarios",
   "main_emails": "{{{ outgoing }}} enviado y {{{ incoming }}} correos electrónicos entrantes hasta la fecha",
-  "main_calltoaction": "¡Crea una cuenta hoy!"
+  "main_calltoaction": "¡Crea una cuenta hoy!",
   "main_invitemethod": "Invita al bot y escribe 'dmail register'",
   "main_invitebutton": "Invitar bot",
   "main_disclaimer": "Al registrarse con {{{ name }}}, acepta totalmente los contenidos de los Términos del servicio y el Acuerdo de privacidad, que se encuentran en la documentación.",
