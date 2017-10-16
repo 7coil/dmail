@@ -27,14 +27,15 @@ DiscordMail is a fairly new bot, so these instructions may not be finalised.
 
 Thinking of translating DiscordMail?
 
-Language         | Code     | Progress  | Translator(s)
----------------- | -------- | --------- | --------------------------
-English (GB)     | en-gb    | Main      | [@lepon01](https://github.com/lepon01) (7coil#3175)
-English (USA)    | en-us    | Done      | [@lepon01](https://github.com/lepon01) (7coil#3175)
-English (Slang)  | en-slang | Done      | [@iDerp](https://github.com/iDerp) (iDerp#3616)
-French (France)  | fr-fr    | Done      | [@iDroid27210](https://github.com/iDroid27210) (iDroid#4441), [@lepeli](https://github.com/lepeli) (Yvan#5087)
-German (Germany) | de       | Announced | TimNook#0323
-English (Pirate) | pirate   | Announced |
+Language         | Code      | Progress  | Translator(s)
+---------------- | --------- | --------- | --------------------------
+English (GB)     | en-gb     | Main      | [@lepon01](https://github.com/lepon01) (7coil#3175)
+English (USA)    | en-us     | Done      | [@lepon01](https://github.com/lepon01) (7coil#3175)
+English (Slang)  | en-slang  | Done      | [@iDerp](https://github.com/iDerp) (iDerp#3616)
+French (France)  | fr-fr     | Done      | [@iDroid27210](https://github.com/iDroid27210) (iDroid#4441), [@lepeli](https://github.com/lepeli) (Yvan#5087)
+Spanish (Spain)  | es-es     | Announced | 🎃 Spoopy Memes 🎃#2545
+German (Germany) | de-de     | Announced | TimNook#0323
+English (Pirate) | de-pirate | Announced |
 
 Translations required:
 
