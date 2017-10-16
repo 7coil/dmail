@@ -8,7 +8,9 @@ module.exports.info = {
 		'i18n',
 		'langue',
 		'langage',
-		'locail'
+		'locail',
+		'internationalisation',
+		'internationalization'
 	],
 	ratelimit: 1000
 };
