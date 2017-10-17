@@ -1,0 +1,18 @@
+extends template.pug
+
+block head
+	script(async defer src="https://www.google.com/recaptcha/api.js")
+
+block main
+	.container.white-text
+		.col-s12
+			h4 Welcome to DiscordMail
+			p Please read the Terms of Service and Privacy Agreement before continuing
+			ul
+				li: a(href="/docs/terms") #{__('tos')}
+				li: a(href="/docs/privacy") #{__('pa')}
+			form(method="POST")
+				input(name="agree" id="agree" type="checkbox")
+				label(for="agree") I agree to the Terms of Service and Privacy Policy
+				.g-recaptcha(data-sitekey=`${captcha}`)
+				button.btn.waves-effect.waves-light.burple(type="submit") Register

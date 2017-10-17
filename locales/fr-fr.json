@@ -48,6 +48,7 @@
 	"info_hard": "Matériel",
 	"info_soft": "Logiciel",
 	"info_licence": "License",
+	"register": "Register",
 	"info_licencedesc": "{{{ name }}}, une instance de [DiscordMail](https://discordmail.com) est couvert sous la license MIT.",
 	"reply_incorrect": "Syntaxe attendue : `{{{ prefix }}} {{{ command }}} ID-Réponse Contenu`",
 	"reply_noexist": "L'ID d'e-mail fourni est introuvable",

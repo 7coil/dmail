@@ -4,5 +4,7 @@ block main
 	.container.white-text
 		.col-s12.center
 			h1 #{status}
+			if message
+				h4 #{message}
 			p #{__('error_suggest')}
 			img(src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Greece_checks_his_email.gif")

@@ -41,6 +41,7 @@
 	"help_noexist": "O arquivo de ajuda para esta linguagem não foi encontrado",
 	"invite": "Convite",
 	"guild": "Servidor",
+	"register": "Register",
 	"guildapp": "Formulário de inscrição de servidor",
 	"info_nodejs": "Node.js",
 	"info_guilds": "Quantidade de servidores",

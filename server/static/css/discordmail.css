@@ -68,3 +68,7 @@ main {
 	height: 25px;
 	display: block;
 }
+
+.g-recaptcha {
+	margin: 10px 0px;
+}

@@ -36,7 +36,8 @@ module.exports.command = (message) => {
 							from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
 							to: `${name(message.input)}@${config.get('api').mailgun.domain}`,
 							subject: message.__('consent_subject', { name: message.__('name') }),
-							html: config.get('welcome')
+							html: config.get('welcome').html,
+							text: config.get('welcome').text
 						};
 
 						mailgun.messages().send(data, (err2) => {

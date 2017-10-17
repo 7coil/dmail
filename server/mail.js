@@ -1,20 +1,74 @@
 const r = require('./db');
+const i18n = require('i18n');
+const config = require('config');
 const express = require('express');
+const request = require('request');
+const discord = require('./discord');
+const mailgun = require('mailgun-js')(config.get('api').mailgun);
 
+const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 const router = express.Router();
 
 const registered = (req, res, next) => {
-	if (!req.user) {
-		req.session.redirect = req.originalUrl;
-		res.redirect('/auth');
-	} else if (!req.user.dmail) {
-		res.status(401).render('error.pug', { status: 401 });
+	if (!req.user.dmail) {
+		res.status(403).render('error.pug', {
+			status: 403,
+			message: 'You are not registered for DiscordMail'
+		});
 	} else {
 		next();
 	}
 };
 
-router.get('/', registered, async (req, res) => {
+const notregistered = (req, res, next) => {
+	if (req.user.dmail) {
+		res.status(403).render('error.pug', {
+			status: 403,
+			message: 'You are already registered for DiscordMail'
+		});
+	} else {
+		next();
+	}
+};
+
+const authed = (req, res, next) => {
+	if (!req.user) {
+		req.session.redirect = req.originalUrl;
+		res.redirect('/auth');
+	} else {
+		next();
+	}
+};
+
+const captcha = (req, res, next) => {
+	if (!req.body['g-recaptcha-response'] || typeof req.body['g-recaptcha-response'] !== 'string') {
+		res.status(400).render('error.pug', {
+			status: 400,
+			message: 'Invalid reCAPTCHA response'
+		});
+	} else {
+		request({
+			url: 'https://google.com/recaptcha/api/siteverify',
+			qs: {
+				secret: config.get('api').captcha.private,
+				response: req.body['g-recaptcha-response'],
+				remoteip: req.connection.remoteAddress
+			},
+			json: true
+		}, (error, response, body) => {
+			if (body.success) {
+				next();
+			} else {
+				res.status(400).render('error.pug', {
+					status: 400,
+					message: 'Incorrect reCAPTCHA response'
+				});
+			}
+		});
+	}
+};
+
+router.get('/', authed, registered, async (req, res) => {
 	try {
 		const cursor = await r.table('emails')
 			.filter({
@@ -35,10 +89,10 @@ router.get('/', registered, async (req, res) => {
 		res.status(500).render('error.pug', { status: 500 });
 	}
 })
-	.get('/terminate', registered, (req, res) => {
+	.get('/terminate', authed, registered, (req, res) => {
 		res.render('terminate.pug');
 	})
-	.post('/terminate', registered, async (req, res) => {
+	.post('/terminate', authed, registered, async (req, res) => {
 		try {
 			await r.table('registrations')
 				.get(req.user.id)
@@ -56,7 +110,64 @@ router.get('/', registered, async (req, res) => {
 				.run(r.conn);
 			res.redirect('/');
 		} catch (e) {
-			res.status(500).render('error.pug', { status: 500 });
+			res.status(500).render('error.pug', {
+				status: 500,
+				message: 'An error occured while deleting your details. Please contact the owner'
+			});
+		}
+	})
+	.get('/register', authed, notregistered, (req, res) => {
+		res.render('register.pug', {
+			captcha: config.get('api').captcha.public
+		});
+	})
+	.post('/register', captcha, authed, notregistered, async (req, res) => {
+		if (!req.body.agree) {
+			res.status(401).render('error.pug', {
+				status: 401,
+				message: 'You did not agree to the Terms of Service and Privacy Agreement'
+			});
+		} else {
+			try {
+				const dm = await discord.getDMChannel(req.user.id);
+				const email = name(`${req.user.username}#${req.user.discriminator}`);
+				await dm.createMessage(`${email}@${config.get('api').mailgun.domain}`);
+				await r.table('registrations')
+					.insert({
+						id: req.user.id,
+						type: 'user',
+						details: {
+							name: req.user.username,
+							discrim: req.user.discriminator
+						},
+						display: `${req.user.username}#${req.user.discriminator}`,
+						email,
+						block: []
+					}).run(r.conn);
+				const data = {
+					from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
+					to: `${email}@${config.get('api').mailgun.domain}`,
+					subject: i18n.__('consent_subject', { name: config.get('name') }),
+					html: config.get('welcome').html,
+					text: config.get('welcome').text
+				};
+				await mailgun.messages().send(data);
+				res.redirect('/');
+			} catch (e) {
+				let error = '';
+				if (e.resonse && e.response.includes('50007')) {
+					error = 'Could not send DM. Check that you are in a guild / you can DM DiscordMail, and that you have not blocked the bot';
+				}
+				res.status(500).render('error.pug', {
+					status: 500,
+					message: error || 'An error occured while attempting to register your account.'
+				});
+				console.dir(e);
+				r.table('registrations')
+					.get(req.user.id)
+					.delete()
+					.run(r.conn);
+			}
 		}
 	})
 	.get('/:id', async (req, res) => {
@@ -80,7 +191,6 @@ router.get('/', registered, async (req, res) => {
 			const result = await r.table('emails')
 				.get(req.params.id)
 				.run(r.conn);
-
 			if (!result) {
 				res.status(404).render('error.pug', { status: 404 });
 			} else {

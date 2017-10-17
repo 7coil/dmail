@@ -41,6 +41,7 @@
 	"help_noexist": "The help file for this language was not found",
 	"invite": "Invite",
 	"guild": "Guild",
+	"register": "Register",
 	"guildapp": "Guild Application Forms",
 	"info_nodejs": "Node.js",
 	"info_guilds": "Guild Count",
