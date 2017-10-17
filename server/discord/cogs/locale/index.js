@@ -34,6 +34,6 @@ module.exports.command = (message) => {
 				}
 			});
 	} else {
-		message.channel.createMessage(message.__('locale_incorrect', { locales: Object.keys(i18n.getCatalog()).join(', ') }));
+		message.channel.createMessage(message.__('locale_incorrect', { locales: Object.keys(i18n.getCatalog()).map(lang => `\`${lang}\``).join('`, `') }));
 	}
 };
