@@ -5,6 +5,7 @@ const router = express.Router();
 
 const registered = (req, res, next) => {
 	if (!req.user) {
+		req.session.redirect = req.originalUrl;
 		res.redirect('/auth');
 	} else if (!req.user.dmail) {
 		res.status(401).render('error.pug', { status: 401 });

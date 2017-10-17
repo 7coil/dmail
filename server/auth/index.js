@@ -4,7 +4,7 @@ const auth = require('./auth');
 const router = express.Router();
 
 router.use('/callback', auth.authenticate('discord'), (req, res) => {
-	res.redirect('/');
+	res.redirect(req.session.redirect || '/');
 })
 	.get('/', auth.authenticate('discord'))
 	.get('/info', (req, res) => {
