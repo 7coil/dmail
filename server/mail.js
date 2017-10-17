@@ -175,7 +175,6 @@ router.get('/', authed, registered, async (req, res) => {
 			const result = await r.table('emails')
 				.get(req.params.id)
 				.run(r.conn);
-
 			if (!result) {
 				res.status(404).render('error.pug', { status: 404 });
 			} else {
