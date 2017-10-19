@@ -156,13 +156,14 @@ router.get('/', authed, registered, async (req, res) => {
 			} catch (e) {
 				let error = '';
 				if (e.resonse && e.response.includes('50007')) {
-					error = 'Could not send DM. Check that you are in a guild / you can DM DiscordMail, and that you have not blocked the bot';
+					error = 'Could not send DM. Check that you have allowed DMs, are in a shared guild, or have not blocked DiscordMail.';
+				} else {
+					console.dir(e);
 				}
 				res.status(500).render('error.pug', {
 					status: 500,
 					message: error || 'An error occured while attempting to register your account.'
 				});
-				console.dir(e);
 				r.table('registrations')
 					.get(req.user.id)
 					.delete()
