@@ -167,16 +167,6 @@
 	const dmusers = document.getElementById('dmusers');
 	const dblservers = [... document.getElementsByClassName('ui label blue')][0];
 
-	const check = () => {
-		if (typeof request !== 'undefined') {
-			console.log('Request found');
-			stats();
-		} else {
-			console.log('Request not found');
-			setTimeout(check, 10);
-		}
-	};
-
 	const stats = () => {
 		request({
 			url: "https://discordmail.com/api/stats",
@@ -194,5 +184,6 @@
 			}
 		});
 	}
-	check();
+
+	document.addEventListener("DOMContentLoaded", stats);
 </script>
