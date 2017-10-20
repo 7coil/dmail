@@ -34,8 +34,8 @@ English (USA)          | en-us     | Done      | [@lepon01](https://github.com/l
 English (Slang)        | en-slang  | Done      | [@iDerp](https://github.com/iDerp) (iDerp#3616)
 French (France)        | fr-fr     | Done      | [@iDroid27210](https://github.com/iDroid27210) (iDroid#4441), [@lepeli](https://github.com/lepeli) (Yvan#5087)
 Spanish (Spain)        | es-es     | Done      | [@Mdstumpfy123](https://github.com/Mdstumpfy123) (🎃 Spoopy Memes 🎃#2545)
-Portuaguese (Portugal) | pt-pt     | Done      | [@PillGP](https://github.com/PillGP) (PillGP#2767)
-Portuaguese (Brazil)   | pt-br     | Done      | [@natanbc](https://github.com/natanbc) (Natan#1289)
+Portuguese (Portugal)  | pt-pt     | Done      | [@PillGP](https://github.com/PillGP) (PillGP#2767)
+Portuguese (Brazil)    | pt-br     | Done      | [@natanbc](https://github.com/natanbc) (Natan#1289)
 German (Germany)       | de-de     | Announced | TimNook#0323
 English (Pirate)       | de-pirate | Announced |
 
