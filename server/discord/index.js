@@ -3,7 +3,6 @@ const Discord = require('eris');
 const config = require('config');
 const utils = require('./utils.js');
 const r = require('../db');
-require('colors');
 
 const client = new Discord.Client(config.get('api').discord.token, {
 	maxShards: config.get('discord').shards
@@ -15,20 +14,15 @@ let prefix = null;
 const commands = require('./cogs.js');
 
 client.on('shardReady', (id) => {
-	console.log(`Shard ${id} is online`.green);
+	console.log(`Shard ${id} is online`);
 });
 
 client.once('ready', () => {
-	// Set up regex for the bot.
-	// It's "man's essential illness"
-	// Use this regex for testing in regexr.com
-	// /^(mss).?(ping)\s?([\s\S]*)/
-	// /(\w+)rly/
 	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`, 'i');
 
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
-	console.log('All shards are online'.green.bold);
+	console.log('All shards are online');
 
 	// Set up currently playing game
 	client.editStatus('online', {
