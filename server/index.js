@@ -1,23 +1,23 @@
 console.log('Welcome to Moustacheminer Server Services');
 
-const config = require('config');
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const engines = require('consolidate');
+const r = require('./db');
 const path = require('path');
 const cors = require('cors');
 const i18n = require('i18n');
-const discord = require('./discord');
 const api = require('./api');
-const docs = require('./docs');
 const url = require('./url');
+const docs = require('./docs');
 const mail = require('./mail');
 const lang = require('./lang');
 const auth = require('./auth');
-const r = require('./db');
-const authentication = require('./auth/auth');
+const config = require('config');
+const express = require('express');
+const discord = require('./discord');
+const engines = require('consolidate');
+const bodyParser = require('body-parser');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const authentication = require('./auth/auth');
 
 const app = express();
 
