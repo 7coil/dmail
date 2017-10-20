@@ -126,6 +126,7 @@
 			<h4 class="dmh4">Statistics</h4>
 			<p id="dmguilds">Loading Guilds</p>
 			<p id="dmusers">Loading Users</p>
+			<p id="dmregistered">Loading Registrations</p>
 		</div>
 	</div>
 	<svg class="bordering dgrey" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="greyplef" points="0,0 0,100 100,0"></polygon></svg>
@@ -165,6 +166,7 @@
 <script>
 	const dmguilds = document.getElementById('dmguilds');
 	const dmusers = document.getElementById('dmusers');
+	const dmregistered = document.getElementById('dmregistered');
 	const dblservers = [... document.getElementsByClassName('ui label blue')][0];
 
 	const stats = () => {
@@ -181,6 +183,7 @@
 				dblservers.innerHTML = `${res.guilds} SERVERS`
 				dmguilds.innerHTML = `${res.guilds} guilds`;
 				dmusers.innerHTML = `${res.users} users`;
+				dmregistered.innerHTML = `${res.registered} registered accounts`;
 			}
 		});
 	}
