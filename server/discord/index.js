@@ -19,9 +19,6 @@ client.on('shardReady', (id) => {
 
 client.once('ready', () => {
 	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`, 'i');
-
-	// Add mentions to the prefix list
-	prefixes.push(`<@${client.user.id}>`);
 	console.log('All shards are online');
 
 	// Set up currently playing game
