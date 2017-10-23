@@ -37,3 +37,4 @@ lugar
  ┣━ Obtenga una lista de locales
  ┗━ Establezca su localidad
 	┗━ [locale]
+```
