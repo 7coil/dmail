@@ -13,7 +13,6 @@ const auth = require('./auth');
 const config = require('config');
 const express = require('express');
 const discord = require('./discord');
-const engines = require('consolidate');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -47,8 +46,7 @@ app.enable('trust proxy')
 	}))
 	.use(i18n.init)
 	.set('views', path.join(__dirname, '/dynamic'))
-	.engine('html', engines.pug)
-	.set('view engine', 'html')
+	.set('view engine', 'pug')
 	.use(cors())
 	.use(authentication.initialize())
 	.use(authentication.session())
