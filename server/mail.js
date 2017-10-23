@@ -5,6 +5,8 @@ const express = require('express');
 const request = require('request');
 const discord = require('./discord');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
+const fs = require('fs');
+const path = require('path');
 
 const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 const router = express.Router();
@@ -147,9 +149,9 @@ router.get('/', authed, registered, async (req, res) => {
 				const data = {
 					from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
 					to: `${email}@${config.get('api').mailgun.domain}`,
-					subject: i18n.__('consent_subject', { name: config.get('name') }),
-					html: config.get('welcome').html,
-					text: config.get('welcome').text
+					subject: i18n.__('consent_subject', { name: i18n.__('name') }),
+					html: fs.readFileSync(path.join('./', 'promo', 'userwelcome.html'), 'utf8'),
+					text: fs.readFileSync(path.join('./', 'promo', 'userwelcome.md'), 'utf8')
 				};
 				await mailgun.messages().send(data);
 				res.redirect('/');

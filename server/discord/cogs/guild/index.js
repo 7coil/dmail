@@ -2,6 +2,8 @@ const r = require('./../../../db');
 const config = require('config');
 const name = require('./../../utils').dmail.name;
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
+const fs = require('fs');
+const path = require('path');
 
 module.exports.info = {
 	aliases: [
@@ -36,8 +38,8 @@ module.exports.command = (message) => {
 							from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
 							to: `${name(message.input)}@${config.get('api').mailgun.domain}`,
 							subject: message.__('consent_subject', { name: message.__('name') }),
-							html: config.get('welcome').html,
-							text: config.get('welcome').text
+							html: fs.readFileSync(path.join('./', 'promo', 'userwelcome.html'), 'utf8'),
+							text: fs.readFileSync(path.join('./', 'promo', 'userwelcome.md'), 'utf8')
 						};
 
 						mailgun.messages().send(data, (err2) => {
