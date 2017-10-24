@@ -1,24 +1,18 @@
 // Get the required shit together
 const Discord = require('eris');
 const config = require('config');
-const utils = require('./utils.js');
-const r = require('../db');
+const { commands } = require('./cogs');
+const handler = require('./handler');
+const botlist = require('./botlist');
+const r = require('./../db');
 
 const client = new Discord.Client(config.get('api').discord.token, {
 	maxShards: config.get('discord').shards
 });
-const prefixes = config.get('discord').prefix.user.concat(config.get('discord').prefix.guild);
-let prefix = null;
 
-// Setup commands and util objects.
-const commands = require('./cogs.js');
-
-client.on('shardReady', (id) => {
-	console.log(`Shard ${id} is online`);
-});
+const prefixes = config.get('discord').prefix.user;
 
 client.once('ready', () => {
-	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`, 'i');
 	console.log('All shards are online');
 
 	// Set up currently playing game
@@ -27,55 +21,38 @@ client.once('ready', () => {
 		type: 0
 	});
 
-	// Send bots.discord.pw info if it was provided.
-	if (config.get('api').botsdiscordpw) {
-		utils.botsdiscordpw(client);
-		setInterval(() => {
-			utils.botsdiscordpw(client);
-		}, 1800000);
-	}
-
-	// Send discordbots.org info if it was provided.
-	if (config.get('api').discordbotsorg) {
-		utils.discordbotsorg(client);
-		setInterval(() => {
-			utils.discordbotsorg(client);
-		}, 1800000);
-	}
+	setInterval(() => {
+		botlist(client);
+	}, 1800000);
+	botlist(client);
 
 	client.on('messageCreate', (message) => {
-		// It crashed on this before. No explaination.
-		if (!message.author) return;
-		// Disallow if the author is a bot
-		if (message.author.bot) return;
-
-		// Test the message content on the regular expression for prefixed commands.
-		const pre = prefix.exec(message.content);
-
-		// If there's a result, do this crap.
-		if (pre) {
-			// Redo the message content but parsed.
-			const clean = prefix.exec(message.cleanContent);
-			utils.init(message, pre, clean, () => {
-				if (message.context === 'guild' && !message.channel.guild) {
-					message.channel.createMessage(message.__('err_guild'));
-				} else if (message.context === 'guild' && !utils.isadmin(message.member)) {
-					message.channel.createMessage(message.__('err_admin'));
-				} else if (config.get('discord').disable) {
-					message.channel.createMessage(message.__('err_quota'));
-				} else if (commands[message.command.toLowerCase()]) {
-					commands[message.command.toLowerCase()].command(message);
-					r.table('ratelimit')
-						.insert({
-							id: message.inbox,
-							timeout: Date.now() + commands[message.command.toLowerCase()].info.ratelimit
-						}, {
-							conflict: 'replace'
-						})
-						.run(r.conn);
-				}
-			});
-		}
+		handler(message, () => {
+			// Run command if it exists, and if their permissions level is good enough
+			if (message.mss.command && message.mss.context === 'guild' && !message.channel.guild) {
+				message.channel.createMessage(message.__('err_guild'));
+			} else if (message.mss.command && message.mss.context === 'guild' && message.mss.admin < 1) {
+				message.channel.createMessage(message.__('err_admin'));
+			} else if (message.mss.command && config.get('discord').disable) {
+				message.channel.createMessage(message.__('err_quota'));
+			} else if (message.mss.command && message.mss.context === 'guild' && !message.mss.dmail && commands[message.mss.command].register) {
+				message.channel.createMessage(message.__('what_guild_noexist', { url: config.get('url').guild }));
+			} else if (message.mss.command && message.mss.context === 'user' && !message.mss.dmail && commands[message.mss.command].register) {
+				message.channel.createMessage(message.__('what_user_noreg', { prefix: message.mss.prefix }));
+			} else if (message.mss.command && message.mss.timeout > 0) {
+				message.channel.createMessage(message.__('err_ratelimit', { time: message.mss.timeout }));
+			} else if (message.mss.command && message.mss.admin >= commands[message.mss.command].admin) {
+				commands[message.mss.command].command(message);
+				r.table('ratelimit')
+					.insert({
+						id: message.author.id,
+						timeout: Date.now() + (typeof commands[message.mss.command].ratelimit === 'number' ? commands[message.mss.command].ratelimit : 5000)
+					}, {
+						conflict: 'replace'
+					})
+					.run(r.conn);
+			}
+		});
 	});
 });
 

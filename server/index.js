@@ -86,3 +86,7 @@ app.enable('trust proxy')
 
 console.log('Listening on', config.get('webserver').port);
 app.listen(config.get('webserver').port);
+
+process.on('unhandledRejection', (reason) => {
+	console.dir(reason);
+});

@@ -24,7 +24,7 @@
     "consolidate": "^0.14.5",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
-    "eris": "^0.7.1",
+    "eris": "^0.7.2",
     "eslint": "^4.1.1",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.7.0",
@@ -40,6 +40,7 @@
     "pug": "^2.0.0-rc.4",
     "request": "^2.81.0",
     "rethinkdb": "^2.3.3",
-    "rethinkdb-init": "^0.2.2"
+    "rethinkdb-init": "^0.2.2",
+    "validator": "^9.1.0"
   }
 }
