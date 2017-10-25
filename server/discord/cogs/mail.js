@@ -13,6 +13,7 @@ marked.setOptions({
 const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 const emailRegex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) (?:"(.*?)")? *([\w\W]+)?/;
 const replyRegex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}|) *([\w\W]+)/;
+const idRegex = /(\d+)/;
 
 module.exports = [{
 	aliases: [
@@ -195,7 +196,7 @@ module.exports = [{
 		'reply'
 	],
 	name: 'reply',
-	uses: 1,
+	uses: 2,
 	admin: 0,
 	register: true,
 	ratelimit: 5000,
@@ -249,6 +250,39 @@ module.exports = [{
 				})
 				.nth(-1)
 				.run(r.conn, send);
+		}
+	}
+}, {
+	aliases: [
+		'what'
+	],
+	name: 'what',
+	uses: 3,
+	admin: 0,
+	register: true,
+	ratelimit: 5000,
+	command: async (message) => {
+		const capture = idRegex.exec(message.mss.input);
+		const id = (capture && capture[1]) || message.inbox;
+		const res = await r.table('registrations')
+			.get(id)
+			.run(r.conn);
+		if (message.context === 'guild') {
+			if (!res) {
+				message.channel.createMessage(message.__('what_guild_noexist', { url: `${config.get('webserver').domain}/url/guild` }));
+			} else {
+				message.channel.createMessage(message.__('what_guild_exist', { email: `${res.email}@${config.get('api').mailgun.domain}` }));
+			}
+		} else if (message.context === 'user') {
+			if (id && !res) {
+				message.channel.createMessage(message.__('what_user_noexist'));
+			} else if (id && res) {
+				message.channel.createMessage(message.__('what_user_exist', { email: `${res.email}@${config.get('api').mailgun.domain}` }));
+			} else if (!res) {
+				message.channel.createMessage(message.__('what_user_noreg', { prefix: message.prefix }));
+			} else {
+				message.channel.createMessage(message.__('what_self_exist', { email: `${res.email}@${config.get('api').mailgun.domain}` }));
+			}
 		}
 	}
 }];

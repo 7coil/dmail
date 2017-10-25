@@ -66,7 +66,7 @@ module.exports = async (message, callback) => {
 	// If there's a prefix, get rid of the prefix and check for any command
 	if (mss.prefix && !message.author.bot) {
 		mss.context = usrPrefix.includes(mss.prefix) ? 'user' : 'guild';
-		mss.inbox = mss.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id);
+		mss.inbox = mss.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || '0';
 		const noprefix = mss.content.substring(mss.prefix.length).trim();
 		mss.command = Object.keys(commands).find(command => noprefix.startsWith(command)) || '';
 		if (mss.command) {

@@ -4,6 +4,7 @@ const { exec } = require('child_process');
 const r = require('./../../db');
 const i18n = require('i18n');
 const os = require('os');
+const config = require('config');
 
 const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} @ ${os.cpus()[0].speed} MHz`;
 const softwareinfo = `[${os.type()}] ${os.release()}`;
@@ -104,6 +105,14 @@ module.exports = [{
 				}
 			});
 		} else if (!message.mss.input) {
+			let reply = `${message.__('help_intro', { name: message.__('name') })}\n`;
+			reply += `${message.__('help_prefixuser', { prefixes: `${config.get('discord').prefix.user.join('; ')}` })}\n`;
+			reply += `${message.__('help_prefixguild', { prefixes: `${config.get('discord').prefix.guild.join('; ')}` })}\n`;
+			message.channel.createMessage({
+				embed: {
+					description: reply
+				}
+			});
 			Object.keys(cogs.categories).forEach((category) => {
 				message.channel.createMessage({
 					embed: {
