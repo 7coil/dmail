@@ -62,7 +62,7 @@ client.once('ready', () => {
 				} else if (message.context === 'guild' && !utils.isadmin(message.member)) {
 					message.channel.createMessage(message.__('err_admin'));
 				} else if (config.get('discord').disable) {
-					message.channel.createMessage(message.__('err_quota'));
+					message.channel.createMessage(message.__('err_disable'));
 				} else if (commands[message.command.toLowerCase()]) {
 					commands[message.command.toLowerCase()].command(message);
 					r.table('ratelimit')
