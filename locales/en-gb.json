@@ -52,6 +52,7 @@
     "help_invalid": "Invalid category or command.",
     "help_prefixguild": "Prefixes for guilds: {{{ prefixes }}}",
     "help_prefixuser": "Prefixes for users: {{{ prefixes }}}",
+	"help_type": "Type `{{{ prefix }}} {{{ command }}} [Command]` for usage info",
     "info": "Info",
     "info_1_in": "{{ prefix }} {{ command }}",
     "info_1_out": "Obtain information about DiscordMail",

@@ -108,11 +108,8 @@ module.exports = [{
 			let reply = `${message.__('help_intro', { name: message.__('name') })}\n`;
 			reply += `${message.__('help_prefixuser', { prefixes: `${config.get('discord').prefix.user.join('; ')}` })}\n`;
 			reply += `${message.__('help_prefixguild', { prefixes: `${config.get('discord').prefix.guild.join('; ')}` })}\n`;
-			message.channel.createMessage({
-				embed: {
-					description: reply
-				}
-			});
+			reply += message.__('help_type', { prefix: message.mss.prefix, command: message.mss.command });
+			reply += `\n[${message.__('github')}](${config.get('webserver').domain}/url/github) - [${message.__('invite')}](${config.get('webserver').domain}/url/invite) - [${message.__('guild')}](${config.get('webserver').domain}/url/help) - [${message.__('guildapp')}](${config.get('webserver').domain}/url/guild)`;
 			Object.keys(cogs.categories).forEach((category) => {
 				message.channel.createMessage({
 					embed: {
@@ -125,6 +122,11 @@ module.exports = [{
 							}))
 					}
 				});
+			});
+			message.channel.createMessage({
+				embed: {
+					description: reply
+				}
 			});
 		} else {
 			message.channel.createMessage(message.__('help_invalid'));
