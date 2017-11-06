@@ -25,12 +25,17 @@
 		color: #FFFFFF;
 	}
 
-	.dmh1,.dmh2,.dmh3,.dmh4,.dmh5,.dmh6,#shortDESU {
+	#shortDESU {
+		font-size: 0;
+		padding-top: 5px;
+	}
+
+	.dmh1,.dmh2,.dmh3,.dmh4,.dmh5,.dmh6 {
 		font-weight: 400;
 		line-height: 1.1;
 	}
 
-	.dmh2,#shortDESU {
+	.dmh2 {
 		font-size: 3.56rem;
 		line-height: 110%;
 		margin: 1.78rem 0 1.424rem 0;
@@ -118,6 +123,7 @@
 
 <div id="discordmail" class="burple">
 	<div class="dmcontainer">
+		<h2 class="dmh2">The Discord to E-Mail Bot, powered by Mailgun</h2>
 		<h5 class="dmh5">DiscordMail links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.</h5>
 	</div>
 	<svg class="bordering greyple" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="burplef" points="0,0 0,100 100,0"></polygon></svg>
@@ -187,6 +193,9 @@
 			}
 		});
 	}
+
+	const vanity = 'mail';
+	if (location.pathname !== `/bot/${vanity}`) location.pathname = `/bot/${vanity}`;
 
 	document.addEventListener("DOMContentLoaded", stats);
 </script>
