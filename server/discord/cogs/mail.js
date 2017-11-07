@@ -42,11 +42,12 @@ module.exports = [{
 			message.channel.createMessage(message.__('block_delimit'));
 		} else if (split.every(email => validator.isEmail(email))) {
 			await r.table('registrations')
-				.get(message.mss.inbox)
+				.filter({
+					location: message.mss.inbox
+				})
 				.update({
 					block: r.row('block').union(split).default([split])
-				})
-				.run();
+				});
 		} else {
 			const invalid = split.filter(email => !validator.isEmail(email)).map(email => `\`${email}\``).join('\n');
 			message.channel.createMessage(message.__('err_email', { invalid }));
@@ -89,32 +90,45 @@ module.exports = [{
 	name: 'guild',
 	uses: 1,
 	admin: 3,
-	register: true,
+	register: false,
 	ratelimit: 0,
 	command: async (message) => {
-		if (!message.mss.input) {
+		const email = name(message.mss.input);
+		const check = await r.table('registrations')
+			.filter({
+				location: message.channel.id
+			});
+		const mail = await r.table('registrations')
+			.filter({
+				email
+			});
+		if (!check) {
+			message.channel.createMessage('This channel already has an E-Mail attributed');
+		} else if (!mail) {
+			message.channel.createMessage('This E-Mail address has already been taken');
+		} else if (!message.mss.input) {
 			message.channel.createMessage('No email was provided.');
+		} else if (!message.channel.guild) {
+			message.channel.createMessage('This command only works in a guild.');
 		} else {
-			const email = name(message.mss.input);
 			await r.table('registrations')
 				.insert({
-					id: message.channel.guild.id,
+					location: message.channel.id,
 					type: 'guild',
 					details: {
-						channel: message.channel.id
+						guild: message.channel.guild.id
 					},
 					display: message.channel.guild.name,
 					email,
 					block: []
 				}, {
 					conflict: 'update'
-				})
-				.run();
+				});
 
 			const data = {
 				from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
 				to: `${email}@${config.get('api').mailgun.domain}`,
-				subject: message.__('consent_subject', { name: message.__('name') }),
+				subject: message.__('register_subject', { name: message.__('name') }),
 				html: fs.readFileSync(path.join('./', 'promo', 'guildwelcome.html'), 'utf8'),
 				text: fs.readFileSync(path.join('./', 'promo', 'guildwelcome.md'), 'utf8')
 			};
@@ -173,7 +187,10 @@ module.exports = [{
 				to: email[1],
 				subject: email[2] || 'No Subject',
 				html: marked((email[3] || '<p>This document is empty</p>').replace(/\n(?=.)/g, '  \n')),
-				text: email[3] || 'This document is empty'
+				text: email[3] || 'This document is empty',
+				'h:X-DiscordMail-Guild': message.mss.dmail.details.guild || null,
+				'h:X-DiscordMail-Channel': message.channel.id,
+				'h:X-DiscordMail-User': message.author.id
 			};
 
 			if (message.attachments && message.attachments[0]) {
@@ -213,6 +230,9 @@ module.exports = [{
 					to: res.from || res.sender,
 					'h:In-Reply-To': res['Message-Id'],
 					'h:References': res.References ? `${res.References} ${res['Message-Id']}` : res['Message-Id'],
+					'h:X-DiscordMail-Guild': message.mss.dmail.details.guild || null,
+					'h:X-DiscordMail-Channel': message.channel.id,
+					'h:X-DiscordMail-User': message.author.id,
 					subject: `Re: ${res.Subject}`,
 					html: marked(email[2].replace(/\n(?=.)/g, '  \n')),
 					text: email[2]
@@ -265,8 +285,9 @@ module.exports = [{
 		const capture = idRegex.exec(message.mss.input);
 		const id = (capture && capture[1]) || message.inbox;
 		const res = await r.table('registrations')
-			.get(id)
-			.run();
+			.filter({
+				location: id
+			});
 		if (message.context === 'guild') {
 			if (!res) {
 				message.channel.createMessage(message.__('what_guild_noexist', { url: `${config.get('webserver').domain}/url/guild` }));

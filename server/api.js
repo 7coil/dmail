@@ -86,8 +86,8 @@ const check = async (req, res, next) => {
 		const result = await r.table('registrations')
 			.filter({
 				email: to
-			})
-			.run();
+			});
+		res.locals.dmail = result[0];
 
 		if (!result[0]) {
 			console.log('The E-Mail doesn\'t exist');
@@ -112,20 +112,18 @@ const check = async (req, res, next) => {
 			res.status(406).json({ error: { message: `The email was detected as spam. Visit ${config.get('webserver').domain}/docs/blocked` } });
 		} else if (result[0].type === 'user') {
 			try {
-				res.locals.channel = await discord.getDMChannel(result[0].id);
-				res.locals.inbox = result[0].id;
+				res.locals.channel = await discord.getDMChannel(result[0].location);
 				next();
 			} catch (e) {
 				console.log('Could not get DM Channel');
 				res.status(406).json({ error: { message: 'DiscordMail failed to fetch a DM channel' } });
 			}
 		} else if (result[0].type === 'guild') {
-			const guild = discord.guilds.get(result[0].id);
+			const guild = discord.guilds.get(result[0].details.guild);
 			if (guild) {
-				const channel = guild.channels.get(result[0].details.channel);
+				const channel = guild.channels.get(result[0].location);
 				if (channel) {
-					res.locals.channel = discord.guilds.get(result[0].id).channels.get(result[0].details.channel);
-					res.locals.inbox = result[0].id;
+					res.locals.channel = discord.guilds.get(result[0].details.guild).channels.get(result[0].location);
 					next();
 				} else {
 					res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
@@ -145,7 +143,7 @@ const check = async (req, res, next) => {
 
 router.post('/mail', upload.single('attachment-1'), validate, services, check, async (req, res) => {
 	const body = req.body;
-	body.dmail = res.locals.inbox;
+	body.dmail = res.locals.dmail.id;
 	const info = await r.table('emails')
 		.insert(req.body)
 		.run();
@@ -173,7 +171,7 @@ router.post('/mail', upload.single('attachment-1'), validate, services, check, a
 	};
 
 	const failure = () => {
-		console.log((new Date()).toUTCString(), `Failed to send DM to ${res.locals.inbox}`);
+		console.log((new Date()).toUTCString(), `Failed to send DM to ${res.locals.dmail.location}`);
 		res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
 		sendError(body, 'The mail server could not DM the user or guild.');
 	};

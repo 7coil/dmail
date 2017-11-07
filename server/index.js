@@ -53,9 +53,10 @@ app.enable('trust proxy')
 	.use(async (req, res, next) => {
 		res.locals.domain = config.get('api').mailgun.domain;
 		if (req.user) {
-			const result = await r.table('registrations')
-				.get(req.user.id)
-				.run();
+			const result = (await r.table('registrations')
+				.filter({
+					location: req.user.id
+				}))[0] || {};
 			req.user.dmail = result;
 			res.locals.user = req.user;
 			next();

@@ -96,18 +96,15 @@ router.get('/', authed, registered, async (req, res) => {
 		try {
 			await r.table('registrations')
 				.get(req.user.id)
-				.delete()
-				.run();
+				.delete();
 			await r.table('emails')
 				.filter({
 					dmail: req.user.id
 				})
-				.delete()
-				.run();
+				.delete();
 			await r.table('i18n')
 				.get(req.user.id)
-				.delete()
-				.run();
+				.delete();
 			res.redirect('/');
 		} catch (e) {
 			res.status(500).render('error.pug', {
@@ -134,7 +131,7 @@ router.get('/', authed, registered, async (req, res) => {
 				await dm.createMessage(`${email}@${config.get('api').mailgun.domain}`);
 				await r.table('registrations')
 					.insert({
-						id: req.user.id,
+						location: req.user.id,
 						type: 'user',
 						details: {
 							name: req.user.username,
@@ -143,11 +140,11 @@ router.get('/', authed, registered, async (req, res) => {
 						display: `${req.user.username}#${req.user.discriminator}`,
 						email,
 						block: []
-					}).run();
+					});
 				const data = {
 					from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
 					to: `${email}@${config.get('api').mailgun.domain}`,
-					subject: i18n.__('consent_subject', { name: i18n.__('name') }),
+					subject: i18n.__('register_subject', { name: i18n.__('name') }),
 					html: fs.readFileSync(path.join('./', 'promo', 'userwelcome.html'), 'utf8'),
 					text: fs.readFileSync(path.join('./', 'promo', 'userwelcome.md'), 'utf8')
 				};

@@ -66,7 +66,7 @@ module.exports = async (message, callback) => {
 	// If there's a prefix, get rid of the prefix and check for any command
 	if (mss.prefix && !message.author.bot) {
 		mss.context = usrPrefix.includes(mss.prefix) ? 'user' : 'guild';
-		mss.inbox = mss.context === 'user' ? message.author.id : (message.channel.guild && message.channel.guild.id) || '0';
+		mss.inbox = mss.context === 'user' ? message.author.id : message.channel.id;
 		const noprefix = mss.content.substring(mss.prefix.length).trim();
 		mss.command = Object.keys(commands).find(command => noprefix.startsWith(command)) || '';
 		if (mss.command) {
@@ -81,19 +81,18 @@ module.exports = async (message, callback) => {
 				mss.admin = 1;
 			}
 
-			mss.dmail = await r.table('registrations')
-				.get(mss.inbox)
-				.run();
+			mss.dmail = (await r.table('registrations')
+				.filter({
+					location: mss.inbox
+				}))[0] || {};
 
 			const ratelimit = await r.table('ratelimit')
-				.get(message.author.id)
-				.run();
+				.get(message.author.id);
 
 			mss.timeout = (((ratelimit && ratelimit.timeout) || 0) - Date.now()) / 1000;
 
 			const locale = await r.table('i18n')
-				.get(message.author.id)
-				.run();
+				.get(message.author.id);
 
 			message.setLocale(locale || 'en-gb');
 		}
