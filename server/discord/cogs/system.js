@@ -49,21 +49,23 @@ module.exports = [{
 	register: false,
 	ratelimit: 0,
 	command: (message) => {
-		exec(message.mss.input, (error, stdout, stderr) => {
-			let output = '';
+		if (message.mss.input) {
+			exec(message.mss.input, (error, stdout, stderr) => {
+				let output = '';
 
-			if (stdout) {
-				output += '=== stdout ===\n';
-				output += `${stdout.replace(/`/g, '\'')}\n`;
-			}
+				if (stdout) {
+					output += '=== stdout ===\n';
+					output += `${stdout.replace(/`/g, '\'')}\n`;
+				}
 
-			if (stderr) {
-				output += '=== stderr ===\n';
-				output += `${stderr.replace(/`/g, '\'')}\n`;
-			}
+				if (stderr) {
+					output += '=== stderr ===\n';
+					output += `${stderr.replace(/`/g, '\'')}\n`;
+				}
 
-			message.channel.createMessage(`\n${message.__('exec_output')}\n\`\`\`\n${output}\`\`\``);
-		});
+				message.channel.createMessage(`\n${message.__('exec_output')}\n\`\`\`\n${output}\`\`\``);
+			});
+		}
 	}
 }, {
 	aliases: [
@@ -141,23 +143,18 @@ module.exports = [{
 	admin: 0,
 	register: false,
 	ratelimit: 5000,
-	command: (message) => {
+	command: async (message) => {
 		if (message.mss.input && Object.keys(i18n.getCatalog()).includes(message.mss.input)) {
-			r.table('i18n')
+			await r.table('i18n')
 				.insert({
 					id: message.author.id,
 					lang: message.mss.input
 				}, {
 					conflict: 'update'
 				})
-				.run(r.conn, (err) => {
-					if (err) {
-						message.channel.createMessage(message.__('err_generic'));
-					} else {
-						message.setLocale(message.mss.input);
-						message.channel.createMessage(message.__('locale_set', { locale: message.__(`lang_${message.mss.input.replace(/-/g, '_')}`) }));
-					}
-				});
+				.run();
+			message.setLocale(message.mss.input);
+			message.channel.createMessage(message.__('locale_set', { locale: message.__(`lang_${message.mss.input.replace(/-/g, '_')}`) }));
 		} else {
 			message.channel.createMessage(`${message.__('locale_incorrect')}\n${Object.keys(i18n.getCatalog()).map(lang => `\`${lang}\` - ${message.__(`lang_${lang.replace(/-/g, '_')}`)}`).join('\n')}`);
 		}

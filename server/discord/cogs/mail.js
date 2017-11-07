@@ -46,7 +46,7 @@ module.exports = [{
 				.update({
 					block: r.row('block').union(split).default([split])
 				})
-				.run(r.conn);
+				.run();
 		} else {
 			const invalid = split.filter(email => !validator.isEmail(email)).map(email => `\`${email}\``).join('\n');
 			message.channel.createMessage(message.__('err_email', { invalid }));
@@ -65,7 +65,7 @@ module.exports = [{
 		if (validator.isUUID(message.mss.input)) {
 			const email = await r.table('emails')
 				.get(message.mss.input)
-				.run(r.conn);
+				.run();
 
 			if (!email) {
 				message.channel.createMessage(message.__('reply_noexist'));
@@ -75,7 +75,7 @@ module.exports = [{
 				await r.table('emails')
 					.get(message.mss.input)
 					.delete()
-					.run(r.conn);
+					.run();
 				message.channel.createMessage(message.__('delete_deleted'));
 			}
 		} else {
@@ -109,7 +109,7 @@ module.exports = [{
 				}, {
 					conflict: 'update'
 				})
-				.run(r.conn);
+				.run();
 
 			const data = {
 				from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
@@ -202,10 +202,8 @@ module.exports = [{
 	ratelimit: 5000,
 	command: (message) => {
 		const email = replyRegex.exec(message.mss.cleanInput);
-		const send = (err, res) => {
-			if (err) {
-				message.channel.createMessage(message.__('err_generic'));
-			} else if (!res) {
+		const send = (res) => {
+			if (!res) {
 				message.channel.createMessage(message.__('reply_noexist'));
 			} else if (res.dmail !== message.inbox) {
 				message.channel.createMessage(message.__('reply_conflict'));
@@ -241,7 +239,8 @@ module.exports = [{
 		} else if (email[1]) {
 			r.table('emails')
 				.get(email[1])
-				.run(r.conn, send);
+				.run()
+				.then(send);
 		} else {
 			r.table('emails')
 				.orderBy('timestamp')
@@ -249,7 +248,8 @@ module.exports = [{
 					dmail: message.inbox
 				})
 				.nth(-1)
-				.run(r.conn, send);
+				.run()
+				.then(send);
 		}
 	}
 }, {
@@ -266,7 +266,7 @@ module.exports = [{
 		const id = (capture && capture[1]) || message.inbox;
 		const res = await r.table('registrations')
 			.get(id)
-			.run(r.conn);
+			.run();
 		if (message.context === 'guild') {
 			if (!res) {
 				message.channel.createMessage(message.__('what_guild_noexist', { url: `${config.get('webserver').domain}/url/guild` }));

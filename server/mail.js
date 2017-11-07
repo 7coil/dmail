@@ -72,14 +72,12 @@ const captcha = (req, res, next) => {
 
 router.get('/', authed, registered, async (req, res) => {
 	try {
-		const cursor = await r.table('emails')
+		const result = await r.table('emails')
 			.filter({
 				dmail: req.user.id
 			})
 			.orderBy(r.desc('timestamp'))
-			.run(r.conn);
-
-		const result = await cursor.toArray();
+			.run();
 
 		res.render('client.pug', {
 			emails: result.map((email) => {
@@ -99,17 +97,17 @@ router.get('/', authed, registered, async (req, res) => {
 			await r.table('registrations')
 				.get(req.user.id)
 				.delete()
-				.run(r.conn);
+				.run();
 			await r.table('emails')
 				.filter({
 					dmail: req.user.id
 				})
 				.delete()
-				.run(r.conn);
+				.run();
 			await r.table('i18n')
 				.get(req.user.id)
 				.delete()
-				.run(r.conn);
+				.run();
 			res.redirect('/');
 		} catch (e) {
 			res.status(500).render('error.pug', {
@@ -145,7 +143,7 @@ router.get('/', authed, registered, async (req, res) => {
 						display: `${req.user.username}#${req.user.discriminator}`,
 						email,
 						block: []
-					}).run(r.conn);
+					}).run();
 				const data = {
 					from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
 					to: `${email}@${config.get('api').mailgun.domain}`,
@@ -169,7 +167,7 @@ router.get('/', authed, registered, async (req, res) => {
 				r.table('registrations')
 					.get(req.user.id)
 					.delete()
-					.run(r.conn);
+					.run();
 			}
 		}
 	})
@@ -177,7 +175,7 @@ router.get('/', authed, registered, async (req, res) => {
 		try {
 			const result = await r.table('emails')
 				.get(req.params.id)
-				.run(r.conn);
+				.run();
 			if (!result) {
 				res.status(404).render('error.pug', { status: 404 });
 			} else {
@@ -192,7 +190,7 @@ router.get('/', authed, registered, async (req, res) => {
 		try {
 			const result = await r.table('emails')
 				.get(req.params.id)
-				.run(r.conn);
+				.run();
 			if (!result) {
 				res.status(404).render('error.pug', { status: 404 });
 			} else {

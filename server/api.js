@@ -83,19 +83,19 @@ const check = async (req, res, next) => {
 	console.log((new Date()).toUTCString(), `Recieved mail for ${to}`);
 
 	try {
-		const cursor = await r.table('registrations')
+		const result = await r.table('registrations')
 			.filter({
 				email: to
 			})
-			.run(r.conn);
+			.run();
 
-		const result = await cursor.toArray();
 		if (!result[0]) {
+			console.log('The E-Mail doesn\'t exist');
 			res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
 			sendError(body, 'The email address does not exist.');
 		} else if (config.get('ban').in.some(email => body.sender.toLowerCase().includes(email))) {
 			res.status(406).json({ success: { message: `The domain this email was sent from is not allowed to send to DiscordMail. Visit ${config.get('webserver').domain}/docs/blocked` } });
-			console.log('The E-Mail was blocked by the recipient.');
+			console.log('The E-Mail was blocked by the owner.');
 		} else if (result[0].block && Array.isArray(result[0].block) && result[0].block.some(email => body.sender.toLowerCase().includes(email))) {
 			res.status(406).json({ success: { message: 'Sender is blocked by recipient' } });
 			console.log('The E-Mail was blocked by the recipient.');
@@ -133,69 +133,66 @@ const check = async (req, res, next) => {
 				}
 			} else {
 				res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
-				sendError(body, 'The guild\'s could not be found');
+				sendError(body, 'The guild could not be found');
 			}
 		}
 	} catch (e) {
+		console.dir(e);
 		console.log('Could not fetch RethinkDB');
 		res.status(500).json({ error: { message: 'Could not fetch RethinkDB' } });
 	}
 };
 
-router.post('/mail', upload.single('attachment-1'), validate, services, check, (req, res) => {
+router.post('/mail', upload.single('attachment-1'), validate, services, check, async (req, res) => {
 	const body = req.body;
 	body.dmail = res.locals.inbox;
-	r.table('emails')
+	const info = await r.table('emails')
 		.insert(req.body)
-		.run(r.conn, (err, res1) => {
-			if (err) {
-				res.status(406).json({ error: { message: 'An error occurred while inserting details into the RethinkDB database.' } });
-				sendError(body, 'An error occurred while inserting details into the RethinkDB database. Sorry for the inconvenience.');
-			} else {
-				const content = {
-					content: res1.generated_keys[0],
-					embed: {
-						title: body.subject || 'Untitled E-Mail',
-						description: body['body-plain'].length > 2000 ? `Too long to display. View full E-Mail at ${config.get('webserver').domain}/mail/${res1.generated_keys[0]}` : body['body-plain'] || 'Empty E-Mail',
-						timestamp: new Date(body.timestamp * 1000),
-						url: `${config.get('webserver').domain}/mail/${res1.generated_keys[0]}`,
-						author: {
-							name: body.from || 'No Author'
-						},
-						fields: [
-							{
-								name: 'E-Mail ID',
-								value: res1.generated_keys[0]
-							}
-						]
-					}
-				};
-
-				const success = () => {
-					res.status(200).json({ success: { message: 'Successfully sent message to user or guild.' } });
-				};
-
-				const failure = () => {
-					console.log((new Date()).toUTCString(), `Failed to send DM to ${res.locals.inbox}`);
-					res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
-					sendError(body, 'The mail server could not DM the user or guild.');
-				};
-
-				if (req.file && req.file.buffer.length < 8000000) {
-					content.file = req.file;
-					const file = {
-						file: req.file.buffer,
-						name: req.file.originalname || 'unnamed_file'
-					};
-					res.locals.channel.createMessage(content, file).then(success).catch(failure);
-				} else {
-					res.locals.channel.createMessage(content).then(success).catch(failure);
+		.run();
+	const content = {
+		content: info.generated_keys[0],
+		embed: {
+			title: body.subject || 'Untitled E-Mail',
+			description: body['body-plain'].length > 2000 ? `Too long to display. View full E-Mail at ${config.get('webserver').domain}/mail/${info.generated_keys[0]}` : body['body-plain'] || 'Empty E-Mail',
+			timestamp: new Date(body.timestamp * 1000),
+			url: `${config.get('webserver').domain}/mail/${info.generated_keys[0]}`,
+			author: {
+				name: body.from || 'No Author'
+			},
+			fields: [
+				{
+					name: 'E-Mail ID',
+					value: info.generated_keys[0]
 				}
-			}
-		});
+			]
+		}
+	};
+
+	const success = () => {
+		res.status(200).json({ success: { message: 'Successfully sent message to user or guild.' } });
+	};
+
+	const failure = () => {
+		console.log((new Date()).toUTCString(), `Failed to send DM to ${res.locals.inbox}`);
+		res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
+		sendError(body, 'The mail server could not DM the user or guild.');
+	};
+
+	if (req.file && req.file.buffer.length < 8000000) {
+		content.file = req.file;
+		const file = {
+			file: req.file.buffer,
+			name: req.file.originalname || 'unnamed_file'
+		};
+		res.locals.channel.createMessage(content, file).then(success).catch(failure);
+	} else {
+		res.locals.channel.createMessage(content).then(success).catch(failure);
+	}
 })
 	.get('/stats', async (req, res) => {
-		const count = await r.table('registrations').count().run(r.conn);
+		const count = await r.table('registrations')
+			.count()
+			.run();
 		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size, registered: count });
 	})
 	.get('/', (req, res) => {

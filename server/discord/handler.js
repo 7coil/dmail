@@ -83,17 +83,17 @@ module.exports = async (message, callback) => {
 
 			mss.dmail = await r.table('registrations')
 				.get(mss.inbox)
-				.run(r.conn);
+				.run();
 
 			const ratelimit = await r.table('ratelimit')
 				.get(message.author.id)
-				.run(r.conn);
+				.run();
 
 			mss.timeout = (((ratelimit && ratelimit.timeout) || 0) - Date.now()) / 1000;
 
 			const locale = await r.table('i18n')
 				.get(message.author.id)
-				.run(r.conn);
+				.run();
 
 			message.setLocale(locale || 'en-gb');
 		}

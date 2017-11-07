@@ -50,7 +50,7 @@ client.once('ready', () => {
 					}, {
 						conflict: 'replace'
 					})
-					.run(r.conn);
+					.run();
 			}
 		});
 	});
