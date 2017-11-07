@@ -4,21 +4,6 @@ const mailgun = require('mailgun-js')(config.get('api').mailgun);
 const r = require('./db.js');
 const multer = require('multer');
 const discord = require('./discord/');
-const fs = require('fs');
-
-const emails = [];
-
-// Register valid commands from "cogs"
-fs.readdir('./server/emails/', (err, items) => {
-	items.forEach((item) => {
-		const file = item.replace(/['"]+/g, '');
-		const email = require(`./emails/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
-		email.info.aliases.forEach((name) => {
-			if (emails[name]) console.log(`Alias ${name} from ${file} was already assigned to another email! Overwriting...`.red);
-			emails[name] = require(`./emails/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
-		});
-	});
-});
 
 const router = express.Router();
 
@@ -61,17 +46,6 @@ const validate = (req, res, next) => {
 	if (!mailgun.validateWebhook(req.body.timestamp, req.body.token, req.body.signature)) {
 		console.log('Request not from Mailgun recieved.');
 		res.status(400).json({ error: { message: 'Invalid signature. Are you even Mailgun?' } });
-	} else {
-		next();
-	}
-};
-
-const services = (req, res, next) => {
-	const to = req.body.recipient.split('@').shift().toLowerCase().replace(/%23/g, '#');
-	if (emails[to]) {
-		console.log((new Date()).toUTCString(), `Recieved special email for ${to}`);
-		emails[to].command(req.body);
-		res.status(200).json({ success: { message: 'Successfully recieved special email.' } });
 	} else {
 		next();
 	}
@@ -141,7 +115,7 @@ const check = async (req, res, next) => {
 	}
 };
 
-router.post('/mail', upload.single('attachment-1'), validate, services, check, async (req, res) => {
+router.post('/mail', upload.single('attachment-1'), validate, check, async (req, res) => {
 	const body = req.body;
 	body.dmail = res.locals.dmail.id;
 	const info = await r.table('emails')
