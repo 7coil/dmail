@@ -56,7 +56,7 @@ app.enable('trust proxy')
 			const result = (await r.table('registrations')
 				.filter({
 					location: req.user.id
-				}))[0] || {};
+				}))[0] || null;
 			req.user.dmail = result;
 			res.locals.user = req.user;
 			next();

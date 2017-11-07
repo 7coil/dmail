@@ -84,7 +84,7 @@ module.exports = async (message, callback) => {
 			mss.dmail = (await r.table('registrations')
 				.filter({
 					location: mss.inbox
-				}))[0] || {};
+				}))[0] || null;
 
 			const ratelimit = await r.table('ratelimit')
 				.get(message.author.id);

@@ -13,7 +13,6 @@ marked.setOptions({
 const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 const emailRegex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) (?:"(.*?)")? *([\w\W]+)?/;
 const replyRegex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}|) *([\w\W]+)/;
-const idRegex = /(\d+)/;
 
 module.exports = [{
 	aliases: [
@@ -21,7 +20,7 @@ module.exports = [{
 	],
 	name: 'mss',
 	uses: 1,
-	admin: 3,
+	admin: 0,
 	register: false,
 	ratelimit: 0,
 	command: (message) => {
@@ -282,26 +281,16 @@ module.exports = [{
 	register: true,
 	ratelimit: 5000,
 	command: async (message) => {
-		const capture = idRegex.exec(message.mss.input);
-		const id = (capture && capture[1]) || message.inbox;
-		const res = await r.table('registrations')
-			.filter({
-				location: id
-			});
-		if (message.context === 'guild') {
-			if (!res) {
-				message.channel.createMessage(message.__('what_guild_noexist', { url: `${config.get('webserver').domain}/url/guild` }));
-			} else {
+		if (message.mss.input) {
+			message.channel.createMessage(message.__('what_self_only'));
+		} else {
+			const res = (await r.table('registrations')
+				.filter({
+					location: message.mss.inbox
+				}))[0];
+			if (message.mss.context === 'guild') {
 				message.channel.createMessage(message.__('what_guild_exist', { email: `${res.email}@${config.get('api').mailgun.domain}` }));
-			}
-		} else if (message.context === 'user') {
-			if (id && !res) {
-				message.channel.createMessage(message.__('what_user_noexist'));
-			} else if (id && res) {
-				message.channel.createMessage(message.__('what_user_exist', { email: `${res.email}@${config.get('api').mailgun.domain}` }));
-			} else if (!res) {
-				message.channel.createMessage(message.__('what_user_noreg', { prefix: message.prefix }));
-			} else {
+			} else if (message.mss.context === 'user') {
 				message.channel.createMessage(message.__('what_self_exist', { email: `${res.email}@${config.get('api').mailgun.domain}` }));
 			}
 		}
