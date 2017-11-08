@@ -1,0 +1,20 @@
+{
+	"username": "VaronBros Community",
+	"embeds": [
+		{
+			"title": "VaronBros Community",
+			"thumbnail": {
+				"url": "https://cdn.discordapp.com/attachments/353995306125361153/373236447613943808/varonbros_invert.png",
+				"height": 25,
+				"width": 25
+			},
+			"description": "Place to talk about MKW, tech, gaming, and has their own private Nintendo server",
+			"fields": [
+				{
+					"name": "Links",
+					"value": "[E-Mail](mailto:varonbros@discordmail.com) | [Guild](https://discord.gg/w4Uqzvw)"
+				}
+			]
+		}
+	]
+}
