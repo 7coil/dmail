@@ -269,7 +269,7 @@ module.exports = [{
 			r.table('emails')
 				.orderBy('timestamp')
 				.filter({
-					dmail: message.inbox
+					dmail: message.mss.inbox
 				})
 				.nth(-1)
 				.run()
