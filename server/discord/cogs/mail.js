@@ -280,7 +280,7 @@ module.exports = [{
 		'what'
 	],
 	name: 'what',
-	uses: 3,
+	uses: 1,
 	admin: 0,
 	register: true,
 	ratelimit: 5000,
