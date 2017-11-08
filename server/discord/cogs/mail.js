@@ -226,7 +226,7 @@ module.exports = [{
 		const send = (res) => {
 			if (!res) {
 				message.channel.createMessage(message.__('reply_noexist'));
-			} else if (res.dmail !== message.inbox) {
+			} else if (res.dmail !== message.mss.inbox) {
 				message.channel.createMessage(message.__('reply_conflict'));
 			} else {
 				const data = {
@@ -272,7 +272,6 @@ module.exports = [{
 					dmail: message.mss.inbox
 				})
 				.nth(-1)
-				.run()
 				.then(send);
 		}
 	}
