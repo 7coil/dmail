@@ -11,9 +11,13 @@
 			"domain": "discordmail.com"
 		},
 		"rethinkdb": {
-			"host": "",
-			"port": 28015,
-			"db": "discordmail"
+			"db": "",
+			"servers": [
+				{
+					"host": "",
+					"port": 28015
+				}
+			]
 		},
 		"captcha": {
 			"public": "",
@@ -54,14 +58,14 @@
 		"word": [
 		],
 		"in": [
-			"dmail.com",
-			"mdteam.ga"
+			"@dmail.com",
+			"@mdteam.ga"
 		],
 		"out": [
-			"discordapp.com",
-			"valvesoftware.com",
-			"mdteam.ga",
-			"dmail.com"
+			"@discordapp.com",
+			"@valvesoftware.com",
+			"@mdteam.ga",
+			"@dmail.com"
 		]
 	}
 }

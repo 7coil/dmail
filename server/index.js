@@ -50,26 +50,22 @@ app.enable('trust proxy')
 	.use(cors())
 	.use(authentication.initialize())
 	.use(authentication.session())
-	.use((req, res, next) => {
+	.use(async (req, res, next) => {
 		res.locals.domain = config.get('api').mailgun.domain;
 		if (req.user) {
-			r.table('registrations')
-				.get(req.user.id)
-				.run(r.conn, (err, result) => {
-					if (err) {
-						res.status(500).render('error.pug', { status: 500 });
-					} else {
-						req.user.dmail = result;
-						res.locals.user = req.user;
-					}
-					next();
-				});
+			const result = (await r.table('registrations')
+				.filter({
+					location: req.user.id
+				}))[0] || null;
+			req.user.dmail = result;
+			res.locals.user = req.user;
+			next();
 		} else {
 			next();
 		}
 	})
 	.get('/', async (req, res) => {
-		const count = await r.table('registrations').count().run(r.conn);
+		const count = await r.table('registrations').count().run();
 		res.status(200).render('index.pug', {
 			discord,
 			count
@@ -86,3 +82,7 @@ app.enable('trust proxy')
 
 console.log('Listening on', config.get('webserver').port);
 app.listen(config.get('webserver').port);
+
+process.on('unhandledRejection', (reason) => {
+	console.dir(reason);
+});

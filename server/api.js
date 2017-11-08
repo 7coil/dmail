@@ -4,21 +4,6 @@ const mailgun = require('mailgun-js')(config.get('api').mailgun);
 const r = require('./db.js');
 const multer = require('multer');
 const discord = require('./discord/');
-const fs = require('fs');
-
-const emails = [];
-
-// Register valid commands from "cogs"
-fs.readdir('./server/emails/', (err, items) => {
-	items.forEach((item) => {
-		const file = item.replace(/['"]+/g, '');
-		const email = require(`./emails/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
-		email.info.aliases.forEach((name) => {
-			if (emails[name]) console.log(`Alias ${name} from ${file} was already assigned to another email! Overwriting...`.red);
-			emails[name] = require(`./emails/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
-		});
-	});
-});
 
 const router = express.Router();
 
@@ -66,36 +51,25 @@ const validate = (req, res, next) => {
 	}
 };
 
-const services = (req, res, next) => {
-	const to = req.body.recipient.split('@').shift().toLowerCase().replace(/%23/g, '#');
-	if (emails[to]) {
-		console.log((new Date()).toUTCString(), `Recieved special email for ${to}`);
-		emails[to].command(req.body);
-		res.status(200).json({ success: { message: 'Successfully recieved special email.' } });
-	} else {
-		next();
-	}
-};
-
 const check = async (req, res, next) => {
 	const body = req.body;
 	const to = body.recipient.split('@').shift().toLowerCase().replace(/%23/g, '#');
 	console.log((new Date()).toUTCString(), `Recieved mail for ${to}`);
 
 	try {
-		const cursor = await r.table('registrations')
+		const result = await r.table('registrations')
 			.filter({
 				email: to
-			})
-			.run(r.conn);
+			});
+		res.locals.dmail = result[0];
 
-		const result = await cursor.toArray();
 		if (!result[0]) {
+			console.log('The E-Mail doesn\'t exist');
 			res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
 			sendError(body, 'The email address does not exist.');
 		} else if (config.get('ban').in.some(email => body.sender.toLowerCase().includes(email))) {
 			res.status(406).json({ success: { message: `The domain this email was sent from is not allowed to send to DiscordMail. Visit ${config.get('webserver').domain}/docs/blocked` } });
-			console.log('The E-Mail was blocked by the recipient.');
+			console.log('The E-Mail was blocked by the owner.');
 		} else if (result[0].block && Array.isArray(result[0].block) && result[0].block.some(email => body.sender.toLowerCase().includes(email))) {
 			res.status(406).json({ success: { message: 'Sender is blocked by recipient' } });
 			console.log('The E-Mail was blocked by the recipient.');
@@ -112,20 +86,18 @@ const check = async (req, res, next) => {
 			res.status(406).json({ error: { message: `The email was detected as spam. Visit ${config.get('webserver').domain}/docs/blocked` } });
 		} else if (result[0].type === 'user') {
 			try {
-				res.locals.channel = await discord.getDMChannel(result[0].id);
-				res.locals.inbox = result[0].id;
+				res.locals.channel = await discord.getDMChannel(result[0].location);
 				next();
 			} catch (e) {
 				console.log('Could not get DM Channel');
 				res.status(406).json({ error: { message: 'DiscordMail failed to fetch a DM channel' } });
 			}
 		} else if (result[0].type === 'guild') {
-			const guild = discord.guilds.get(result[0].id);
+			const guild = discord.guilds.get(result[0].details.guild);
 			if (guild) {
-				const channel = guild.channels.get(result[0].details.channel);
+				const channel = guild.channels.get(result[0].location);
 				if (channel) {
-					res.locals.channel = discord.guilds.get(result[0].id).channels.get(result[0].details.channel);
-					res.locals.inbox = result[0].id;
+					res.locals.channel = discord.guilds.get(result[0].details.guild).channels.get(result[0].location);
 					next();
 				} else {
 					res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
@@ -133,69 +105,66 @@ const check = async (req, res, next) => {
 				}
 			} else {
 				res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
-				sendError(body, 'The guild\'s could not be found');
+				sendError(body, 'The guild could not be found');
 			}
 		}
 	} catch (e) {
+		console.dir(e);
 		console.log('Could not fetch RethinkDB');
 		res.status(500).json({ error: { message: 'Could not fetch RethinkDB' } });
 	}
 };
 
-router.post('/mail', upload.single('attachment-1'), validate, services, check, (req, res) => {
+router.post('/mail', upload.single('attachment-1'), validate, check, async (req, res) => {
 	const body = req.body;
-	body.dmail = res.locals.inbox;
-	r.table('emails')
+	body.dmail = res.locals.dmail.id;
+	const info = await r.table('emails')
 		.insert(req.body)
-		.run(r.conn, (err, res1) => {
-			if (err) {
-				res.status(406).json({ error: { message: 'An error occurred while inserting details into the RethinkDB database.' } });
-				sendError(body, 'An error occurred while inserting details into the RethinkDB database. Sorry for the inconvenience.');
-			} else {
-				const content = {
-					content: res1.generated_keys[0],
-					embed: {
-						title: body.subject || 'Untitled E-Mail',
-						description: body['body-plain'].length > 2000 ? `Too long to display. View full E-Mail at ${config.get('webserver').domain}/mail/${res1.generated_keys[0]}` : body['body-plain'] || 'Empty E-Mail',
-						timestamp: new Date(body.timestamp * 1000),
-						url: `${config.get('webserver').domain}/mail/${res1.generated_keys[0]}`,
-						author: {
-							name: body.from || 'No Author'
-						},
-						fields: [
-							{
-								name: 'E-Mail ID',
-								value: res1.generated_keys[0]
-							}
-						]
-					}
-				};
-
-				const success = () => {
-					res.status(200).json({ success: { message: 'Successfully sent message to user or guild.' } });
-				};
-
-				const failure = () => {
-					console.log((new Date()).toUTCString(), `Failed to send DM to ${res.locals.inbox}`);
-					res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
-					sendError(body, 'The mail server could not DM the user or guild.');
-				};
-
-				if (req.file && req.file.buffer.length < 8000000) {
-					content.file = req.file;
-					const file = {
-						file: req.file.buffer,
-						name: req.file.originalname || 'unnamed_file'
-					};
-					res.locals.channel.createMessage(content, file).then(success).catch(failure);
-				} else {
-					res.locals.channel.createMessage(content).then(success).catch(failure);
+		.run();
+	const content = {
+		content: info.generated_keys[0],
+		embed: {
+			title: body.subject || 'Untitled E-Mail',
+			description: body['body-plain'].length > 2000 ? `Too long to display. View full E-Mail at ${config.get('webserver').domain}/mail/${info.generated_keys[0]}` : body['body-plain'] || 'Empty E-Mail',
+			timestamp: new Date(body.timestamp * 1000),
+			url: `${config.get('webserver').domain}/mail/${info.generated_keys[0]}`,
+			author: {
+				name: body.from || 'No Author'
+			},
+			fields: [
+				{
+					name: 'E-Mail ID',
+					value: info.generated_keys[0]
 				}
-			}
-		});
+			]
+		}
+	};
+
+	const success = () => {
+		res.status(200).json({ success: { message: 'Successfully sent message to user or guild.' } });
+	};
+
+	const failure = () => {
+		console.log((new Date()).toUTCString(), `Failed to send DM to ${res.locals.dmail.location}`);
+		res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
+		sendError(body, 'The mail server could not DM the user or guild.');
+	};
+
+	if (req.file && req.file.buffer.length < 8000000) {
+		content.file = req.file;
+		const file = {
+			file: req.file.buffer,
+			name: req.file.originalname || 'unnamed_file'
+		};
+		res.locals.channel.createMessage(content, file).then(success).catch(failure);
+	} else {
+		res.locals.channel.createMessage(content).then(success).catch(failure);
+	}
 })
 	.get('/stats', async (req, res) => {
-		const count = await r.table('registrations').count().run(r.conn);
+		const count = await r.table('registrations')
+			.count()
+			.run();
 		res.status(200).json({ guilds: discord.guilds.size, users: discord.users.size, registered: count });
 	})
 	.get('/', (req, res) => {
