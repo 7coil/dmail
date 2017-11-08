@@ -36,7 +36,7 @@ client.once('ready', () => {
 			} else if (message.mss.command && config.get('discord').disable) {
 				message.channel.createMessage(message.__('err_quota'));
 			} else if (message.mss.command && message.mss.context === 'guild' && !message.mss.dmail && commands[message.mss.command].register) {
-				message.channel.createMessage(message.__('what_guild_noexist', { url: config.get('url').guild }));
+				message.channel.createMessage(message.__('what_guild_noexist', { url: `${config.get('webserver').domain}/url/guild` }));
 			} else if (message.mss.command && message.mss.context === 'user' && !message.mss.dmail && commands[message.mss.command].register) {
 				message.channel.createMessage(message.__('what_user_noreg', { prefix: message.mss.prefix }));
 			} else if (message.mss.command && message.mss.timeout > 0) {
