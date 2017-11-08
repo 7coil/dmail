@@ -157,12 +157,17 @@ module.exports = [{
 		} else if (message.mss.context === 'user') {
 			message.channel.createMessage({
 				embed: {
-					title: message.__('consent_subject', { name: message.__('name') }),
-					description: `[${message.__('register')}](${config.get('webserver').domain}/mail/register)`,
+					title: message.__('register_welcome', { name: message.__('name') }),
+					description: `[${message.__('register_user')}](${config.get('webserver').domain}/mail/register)`,
 				}
 			});
-		} else {
-			message.channel.createMessage(message.__('consent_guild', { url: `${config.get('webserver').domain}/url/guild` }));
+		} else if (message.mss.context === 'guild') {
+			message.channel.createMessage({
+				embed: {
+					title: message.__('register_welcome', { name: message.__('name') }),
+					description: `[${message.__('register_guild')}](${config.get('webserver').domain}/url/guild)`,
+				}
+			});
 		}
 	}
 }, {
