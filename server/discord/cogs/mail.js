@@ -20,7 +20,7 @@ module.exports = [{
 	],
 	name: 'mss',
 	uses: 1,
-	admin: 0,
+	admin: 3,
 	register: false,
 	ratelimit: 0,
 	command: (message) => {
