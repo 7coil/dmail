@@ -69,7 +69,7 @@ module.exports = [{
 
 			if (!email) {
 				message.channel.createMessage(message.__('reply_noexist'));
-			} else if (email.dmail !== message.mss.inbox) {
+			} else if (email.dmail !== message.mss.dmail.id) {
 				message.channel.createMessage(message.__('delete_conflict'));
 			} else {
 				await r.table('emails')
