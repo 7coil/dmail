@@ -15,13 +15,17 @@ DiscordMail uses Eris and Mailgun JS to send and recieve emails, and routing ema
 
 ## Installation
 
-0. Have at least `Node.js 8.4.0`, `RethinkDB 2.3.6`, `npm 5.4.1` and `git`
+0. Have at least `Node.js 9.1.0`, `RethinkDB 2.3.6`, `npm 5.5.1` and `git`
 1. `git clone`
 2. `npm i`
 3. Edit `config/default.json`, using `config/default.rename.json` as a template
 4. Create a database in Rethink with tables: `registrations`, `emails`, `i18n`, `users` and `ratelimit`
 5. Set up mailgun so that `/api/mail` is a webhook based listener for emails
 6. `npm start`
+
+## DiscordMail `2.2.1` to `3.0.0`
+
+DiscordMail now uses a new database structure for storing registrations. Please run the `convert.js` script before upgrading to `3.0.0`
 
 ## Translations
 
