@@ -191,7 +191,7 @@ module.exports = [{
 				from: `${message.mss.dmail.display} <${message.mss.dmail.email}@${config.get('api').mailgun.domain}>`,
 				to: email[1],
 				subject: email[2] || 'No Subject',
-				html: marked((email[3] || '<p>This document is empty</p>').replace(/\n(?=.)/g, '  \n')),
+				html: marked((email[3] || 'This document is empty').replace(/\n(?=.)/g, '  \n')),
 				text: email[3] || 'This document is empty',
 				'h:X-DiscordMail-Guild': message.mss.dmail.type === 'guild' ? message.mss.dmail.details.guild : null,
 				'h:X-DiscordMail-Channel': message.channel.id,
