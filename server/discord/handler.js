@@ -94,7 +94,7 @@ module.exports = async (message, callback) => {
 			const locale = await r.table('i18n')
 				.get(message.author.id);
 
-			message.setLocale(locale || 'en-gb');
+			message.setLocale((locale && locale.lang) || 'en-gb');
 		}
 	}
 

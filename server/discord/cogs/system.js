@@ -154,8 +154,7 @@ module.exports = [{
 					lang: message.mss.input
 				}, {
 					conflict: 'update'
-				})
-				.run();
+				});
 			message.setLocale(message.mss.input);
 			message.channel.createMessage(message.__('locale_set', { locale: message.__(`lang_${message.mss.input.replace(/-/g, '_')}`) }));
 		} else {
