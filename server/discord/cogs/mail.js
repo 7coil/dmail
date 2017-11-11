@@ -47,6 +47,7 @@ module.exports = [{
 				.update({
 					block: r.row('block').union(split).default([split])
 				});
+			message.channel.createMessage(message.__('block_blocked', { emails: split.length }));
 		} else {
 			const invalid = split.filter(email => !validator.isEmail(email)).map(email => `\`${email}\``).join('\n');
 			message.channel.createMessage(message.__('err_email', { invalid }));
