@@ -102,15 +102,25 @@ module.exports = [{
 			.filter({
 				email
 			});
-		if (!check) {
-			message.channel.createMessage('This channel already has an E-Mail attributed');
-		} else if (!mail) {
-			message.channel.createMessage('This E-Mail address has already been taken');
+		if (check.length && message.mss.context === 'user') {
+			message.channel.createMessage('This channel already has an E-Mail attributed. Override using guild prefix.');
+		} else if (mail.length && message.mss.context === 'user') {
+			message.channel.createMessage('This E-Mail address has already been taken. Override using guild prefix.');
 		} else if (!message.mss.input) {
 			message.channel.createMessage('No email was provided.');
 		} else if (!message.channel.guild) {
 			message.channel.createMessage('This command only works in a guild.');
 		} else {
+			await r.table('registrations')
+				.filter({
+					location: message.channel.id
+				})
+				.delete();
+			await r.table('registrations')
+				.filter({
+					email
+				})
+				.delete();
 			await r.table('registrations')
 				.insert({
 					location: message.channel.id,
@@ -121,8 +131,6 @@ module.exports = [{
 					display: message.channel.guild.name,
 					email,
 					block: []
-				}, {
-					conflict: 'update'
 				});
 
 			const data = {
