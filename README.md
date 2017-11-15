@@ -41,7 +41,7 @@ Spanish (Spain)        | es-es     | Updates Needed | [@Mdstumpfy123](https://gi
 Portuguese (Portugal)  | pt-pt     | Updates Needed | [@PillGP](https://github.com/PillGP) (PillGP#2767)
 Portuguese (Brazil)    | pt-br     | Updates Needed | [@natanbc](https://github.com/natanbc) (Natan#1289)
 German (Germany)       | de-de     | Announced      | TimNook#0323
-English (Pirate)       | de-pirate | Announced      |
+English (Pirate)       | en-pirate | Announced      |
 
 Translations required:
 
