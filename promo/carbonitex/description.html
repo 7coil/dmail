@@ -6,14 +6,8 @@
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-	}
-
-	h1,h2,h3,h4,h5,h6,div,button,p {
-		font-family: "Whitney", "Roboto", sans-serif !important;
-	}
-
-	body {
-		background-color: #7289DA !important;
+		font-family: "Whitney", "Roboto", sans-serif;
+		background-color: #7289DA;
 	}
 
 	@font-face {
@@ -110,15 +104,6 @@
 		width: 100vw;
 		display: block;
 	}
-
-	.dmbutton {
-		margin: 10px 0 !important;
-	}
-
-	ul {
-		padding: 0px;
-		list-style-type: none;
-	}
 </style>
 
 <div id="discordmail" class="burple">
@@ -128,35 +113,29 @@
 	</div>
 	<svg class="bordering greyple" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="burplef" points="0,0 0,100 100,0"></polygon></svg>
 	<div class="greyple">
-		<div class="dmcontainer blacktext">
-			<h4 class="dmh4">Statistics</h4>
-			<p id="dmguilds">Loading Guilds</p>
-			<p id="dmusers">Loading Users</p>
-			<p id="dmregistered">Loading Registrations</p>
-		</div>
+		<ul>
+			<li>E-Mails to your DMs</li>
+			<li>E-Mails to your guild</li>
+			<li>E-Mails to anywhere</li>
+		</ul>
 	</div>
 	<svg class="bordering dgrey" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="greyplef" points="0,0 0,100 100,0"></polygon></svg>
 	<div class="dgrey lastbox">
 		<div class="dmcontainer">
 			<h3 class="dmh3">Create an account today!</h3>
 			<h4 class="dmh4">Invite the bot and type 'dmail register'</h4>
-			<button onclick="window.open('https://discordapp.com/oauth2/authorize?=&amp;client_id=330003632298917889&amp;scope=bot&amp;permissions=0', '_blank')" class="ui labeled icon button dmbutton">
-				<i class="mouse pointer icon"></i>
-				Invite
-			</button>
 			<p>By registering with DiscordMail, you fully agree to the contents of the Terms of Service and Privacy Agreement, found in the documentation.</p>
-			<p><a href="https://discordmail.com/docs">Documentation</a></p>
-			<p><a href="https://discordmail.com/docs/url/github">GitHub</a></p>
+			<p><a href="https://discordmail.com/docs" target="_blank">Documentation</a></p>
 		</div>
 	</div>
 	<div class="dark">
 		<div class="dmcontainer">
 			<ul>
-				<li><a href="https://discordmail.com/docs/terms">Terms of Service</a></li>
-				<li><a href="https://discordmail.com/docs/privacy">Privacy Agreement</a></li>
+				<li><a href="https://discordmail.com/docs/terms" target="_blank">Terms of Service</a></li>
+				<li><a href="https://discordmail.com/docs/privacy" target="_blank">Privacy Agreement</a></li>
 				<li><a href="https://discordmail.com/url/github" target="_blank">GitHub</a></li>
 				<li><a href="https://moustacheminer.com/" target="_blank">Moustacheminer Server Services</a></li>
-				<li><a href="https://discordmail.com/lang">Languages / Internationalisation</a></li>
+				<li><a href="https://discordmail.com/lang" target="_blank">Languages / Internationalisation</a></li>
 			</ul>
 		</div>
 	</div>
@@ -168,34 +147,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	const dmguilds = document.getElementById('dmguilds');
-	const dmusers = document.getElementById('dmusers');
-	const dmregistered = document.getElementById('dmregistered');
-	const dblservers = [... document.getElementsByClassName('ui label blue')][0];
-
-	const stats = () => {
-		request({
-			url: "https://discordmail.com/api/stats",
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		}, (err, res) => {
-			if (err) {
-				console.log(err);
-			} else {
-				dblservers.innerHTML = `${res.guilds} SERVERS`
-				dmguilds.innerHTML = `${res.guilds} guilds`;
-				dmusers.innerHTML = `${res.users} users`;
-				dmregistered.innerHTML = `${res.registered} registered accounts`;
-			}
-		});
-	}
-
-	const vanity = 'mail';
-	if (location.pathname !== `/bot/${vanity}`) history.pushState(null, '', `/bot/${vanity}`);
-
-	document.addEventListener("DOMContentLoaded", stats);
-</script>
