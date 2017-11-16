@@ -110,6 +110,7 @@
     "nav_emails": "E-Mails",
     "nav_login": "Login",
     "nav_logout": "Logout",
+	"nav_admin": "Administration Console",
     "pa": "Privacy Agreement",
     "ping": "Ping",
     "ping_1_in": "{{ prefix }} {{ command }}",

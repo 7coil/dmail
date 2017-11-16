@@ -49,7 +49,7 @@ html
 					li: a(href="/mail") #{__('nav_emails')}
 				li: a(href="/auth/logout") #{__('nav_logout')}
 				if admin
-					li: a(href="/admin") Administration Panel
+					li: a(href="/admin") #{__('nav_admin')}
 			else
 				li: a(href="/auth" target="_blank") #{__('nav_login')}
 			li: a(href="/docs/terms") #{__('tos')}
