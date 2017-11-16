@@ -1,0 +1,15 @@
+extends templates/template.pug
+
+block main
+	.container.white-text
+		.row
+			.col-s12
+				h3 DiscordMail Administration Panel
+			.col-s12
+				form
+					.row
+						div.input-field.col.s12
+							select(name="guild")
+								option(disabled selected) Select a guild
+block scripts
+	script(src="/js/admin.js")

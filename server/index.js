@@ -10,6 +10,7 @@ const docs = require('./docs');
 const mail = require('./mail');
 const lang = require('./lang');
 const auth = require('./auth');
+const admin = require('./admin');
 const config = require('config');
 const express = require('express');
 const discord = require('./discord');
@@ -52,6 +53,7 @@ app.enable('trust proxy')
 	.use(authentication.session())
 	.use(async (req, res, next) => {
 		res.locals.domain = config.get('api').mailgun.domain;
+		res.locals.admin = false;
 		if (req.user) {
 			const result = (await r.table('registrations')
 				.filter({
@@ -59,10 +61,9 @@ app.enable('trust proxy')
 				}))[0] || null;
 			req.user.dmail = result;
 			res.locals.user = req.user;
-			next();
-		} else {
-			next();
+			res.locals.admin = config.get('discord').admins.includes(req.user.id);
 		}
+		next();
 	})
 	.get('/', async (req, res) => {
 		const count = await r.table('registrations').count().run();
@@ -77,6 +78,7 @@ app.enable('trust proxy')
 	.use('/mail', mail)
 	.use('/lang', lang)
 	.use('/auth', auth)
+	.use('/admin', admin)
 	.use(express.static(path.join(__dirname, '/static')))
 	.use('*', (req, res) => res.status(404).render('error.pug', { status: 404 }));
 

@@ -48,10 +48,11 @@ html
 					li: a(href="mailto:" + encodeURIComponent(`${user.dmail.email}@${domain}`)) #{user.dmail.email}@#{domain}
 					li: a(href="/mail") #{__('nav_emails')}
 				li: a(href="/auth/logout") #{__('nav_logout')}
+				if admin
+					li: a(href="/admin") Administration Panel
 			else
 				li: a(href="/auth" target="_blank") #{__('nav_login')}
 			li: a(href="/docs/terms") #{__('tos')}
-		block scripts
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js")
 		script(src="/js/init.js")
@@ -61,4 +62,5 @@ html
 			| function gtag(){dataLayer.push(arguments);}
 			| gtag('js', new Date());
 			| gtag('config', 'UA-67900801-4');
+		block scripts
 
