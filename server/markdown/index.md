@@ -9,3 +9,7 @@ This documentation can be found on [GitHub](https://github.com/moustacheminer/di
 - [Commands](docs/commands)
 - [Terms and Conditions](docs/terms)
 - [Privacy Statement](docs/privacy)
+
+### Shill
+
+[![stupid fucking shitty website](https://discordbots.org/api/widget/330003632298917889.png)](https://bots.discord.pw/bots/330003632298917889)
