@@ -12,4 +12,4 @@ This documentation can be found on [GitHub](https://github.com/moustacheminer/di
 
 ### Shill
 
-[![Link to bots.discord.pw](https://discordbots.org/api/widget/330003632298917889.png)](https://bots.discord.pw/bots/330003632298917889)
+[![Link to ls.terminal.ink](https://discordbots.org/api/widget/330003632298917889.png)](https://ls.terminal.ink/bot/330003632298917889)
