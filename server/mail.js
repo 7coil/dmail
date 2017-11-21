@@ -72,9 +72,14 @@ const captcha = (req, res, next) => {
 
 router.get('/', authed, registered, async (req, res) => {
 	try {
-		const result = await r.table('emails')
+		const account = (await r.table('registrations')
 			.filter({
 				location: req.user.id
+			}))[0] || null;
+
+		const result = await r.table('emails')
+			.filter({
+				dmail: account.id
 			})
 			.orderBy(r.desc('timestamp'));
 
