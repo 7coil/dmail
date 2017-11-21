@@ -74,10 +74,9 @@ router.get('/', authed, registered, async (req, res) => {
 	try {
 		const result = await r.table('emails')
 			.filter({
-				dmail: req.user.id
+				location: req.user.id
 			})
-			.orderBy(r.desc('timestamp'))
-			.run();
+			.orderBy(r.desc('timestamp'));
 
 		res.render('client.pug', {
 			emails: result.map((email) => {
@@ -94,16 +93,18 @@ router.get('/', authed, registered, async (req, res) => {
 	})
 	.post('/terminate', authed, registered, async (req, res) => {
 		try {
+			const email = (await r.table('registrations')
+				.filter({
+					location: req.user.id
+				}))[0] || null;
 			await r.table('registrations')
-				.get(req.user.id)
+				.get(email.id)
 				.delete();
 			await r.table('emails')
-				.filter({
-					dmail: req.user.id
-				})
+				.get(email.id)
 				.delete();
 			await r.table('i18n')
-				.get(req.user.id)
+				.get(email.id)
 				.delete();
 			res.redirect('/');
 		} catch (e) {
