@@ -2,7 +2,6 @@
 
 Your guild is now powered by E-Mail
 
-If you enjoy DiscordMail, consider supporting us by [upvoting our page on discordbots.org](https://discordbots.org/bot/330003632298917889).
 For a complete commands list, type `dmail help`
 
 __                                                                                                                    __

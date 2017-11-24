@@ -11,7 +11,6 @@ __Step 3: Explore!__
 Because DiscordMail is just a normal E-Mail client, you can use your DiscordMail account anywhere where you can insert an E-Mail.  
 If E-Mails don't come out right in Discord, you can click the embed URL to open the original HTML version. Try it out on this E-Mail! 
 
-If you enjoy DiscordMail, consider supporting us by [upvoting our page on discordbots.org](https://discordbots.org/bot/330003632298917889).
 For a complete commands list, type `dmail help`
 
 __                                                                                                                    __
