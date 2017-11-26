@@ -74,6 +74,5 @@ main {
 }
 
 .err-img {
-	max-width: 896px;
-	width: 100%;
+	max-width: 100%;
 }
