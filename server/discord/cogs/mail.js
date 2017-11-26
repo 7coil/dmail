@@ -308,4 +308,20 @@ module.exports = [{
 			}
 		}
 	}
+}, {
+	aliases: [
+		'terminate'
+	],
+	name: 'terminate',
+	uses: 1,
+	admin: 0,
+	register: true,
+	ratelimit: 5000,
+	command: async (message) => {
+		if (message.mss.context === 'guild') {
+			message.channel.createMessage(message.__('terminate_guild'));
+		} else if (message.mss.context === 'user') {
+			message.channel.createMessage(message.__('terminate_user', { url: `${config.get('webserver').domain}/mail/terminate` }));
+		}
+	}
 }];
