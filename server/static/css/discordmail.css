@@ -72,3 +72,8 @@ main {
 .g-recaptcha {
 	margin: 10px 0px;
 }
+
+.err-img {
+	max-width: 896px;
+	width: 100%;
+}
