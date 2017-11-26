@@ -152,7 +152,7 @@
 	"terminate_1_in": "{{ prefix }} {{ command }}",
 	"terminate_1_out": "Obtain details on how to terminate your DiscordMail account, in accordance to the Data Protection Act.",
 	"terminate_guild": "To terminate your guild based account, please send an E-Mail from your DiscordMail account to `admin@discordmail.com`",
-	"terminate_user": "To terminate your user based account, please click the terminate button here: {{ url }}",
+	"terminate_user": "To terminate your user based account, please click the terminate button here: {{{ url }}}",
     "tos": "Terms of Service",
     "what": "Obtain E-Mail",
     "what_1_in": "{{ prefix }} {{ command }}",
