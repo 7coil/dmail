@@ -86,27 +86,16 @@ const check = async (req, res, next) => {
 			res.status(406).json({ error: { message: `The email was detected as spam. Visit ${config.get('webserver').domain}/docs/blocked` } });
 		} else if (result[0].type === 'user') {
 			try {
-				res.locals.channel = await discord.getDMChannel(result[0].location);
+				console.log(result[0].location);
+				const channel = await discord.getDMChannel(result[0].location);
+				res.locals.channel = channel.id;
 				next();
 			} catch (e) {
 				console.log('Could not get DM Channel');
 				res.status(406).json({ error: { message: 'DiscordMail failed to fetch a DM channel' } });
 			}
 		} else if (result[0].type === 'guild') {
-			const guild = discord.guilds.get(result[0].details.guild);
-			if (guild) {
-				const channel = guild.channels.get(result[0].location);
-				if (channel) {
-					res.locals.channel = discord.guilds.get(result[0].details.guild).channels.get(result[0].location);
-					next();
-				} else {
-					res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
-					sendError(body, 'The guild\'s channel could not be found');
-				}
-			} else {
-				res.status(406).json({ error: { message: 'Could not send mail to guild.' } });
-				sendError(body, 'The guild could not be found');
-			}
+			res.locals.channel = result[0].location;
 		}
 	} catch (e) {
 		console.dir(e);
@@ -151,14 +140,13 @@ router.post('/mail', upload.single('attachment-1'), validate, check, async (req,
 	};
 
 	if (req.file && req.file.buffer.length < 8000000) {
-		content.file = req.file;
 		const file = {
 			file: req.file.buffer,
 			name: req.file.originalname || 'unnamed_file'
 		};
-		res.locals.channel.createMessage(content, file).then(success).catch(failure);
+		discord.createMessage(res.locals.channel, content, file).then(success).catch(failure);
 	} else {
-		res.locals.channel.createMessage(content).then(success).catch(failure);
+		discord.createMessage(res.locals.channel, content).then(success).catch(failure);
 	}
 })
 	.get('/stats', async (req, res) => {
