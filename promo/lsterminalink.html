@@ -1,17 +1,19 @@
 <style>
 	#discordmail {
 		z-index: 100;
-		width: 100%;
+		width: 100vw;
 		border: none;
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
-		text-align: center;
+	}
+
+	h1,h2,h3,h4,h5,h6,div,button,p {
+		font-family: "Whitney", "Roboto", sans-serif !important;
 	}
 
 	body {
 		background-color: #7289DA !important;
-		font-family: "Whitney", "Roboto", sans-serif !important;
 	}
 
 	@font-face {
@@ -19,8 +21,16 @@
 		src: url(https://discordmail.com/font/whitney.woff);
 	}
 
-	.dmh1,.dmh2,.dmh3,.dmh4,.dmh5,.dmh6,.dmp {
+	.profile {
 		color: #FFFFFF;
+	}
+
+	#shortDESU {
+		font-size: 0;
+		padding-top: 5px;
+	}
+
+	.dmh1,.dmh2,.dmh3,.dmh4,.dmh5,.dmh6 {
 		font-weight: 400;
 		line-height: 1.1;
 	}
@@ -43,6 +53,10 @@
 
 	.dmh5 {
 		font-size: 1.64rem;
+	}
+
+	.profile .dmp {
+		font-size: 12pt;
 	}
 
 	.dmcontainer {
@@ -109,6 +123,10 @@
 		padding: 0px;
 		list-style-type: none;
 	}
+
+	.left {
+		text-align: left;
+	}
 </style>
 
 <div id="discordmail" class="burple">
@@ -116,26 +134,22 @@
 		<h2 class="dmh2">The Discord to E-Mail Bot, powered by Mailgun</h2>
 		<h5 class="dmh5">DiscordMail links your Discord account to a unique E-Mail address, opening the reach of Discord to be able to communicate to a wider range of of people.</h5>
 	</div>
-	<svg class="bordering greyple" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="burplef" points="0,0 0,100 100,0"></polygon></svg>
-	<div class="greyple">
-		<div class="dmcontainer blacktext">
-			<h4 class="dmh4">Help</h4>
-			<p class="dmp"><code>dmail help</code> Obtain help</p>
-		</div>
-	</div>
-	<svg class="bordering dgrey" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="greyplef" points="0,0 0,100 100,0"></polygon></svg>
+	<svg class="bordering dgrey" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="burplef" points="0,0 0,100 100,0"></polygon></svg>
 	<div class="dgrey lastbox">
 		<div class="dmcontainer">
 			<h3 class="dmh3">Create an account today!</h3>
 			<h4 class="dmh4">Invite the bot and type 'dmail register'</h4>
-			<a href="https://discordapp.com/oauth2/authorize?=&amp;client_id=330003632298917889&amp;scope=bot&amp;permissions=0"></a>
-			<p class="dmp">By registering with DiscordMail, you fully agree to the contents of the Terms of Service and Privacy Agreement, found in the documentation.</p>
-			<p class="dmp"><a href="https://discordmail.com/docs">Documentation</a></p>
-			<p class="dmp"><a href="https://discordmail.com/docs/url/github">GitHub</a></p>
+			<button onclick="window.open('https://discordapp.com/oauth2/authorize?=&amp;client_id=330003632298917889&amp;scope=bot&amp;permissions=0', '_blank')" class="ui labeled icon button dmbutton">
+				<i class="mouse pointer icon"></i>
+				Invite
+			</button>
+			<p>By registering with DiscordMail, you fully agree to the contents of the Terms of Service and Privacy Agreement, found in the documentation.</p>
+			<p><a href="https://discordmail.com/docs">Documentation</a></p>
+			<p><a href="https://discordmail.com/docs/url/github">GitHub</a></p>
 		</div>
 	</div>
 	<div class="dark">
-		<div class="dmcontainer">
+		<div class="dmcontainer left">
 			<ul>
 				<li><a href="https://discordmail.com/docs/terms">Terms of Service</a></li>
 				<li><a href="https://discordmail.com/docs/privacy">Privacy Agreement</a></li>
@@ -146,10 +160,17 @@
 		</div>
 	</div>
 	<div class="dblack">
-		<div class="dmcontainer">
+		<div class="dmcontainer left">
 			<p class="dmp">
-				Copyright 2015 - 2018, Moustacheminer Server Services<br> Moustacheminer Server Services are not associated with Discord Inc.<br> Thanks for using ls.terminal.ink!
+				Copyright 2015 - 2018, Moustacheminer Server Services<br>
+				Moustacheminer Server Services are not associated with Discord Inc.
 			</p>
+			<a href="https://ls.terminal.ink/bot/330003632298917889">
+				<img src="https://ls.terminal.ink/api/v1/bots/330003632298917889/embed?width=300" alt="ls.terminal.ink">
+			</a>
+			<a href="https://discordbots.org/bot/330003632298917889">
+				<img src="https://discordbots.org/api/widget/330003632298917889.png" alt="discordbots.org" />
+			</a>
 		</div>
 	</div>
 </div>
