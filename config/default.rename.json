@@ -22,7 +22,10 @@
 		"captcha": {
 			"public": "",
 			"private": ""
-		}
+		},
+		"botsdiscordpw": "",
+		"discordbotsorg": "",
+		"lsterminalink": ""
 	},
 	"webserver": {
 		"port": 8080,

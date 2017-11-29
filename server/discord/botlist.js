@@ -32,4 +32,19 @@ module.exports = (client) => {
 		};
 		request.post(discordbotsorg);
 	}
+	if (config.get('api').lsterminalink) {
+		const lsterminalink = {
+			url: `https://ls.terminal.ink/api/v1/bots/${client.user.id}`,
+			method: 'POST',
+			json: true,
+			headers: {
+				'User-Agent': config.get('useragent'),
+				authorization: config.get('api').lsterminalink
+			},
+			body: {
+				server_count: client.guilds.size
+			}
+		};
+		request.post(lsterminalink);
+	}
 };
