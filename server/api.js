@@ -96,6 +96,7 @@ const check = async (req, res, next) => {
 			}
 		} else if (result[0].type === 'guild') {
 			res.locals.channel = result[0].location;
+			next();
 		}
 	} catch (e) {
 		console.dir(e);
