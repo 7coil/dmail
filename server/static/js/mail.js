@@ -5,4 +5,5 @@ const iframeLoaded = () => {
 		iFrameID.height = '';
 		iFrameID.height = `${iFrameID.contentWindow.document.body.scrollHeight}px`;
 	}
+	setTimeout(iframeLoaded, 50);
 };
