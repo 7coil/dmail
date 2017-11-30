@@ -16,10 +16,10 @@ client.once('ready', () => {
 	console.log('All shards are online');
 
 	// Set up currently playing game
-	//	client.editStatus('online', {
-	//		name: `${prefixes[0]} help`,
-	//		type: 0
-	//	});
+	client.editStatus('online', {
+		name: `${prefixes[0]} help`,
+		type: 0
+	});
 
 	setInterval(() => {
 		botlist(client);
