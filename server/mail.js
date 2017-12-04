@@ -15,7 +15,7 @@ const registered = (req, res, next) => {
 	if (!req.user.dmail) {
 		res.status(403).render('error.pug', {
 			status: 403,
-			message: 'You are not registered for DiscordMail'
+			message: res.__('err_registered')
 		});
 	} else {
 		next();
@@ -26,7 +26,12 @@ const notregistered = (req, res, next) => {
 	if (req.user.dmail) {
 		res.status(403).render('error.pug', {
 			status: 403,
-			message: 'You are already registered for DiscordMail'
+			message: res.__('err_not_registered')
+		});
+	} else if (!req.user.email) {
+		res.status(403).render('error.pug', {
+			status: 403,
+			message: res.__('err_no_email')
 		});
 	} else {
 		next();
@@ -46,7 +51,7 @@ const captcha = (req, res, next) => {
 	if (!req.body['g-recaptcha-response'] || typeof req.body['g-recaptcha-response'] !== 'string') {
 		res.status(400).render('error.pug', {
 			status: 400,
-			message: 'Invalid reCAPTCHA response'
+			message: res.__('err_recaptcha')
 		});
 	} else {
 		request({
@@ -63,7 +68,7 @@ const captcha = (req, res, next) => {
 			} else {
 				res.status(400).render('error.pug', {
 					status: 400,
-					message: 'Incorrect reCAPTCHA response'
+					message: res.__('err_recaptcha')
 				});
 			}
 		});
@@ -115,7 +120,7 @@ router.get('/', authed, registered, async (req, res) => {
 		} catch (e) {
 			res.status(500).render('error.pug', {
 				status: 500,
-				message: 'An error occured while deleting your details. Please contact the owner'
+				message: res.__('err_delete')
 			});
 		}
 	})
@@ -128,7 +133,7 @@ router.get('/', authed, registered, async (req, res) => {
 		if (!req.body.agree) {
 			res.status(401).render('error.pug', {
 				status: 401,
-				message: 'You did not agree to the Terms of Service and Privacy Agreement'
+				message: res.__('err_no_agree')
 			});
 		} else {
 			try {
@@ -141,7 +146,9 @@ router.get('/', authed, registered, async (req, res) => {
 						type: 'user',
 						details: {
 							name: req.user.username,
-							discrim: req.user.discriminator
+							discrim: req.user.discriminator,
+							email: req.user.email,
+							mfa_enabled: req.user.mfa_enabled
 						},
 						display: `${req.user.username}#${req.user.discriminator}`,
 						email,
@@ -159,13 +166,13 @@ router.get('/', authed, registered, async (req, res) => {
 			} catch (e) {
 				let error = '';
 				if (e.resonse && e.response.includes('50007')) {
-					error = 'Could not send DM. Check that you have allowed DMs, are in a shared guild, or have not blocked DiscordMail.';
+					error = res.__('err_dm');
 				} else {
 					console.dir(e);
 				}
 				res.status(500).render('error.pug', {
 					status: 500,
-					message: error || 'An error occured while attempting to register your account.'
+					message: error || res.__('err_generic')
 				});
 				r.table('registrations')
 					.get(req.user.id)
