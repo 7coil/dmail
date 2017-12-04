@@ -1,4 +1,10 @@
 {
+	"ban": "Ban a user",
+	"ban_1_in": "{{ prefix }} {{ command }} [@mention / ID] [Reason]",
+	"ban_1_out": "Ban a user for the specified reason",
+	"ban_desc": "Ban a user",
+	"ban_banned": "The account was banned successfully",
+	"ban_invalid": "You did not provide a reason or an ID",
     "block": "Block E-Mails",
     "block_1_in": "{{ prefix }} {{ command }} [E-Mail]; [E-Mail]; [E-Mail]; ... ; [E-Mail]",
     "block_1_out": "Block the specified E-Mails",
@@ -20,6 +26,7 @@
     "err_guild": "You can only use this context while inside a registered channel!",
     "err_quota": "DiscordMail has ran out of it's monthly Mailgun quota. The bot has been disabled.",
     "err_ratelimit": "To help prevent abuse for this bot, you are being ratelimited. Please wait for {{ time }}s.",
+	"err_banned": "You have been blocked for using DiscordMail. Reason:",
     "err_registered": "You have already registered!",
     "error_suggest": "You may want to go back to the previous page.",
     "eval": "Evaluate JavaScript",

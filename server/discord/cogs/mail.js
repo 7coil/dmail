@@ -13,6 +13,7 @@ marked.setOptions({
 const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 const emailRegex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) (?:"(.*?)")? *([\w\W]+)?/;
 const replyRegex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}|) *([\w\W]+)/;
+const banRegex = /(\d+)>? ?([\w\W]+)/;
 
 module.exports = [{
 	aliases: [
@@ -25,6 +26,28 @@ module.exports = [{
 	ratelimit: 0,
 	command: (message) => {
 		message.channel.createMessage(JSON.stringify(message.mss));
+	}
+}, {
+	aliases: [
+		'ban'
+	],
+	name: 'ban',
+	uses: 1,
+	admin: 3,
+	register: false,
+	ratelimit: 0,
+	command: async (message) => {
+		const input = banRegex.exec(message.mss.input);
+		if (input) {
+			await r.table('bans')
+				.insert({
+					id: input[1],
+					reason: input[2]
+				});
+			message.channel.createMessage(message.__('ban_banned'));
+		} else {
+			message.channel.createMessage(message.__('ban_invalid'));
+		}
 	}
 }, {
 	aliases: [
