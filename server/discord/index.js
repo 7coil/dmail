@@ -28,20 +28,21 @@ client.once('ready', () => {
 
 	client.on('messageCreate', (message) => {
 		handler(message, () => {
-			// Run command if it exists, and if their permissions level is good enough
-			if (message.mss.command && message.mss.context === 'guild' && !message.channel.guild) {
+			if (message.mss.context === 'guild' && !message.channel.guild) {
 				message.channel.createMessage(message.__('err_guild'));
-			} else if (message.mss.command && message.mss.context === 'guild' && message.mss.admin < 1) {
+			} else if (message.mss.context === 'guild' && message.mss.admin < 1) {
 				message.channel.createMessage(message.__('err_admin'));
-			} else if (message.mss.command && config.get('discord').disable) {
+			} else if (config.get('discord').disable) {
 				message.channel.createMessage(message.__('err_quota'));
-			} else if (message.mss.command && message.mss.context === 'guild' && !message.mss.dmail && commands[message.mss.command].register) {
+			} else if (message.mss.banned && commands[message.mss.command].register) {
+				message.channel.createMessage(`${message.__('err_banned')}\n${message.mss.banned.reason}`);
+			} else if (message.mss.context === 'guild' && !message.mss.dmail && commands[message.mss.command].register) {
 				message.channel.createMessage(message.__('what_guild_noexist', { url: `${config.get('webserver').domain}/url/guild` }));
-			} else if (message.mss.command && message.mss.context === 'user' && !message.mss.dmail && commands[message.mss.command].register) {
+			} else if (message.mss.context === 'user' && !message.mss.dmail && commands[message.mss.command].register) {
 				message.channel.createMessage(message.__('what_user_noreg', { prefix: message.mss.prefix }));
-			} else if (message.mss.command && message.mss.timeout > 0) {
+			} else if (message.mss.timeout > 0) {
 				message.channel.createMessage(message.__('err_ratelimit', { time: message.mss.timeout }));
-			} else if (message.mss.command && message.mss.admin >= commands[message.mss.command].admin) {
+			} else if (message.mss.admin >= commands[message.mss.command].admin) {
 				commands[message.mss.command].command(message);
 				r.table('ratelimit')
 					.insert({

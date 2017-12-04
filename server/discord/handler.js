@@ -57,6 +57,7 @@ module.exports = async (message, callback) => {
 	mss.cleanInput = '';
 	mss.clean = clean;
 	mss.admin = 0;
+	mss.banned = null;
 	mss.inbox = '0';
 	mss.dmail = null;
 	mss.ratelimit = 0;
@@ -86,6 +87,9 @@ module.exports = async (message, callback) => {
 					location: mss.inbox
 				}))[0] || null;
 
+			mss.banned = await r.table('bans')
+				.get(mss.inbox) || null;
+
 			const ratelimit = await r.table('ratelimit')
 				.get(message.author.id);
 
@@ -95,9 +99,9 @@ module.exports = async (message, callback) => {
 				.get(message.author.id);
 
 			message.setLocale((locale && locale.lang) || 'en-gb');
+
+			message.mss = mss;
+			callback();
 		}
 	}
-
-	message.mss = mss;
-	callback();
 };
