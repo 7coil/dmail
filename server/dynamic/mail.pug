@@ -1,5 +1,8 @@
 extends templates/template.pug
 
+block title
+	title #{email.subject} - #{__('name')}
+
 block main
 	.container.white-text
 		.col-s12

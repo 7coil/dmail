@@ -1,5 +1,8 @@
 extends templates/template.pug
 
+block title
+	title #{__('register')} - #{__('name')}
+
 block head
 	script(async defer src="https://www.google.com/recaptcha/api.js")
 

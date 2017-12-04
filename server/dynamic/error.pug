@@ -1,5 +1,8 @@
 extends templates/template.pug
 
+block title
+	title #{status} - #{__('name')}
+
 block main
 	.container.white-text
 		.col-s12.center
