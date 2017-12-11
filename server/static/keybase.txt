@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/7coil
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://discordmail.com
+  * I am 7coil (https://keybase.io/7coil) on keybase.
+  * I have a public key ASBs0-MjLlXFsIdC7zKxuGZRCYU2XAFO9H7ot3e7w-4AUgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101ac2971b2ac3a2dd155d295430482dcc36681b9bebe9a343441edf8043a6ddf360a",
+      "host": "keybase.io",
+      "kid": "01206cd3e3232e55c5b08742ef32b1b866510985365c014ef47ee8b777bbc3ee00520a",
+      "uid": "69faf46502edf2e3ba8359520d719819",
+      "username": "7coil"
+    },
+    "merkle_root": {
+      "ctime": 1513026876,
+      "hash": "5bd744349256c06a996548dae2c6e04ca4ead84406753b23a7feb835cd130676e518d3d1114a944fb2907a624e7e254ad00e264e1c320f5eec5398b2e6538fc4",
+      "hash_meta": "8861202004971be57924e6b8327eeb5fce503dee36b9424cc5280ebcbb39580c",
+      "seqno": 1803777
+    },
+    "service": {
+      "hostname": "discordmail.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.37"
+  },
+  "ctime": 1513026908,
+  "expire_in": 504576000,
+  "prev": "5bd292ad6504fd217db8dc3f618c95f6ecb2b72819af15e0904b1e1993de5269",
+  "seqno": 6,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgbNPjIy5VxbCHQu8ysbhmUQmFNlwBTvR+6Ld3u8PuAFIKp3BheWxvYWTFA0R7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxYWMyOTcxYjJhYzNhMmRkMTU1ZDI5NTQzMDQ4MmRjYzM2NjgxYjliZWJlOWEzNDM0NDFlZGY4MDQzYTZkZGYzNjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwNmNkM2UzMjMyZTU1YzViMDg3NDJlZjMyYjFiODY2NTEwOTg1MzY1YzAxNGVmNDdlZThiNzc3YmJjM2VlMDA1MjBhIiwidWlkIjoiNjlmYWY0NjUwMmVkZjJlM2JhODM1OTUyMGQ3MTk4MTkiLCJ1c2VybmFtZSI6Ijdjb2lsIn0sIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNTEzMDI2ODc2LCJoYXNoIjoiNWJkNzQ0MzQ5MjU2YzA2YTk5NjU0OGRhZTJjNmUwNGNhNGVhZDg0NDA2NzUzYjIzYTdmZWI4MzVjZDEzMDY3NmU1MThkM2QxMTE0YTk0NGZiMjkwN2E2MjRlN2UyNTRhZDAwZTI2NGUxYzMyMGY1ZWVjNTM5OGIyZTY1MzhmYzQiLCJoYXNoX21ldGEiOiI4ODYxMjAyMDA0OTcxYmU1NzkyNGU2YjgzMjdlZWI1ZmNlNTAzZGVlMzZiOTQyNGNjNTI4MGViY2JiMzk1ODBjIiwic2Vxbm8iOjE4MDM3Nzd9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiZGlzY29yZG1haWwuY29tIiwicHJvdG9jb2wiOiJodHRwczoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMzcifSwiY3RpbWUiOjE1MTMwMjY5MDgsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJwcmV2IjoiNWJkMjkyYWQ2NTA0ZmQyMTdkYjhkYzNmNjE4Yzk1ZjZlY2IyYjcyODE5YWYxNWUwOTA0YjFlMTk5M2RlNTI2OSIsInNlcW5vIjo2LCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQBdDy+N9mTLgug/rGiTjk5dqgBzPXd8We+5EUUnp4GZXRlRUpdt+XAEPOKnTvH3HESv97ytU3gRXlReYTi12yQaoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCAv5y/jfLZO7mMkvuSDLbnoSI/zEwIa1SdYqttPQfBO26N0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/7coil
+
+==================================================================
