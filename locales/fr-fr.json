@@ -159,7 +159,7 @@
     "terminate_language": "- votre choix de langue.",
     "terminate_submit": "Supprimer",
     "terminate_title": "Supprimer votre compte",
-    "terminate": "Supprimer DiscordMail",
+    "terminate": "Supprimer votre compte",
     "terminate_desc": "Obtenez des détails sur comment supprimer votre compte DiscordMail en accord avec la Data Protection Act.",
     "terminate_1_in": "{{ prefix }} {{ command }}",
     "terminate_1_out": "Obtenez des détails sur comment supprimer votre compte DiscordMail en accord avec la Data Protection Act.",
