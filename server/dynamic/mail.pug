@@ -13,7 +13,7 @@ block main
 				li #{__('mail_to', { to: email.To })}
 		hr
 		.col-s12
-			iframe#iframe(sandbox="allow-same-origin" onload="iframeLoaded()" src=`view/${email.id}`)
+			iframe#iframe(sandbox="allow-same-origin" onload="iframeLoaded()" onresize="iframeLoaded()" src=`view/${email.id}`)
 
 block scripts
 	script(src="/js/mail.js")
