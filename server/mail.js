@@ -168,7 +168,7 @@ router.get('/', authed, registered, async (req, res) => {
 				if (e.resonse && e.response.includes('50007')) {
 					error = res.__('err_dm');
 				} else {
-					error = JSON.stringify(e);
+					console.dir(e);
 				}
 				res.status(500).render('error.pug', {
 					status: 500,
