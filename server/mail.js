@@ -15,7 +15,7 @@ const registered = (req, res, next) => {
 	if (!req.user.dmail) {
 		res.status(403).render('error.pug', {
 			status: 403,
-			message: res.__('err_registered')
+			message: res.__('err_not_registered')
 		});
 	} else {
 		next();
@@ -26,7 +26,7 @@ const notregistered = (req, res, next) => {
 	if (req.user.dmail) {
 		res.status(403).render('error.pug', {
 			status: 403,
-			message: res.__('err_not_registered')
+			message: res.__('err_registered')
 		});
 	} else if (!req.user.email) {
 		res.status(403).render('error.pug', {
