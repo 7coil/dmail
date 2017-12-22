@@ -20,7 +20,7 @@
     "delete_incorrect": "Syntaxe correcte : `{{{ prefix }}} {{{ command }}} ID-Réponse`",
     "documentation": "Documentation",
     "err_admin": "Seuls les administrateurs peuvent utiliser ceci.",
-    "err_dm": ":x: Impossible de vous envoyer un message. Vérifiez si vos messages privés ne sont pas bloqués.",
+    "err_dm": "Impossible de vous envoyer un message. Vérifiez si vos messages privés ne sont pas bloqués.",
     "err_email": "Invalid E-Mail addresses found: {{{ invalid }}}",
     "err_generic": "Une erreur est survenue lors du traitement de votre requête.",
     "err_guild": "Vous ne pouvez utiliser ceci que sur un serveur !",
