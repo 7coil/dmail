@@ -35,12 +35,12 @@ Language               | Code      | Progress       | Translator(s)
 ---------------------- | --------- | -------------- | --------------------------
 English (GB)           | en-gb     | Main           | [@lepon01](https://github.com/lepon01) (7coil#3175)
 English (USA)          | en-us     | Done           | [@lepon01](https://github.com/lepon01) (7coil#3175)
+German (Germany)       | de-de     | Done           | [@Crypti-x](https://github.com/Crypti-x) (CodingGuy#9320)
 English (Slang)        | en-slang  | Updated Nov. 24th, 2017 | [@iDerp](https://github.com/iDerp) (iDerp#3616)
 French (France)        | fr-fr     | Updates Needed | [@iDroid27210](https://github.com/iDroid27210) (iDroid#4441), [@lepeli](https://github.com/lepeli) (Yvan#5087)
 Spanish (Spain)        | es-es     | Updates Needed | [@Mdstumpfy123](https://github.com/Mdstumpfy123) (🎃 Spoopy Memes 🎃#2545)
 Portuguese (Portugal)  | pt-pt     | Updates Needed | [@PillGP](https://github.com/PillGP) (PillGP#2767)
 Portuguese (Brazil)    | pt-br     | Updates Needed | [@natanbc](https://github.com/natanbc) (Natan#1289)
-German (Germany)       | de-de     | Announced      | TimNook#0323
 English (Pirate)       | en-pirate | Announced      |
 
 Translations required:
