@@ -49,4 +49,3 @@ Description  | Location
 ------------ | ----------------------
 General Text | `locales/{code}.json`
 
-Feel free to add your name inside the help menu, and ask for extra translated aliases for commands to better suit the language's audience.
