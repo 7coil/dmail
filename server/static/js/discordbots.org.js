@@ -189,36 +189,31 @@ const description = `
 		</div>
 	</div>
 </div>
+`;
 
-<script>
+// Things to do after finishing up
+const onload = () => {
 	const dmguilds = document.getElementById('dmguilds');
 	const dmusers = document.getElementById('dmusers');
 	const dmregistered = document.getElementById('dmregistered');
 	const dblservers = [... document.getElementsByClassName('ui label blue')][0];
 
-	const stats = () => {
-		request({
-			url: "https://discordmail.com/api/stats",
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		}, (err, res) => {
-			if (err) {
-				console.log(err);
-			} else {
-				dblservers.innerHTML = \`\$\{res.guilds} SERVERS\`
-				dmguilds.innerHTML = \`\$\{res.guilds} guilds\`;
-				dmusers.innerHTML = \`\$\{res.users} users\`;
-				dmregistered.innerHTML = \`\$\{res.registered} registered accounts\`;
-			}
-		});
-	}
-</script>`;
-
-// Things to do after finishing up
-const onload = () => {
-	stats();
+	request({
+		url: "https://discordmail.com/api/stats",
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json"
+		}
+	}, (err, res) => {
+		if (err) {
+			console.log(err);
+		} else {
+			dblservers.innerHTML = `${res.guilds} SERVERS`
+			dmguilds.innerHTML = `${res.guilds} guilds`;
+			dmusers.innerHTML = `${res.users} users`;
+			dmregistered.innerHTML = `${res.registered} registered accounts`;
+		}
+	});
 }
 
 const getClass = name => [...document.getElementsByClassName(name)][0];
