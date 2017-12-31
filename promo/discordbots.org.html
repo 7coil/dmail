@@ -208,9 +208,5 @@
 			}
 		});
 	}
-
-	const vanity = 'mail';
-	if (location.pathname !== `/bot/${vanity}`) history.pushState(null, '', `/bot/${vanity}`);
-
-	document.addEventListener("DOMContentLoaded", stats);
+	stats();
 </script>

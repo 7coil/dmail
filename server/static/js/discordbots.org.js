@@ -1,5 +1,9 @@
 const description = `
 	<style>
+		#longdesc {
+			margin: 0;
+		}
+
 		#discordmail {
 			z-index: 100;
 			width: 100vw;
@@ -8,11 +12,11 @@ const description = `
 			display: flex;
 			flex-direction: column;
 		}
-	
+
 		h1,h2,h3,h4,h5,h6,div,button,p {
 			font-family: "Whitney", "Roboto", sans-serif !important;
 		}
-	
+
 		body {
 			background-color: #7289DA !important;
 		}
