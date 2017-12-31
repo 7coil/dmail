@@ -1,3 +1,4 @@
+// Your old long description
 const description = `
 <style>
 	#longdesc {
@@ -213,8 +214,12 @@ const description = `
 			}
 		});
 	}
-	stats();
 </script>`;
+
+// Things to do after finishing up
+const onload = () => {
+	stats();
+}
 
 const getClass = name => [...document.getElementsByClassName(name)][0];
 const load = () => {
@@ -335,6 +340,7 @@ const load = () => {
 	} else {
 		dblnav.innerHTML += '<a href="/login">Login</a>';
 	}
+	onload();
 };
 
 const dblupvote = (id, elem) => {
