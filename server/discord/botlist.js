@@ -47,4 +47,19 @@ module.exports = (client) => {
 		};
 		request.post(lsterminalink);
 	}
+	if (config.get('api').carbon) {
+		const carbon = {
+			url: `https://www.carbonitex.net/discord/data/botdata.php`,
+			method: 'POST',
+			json: true,
+			headers: {
+				'User-Agent': config.get('useragent')
+			},
+			body: {
+				key: config.get('api').carbon,
+				servercount: client.guilds.size
+			}
+		};
+		request.post(carbon);
+	}
 };
