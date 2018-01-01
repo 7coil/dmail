@@ -198,7 +198,7 @@ const onload = () => {
 	const dmregistered = document.getElementById('dmregistered');
 	const dblservers = [... document.getElementsByClassName('ui label blue')][0];
 
-	request({
+	dblrequest({
 		url: "https://discordmail.com/api/stats",
 		method: "GET",
 		headers: {
@@ -342,7 +342,7 @@ const dblupvote = (id, elem) => {
 	const upBtn = document.getElementById('upvotebutton');
 	const pointTxt = document.getElementById('upvotecounterprofile');
 	const upvote = !upBtn.classList.contains('positive');
-	request({
+	dblrequest({
 		url: `${window.location.protocol}//${window.location.hostname}/api/vote`,
 		method: 'POST',
 		data: JSON.stringify({
@@ -367,7 +367,7 @@ const dblupvote = (id, elem) => {
 	});
 };
 
-const request = (opts, callback) => {
+const dblrequest = (opts, callback) => {
 	var xhr = new XMLHttpRequest()
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState != 4) return
