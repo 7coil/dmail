@@ -258,7 +258,7 @@ module.exports = [{
 		const send = (res) => {
 			if (!res) {
 				message.channel.createMessage(message.__('reply_noexist'));
-			} else if (res.dmail !== message.mss.inbox) {
+			} else if (res.dmail !== message.mss.dmail.id) {
 				message.channel.createMessage(message.__('reply_conflict'));
 			} else {
 				const data = {
