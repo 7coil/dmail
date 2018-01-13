@@ -301,7 +301,7 @@ module.exports = [{
 			r.table('emails')
 				.orderBy('timestamp')
 				.filter({
-					dmail: message.mss.inbox
+					dmail: message.mss.dmail.id
 				})
 				.nth(-1)
 				.then(send);
