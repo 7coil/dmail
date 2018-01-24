@@ -3,15 +3,11 @@
 		"discord": {
 			"clientID": "",
 			"clientSecret": "",
-			"scope": [ "identify" ],
+			"scope": [ "identify", "email" ],
 			"token": ""
 		},
-		"mailgun": {
-			"apiKey": "key-",
-			"domain": "discordmail.com"
-		},
 		"rethinkdb": {
-			"db": "",
+			"db": "dmail",
 			"servers": [
 				{
 					"host": "",
@@ -29,7 +25,8 @@
 	},
 	"webserver": {
 		"port": 8080,
-		"domain": "https://discordmail.com"
+		"domain": "https://discordmail.com",
+		"secret": "aaaa"
 	},
 	"discord": {
 		"prefix": {
@@ -47,7 +44,7 @@
 		"shards": 1
 	},
 	"name": "DiscordMail",
-	"useragent": "DiscordMail/1.3 Like Parkerbot/4.0 (node.js; Linux x86_64)",
+	"useragent": "DiscordMail/2.0 (node.js; Linux x86_64)",
 	"welcome": {
 		"html": "<div style='color: #FFFFFF;'>\n<div style='text-align: center; background: #7289DA;'>\n<img style='height: 60px' src='https:\/\/discordmail.com\/img\/DiscordMail.png'>\n<\/div>\n<div style='background: #2C2F33;'>\n<h1 style='margin-top: 0px;'>Thanks for registering with DiscordMail!<\/h1>\n<p>By viewing this E-Mail you will have succeeded in <b>Step 1<\/b> of the DiscordMail tutorial.<\/p>\n<p><b>Step 2:<\/b> Try sending an E-Mail to a friend of yours.<\/p>\n<code>dmail send yourfriend@example.com 'Hello!' I sent an E-Mail from Discord, isn't that cool?<\/code>\n<p><i>Tip! You can attach a single file while sending the message to send the attachment in Discord!<\/i><\/p>\n<p><b>Step 3:<\/b> Explore!<\/p>\n<p>Because DiscordMail is just a normal E-Mail client, you can use your DiscordMail account anywhere where you can insert an E-Mail. If E-Mails don't come out right in Discord, you can click the embed URL to open the original HTML version. Try it out on this E-Mail!<\/p>\n<br>\n<\/div>\n<div style='background: #23272A;'>\n<p style='margin-top: 0px;'>This is a one-time E-Mail sent on registration for DiscordMail. If you are unaware of this E-Mail, please disregard it.<\/p>\n<p>\nCopyright 2015 - 2018, Moustacheminer Server Services<br>\nMoustacheminer Server Services are not associated with Discord Inc.\n<\/p>\n<\/div>\n<\/div>\n",
 		"text": "**Thanks for registering with DiscordMail!**\n\nBy viewing this E-Mail you will have succeeded in Step 1 of the DiscordMail tutorial.\n\n__Step 2: Try sending an E-Mail to a friend of yours.__  \n`dmail send yourfriend@example.com 'Hello!' I sent an E-Mail from Discord, isn't that cool?`\n\n_Tip! You can attach a single file while sending the message to send the attachment in Discord!_\n\n__Step 3: Explore!__\nBecause DiscordMail is just a normal E-Mail client, you can use your DiscordMail account anywhere where you can insert an E-Mail.  \nIf E-Mails don't come out right in Discord, you can click the embed URL to open the original HTML version. Try it out on this E-Mail! \n\n---\n\nThis is a one-time E-Mail sent on registration for DiscordMail. If you are unaware of this E-Mail, please disregard it.  \nCopyright 2015 - 2018, Moustacheminer Server Services Moustacheminer Server Services are not associated with Discord Inc."
@@ -70,6 +67,9 @@
 			"@mdteam.ga",
 			"@dmail.com"
 		]
+	},
+	"certificate": {
+		"key": "",
+		"cert": ""
 	}
 }
-

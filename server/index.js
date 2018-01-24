@@ -4,13 +4,13 @@ const r = require('./db');
 const path = require('path');
 const cors = require('cors');
 const i18n = require('i18n');
-const api = require('./api');
-const url = require('./url');
-const docs = require('./docs');
-const mail = require('./mail');
-const lang = require('./lang');
+const api = require('./router/api');
+const url = require('./router/url');
+const docs = require('./router/docs');
+const mail = require('./router/mail');
+const lang = require('./router/lang');
 const auth = require('./auth');
-const admin = require('./admin');
+const admin = require('./router/admin');
 const config = require('config');
 const express = require('express');
 const discord = require('./discord');
@@ -52,7 +52,6 @@ app.enable('trust proxy')
 	.use(authentication.initialize())
 	.use(authentication.session())
 	.use(async (req, res, next) => {
-		res.locals.domain = config.get('api').mailgun.domain;
 		res.locals.admin = false;
 		if (req.user) {
 			const result = (await r.table('registrations')

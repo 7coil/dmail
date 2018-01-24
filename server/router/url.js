@@ -1,6 +1,6 @@
 const express = require('express');
 const config = require('config');
-const discord = require('./discord');
+const discord = require('./../discord');
 
 const router = express.Router();
 

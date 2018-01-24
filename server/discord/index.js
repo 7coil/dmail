@@ -57,5 +57,5 @@ client.once('ready', () => {
 	});
 });
 
-client.connect();
+// client.connect();
 module.exports = client;
