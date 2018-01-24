@@ -20,6 +20,7 @@ const cookieParser = require('cookie-parser');
 const authentication = require('./auth/auth');
 
 const app = express();
+require('./mail');
 
 i18n.configure({
 	directory: path.join(__dirname, '..', 'locales'),
