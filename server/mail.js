@@ -1,4 +1,4 @@
-const SMTPServer = require('smtp-server');
+const { SMTPServer } = require('smtp-server');
 const fs = require('fs');
 const config = require('config');
 
