@@ -5,6 +5,7 @@ const config = require('config');
 const server = new SMTPServer({
 	key: fs.readFileSync(config.get('certificate').key),
 	cert: fs.readFileSync(config.get('certificate').cert),
+	authOptional: true,
 	onData(stream, session, callback) {
 		stream.pipe(process.stdout);
 		stream.on('end', callback);
