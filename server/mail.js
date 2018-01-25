@@ -18,19 +18,21 @@ transporter.on('error', (err) => {
 });
 
 const bounce = (mail, error) => {
-	transporter.sendMail({
-		from: 'noreply@mss.ovh',
-		to: mail.from,
-		subject: 'Non-Delivery Report',
-		text: error,
-		headers: {
-			'In-Reply-To': mail.headers['Message-Id'],
-			References: mail.References
-		}
-	}, (err, info) => {
-		console.dir(info);
-		console.dir(err);
-	});
+	if (mail.from && mail.from.value[0]) {
+		transporter.sendMail({
+			from: 'noreply@mss.ovh',
+			to: mail.from.value[0].address,
+			subject: 'Non-Delivery Report',
+			text: error,
+			headers: {
+				'In-Reply-To': mail.headers['Message-Id'],
+				References: mail.References
+			}
+		}, (err, info) => {
+			console.dir(info);
+			console.dir(err);
+		});
+	}
 };
 
 const server = new SMTPServer({
