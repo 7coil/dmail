@@ -17,8 +17,8 @@ const bounce = (mail, error) => {
 		subject: 'Non-Delivery Report',
 		text: error
 	}, (err, info) => {
-		console.log(info.envelope);
-		console.log(info.messageId);
+		console.dir(info);
+		console.dir(err);
 	});
 };
 
