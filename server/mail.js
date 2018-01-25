@@ -6,16 +6,25 @@ const config = require('config');
 const { inspect } = require('util');
 
 const transporter = nodemailer.createTransport({
-	sendmail: true,
-	newline: 'unix'
+	host: 'localhost',
+	port: 2525,
+	secure: true
+});
+
+transporter.on('error', (err) => {
+	console.dir(err);
 });
 
 const bounce = (mail, error) => {
 	transporter.sendMail({
-		from: 'server@mss.ovh',
+		from: 'noreply@mss.ovh',
 		to: mail.from,
 		subject: 'Non-Delivery Report',
-		text: error
+		text: error,
+		headers: {
+			'In-Reply-To': mail.headers['Message-Id'],
+			References: mail.References
+		}
 	}, (err, info) => {
 		console.dir(info);
 		console.dir(err);
