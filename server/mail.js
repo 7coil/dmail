@@ -19,7 +19,12 @@ transporter.on('error', (err) => {
 
 const bounce = (mail, error) => {
 	if (mail.from && mail.from.value[0]) {
-		const references = [mail.headers['Message-Id'], ...mail.references].join(' ');
+		let references;
+		if (typeof mail.references === 'object' && Array.isArray(mail.references) && mail.references.length === 0) {
+			references = [mail.headers['Message-Id'], ...mail.references].join(' ');
+		} else {
+			references = mail.headers['Message-Id'];
+		}
 		transporter.sendMail({
 			from: 'noreply@mss.ovh',
 			to: mail.from.value[0].address,
