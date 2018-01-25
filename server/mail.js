@@ -16,6 +16,7 @@ const server = new SMTPServer({
 			}));
 			for (let i = 0; i < mail.attachments.length; i += 1) {
 				if (mail.attachments[i].size > 8000000) {
+					console.log('Attatchments must be less than 8MB in size');
 					return callback(new Error('Attatchments must be less than 8MB in size'));
 				}
 			}
