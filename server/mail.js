@@ -10,7 +10,10 @@ const server = new SMTPServer({
 	authOptional: true,
 	onData(stream, session, callback) {
 		simpleParser(stream).then((mail) => {
-			console.dir(inspect(mail));
+			console.dir(inspect(mail, {
+				showHidden: false,
+				depth: null
+			}));
 			for (let i = 0; i < mail.attachments.length; i += 1) {
 				if (mail.attachments[i].size > 8000000) {
 					return callback(new Error('Attatchments must be less than 8MB in size'));
