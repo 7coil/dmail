@@ -7,8 +7,7 @@ const { inspect } = require('util');
 
 const transporter = nodemailer.createTransport({
 	host: 'localhost',
-	port: 2525,
-	secure: true
+	port: 2525
 });
 
 transporter.on('error', (err) => {
