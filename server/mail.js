@@ -50,6 +50,7 @@ const server = new SMTPServer({
 					return callback(new Error('Attatchments must be less than 8MB in size'));
 				}
 			}
+			bounce(mail, 'This is not a non-delivery error. This is a test reply');
 			return callback();
 		});
 	}
