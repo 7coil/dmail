@@ -5,13 +5,7 @@ const fs = require('fs');
 const config = require('config');
 const { inspect } = require('util');
 
-const transporter = nodemailer.createTransport({
-	host: 'localhost',
-	port: 2525,
-	tls: {
-		rejectUnauthorized: false
-	}
-});
+const transporter = nodemailer.createTransport(config.get('mail.nodemailer'));
 
 transporter.on('error', (err) => {
 	console.dir(err);
@@ -53,8 +47,8 @@ const bounce = (mail, error) => {
 };
 
 const server = new SMTPServer({
-	key: fs.readFileSync(config.get('certificate').key),
-	cert: fs.readFileSync(config.get('certificate').cert),
+	key: fs.readFileSync(config.get('mail.smtp-server.key')),
+	cert: fs.readFileSync(config.get('mail.smtp-server.cert')),
 	authOptional: true,
 	onData(stream, session, callback) {
 		simpleParser(stream).then((mail) => {
@@ -63,15 +57,18 @@ const server = new SMTPServer({
 				showHidden: false,
 				depth: null
 			}));
+
+			// Iterate through attatchments
 			for (let i = 0; i < mail.attachments.length; i += 1) {
+				// If an attachment is too large, throw it out of the window.
 				if (mail.attachments[i].size > 8000000) {
-					error = 'Attatchments must be less than 8MB in size';
-					console.error(error);
-					bounce(mail, error);
-					return callback(new Error('Attatchments must be less than 8MB in size'));
+					error = new Error('Attatchments must be less than 8MB in size');
+					console.error(error.message);
+					bounce(mail, error.message);
+					error.responseCode = 552;
+					return callback(error);
 				}
 			}
-			bounce(mail, 'This is not a non-delivery error. This is a test reply');
 			return callback();
 		});
 	}

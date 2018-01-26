@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
 		res.redirect(`https://discordapp.com/oauth2/authorize?=&client_id=${discord.user.id}&scope=bot&permissions=0`);
 	})
 	.get('/:page', (req, res, next) => {
-		if (config.get('url')[req.params.page]) {
-			res.redirect(config.get('url')[req.params.page]);
+		if (config.has(`webserver.url.${req.params.page}`)) {
+			res.redirect(config.get(`webserver.url.${req.params.page}`));
 		} else {
 			next();
 		}

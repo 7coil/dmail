@@ -1,13 +1,8 @@
 const r = require('./../db');
-const i18n = require('i18n');
 const config = require('config');
 const express = require('express');
 const request = require('request');
-const discord = require('./../discord');
-const fs = require('fs');
-const path = require('path');
 
-const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 const router = express.Router();
 
 const registered = (req, res, next) => {
