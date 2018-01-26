@@ -58,7 +58,7 @@ const server = new SMTPServer({
 				depth: null
 			}));
 
-			// Iterate through attatchments
+			// Iterate through attatchments, and validate each one
 			for (let i = 0; i < mail.attachments.length; i += 1) {
 				// If an attachment is too large, throw it out of the window.
 				if (mail.attachments[i].size > 8000000) {
@@ -67,6 +67,8 @@ const server = new SMTPServer({
 					return callback(error);
 				}
 			}
+
+			// Success!
 			return callback();
 		});
 	}
