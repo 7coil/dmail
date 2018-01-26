@@ -19,16 +19,27 @@ transporter.on('error', (err) => {
 
 const bounce = (mail, error) => {
 	if (mail.from && mail.from.value[0]) {
+		// References string, to reply to the original E-Mail
 		let references;
+
+		// Reply subject
+		let subject = 'Non-Delivery Report';
+
 		if (typeof mail.references === 'object' && Array.isArray(mail.references) && mail.references.length === 0) {
 			references = [mail.headers['Message-Id'], ...mail.references].join(' ');
 		} else {
 			references = mail.headers['Message-Id'];
 		}
+
+		if (mail.subject) {
+			subject += ' for: ';
+			subject += mail.subject;
+		}
+
 		transporter.sendMail({
 			from: 'noreply@mss.ovh',
 			to: mail.from.value[0].address,
-			subject: 'Non-Delivery Report',
+			subject,
 			text: error,
 			headers: {
 				'In-Reply-To': mail.headers['Message-Id'],
