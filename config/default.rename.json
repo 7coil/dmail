@@ -10,7 +10,7 @@
 			"db": "dmail",
 			"servers": [
 				{
-					"host": "",
+					"host": "127.0.0.1",
 					"port": 28015
 				}
 			]
@@ -19,9 +19,16 @@
 			"public": "",
 			"private": ""
 		},
-		"botsdiscordpw": "",
-		"discordbotsorg": "",
-		"lsterminalink": ""
+		"clamav": {
+			"host": "127.0.0.1",
+			"port": 3310
+		},
+		"letsencrypt": {
+			"email": "email@example.com",
+			"agreeTOS": false,
+			"rsaKeySize": 2048,
+			"challengeType": "http-01"
+		}
 	},
 	"webserver": {
 		"port": 8080,
@@ -63,9 +70,5 @@
 			"@mdteam.ga",
 			"@dmail.com"
 		]
-	},
-	"certificate": {
-		"key": "",
-		"cert": ""
 	}
 }
