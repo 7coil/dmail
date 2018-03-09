@@ -193,27 +193,6 @@ const description = `
 
 // Things to do after finishing up
 const onload = () => {
-	const dmguilds = document.getElementById('dmguilds');
-	const dmusers = document.getElementById('dmusers');
-	const dmregistered = document.getElementById('dmregistered');
-	const dblservers = [... document.getElementsByClassName('ui label blue')][0];
-
-	dblrequest({
-		url: "https://discordmail.com/api/stats",
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json"
-		}
-	}, (err, res) => {
-		if (err) {
-			console.log(err);
-		} else {
-			dblservers.innerHTML = `${res.guilds} SERVERS`
-			dmguilds.innerHTML = `${res.guilds} guilds`;
-			dmusers.innerHTML = `${res.users} users`;
-			dmregistered.innerHTML = `${res.registered} registered accounts`;
-		}
-	});
 }
 
 const getClass = name => [...document.getElementsByClassName(name)][0];
@@ -245,11 +224,10 @@ const load = () => {
 		points: document.getElementById('points').innerHTML,
 		disabled: !document.getElementById('userloggedin') || document.getElementById('upvotebutton').style.display === 'none' || false,
 		prefix: document.getElementById('prefix').firstChild.innerHTML,
-		upvotescript: document.getElementById('upvotebutton').getAttribute('onclick'),
-		owners: [...document.getElementById('createdby').children].map((elem) => ({
-			url: elem.firstChild.href,
-			img: elem.firstChild.children[0].src,
-			name: elem.firstChild.children[1].innerText
+		owners: [...[...document.getElementById('createdby').children][2].children].map((elem) => ({
+			url: elem.href,
+			img: elem.children[0].src,
+			name: elem.children[1].innerText
 		})),
 		upvoted: [...document.getElementById('upvotebutton').classList].includes('voted') || false,
 		username: document.getElementById('userloggedin') ? document.getElementById('userloggedin').innerHTML : null,
@@ -320,7 +298,7 @@ const load = () => {
 	if (dbl.invite) dblbuttons.innerHTML += `<a class="ui labeled icon button" href="${dbl.invite}"><i class="mouse pointer icon"></i>Invite</a>`;
 	if (dbl.github) dblbuttons.innerHTML += `<a class="ui labeled icon button" href="${dbl.github}"><i class="github icon"></i>GitHub Repo</a>`;
 	if (dbl.support) dblbuttons.innerHTML += `<a class="ui labeled icon button" href="${dbl.support}"><i class="mail forward icon"></i>Join Support Server</a>`;
-	dblbuttons.innerHTML += `<div class="ui left labeled button" tabindex="0"><a class="ui basic right pointing label" id="upvotecounterprofile">${dbl.points}</a><button onclick="dbl${dbl.upvotescript}" class="ui button ${dbl.upvoted ? 'positive' : ''}" ${dbl.disabled ? 'disabled' : ''} id="upvotebutton"><i class="angle up icon"></i> Upvote</button></div>`,
+	dblbuttons.innerHTML += `<div class="ui left labeled button" tabindex="0"><a class="ui basic right pointing label" id="upvotecounterprofile" href="${window.location.href}/vote">${dbl.points}</a><a href="${window.location.href}/vote" class="ui button ${dbl.upvoted ? 'positive' : ''}" ${dbl.disabled ? 'disabled' : ''} id="upvotebutton"><i class="angle up icon"></i> Upvote</a></div>`,
 	document.getElementById('bottprefix').innerHTML = `Bot Prefix: <b>${dbl.prefix}</b>`;
 	if (dbl.owners) dbl.owners.forEach((owner) => {
 		dblowners.innerHTML += `<a class="ui label" id="ownerthing" style="padding: 5px;" href="${owner.url}"><img class="ui right spaced avatar image" src="${owner.img}" style="border-radius:250px;">${owner.name}</a>`
