@@ -11,37 +11,6 @@ const upload = multer({
 	storage: multer.memoryStorage()
 });
 
-const sendError = (email, message) => {
-	const name = discord.user.username
-		.replace(/ /g, '+')
-		.replace(/\W/g, '=')
-		.toLowerCase();
-
-	const data = {
-		from: `${config.get('name')} Mail Server <${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}>`,
-		to: email.From,
-		'h:In-Reply-To': email['Message-Id'],
-		'h:References': email['Message-Id'],
-		'h:X-Failed-Recipients': email.recipient,
-		subject: `Re: ${email.Subject}`,
-		text: message
-	};
-
-	if (email.from.toLowerCase() === `${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}`.toLowerCase()) {
-		console.log('Detected server is sending error message to itself. Giving up.');
-	} else if (email.recipient.toLowerCase() === `${name}#${discord.user.discriminator}@${config.get('api').mailgun.domain}`.toLowerCase()) {
-		console.log('Detected recipient is also mail server. Giving up');
-	} else {
-		mailgun.messages().send(data, (err) => {
-			if (err) {
-				console.log('Failed to send error message. Giving up.');
-			} else {
-				console.log(message, 'Sent error message to person.');
-			}
-		});
-	}
-};
-
 const validate = (req, res, next) => {
 	if (!mailgun.validateWebhook(req.body.timestamp, req.body.token, req.body.signature)) {
 		console.log('Request not from Mailgun recieved.');
@@ -66,7 +35,6 @@ const check = async (req, res, next) => {
 		if (!result[0]) {
 			console.log('The E-Mail doesn\'t exist');
 			res.status(406).json({ error: { message: 'Invalid user - Not found in database.' } });
-			sendError(body, 'The email address does not exist.');
 		} else if (config.get('ban').in.some(email => body.sender.toLowerCase().includes(email))) {
 			res.status(406).json({ success: { message: `The domain this email was sent from is not allowed to send to DiscordMail. Visit ${config.get('webserver').domain}/docs/blocked` } });
 			console.log('The E-Mail was blocked by the owner.');
@@ -76,11 +44,9 @@ const check = async (req, res, next) => {
 		} else if (body.subject.length > 128) {
 			console.log('The subject was too long');
 			res.status(406).json({ error: { message: 'The subject was too long' } });
-			sendError(body, 'The subject of your E-Mail was too long to be sent to Discord.');
 		} else if (body.from > 128) {
 			console.log('The author name was too long');
 			res.status(406).json({ error: { message: 'The author name was too long' } });
-			sendError(body, 'Your author name was too long to be sent to Discord.');
 		} else if (config.get('ban').word.some(word => body['body-plain'].toLowerCase().includes(word))) {
 			console.log('The email was detected as spam.');
 			res.status(406).json({ error: { message: `The email was detected as spam. Visit ${config.get('webserver').domain}/docs/blocked` } });
@@ -137,7 +103,6 @@ router.post('/mail', upload.single('attachment-1'), validate, check, async (req,
 	const failure = () => {
 		console.log((new Date()).toUTCString(), `Failed to send DM to ${res.locals.dmail.location}`);
 		res.status(406).json({ error: { message: 'Could not send mail to user or guild.' } });
-		sendError(body, 'The mail server could not DM the user or guild.');
 	};
 
 	if (req.file && req.file.buffer.length < 8000000) {
