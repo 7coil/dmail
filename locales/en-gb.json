@@ -135,7 +135,7 @@
 	"register_subject": "DiscordMail Introduction",
 	"register_welcome": "Welcome to DiscordMail!",
 	"register_user": "Register Online",
-	"register_guild": "Fill in form to register Guild",
+	"register_guild": "DiscordMail no longer sends to guilds. Please register for DiscordMailHooks to send emails to a channel.",
     "reply": "Reply to E-Mail",
     "reply_1_in": "{{ prefix }} {{ command }} [Content]",
     "reply_1_out": "Reply to previous E-Mail",

@@ -1,8 +1,6 @@
 const validator = require('validator');
 const r = require('./../../db');
 const config = require('config');
-const fs = require('fs');
-const path = require('path');
 const mailgun = require('mailgun-js')(config.get('api').mailgun);
 const marked = require('marked');
 const request = require('request');
@@ -10,7 +8,6 @@ const request = require('request');
 marked.setOptions({
 	sanitize: true
 });
-const name = string => string.replace(/ /g, '+').replace(/[^\w\d!#$&'*+\-/=?^_`{|}~\u007F-\uFFFF]+/g, '=').toLowerCase();
 const emailRegex = /([\w!#$%&'*+\-/=?^_`{|}~.]+@[\w.!#$%&'*+\-/=?^_`{|}~]+) (?:"(.*?)")? *([\w\W]+)?/;
 const replyRegex = /(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}|) *([\w\W]+)/;
 const banRegex = /(\d+)>? ?([\w\W]+)/;
@@ -104,74 +101,6 @@ module.exports = [{
 			}
 		} else {
 			message.channel.createMessage(message.__('delete_incorrect', { prefix: message.mss.prefix, command: message.mss.command }));
-		}
-	}
-}, {
-	aliases: [
-		'guild'
-	],
-	name: 'guild',
-	uses: 1,
-	admin: 3,
-	register: false,
-	ratelimit: 0,
-	command: async (message) => {
-		const email = name(message.mss.input);
-		const check = await r.table('registrations')
-			.filter({
-				location: message.channel.id
-			});
-		const mail = await r.table('registrations')
-			.filter({
-				email
-			});
-		if (check.length && message.mss.context === 'user') {
-			message.channel.createMessage('This channel already has an E-Mail attributed. Override using guild prefix.');
-		} else if (mail.length && message.mss.context === 'user') {
-			message.channel.createMessage('This E-Mail address has already been taken. Override using guild prefix.');
-		} else if (!message.mss.input) {
-			message.channel.createMessage('No email was provided.');
-		} else if (!message.channel.guild) {
-			message.channel.createMessage('This command only works in a guild.');
-		} else {
-			await r.table('registrations')
-				.filter({
-					location: message.channel.id
-				})
-				.delete();
-			await r.table('registrations')
-				.filter({
-					email
-				})
-				.delete();
-			await r.table('registrations')
-				.insert({
-					location: message.channel.id,
-					type: 'guild',
-					details: {
-						guild: message.channel.guild.id
-					},
-					display: message.channel.guild.name,
-					email,
-					block: []
-				});
-
-			const data = {
-				from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
-				to: `${email}@${config.get('api').mailgun.domain}`,
-				subject: message.__('register_subject', { name: message.__('name') }),
-				html: fs.readFileSync(path.join('./', 'promo', 'guildwelcome.html'), 'utf8'),
-				text: fs.readFileSync(path.join('./', 'promo', 'guildwelcome.md'), 'utf8')
-			};
-
-			mailgun.messages().send(data, (err2) => {
-				if (err2) {
-					message.channel.createMessage(message.__('err_generic'));
-					console.log(`Failed to send an introductory email to ${email}@${config.get('api').mailgun.domain}`);
-				} else {
-					console.log((new Date()).toUTCString(), `Sent introductory email to ${email}@${config.get('api').mailgun.domain}`);
-				}
-			});
 		}
 	}
 }, {
