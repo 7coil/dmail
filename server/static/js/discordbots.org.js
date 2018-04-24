@@ -224,7 +224,7 @@ const load = () => {
 		points: document.getElementById('points').innerHTML,
 		disabled: !document.getElementById('userloggedin') || document.getElementById('upvotebutton').style.display === 'none' || false,
 		prefix: document.getElementById('prefix').firstChild.innerHTML,
-		owners: [...[...document.getElementById('createdby').children][2].children].map((elem) => ({
+		owners: [...[...document.getElementById('createdby').children][0].children].map((elem) => ({
 			url: elem.href,
 			img: elem.children[0].src,
 			name: elem.children[1].innerText
