@@ -86,7 +86,11 @@ app.enable('trust proxy')
 
 // Remove old socket
 if (typeof config.get('webserver').port !== 'number') {
-	fs.unlinkSync(config.get('webserver').port, (err) => { if (err) console.error(err); });
+	try {
+		fs.unlink(config.get('webserver').port);
+	} catch (e) {
+		// ignore
+	}
 }
 
 // Create a socket, or listen to a port
