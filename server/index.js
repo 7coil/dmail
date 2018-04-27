@@ -1,5 +1,6 @@
 console.log('Welcome to Moustacheminer Server Services');
 
+const fs = require('fs');
 const r = require('./db');
 const path = require('path');
 const cors = require('cors');
@@ -14,6 +15,7 @@ const admin = require('./admin');
 const config = require('config');
 const express = require('express');
 const discord = require('./discord');
+const { exec } = require('child_process');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -82,8 +84,19 @@ app.enable('trust proxy')
 	.use(express.static(path.join(__dirname, '/static')))
 	.use('*', (req, res) => res.status(404).render('error.pug', { status: 404 }));
 
+// Remove old socket
+if (typeof config.get('webserver').port !== 'number') {
+	fs.unlinkSync(config.get('webserver').port, (err) => { if (err) console.error(err); });
+}
+
+// Create a socket, or listen to a port
 console.log('Listening on', config.get('webserver').port);
 app.listen(config.get('webserver').port);
+
+// Chown the new socket
+if (typeof config.get('webserver').port !== 'number') {
+	exec(`chown ${config.get('webserver').sock_owner} ${config.get('webserver').port}`);
+}
 
 process.on('unhandledRejection', (reason) => {
 	console.dir(reason);

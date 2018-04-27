@@ -28,6 +28,7 @@
 		"lsterminalink": ""
 	},
 	"webserver": {
+		"sock_owner": "www_data",
 		"port": 8080,
 		"domain": "https://discordmail.com"
 	},
