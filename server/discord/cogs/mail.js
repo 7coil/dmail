@@ -113,23 +113,7 @@ module.exports = [{
 	register: false,
 	ratelimit: 1000,
 	command: (message) => {
-		if (message.mss.dmail) {
-			message.channel.createMessage(message.__('err_registered'));
-		} else if (message.mss.context === 'user') {
-			message.channel.createMessage({
-				embed: {
-					title: message.__('register_welcome', { name: message.__('name') }),
-					description: `[${message.__('register_user')}](${config.get('webserver').domain}/mail/register)`,
-				}
-			});
-		} else if (message.mss.context === 'guild') {
-			message.channel.createMessage({
-				embed: {
-					title: message.__('register_welcome', { name: message.__('name') }),
-					description: `[${message.__('register_guild')}](${config.get('webserver').domain}/url/guild)`,
-				}
-			});
-		}
+		message.channel.createMessage('DiscordMail is no longer taking registrations.');
 	}
 }, {
 	aliases: [

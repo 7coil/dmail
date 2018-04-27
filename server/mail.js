@@ -124,63 +124,63 @@ router.get('/', authed, registered, async (req, res) => {
 			});
 		}
 	})
-	.get('/register', authed, notregistered, (req, res) => {
-		res.render('register.pug', {
-			captcha: config.get('api').captcha.public
-		});
-	})
-	.post('/register', captcha, authed, notregistered, async (req, res) => {
-		if (!req.body.agree) {
-			res.status(401).render('error.pug', {
-				status: 401,
-				message: res.__('err_no_agree')
-			});
-		} else {
-			try {
-				const dm = await discord.getDMChannel(req.user.id);
-				const email = name(`${req.user.username}#${req.user.discriminator}`);
-				await dm.createMessage(`${email}@${config.get('api').mailgun.domain}`);
-				await r.table('registrations')
-					.insert({
-						location: req.user.id,
-						type: 'user',
-						details: {
-							name: req.user.username,
-							discrim: req.user.discriminator,
-							email: req.user.email,
-							mfa_enabled: req.user.mfa_enabled
-						},
-						display: `${req.user.username}#${req.user.discriminator}`,
-						email,
-						block: []
-					});
-				const data = {
-					from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
-					to: `${email}@${config.get('api').mailgun.domain}`,
-					subject: i18n.__('register_subject', { name: i18n.__('name') }),
-					html: fs.readFileSync(path.join('./', 'promo', 'userwelcome.html'), 'utf8'),
-					text: fs.readFileSync(path.join('./', 'promo', 'userwelcome.md'), 'utf8')
-				};
-				await mailgun.messages().send(data);
-				res.redirect('/');
-			} catch (e) {
-				let error = '';
-				if (e.resonse && e.response.includes('50007')) {
-					error = res.__('err_dm');
-				} else {
-					console.dir(e);
-				}
-				res.status(500).render('error.pug', {
-					status: 500,
-					message: error || res.__('err_generic')
-				});
-				r.table('registrations')
-					.get(req.user.id)
-					.delete()
-					.run();
-			}
-		}
-	})
+	// .get('/register', authed, notregistered, (req, res) => {
+	// 	res.render('register.pug', {
+	// 		captcha: config.get('api').captcha.public
+	// 	});
+	// })
+	// .post('/register', captcha, authed, notregistered, async (req, res) => {
+	// 	if (!req.body.agree) {
+	// 		res.status(401).render('error.pug', {
+	// 			status: 401,
+	// 			message: res.__('err_no_agree')
+	// 		});
+	// 	} else {
+	// 		try {
+	// 			const dm = await discord.getDMChannel(req.user.id);
+	// 			const email = name(`${req.user.username}#${req.user.discriminator}`);
+	// 			await dm.createMessage(`${email}@${config.get('api').mailgun.domain}`);
+	// 			await r.table('registrations')
+	// 				.insert({
+	// 					location: req.user.id,
+	// 					type: 'user',
+	// 					details: {
+	// 						name: req.user.username,
+	// 						discrim: req.user.discriminator,
+	// 						email: req.user.email,
+	// 						mfa_enabled: req.user.mfa_enabled
+	// 					},
+	// 					display: `${req.user.username}#${req.user.discriminator}`,
+	// 					email,
+	// 					block: []
+	// 				});
+	// 			const data = {
+	// 				from: `${config.get('name')} Mail Server <noreply@${config.get('api').mailgun.domain}>`,
+	// 				to: `${email}@${config.get('api').mailgun.domain}`,
+	// 				subject: i18n.__('register_subject', { name: i18n.__('name') }),
+	// 				html: fs.readFileSync(path.join('./', 'promo', 'userwelcome.html'), 'utf8'),
+	// 				text: fs.readFileSync(path.join('./', 'promo', 'userwelcome.md'), 'utf8')
+	// 			};
+	// 			await mailgun.messages().send(data);
+	// 			res.redirect('/');
+	// 		} catch (e) {
+	// 			let error = '';
+	// 			if (e.resonse && e.response.includes('50007')) {
+	// 				error = res.__('err_dm');
+	// 			} else {
+	// 				console.dir(e);
+	// 			}
+	// 			res.status(500).render('error.pug', {
+	// 				status: 500,
+	// 				message: error || res.__('err_generic')
+	// 			});
+	// 			r.table('registrations')
+	// 				.get(req.user.id)
+	// 				.delete()
+	// 				.run();
+	// 		}
+	// 	}
+	// })
 	.get('/:id', async (req, res) => {
 		try {
 			const result = await r.table('emails')
