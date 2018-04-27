@@ -48,8 +48,7 @@ html
 					li: a(href="mailto:" + encodeURIComponent(`${user.dmail.email}@${domain}`)) #{user.dmail.email}@#{domain}
 					li: a(href="/mail") #{__('nav_emails')}
 				li: a(href="/auth/logout") #{__('nav_logout')}
-				if admin
-					li: a(href="/admin") #{__('nav_admin')}
+				li: a(href="/mail/terminate") Terminate your DiscordMail account
 			else
 				li: a(href="/auth" target="_blank") #{__('nav_login')}
 			li: a(href="/docs/terms") #{__('tos')}
