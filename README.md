@@ -1,3 +1,8 @@
+# DEPRECIATION WARNING
+DiscordMail doesnt exist anymore.
+## [Try DiscordMailHooks to send emails to channels](https://webhooks.discordmail.com/)
+
+
 # DiscordMail
 The Discord to Email client, connecting the past to the future.
 
