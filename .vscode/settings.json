@@ -9,6 +9,7 @@
       "sql",
       "startup",
       "webhook",
-      "webhooks"
+      "webhooks",
+      "wholesomeyuri"
     ]
 }

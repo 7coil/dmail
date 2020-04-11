@@ -7,6 +7,8 @@ import mysql from 'mysql';
 import registerCommand from './commands/register';
 import meiCommand from './commands/mei';
 import deactivateCommand from './commands/deactivate';
+import helpCommand from './commands/help';
+import pingCommand from './commands/ping';
 
 const token = fs.readFileSync('/run/secrets/discord_token', { encoding: 'UTF-8' }).trim();
 
@@ -41,6 +43,8 @@ router
   .command('test', ({message}) => {
     message.channel.createMessage('Hello world!')
   })
+  .command('help', helpCommand)
+  .command('ping', pingCommand)
   .command('register', registerCommand)
   .command('deactivate', deactivateCommand)
   .command('mei', meiCommand)
