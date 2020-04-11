@@ -1,0 +1,20 @@
+{
+  "name": "discordmail-mailserver",
+  "version": "2.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "form-data": "^3.0.0",
+    "html-to-text": "^5.1.1",
+    "mailparser": "^2.7.7",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.0",
+    "smtp-server": "^3.6.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "source-map-support": "^0.5.16",
+    "typescript": "^3.8.3"
+  }
+}

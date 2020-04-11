@@ -1,0 +1,40 @@
+version: '3.7'
+services:
+  database:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    hostname: database
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: discordmail
+      MYSQL_USER: discordmail
+      MYSQL_PASSWORD: discordmail
+  mail:
+    build: src/mail/
+    ports:
+      - "25:25"
+    depends_on:
+      - database
+      - bot
+    environment: 
+      WAIT_HOSTS: database:3306
+      DOMAIN_NAME: discordmail.com
+    secrets:
+      - startup_sql
+  bot:
+    build: src/bot/
+    depends_on:
+      - database
+    environment:
+      WAIT_HOSTS: database:3306
+      DOMAIN_NAME: discordmail.com
+    secrets:
+      - discord_token
+secrets:
+  discord_token:
+    file: ./secrets/discord_token
+  startup_sql:
+    file: ./secrets/startup_sql.sql
