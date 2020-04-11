@@ -4,8 +4,8 @@ import HaSeul from 'haseul';
 import { Connection } from 'mysql';
 import path from 'path';
 import { v4 as uuid4 } from 'uuid';
-import pictureFileLocation from '../images/favicon.png';
 import AccountTypes from '../AccountTypes';
+import pictureFileLocation from '../images/favicon.png';
 
 const registerCommand = new HaSeul<Eris.Message>();
 
