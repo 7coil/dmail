@@ -1,10 +1,6 @@
-import datauri from 'datauri';
-import Eris, { Client, TextChannel } from 'eris';
+import Eris, { TextChannel } from 'eris';
 import HaSeul from 'haseul';
 import { Connection } from 'mysql';
-import path from 'path';
-import { v4 as uuid4 } from 'uuid';
-import pictureFileLocation from '../images/favicon.png';
 import AccountTypes from '../AccountTypes';
 
 const deactivateCommand = new HaSeul<Eris.Message>();
