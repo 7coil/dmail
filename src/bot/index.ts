@@ -39,9 +39,7 @@ router
     next();
   })
   .command('test', ({message}) => {
-    console.log('Received a test message!')
     message.channel.createMessage('Hello world!')
-      .catch((err) => console.log(err));
   })
   .command('register', registerCommand)
   .command('deactivate', deactivateCommand)
