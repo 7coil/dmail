@@ -1,9 +1,9 @@
 #!/usr/bin/env pwsh
 
-$smtpServer = "localhost"
+$smtpServer = "mailserver.discordmail.com"
 $smtpFrom = "Test Account <test@discordmail.com>"
 # $smtpTo = "katie@discordmail.com"
-$smtpTo = "bf13a0e6-418e-4b12-a983-5153d206d84a@discordmail.com"
+$smtpTo = "c0e371a9-6fff-43cb-85b9-4e42be1fa18d@discordmail.com"
 $messageSubject = "Test"
 $messageBody = "This is a test application from Microsoft PowerShell."
 
