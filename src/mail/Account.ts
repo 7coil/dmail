@@ -2,6 +2,7 @@ import FormData from 'form-data';
 import { Connection } from 'mysql';
 import fetch from 'node-fetch';
 import Mail from './Mail';
+import DiscordMailHooks from './DiscordMailHooks';
 
 enum AccountTypes {
   WEBHOOK_ACCOUNT = 0,
@@ -71,15 +72,24 @@ class Account {
       if (!lowercaseEmailString.endsWith('@' + process.env.DOMAIN_NAME)) return resolve(null);
       
       const remainingPart = email.substring(0, email.length - process.env.DOMAIN_NAME.length - 1);
+      const discordMailHooks = new DiscordMailHooks(remainingPart);
 
-      db.query('SELECT * FROM accounts WHERE id = ?', [remainingPart], (err, results, fields) => {
-        if (err) {
-          reject(err);
-        } else {
-          if (results.length === 0) return resolve(null);
-          return resolve(new Account(results[0]))
-        }
-      })
+      if (discordMailHooks.matches()) {
+        return resolve(new Account({
+          id: remainingPart,
+          type: AccountTypes.WEBHOOK_ACCOUNT,
+          payload: discordMailHooks.toWebhook()
+        }))
+      } else {
+        db.query('SELECT * FROM accounts WHERE id = ?', [remainingPart], (err, results, fields) => {
+          if (err) {
+            reject(err);
+          } else {
+            if (results.length === 0) return resolve(null);
+            return resolve(new Account(results[0]))
+          }
+        })
+      }
     })
   }
 }
