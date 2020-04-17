@@ -35,10 +35,16 @@ const server = new SMTPServer({
       .then(mail => new Mail({ mail, stream, session, callback, sqlConnection }))
       .then(async (mail) => {
         const recipient = await mail.getRecipient();
-        if (recipient) await recipient.sendMail(mail);
+        if (recipient) {
+          await recipient.sendMail(mail);
+          callback()
+        } else {
+          const err = new Error('No Such User Here');
+          err.responseCode = 550
+          callback(err);
+        }
         return;
       })
-      .then(() => callback())
       .catch((error) => {
         const err = error instanceof Error ? error : new Error(error);
         err.responseCode = 552;
