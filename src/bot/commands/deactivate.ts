@@ -34,6 +34,20 @@ deactivateCommand
       next(new Error('You cannot delete a text channel account outside a Guild.'))
     }
   })
+  .command('webhook', ({ message, req, next, content }) => {
+    if (/^https:\/\/(canary.|ptb.)?discordapp.com\/api\/webhooks\/\d+\/[\w-_]{50,70}$/.test(content)) {
+      const sqlConnection: Connection = req.locals.sqlConnection;
+      sqlConnection.query(`DELETE FROM accounts WHERE type = ? AND payload = ?`, [AccountTypes.WEBHOOK_ACCOUNT, content], (err) => {
+        if (err) {
+          next(err);
+        } else {
+          message.channel.createMessage('Deleted all emails for this webhook.')
+        }
+      })
+    } else {
+      next(new Error('This webhook is not registered in the database'))
+    }
+  })
   .command(({ message }) => {
     message.channel.createMessage({
       content: `
