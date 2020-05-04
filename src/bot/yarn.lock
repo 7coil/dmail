@@ -2589,10 +2589,10 @@ has@^1.0.0, has@^1.0.1, has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-haseul@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/haseul/-/haseul-1.0.14.tgz#540949c235e9559b12190992640c604286840f6f"
-  integrity sha512-819O+8w79nSXhYcnORRvCaH4jGpAwuaa2SYjycScwCGQi9blkbsxLvag5xzODLKGOPwc0ONHxPb8mOTuwfC6HA==
+haseul@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/haseul/-/haseul-1.1.0.tgz#7d2436588dccd534aecc0ebbb1cb424838d54ace"
+  integrity sha512-ozgARaOhcrUtT6hS/pxk+nXGBrWUSZwSyMx3fVBOONYsI7m6NfT8DN719cll1mubPGsvxsw/XTXmBrHaUecUPA==
 
 hash-base@^3.0.0:
   version "3.0.4"

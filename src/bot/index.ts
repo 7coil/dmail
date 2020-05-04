@@ -24,7 +24,7 @@ const router = new HaSeul<eris.Message>();
 const webserver = express();
 
 router
-  .set('prefix', 'discordmail')
+  .set('prefix', ['discordmail', 'dmail'])
   .set('case sensitive routing', false)
   .set('json spaces', 2)
   .command(({message, next, req}) => {
@@ -50,7 +50,7 @@ router
   .command('mei', meiCommand)
   .error(({ message, err }) => {
     console.log(err)
-    message.channel.createMessage('An error has occurred while processing your request. ```\n' + err.stack + '\n```\n\nIf you feel this is in error, visit us on https://discordmail.com/')
+    message.channel.createMessage('An error has occurred while processing your request. ```\n' + err?.stack + '\n```\n\nIf you feel this is in error, visit us on https://discordmail.com/')
   })
 
 webserver
