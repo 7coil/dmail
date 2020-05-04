@@ -1,4 +1,4 @@
-# DiscordMail
+# ~~DiscordMail~~ Dmail
 _It's like you can finally receive all your emails!_
 
 ## Setup
