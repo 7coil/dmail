@@ -9,17 +9,17 @@ helpCommand
       content: `
 It's okay to ask for help.
 
-\`discordmail register myself\` - Set up your DMs as an inbox.
-\`discordmail register channel\` - Set up this channel as an inbox.
+\`dmail register myself\` - Set up your DMs as an inbox.
+\`dmail register channel\` - Set up this channel as an inbox.
 
 **Advanced Setup**
-\`discordmail register webhook\` - Set up this channel as an inbox, using webhooks as the transport layer.
-\`discordmail register webhook https://discordapp.com/api/webhooks/123/abcdefg\` - Set up the webhook as an inbox.
-\`discordmail mei\` - Print a picture from /r/wholesomeyuri
+\`dmail register webhook\` - Set up this channel as an inbox, using webhooks as the transport layer.
+\`dmail register webhook https://discordapp.com/api/webhooks/123/abcdefg\` - Set up the webhook as an inbox.
+\`dmail mei\` - Print a picture from /r/wholesomeyuri
 
 **Deactivate** (aka delete your online presence)
-\`discordmail deactivate myself\` - Deactivate DiscordMail for DMs
-\`discordmail deactivate channel\` - Deactivate DiscordMail for this channel
+\`dmail deactivate myself\` - Deactivate Dmail for DMs
+\`dmail deactivate channel\` - Deactivate Dmail for this channel
 
 To deactivate webhooks, simply delete the webhook from the Discord channel.
 `

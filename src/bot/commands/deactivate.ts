@@ -53,8 +53,8 @@ deactivateCommand
       content: `
 It's okay to leave. Enter a command to deactivate a specific service.
 
-\`discordmail deactivate myself\` - Deactivate DiscordMail for DMs
-\`discordmail deactivate channel\` - Deactivate DiscordMail for this channel
+\`dmail deactivate myself\` - Deactivate Dmail for DMs
+\`dmail deactivate channel\` - Deactivate Dmail for this channel
 
 To deactivate webhooks, simply delete the webhook from the Discord channel.
 `

@@ -87,7 +87,7 @@ registerCommand
           (overwrittenBotPermissions && overwrittenBotPermissions.has('manageWebhooks'))
         ) {
           message.channel.createWebhook({
-            name: 'DiscordMail',
+            name: 'Dmail',
             avatar: datauri.sync(path.join(__dirname, pictureFileLocation))
           }, `Create email for user: ${message.author.username}#${message.author.discriminator} <${message.author.id}>`)
             .then((webhook) => {
@@ -114,14 +114,14 @@ registerCommand
   .command(({ message }) => {
     message.channel.createMessage({
       content: `
-Welcome to DiscordMail! To register, run one of the following commands:
+Welcome to Dmail! To register, run one of the following commands:
 
-\`discordmail register myself\` - Set up your DMs as an inbox.
-\`discordmail register channel\` - Set up this channel as an inbox.
+\`dmail register myself\` - Set up your DMs as an inbox.
+\`dmail register channel\` - Set up this channel as an inbox.
 
 **Advanced Setup**
-\`discordmail register webhook\` - Set up this channel as an inbox, using webhooks as the transport layer.
-\`discordmail register webhook https://discordapp.com/api/webhooks/123/abcdefg\` - Set up the webhook as an inbox.
+\`dmail register webhook\` - Set up this channel as an inbox, using webhooks as the transport layer.
+\`dmail register webhook https://discordapp.com/api/webhooks/123/abcdefg\` - Set up the webhook as an inbox.
 `
     })
   })
