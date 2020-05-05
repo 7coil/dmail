@@ -24,7 +24,7 @@ class Account {
   }) {
     this.id = id;
     this.type = type;
-    this.payload = payload;
+    this.payload = payload.replace('discordapp.com', 'discord.com');
   }
 
   sendMail(mail: Mail): Promise<any> {

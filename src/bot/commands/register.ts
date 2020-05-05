@@ -66,7 +66,7 @@ registerCommand
   .command('webhook', ({ message, content, req, next }) => {
     const email = uuid4();
     if (content.length > 0) {
-      if (/^https:\/\/(canary.|ptb.)?discordapp.com\/api\/webhooks\/\d+\/[\w-_]{50,70}$/.test(content)) {
+      if (/^https:\/\/(canary.|ptb.)?discord.com\/api\/webhooks\/\d+\/[\w-_]{50,70}$/.test(content)) {
         createEmail({
           req,
           email,
@@ -75,6 +75,8 @@ registerCommand
           message,
           next
         })
+      } else {
+        next(new Error('This webhook does not match the format of a Discord webhook. Make sure the domain name is `discord.com` and not `discordapp.com`.'))
       }
     } else if (message.channel instanceof TextChannel) {
       if (req.locals.userHasPermission) {

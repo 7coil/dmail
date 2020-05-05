@@ -35,7 +35,7 @@ deactivateCommand
     }
   })
   .command('webhook', ({ message, req, next, content }) => {
-    if (/^https:\/\/(canary.|ptb.)?discordapp.com\/api\/webhooks\/\d+\/[\w-_]{50,70}$/.test(content)) {
+    if (/^https:\/\/(canary.|ptb.)?discord(app)?.com\/api\/webhooks\/\d+\/[\w-_]{50,70}$/.test(content)) {
       const sqlConnection: Connection = req.locals.sqlConnection;
       sqlConnection.query(`DELETE FROM accounts WHERE type = ? AND payload = ?`, [AccountTypes.WEBHOOK_ACCOUNT, content], (err) => {
         if (err) {
@@ -45,7 +45,7 @@ deactivateCommand
         }
       })
     } else {
-      next(new Error('This webhook is not registered in the database'))
+      next(new Error('This webhook does not match the format of a Discord webhook. Try entering the channel settings and deleting the webhook instead.'))
     }
   })
   .command(({ message }) => {
