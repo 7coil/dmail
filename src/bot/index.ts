@@ -11,6 +11,7 @@ import helpCommand from './commands/help';
 import pingCommand from './commands/ping';
 
 const token = fs.readFileSync('/run/secrets/discord_token', { encoding: 'UTF-8' }).trim();
+const prefixes = ['discordmail', 'dmail']
 
 const sqlConnection = mysql.createConnection({
   host: 'database',
@@ -24,7 +25,7 @@ const router = new HaSeul<eris.Message>();
 const webserver = express();
 
 router
-  .set('prefix', ['discordmail', 'dmail'])
+  .set('prefix', prefixes)
   .set('case sensitive routing', false)
   .set('json spaces', 2)
   .command(({message, next, req}) => {
@@ -60,7 +61,7 @@ webserver
   .post('/message/:id', (req, res, next) => {
     bot.createMessage(req.params.id, req.body)
       .then(() => res.status(200).end())
-      .catch(err => next(err))
+      .catch(err => next(err)) 
   })
   .post('/dm/:id', (req, res, next) => {
     const user = bot.users.get(req.params.id);
@@ -74,6 +75,11 @@ webserver
 
 bot.on('connect', () => {
   console.log('Discord Bot is now available')
+
+  router.set('prefix', [
+    ...prefixes,
+    `<@${bot.user.id}>`
+  ])
 })
 
 // Connect to Discord, make webserver
