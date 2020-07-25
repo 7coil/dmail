@@ -2589,10 +2589,10 @@ has@^1.0.0, has@^1.0.1, has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
-haseul@^1.1.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/haseul/-/haseul-1.2.0.tgz#4a5d2b6c9024acd87137a2dc23bb4f87a2f152bf"
-  integrity sha512-oOnmx4nvoUJ8+R5zwU84mLtgtzSjn7Zay9AvPCMMN3F252vdTNcKUtuPjpSKSj8eYwjt5IXZPy/QyMr01zGq7A==
+haseul@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/haseul/-/haseul-1.2.1.tgz#9ea6b418464fc0bf9839b2fff69a7b87dbb1de70"
+  integrity sha512-mgYAPs+jBAb468kiYEERYUiZ6MRGK0arh1ZMPCUgIYx2zWvACTL1FhgAjXZQFhZIlwAXWJZ9ZckhK+lEZbARqQ==
 
 hash-base@^3.0.0:
   version "3.0.4"
@@ -5183,7 +5183,7 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.8.3:
+typescript@^3.9.7:
   version "3.9.7"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.7.tgz#98d600a5ebdc38f40cb277522f12dc800e9e25fa"
   integrity sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
