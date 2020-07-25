@@ -73,13 +73,13 @@ webserver
       .catch(err => next(err.next))
   })
 
-bot.on('connect', () => {
+bot.once('connect', () => {
   console.log('Discord Bot is now available')
 
-  router.set('prefix', [
-    ...prefixes,
-    `<@${bot.user.id}>`
-  ])
+  // router.set('prefix', [
+  //   ...prefixes,
+  //   `<@${bot.user.id}>`
+  // ])
 })
 
 // Connect to Discord, make webserver
