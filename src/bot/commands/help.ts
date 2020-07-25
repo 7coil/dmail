@@ -22,6 +22,7 @@ It's okay to ask for help.
 \`dmail deactivate channel\` - Deactivate Dmail for this channel
 
 To deactivate webhooks, simply delete the webhook from the Discord channel.
+For technical support (without warranty of any kind), please visit https://discord.gg/wHgdmf4
 `
     })
   })
