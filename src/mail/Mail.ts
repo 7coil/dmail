@@ -86,11 +86,11 @@ class Mail {
    */
   getContents(): string {
     if (this.contentRequiresConversion()) {
-      if (this.mailObject.html === false) return null
+      if (this.mailObject.html === false) return ''
       return htmlToText.fromString(this.mailObject.html)
     } else {
-      if (this.mailObject.text.trim().length === 0) return null
-      return this.mailObject.text;
+      if (this.mailObject?.text?.trim().length === 0) return ''
+      return this.mailObject.text || '';
     }
   }
 

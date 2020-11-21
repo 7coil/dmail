@@ -1,4 +1,4 @@
-import datauri from 'datauri';
+import datauri from 'datauri/sync';
 import Eris, { Client, TextChannel } from 'eris';
 import HaSeul from 'haseul';
 import { Connection } from 'mysql';
@@ -90,7 +90,7 @@ registerCommand
         ) {
           message.channel.createWebhook({
             name: 'Dmail',
-            avatar: datauri.sync(path.join(__dirname, pictureFileLocation))
+            avatar: datauri(path.join(__dirname, pictureFileLocation)).content || ''
           }, `Create email for user: ${message.author.username}#${message.author.discriminator} <${message.author.id}>`)
             .then((webhook) => {
               createEmail({
