@@ -6,15 +6,15 @@
   "private": true,
   "dependencies": {
     "form-data": "^3.0.0",
-    "html-to-text": "^5.1.1",
-    "mailparser": "^2.8.0",
+    "html-to-text": "^6.0.0",
+    "mailparser": "^3.0.0",
     "mysql": "^2.18.1",
-    "node-fetch": "^2.6.0",
-    "smtp-server": "^3.7.0"
+    "node-fetch": "^2.6.1",
+    "smtp-server": "^3.8.0"
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "source-map-support": "^0.5.19",
-    "typescript": "^3.9.7"
+    "typescript": "^4.1.2"
   }
 }
