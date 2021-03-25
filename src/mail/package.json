@@ -5,16 +5,21 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "form-data": "^3.0.0",
-    "html-to-text": "^6.0.0",
-    "mailparser": "^3.0.0",
+    "form-data": "^4.0.0",
+    "html-to-text": "^7.0.0",
+    "mailparser": "^3.1.0",
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.1",
     "smtp-server": "^3.8.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4",
+    "parcel": "^2.0.0-beta.2",
     "source-map-support": "^0.5.19",
-    "typescript": "^4.1.2"
+    "typescript": "^4.2.3"
+  },
+  "targets": {
+    "node": {
+      "context": "node"
+    }
   }
 }

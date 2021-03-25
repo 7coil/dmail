@@ -53,13 +53,29 @@ class Mail {
 
   getRecipient(): Promise<Account> {
     return new Promise((resolve, reject) => {
-      const emails = [];
+      const emails: string[] = [];
 
-      if (this.mailObject.to) emails.push(...this.mailObject.to.value.map(email => email.address))
-      if (this.mailObject.headers.get('x-forwarded-to')) emails.push(this.mailObject.headers.get('x-forwarded-to'))
+      if (this.mailObject.to) {
+        if (Array.isArray(this.mailObject.to)) {
+          this.mailObject.to.map(email => email.value)
+            .forEach(i =>
+              i.forEach(email => email.address && emails.push(email.address)
+            )
+          )
+        } else {
+          this.mailObject.to.value.map(email => email.address).forEach(address => address && emails.push(address))
+        }
+      }
+
+      let addr = this.mailObject.headers.get('x-forwarded-to')
+      if (addr) emails.push(addr.toString())
+      
       if (this.session.envelope.rcptTo.length > 0) emails.push(...this.session.envelope.rcptTo.map(email => email.address))
 
-      Promise.all(emails.map(email => Account.getAccountFromEmail(this.sqlConnection, email)))
+      const promises = emails
+        .map(email => Account.getAccountFromEmail(this.sqlConnection, email))
+
+      Promise.all(promises)
         .then((results) => {
           const accounts = results.filter(acc => !!acc);
 
@@ -130,10 +146,10 @@ class Mail {
       })
     }
 
-    fields.push({
-      name: 'Notice',
-      value: 'The content of the email are affiliated with the sender of the email only, and not with this service, or Discord Inc.\nFind out what you can do to stop unwanted content at https://discordmail.com/docs/spam',
-    })
+    // fields.push({
+    //   name: 'Notice',
+    //   value: 'The content of the email are affiliated with the sender of the email only, and not with this service, or Discord Inc.\nFind out what you can do to stop unwanted content at https://discordmail.com/docs/spam',
+    // })
 
     return {
       title: this.getTitle(),
@@ -144,7 +160,7 @@ class Mail {
       },
       fields,
       footer: {
-        text: 'https://discordmail.com/'
+        text: 'dmail by https://leondrolio.com/'
       }
     }
   }
