@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:15
 
 WORKDIR /code
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
